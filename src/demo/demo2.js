@@ -17,12 +17,12 @@ export default class Demo2 extends React.Component{
     };
 
     render() {
-        const data = Data().map(item=>Object.assign(item,{show:true}));
+        const data = Data().map(item=>Object.assign(item,{show:false}));//通过index可以很容易设置show,显隐控制可以轻松做到
 
         return <Fragment>
             {
                 data.map((item,index) =>{
-                    return <div key={index}>
+                    return <div key={index} className={item.show?'show':""}>
                         <span>{item.text}</span>
                         <span>{this.condSymMap[item.status] || item.status}</span>
                         <span>{Array.isArray(item.value)? this.condValMap[item.status](item.value) : item.value}</span>
