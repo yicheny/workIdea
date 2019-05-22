@@ -1,6 +1,6 @@
 import React,{Fragment} from "react";
-import {Data} from './data2';
-import '../asset/style/demo2.less';
+import {Data} from '../../data/business/data2';
+import '../../asset/style/business/demo2.less';
 
 export default class Demo2 extends React.Component{
     condSymMap = {

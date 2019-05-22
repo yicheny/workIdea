@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 // import Demo from './demo/demo';
-import Demo from './demo/demo2';
+// import Demo from './demo/business/demo2';
+import Game from './demo/game/Game';
 import './index.less'
 
 ReactDOM.render(
-    <Demo/>,
+    <Game/>,
     document.getElementById('root')
 );
 
