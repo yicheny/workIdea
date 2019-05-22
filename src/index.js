@@ -1,12 +1,28 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-// import Demo from './demo/demo';
-// import Demo from './demo/business/demo2';
-import Game from './demo/game/Game';
-import './index.less'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import App from './app';
+import Login from './login';
+import './asset/style/index.less'
+import 'antd/dist/antd.css';
+
+/*const Initialize = ()=>{
+    let href = window.location.href.split('/');
+    href.pop();
+    href.push('login');
+    let path = href.join('/');
+    window.location.href = path;
+};
+
+Initialize();*/
 
 ReactDOM.render(
-    <Game/>,
+    (<Router>
+        <Switch>
+            <Route path='login' component={Login}/>
+            <Route component={App}/>
+        </Switch>
+    </Router>),
     document.getElementById('root')
 );
 
