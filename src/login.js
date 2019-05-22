@@ -1,16 +1,8 @@
 import React from 'react';
 import { Button } from 'antd';
+import { Link } from 'react-router-dom';
 
 function Login(props){
-
-    const handleClick = ()=>{
-        props.history.push("/MainPanel");
-    };
-
-    return (
-        <Button type="primary" to='/MainPanel'>
-            登录
-        </Button>
-    );
+    return <Link to='/'>登录</Link>
 }
 export default Login;

@@ -19,8 +19,8 @@ Initialize();*/
 ReactDOM.render(
     (<Router>
         <Switch>
-            <Route path='login' component={Login}/>
-            <Route component={App}/>
+            <Route path='/login' exact component={Login}/>
+            <Route path='/' exact component={App}/>
         </Switch>
     </Router>),
     document.getElementById('root')

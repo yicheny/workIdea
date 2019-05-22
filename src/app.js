@@ -6,7 +6,7 @@ class App extends Component {
     render() {
         return <div>
                     {/*<AppBar/>*/}
-                    <Route path='MainPanel' component={MainPanel}/>
+                    <Route component={MainPanel}/>
             </div>
     }
 }
