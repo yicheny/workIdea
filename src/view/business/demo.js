@@ -1,7 +1,7 @@
 import React from "react";
 import _ from 'lodash';
 import {data} from "../../data/business/data"
-import '../../asset/style/business/demo.less'
+import '../../asset/style/View/business/demo.less'
 
 class ChangeDisplay extends React.Component{
     constructor(props){
