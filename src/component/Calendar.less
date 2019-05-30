@@ -27,9 +27,12 @@ div.x.calendar{
       }
     }
     .week{
-      padding:4px 8px;
+      padding:4px 28px;
+      span.clock{
+        display: inline-flex;
+        padding-left:36px;
+      }
     }
-
     >.panel{
       margin:0 18px;
       .row{
@@ -40,6 +43,7 @@ div.x.calendar{
         margin:0 6px;
         flex:1;
         text-align: center;
+        cursor: pointer;
         &.current{
           background: aqua;
         }

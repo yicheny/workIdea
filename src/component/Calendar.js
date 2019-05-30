@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Clock} from "./index";
 import {chunk} from "../utils/arrMethod";
 import {Icon} from 'antd';
 import './Calendar.less';
@@ -62,7 +63,10 @@ function Calendar() {
                     <DateChange date={month} unit='月'/>
                     <DateChange date={day} unit='日'/>
                 </div>
-                <div className='week'>星期{weekList[week]}</div>
+                <div className='week'>
+                    <span className='week_inner'>星期{weekList[week]}</span>
+                    <Clock/>
+                </div>
             </div>
             <div className="panel">
                 <div className="panel_header row">
