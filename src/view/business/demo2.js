@@ -22,7 +22,7 @@ export default class Demo2 extends React.Component{
         return <Fragment>
             {
                 data.map((item,index) =>{
-                    return <div key={index} className={item.show?'show':""}>
+                    return <div key={index} className={item.show?'business show':"business"}>
                         <span>{item.text}</span>
                         <span>{this.condSymMap[item.status] || item.status}</span>
                         <span>{Array.isArray(item.value)? this.condValMap[item.status](item.value) : item.value}</span>

@@ -18,9 +18,12 @@ function LeftMenu(props) {
                 title={
                     <span>
                          <Icon type='compass'/>
-                         <span>主页</span>
+                         <span>工作业务演示</span>
                     </span>
                 }>
+                <Item key='s1_1'>
+                    <Link to='./wDemo'>当前业务</Link>
+                </Item>
             </SubMenu>
 
             <SubMenu key='sub2'
@@ -30,8 +33,8 @@ function LeftMenu(props) {
                              <span>my组件库测试</span>
                          </span>
                      }>
-                <Item key='1'>
-                    <Link to='./demo'>综合测试</Link>
+                <Item key='s2_1'>
+                    <Link to='./cDemo'>综合测试</Link>
                 </Item>
             </SubMenu>
         </Menu>

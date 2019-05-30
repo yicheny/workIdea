@@ -4,14 +4,16 @@ import '../asset/style/View/mainPanel.less';
 import LeftMenu from './LeftMenu';
 import Game from './game/Game';
 import Demo from './Demo'
+import Work from './business/demo3'
 
 function MainPanel(){
     return <div className='mainPanel'>
         <LeftMenu className='mainPanel_leftMenu'/>
         <div className="mainPanel_content">
             <Switch>
+                <Route path='/wDemo' component={Work}/>
                 <Route path='/game' component={Game}/>
-                <Route path='/demo' component={Demo}/>
+                <Route path='/cDemo' component={Demo}/>
 
                 <Redirect exact from="/" to="/login" />
             </Switch>
