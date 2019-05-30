@@ -5,9 +5,8 @@ export function chunk(arr,size=1) {
     let oriArr = [...arr],
         newArr = [];
 
-    for(let i=0;i<oriArr.length/size-1;i++){
+    for(let i=0;i<oriArr.length/size;i++){
         newArr.push(arr.splice(0,size))
     }
-    newArr.push(arr);
     return newArr;
 }
