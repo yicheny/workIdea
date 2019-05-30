@@ -6,16 +6,6 @@ import Login from './login';
 import './asset/style/index.less'
 import 'antd/dist/antd.css';
 
-/*const Initialize = ()=>{
-    let href = window.location.href.split('/');
-    href.pop();
-    href.push('login');
-    let path = href.join('/');
-    window.location.href = path;
-};
-
-Initialize();*/
-
 ReactDOM.render(
     (<Router>
         <Switch>

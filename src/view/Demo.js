@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container,Header,Graph} from '../component/index'
+import {Container,Header,Graph,Calendar} from '../component/index'
 
 function Demo(){
     return <Container>
@@ -7,6 +7,7 @@ function Demo(){
         <Graph/>
         <Graph type='roundness' color='blue'/>
         <Graph type='triangle' color='red'/>
+        <Calendar/>
     </Container>
 }
 

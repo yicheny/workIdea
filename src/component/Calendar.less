@@ -1,0 +1,45 @@
+div.x.calendar{
+  >.content{
+    margin:16px;
+    padding:6px 0 16px;
+    width:280px;
+    background:#fff;
+    box-shadow:0 2px 4px rgba(0, 0, 0, 0.3);
+    >.header{
+      padding:0 16px;
+      border-bottom:1px solid #dddddd;
+    }
+    .date{
+      display: flex;
+      justify-content: center;
+      p{
+        display: inline-block;
+        line-height: 20px;
+        >span{
+          padding:0 4px;
+        }
+      }
+      i.anticon{
+        padding:6px 3px;
+        &:hover{
+          background: aqua;
+        }
+      }
+    }
+    .week{
+      padding:4px 8px;
+    }
+
+    >.panel{
+      margin:0 18px;
+      .row{
+        display: flex;
+        padding:6px 0;
+      }
+      .cell{
+        flex:1;
+        text-align: center;
+      }
+    }
+  }
+}
