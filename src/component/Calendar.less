@@ -37,8 +37,15 @@ div.x.calendar{
         padding:6px 0;
       }
       .cell{
+        margin:0 6px;
         flex:1;
         text-align: center;
+        &.current{
+          background: aqua;
+        }
+        &.selected{
+          background: greenyellow;
+        }
       }
     }
   }

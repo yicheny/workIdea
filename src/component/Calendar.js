@@ -10,12 +10,24 @@ function DateChange(props) {
     </p>
 }
 
+function Cell(props) {
+    const {val='',current=false,selected=false,onClick} = props;
+    const cn = [
+        'cell',
+        current ? 'current' : '',
+        selected ? 'selected': ''
+    ].join(' ');
+
+    return <span className={cn} onClick={onClick}>{val}</span>
+}
+
 function Calendar() {
     const date = new Date();
     const [year, setYear] = useState(date.getFullYear());
     const [month, setMonth] = useState(date.getMonth() + 1);
     const [day, setDay] = useState(date.getDate());
     const [week, setWeek] = useState(date.getDay());
+    const [sDay, setSDay] = useState([0,0]);//选中日期
 
     const weekList = ['日', '一', '二', '三', '四', '五', '六',];
 
@@ -32,6 +44,7 @@ function Calendar() {
         date.pop();
         return date.length % 7 ? getViewMonDay(date) : date;
     };
+    const getDateLocation = (date) =>[Math.ceil(date/7),date%7||7];
 
     const weekStart = getCurrentWeekStart();
     const currentMonDay = Array.from(Array(computeDay(year, month)), (x, i) => i + 1);
@@ -39,6 +52,8 @@ function Calendar() {
     const viewMonDay = getViewMonDay(preMonDay.concat(currentMonDay).concat([1,2,3,4,5,6,7]));
     // console.log(viewMonDay);
     // console.log(chunk(viewMonDay, 7));
+    // console.log(getDateLocation(7));
+    const cDay = getDateLocation(weekStart+day);
     return <div className='x calendar'>
         <div className="content">
             <div className="header">
@@ -52,14 +67,18 @@ function Calendar() {
             <div className="panel">
                 <div className="panel_header row">
                     {
-                        weekList.map((el,i)=><span key={i} className='cell'>{el}</span>)
+                        weekList.map((el,i)=><Cell key={i} val={el}/>)
                     }
                 </div>
                 <div className='panel_main'>
                     {
                         chunk(viewMonDay, 7).map((el,i)=><div className="row" key={i}>
                             {
-                                el.map((el2,i2)=><span key={i2} className='cell'>{el2}</span>)
+                                el.map((el2,i2)=><Cell key={i2} val={el2}
+                                                       current={i+1===cDay[0]&&i2+1===cDay[1]}
+                                                       selected={i+1===sDay[0]&&i2+1===sDay[1]}
+                                                       onClick={()=>setSDay(getDateLocation(i*7+i2+1))}
+                                />)
                             }
                         </div>)
                     }
