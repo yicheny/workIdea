@@ -5,9 +5,11 @@ import {Icon} from 'antd';
 import './Calendar.less';
 
 function DateChange(props) {
-    const {date, unit} = props;
+    const {date, unit,switch_=true } = props;
     return <p>
-        <Icon type='left'/><span>{date}{unit}</span><Icon type='right'/>
+        {switch_ && <Icon type='left'/>}
+        <span>{date}{unit}</span>
+        {switch_ && <Icon type='right'/>}
     </p>
 }
 
@@ -61,7 +63,7 @@ function Calendar() {
                 <div className="date">
                     <DateChange date={year} unit='年'/>
                     <DateChange date={month} unit='月'/>
-                    <DateChange date={day} unit='日'/>
+                    <DateChange date={day} unit='日' switch_={false}/>
                 </div>
                 <div className='week'>
                     <span className='week_inner'>星期{weekList[week]}</span>
@@ -81,7 +83,7 @@ function Calendar() {
                                 el.map((el2,i2)=><Cell key={i2} val={el2}
                                                        current={i+1===cDay[0]&&i2+1===cDay[1]}
                                                        selected={i+1===sDay[0]&&i2+1===sDay[1]}
-                                                       onClick={()=>setSDay(getDateLocation(i*7+i2+1))}
+                                                       onClick={()=>setSDay([i+1,i2+1])}
                                 />)
                             }
                         </div>)
