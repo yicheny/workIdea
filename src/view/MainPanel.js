@@ -4,7 +4,7 @@ import '../asset/style/View/mainPanel.less';
 import LeftMenu from './LeftMenu';
 import Game from './game/Game';
 import Demo from './Demo'
-import Work from './business/demo3'
+import Work from './business/WorkHome'
 
 function MainPanel(){
     return <div className='mainPanel'>
