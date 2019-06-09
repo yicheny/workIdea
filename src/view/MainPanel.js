@@ -5,7 +5,7 @@ import LeftMenu from './LeftMenu';
 import Game from './game/Game';
 import Demo from './Demo'
 import Work from './business/WorkHome'
-import ParentComponent from './reactTest/ParentComponent'
+import ReactHome from "./reactTest/ReactHome";
 
 function MainPanel(){
     return <div className='mainPanel'>
@@ -15,7 +15,7 @@ function MainPanel(){
                 <Route path='/wDemo' component={Work}/>
                 <Route path='/game' component={Game}/>
                 <Route path='/cDemo' component={Demo}/>
-                <Route path='/rDemo' component={ParentComponent}/>
+                <Route path='/rDemo' component={ReactHome}/>
 
                 <Redirect exact from="/" to="/login" />
             </Switch>

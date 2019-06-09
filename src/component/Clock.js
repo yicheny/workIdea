@@ -1,23 +1,14 @@
-import React, {useState,useEffect,useRef} from 'react';
-
-// const savedCallback = {};//不使用useRef方案
+import React, {useState,useEffect} from 'react';
 
 function Clock(){
     const [date,setDate] = useState(new Date());
 
-    const savedCallback = useRef();//useRef方案
-    const callback = ()=>{
-        // console.log(date);
-        setDate(new Date())
-    };
-
     useEffect(()=>{
-        savedCallback.current = callback;
+        // console.log(date);
     });
 
     useEffect(()=>{
-        const tick = () => savedCallback.current();
-        let id = setInterval(tick,1000);//问题的关键在于如何使用到最新的props和state
+        let id = setInterval(()=>setDate(new Date()),1000);//问题的关键在于如何使用到最新的props和state
         return () => clearInterval(id);
     },[]);
 
