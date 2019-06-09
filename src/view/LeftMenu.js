@@ -37,6 +37,19 @@ function LeftMenu(props) {
                     <Link to='./cDemo'>综合测试</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub3'
+                     title={
+                         <span>
+                             <Icon type='read'/>
+                             <span>React知识点实践</span>
+                         </span>
+                     }>
+                <Item key='s3_1'>
+                    <Link to='./rDemo'>生命周期-16.3以前</Link>
+                </Item>
+            </SubMenu>
+
         </Menu>
     </div>
 }
