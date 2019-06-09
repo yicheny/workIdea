@@ -8,7 +8,7 @@ function Breadcrumb_w(props) {
 
     return <div className='x_breadcrumb'>
         {pathname.split('/').map((el,i,arg) => <span key={i} className={[i===arg.length-1?'current':''].join(' ')}>
-            <Link to={el}>{option[el]}</Link>
+            <Link to={`/${el}`}>{option[el]}</Link>
             {i!==arg.length-1 && <span className='separator'>{separator}</span>}
         </span>)}
     </div>
