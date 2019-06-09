@@ -22,7 +22,7 @@ function LeftMenu(props) {
                     </span>
                 }>
                 <Item key='s1_1'>
-                    <Link to='./wDemo'>当前业务</Link>
+                    <Link to='/wDemo'>当前业务</Link>
                 </Item>
             </SubMenu>
 
@@ -34,7 +34,7 @@ function LeftMenu(props) {
                          </span>
                      }>
                 <Item key='s2_1'>
-                    <Link to='./cDemo'>综合测试</Link>
+                    <Link to='/cDemo'>综合测试</Link>
                 </Item>
             </SubMenu>
 
@@ -46,7 +46,7 @@ function LeftMenu(props) {
                          </span>
                      }>
                 <Item key='s3_1'>
-                    <Link to='./rDemo'>生命周期-16.3以前</Link>
+                    <Link to='/rDemo'>生命周期-16.3以前</Link>
                 </Item>
             </SubMenu>
 
