@@ -1,15 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Clock} from "./index";
 import {chunk} from "../utils/arrMethod";
 import {Icon} from 'antd';
 import './Calendar.less';
 
 function DateChange(props) {
-    const {date, unit,switch_=true } = props;
+    let {date, unit,switch_=true,setDate } = props;
+
+    const handleClick = (alg)=>{
+        if(alg==='add') setDate(++date);
+        if(alg==='sub') setDate(--date)
+    };
     return <p>
-        {switch_ && <Icon type='left'/>}
+        {switch_ && <Icon type='left' onClick={()=>handleClick('sub')}/>}
         <span>{date}{unit}</span>
-        {switch_ && <Icon type='right'/>}
+        {switch_ && <Icon type='right' onClick={()=>handleClick('add')}/>}
     </p>
 }
 
@@ -28,11 +33,15 @@ function Calendar() {
     const date = new Date();
     const [year, setYear] = useState(date.getFullYear());
     const [month, setMonth] = useState(date.getMonth() + 1);
-    const [day, setDay] = useState(date.getDate());
-    const [week, setWeek] = useState(date.getDay());
+    const [day] = useState(date.getDate());
+    const [week] = useState(date.getDay());
     const [sDay, setSDay] = useState([0,0]);//选中日期
 
     const weekList = ['日', '一', '二', '三', '四', '五', '六',];
+
+    useEffect(()=>{
+
+    });
 
     const getCurrentWeekStart = () => (new Date(date.getTime() - (date.getDate() - 1) * 1000 * 60 * 60 * 24)).getDay();
     const computeDay = (y, m) => {
@@ -61,8 +70,8 @@ function Calendar() {
         <div className="content">
             <div className="header">
                 <div className="date">
-                    <DateChange date={year} unit='年'/>
-                    <DateChange date={month} unit='月'/>
+                    <DateChange date={year} unit='年' setDate={setYear}/>
+                    <DateChange date={month} unit='月' setDate={setMonth}/>
                     <DateChange date={day} unit='日' switch_={false}/>
                 </div>
                 <div className='week'>
