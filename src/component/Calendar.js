@@ -12,9 +12,9 @@ function DateChange(props) {
         if(alg==='sub') setDate(--date)
     };
     return <p>
-        {switch_ && <Icon type='left' onClick={()=>handleClick('sub')}/>}
+        <Icon type='left' onClick={()=>handleClick('sub')}/>
         <span>{date}{unit}</span>
-        {switch_ && <Icon type='right' onClick={()=>handleClick('add')}/>}
+        <Icon type='right' onClick={()=>handleClick('add')}/>
     </p>
 }
 
@@ -72,10 +72,10 @@ function Calendar() {
                 <div className="date">
                     <DateChange date={year} unit='年' setDate={setYear}/>
                     <DateChange date={month} unit='月' setDate={setMonth}/>
-                    <DateChange date={day} unit='日' switch_={false}/>
                 </div>
                 <div className='week'>
                     <span className='week_inner'>星期{weekList[week]}</span>
+                    <span className='week_inner'>{day}日</span>
                     <Clock/>
                 </div>
             </div>
