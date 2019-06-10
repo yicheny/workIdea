@@ -10,7 +10,7 @@ function Demo3(props) {
         callback(value[1]==='二级页面A'?'二级页面B':'二级页面A',1);
     }
     return <div>
-        {/*双重切换*/}
+        {/*双重状态保存*/}
         <Button onClick={handleClick} type={"primary"}>点击跳转到Demo1</Button>
         <Consumer>
             {
