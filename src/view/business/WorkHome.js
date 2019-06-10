@@ -7,14 +7,10 @@ import Demo4 from "./Demo4";
 import {Breadcrumb_w} from "../../component";
 
 function WorkHome(props) {
-    const breadCrumb = {
-        'wDemo':'一级页面',
-        'demo3':'二级页面'
-    };
     return <div>
-        <Route render={()=>(<Breadcrumb_w option={breadCrumb} separator='/' {...props}/>)}/>
+        <Route render={()=>(<Breadcrumb_w separator='/' name={['一级页面','二级页面','三级页面']} {...props}/>)}/>
         <Switch>
-            <Route path='/wDemo/demo' component={Demo}/>
+            <Route path='/wDemo/demo3/demo' component={Demo}/>
             <Route path='/wDemo/demo2' component={Demo2}/>
             <Route path='/wDemo/demo3' component={Demo3}/>
             <Route component={Demo4}/>

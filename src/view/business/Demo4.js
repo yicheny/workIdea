@@ -6,7 +6,7 @@ function Demo4(props) {
         props.history.push({ pathname : '/wDemo/demo3' ,query : { param:[1,2,3,4,5,6]} })
     };
     return <div>
-        <Button onClick={handleClick} type={"primary"}>点击跳转到Demo1</Button>
+        <Button onClick={handleClick} type={"primary"}>点击跳转到Demo3</Button>
     </div>
 }
 
