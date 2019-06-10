@@ -48,6 +48,9 @@ function LeftMenu(props) {
                 <Item key='s3_1'>
                     <Link to='/rDemo'>生命周期-16.3以前</Link>
                 </Item>
+                <Item key='s3_2'>
+                    <Link to='/rDemo/context'>Context</Link>
+                </Item>
             </SubMenu>
 
         </Menu>
