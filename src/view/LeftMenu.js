@@ -51,6 +51,9 @@ function LeftMenu(props) {
                 <Item key='s3_2'>
                     <Link to='/rDemo/context'>Context</Link>
                 </Item>
+                <Item key='s3_3'>
+                    <Link to='/rDemo/hoc'>高阶组件HOC</Link>
+                </Item>
             </SubMenu>
 
             <SubMenu key='sub4'
