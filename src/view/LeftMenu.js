@@ -9,7 +9,7 @@ function LeftMenu(props) {
     return <div className={className}>
         <Menu
             style={{height:'100vh'}}
-            defaultSelectedKeys={['1']}
+            defaultSelectedKeys={['s2_1']}
             defaultOpenKeys={['sub2']}
             mode="inline"
         >
