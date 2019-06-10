@@ -3,79 +3,54 @@ import _ from 'lodash';
 import {data} from "../../data/business/data"
 import '../../asset/style/View/business/demo.less'
 
-class ChangeDisplay extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        const {v,max,min} = this.props;
-        return <span className={[v===max?'up':(v===min?'down':'')]}>
+function ChangeDisplay(props) {
+    const {v,max,min} = props;
+    return <span className={[v===max?'up':(v===min?'down':'')]}>
             {v===null?'-':v}
         </span>
-    }
 }
 
-class Table extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            data:null
-        }
-    }
+function Table(props) {
+    const {option:{title,bind},data} = props;
 
-    componentDidMount() {
-        this.setState({data:this.props.data});
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.data!==this.props.data){
-            this.setState({data:this.props.data})
-        }
-    }
+    if(!data) return <div>没有数据</div>;
 
-    render() {
-        const {option:{title,bind}} = this.props;
-        const {data} = this.state;
-
-        if(!data) return <div>没有数据</div>;
-
-        return <table>
-            <tbody>
-                <tr>
-                    {
-                        title.map((item,index)=>{
-                            return <th key={index}>
-                                {item}
-                            </th>
-                        })
-                    }
-                </tr>
-                {
-                    data.map(item=>{
-                        return item.details.map((ele,index)=>{
-                            return <tr key={index}>
-                                {bind.map((iItem,iIndex)=>{
-                                    if(index===0){
-                                        if(iIndex!==0) {
-                                            return <td key={iIndex}>
-                                                <ChangeDisplay v={ele[iItem]} min={ele.minVal} max={ele.maxVal}/>
-                                            </td>
-                                        }
-                                        return [<td rowSpan={item.details.length} key={0}>{item.value}</td>,<td key={1}>
-                                            {ele[iItem]}
-                                        </td>]
-                                    }
+    return <table>
+        <tbody>
+        <tr>
+            {
+                title.map((item,index)=>{
+                    return <th key={index}>
+                        {item}
+                    </th>
+                })
+            }
+        </tr>
+        {
+            data.map(item=>{
+                return item.details.map((ele,index)=>{
+                    return <tr key={index}>
+                        {bind.map((iItem,iIndex)=>{
+                            if(index===0){
+                                if(iIndex!==0) {
                                     return <td key={iIndex}>
                                         <ChangeDisplay v={ele[iItem]} min={ele.minVal} max={ele.maxVal}/>
                                     </td>
-                                })}
-                            </tr>
-                        })
-                    })
-                }
-            </tbody>
-        </table>
-    }
+                                }
+                                return [<td rowSpan={item.details.length} key={0}>{item.value}</td>,<td key={1}>
+                                    {ele[iItem]}
+                                </td>]
+                            }
+                            return <td key={iIndex}>
+                                <ChangeDisplay v={ele[iItem]} min={ele.minVal} max={ele.maxVal}/>
+                            </td>
+                        })}
+                    </tr>
+                })
+            })
+        }
+        </tbody>
+    </table>
 }
 
 class Demo extends React.Component{
