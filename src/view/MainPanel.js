@@ -6,6 +6,7 @@ import Game from './game/Game';
 import Demo from './Demo'
 import Work from './business/WorkHome'
 import ReactHome from "./reactTest/ReactHome";
+import ESHome from './esTest/ESHome';
 
 function MainPanel(){
     return <div className='mainPanel'>
@@ -16,6 +17,7 @@ function MainPanel(){
                 <Route path='/game' component={Game}/>
                 <Route path='/cDemo' component={Demo}/>
                 <Route path='/rDemo' component={ReactHome}/>
+                <Route path='/esDemo' component={ESHome}/>
 
                 <Redirect exact from="/" to="/login" />
             </Switch>

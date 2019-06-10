@@ -53,6 +53,17 @@ function LeftMenu(props) {
                 </Item>
             </SubMenu>
 
+            <SubMenu key='sub4'
+                     title={
+                         <span>
+                             <Icon type="html5" />
+                             <span>JS原生知识点实践</span>
+                         </span>
+                     }>
+                <Item key='s4_1'>
+                    <Link to='/esDemo/date'>Date</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }
