@@ -7,10 +7,11 @@ const TestComponent = (props)=> {
 
 //属性代理
 const HOC = (WrappedComponent) => (props) => {
-        const newProps = {
+        const { extraProp, ...passThroughProps } = props;// 过滤掉非此 HOC 额外的 props，且不要进行透传
+        const newProps = {// 将 props 注入到被包装的组件中。——通常为 state 的值或者实例方法。
             name:'hoc'
         };
-        return <WrappedComponent {...props} {...newProps}/> //方便操作props
+        return <WrappedComponent {...passThroughProps} {...newProps}/> //方便操作props
     };
 
 export default HOC(TestComponent);
