@@ -3,35 +3,41 @@ import React, {PureComponent} from 'react';
 class ChildrenComponent extends PureComponent {
     constructor(props) {
         super(props);
-        console.log('constructor', 'child');
+        this.state={
+            childNum:100,
+            // parentNum:0,
+        };
+        console.log('child','constructor' );
     }
 
     componentWillMount() {
-        console.log('componentWillMount', 'child');
+        console.log('child','componentWillMount');
     }
 
     componentDidMount() {
-        console.log('componentDidMount', 'child');
+        // this.setState({childNum:99});
+        console.log('child','componentDidMount');
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log('componentWillReceiveProps', 'child');
+        // this.setState({parentNum:this.props.num});
+        console.log('child','componentWillReceiveProps');
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {
-        console.log('componentWillUpdate', 'child');
+        console.log('child','componentWillUpdate');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('componentDidUpdate', 'child');
+        console.log('child','componentDidUpdate');
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount', 'child');
+        console.log('child','componentWillUnmount');
     }
 
     render() {
-        console.log('render', 'child');
+        console.log('child','render');
         return (
             <div>
                 子组件

@@ -16,6 +16,7 @@ function WorkHome(props) {
             setName({...Name,value:Name.value})
         }
     });
+
     return <Provider value={Name}>
         <Route render={()=>(<Breadcrumb_w separator='/' name={Name.value} {...props}/>)}/>
         <Switch>

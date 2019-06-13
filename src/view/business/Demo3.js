@@ -14,6 +14,7 @@ function Demo3(props) {
         props.setName('二级修改成功',1);
     },[]);
     // console.log(props.location.search);
+
     return <div>
         {/*双重状态保存*/}
         <Button onClick={handleClick} type={"primary"}>点击跳转到Demo1</Button>
