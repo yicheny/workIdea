@@ -67,6 +67,18 @@ function LeftMenu(props) {
                     <Link to='/esDemo/date'>Date</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub5'
+                     title={
+                         <span>
+                             <Icon type="read" />
+                             <span>React-Router</span>
+                         </span>
+                     }>
+                <Item key='s5_1'>
+                    <Link to='/router'>Router_Demo</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }
