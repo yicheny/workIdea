@@ -9,11 +9,11 @@ const BreadcrumbItem = ({match,match:{path},Name,separator='/'}) =>{
         </Link>
 };
 
-const Breadcrumb = ({Name}) => {
+const Breadcrumb = ({Name,...rest}) => {
     return <div className='x_breadcrumb'>
         {
             Name && Object.keys(Name).map((el,i)=>{
-                return <Route key={i} path={el} render={(props)=><BreadcrumbItem {...props} Name={Name}/>}/>
+                return <Route key={i} path={el} render={(props)=><BreadcrumbItem {...props} Name={Name} {...rest}/>}/>
             })
         }
     </div>
