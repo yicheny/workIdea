@@ -1,7 +1,7 @@
 import React from 'react';
-import {Container,Header,Graph,Calendar} from '../component/index'
+import {Container,Header,Graph,Calendar} from '../../component'
 
-function Demo(){
+function Home(){
     return <Container>
         <Header value='标题' style={{color:'red'}}/>
         <Graph/>
@@ -11,4 +11,4 @@ function Demo(){
     </Container>
 }
 
-export default Demo;
+export default Home;

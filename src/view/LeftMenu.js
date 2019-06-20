@@ -22,7 +22,10 @@ function LeftMenu(props) {
                     </span>
                 }>
                 <Item key='s1_1'>
-                    <Link to='/wDemo'>当前业务</Link>
+                    <Link to='/wDemo'>工作台</Link>
+                </Item>
+                <Item key='s1_2'>
+                    <Link to='/wDemo/dualStateSave'>双重状态保存</Link>
                 </Item>
             </SubMenu>
 
@@ -35,6 +38,9 @@ function LeftMenu(props) {
                      }>
                 <Item key='s2_1'>
                     <Link to='/cDemo'>综合测试</Link>
+                </Item>
+                <Item key='s2_2'>
+                    <Link to='/cDemo/bread'>面包屑组件</Link>
                 </Item>
             </SubMenu>
 

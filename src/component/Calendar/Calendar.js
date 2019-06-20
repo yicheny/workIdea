@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
-import {Clock} from "./index";
-import {chunk} from "../utils/arrMethod";
-import {Icon} from 'antd';
+import {Clock} from "../index";
+import {chunk} from "../../utils/arrMethod";
+import {Icon} from 'antd/lib/index';
 import './Calendar.less';
 
 function DateChange(props) {

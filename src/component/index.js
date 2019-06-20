@@ -1,10 +1,10 @@
-import _Container from './Container';
-import _Header from './Header';
-import _Graph from './Graph';
-import _Calendar from './Calendar';
-import _Clock from './Clock';
-import _Breadcrumb_w from './Breadcrumb_w';
-import _Breadcrumb from './Breadcrumb';
+import _Container from './Container/Container';
+import _Header from './Header/Header';
+import _Graph from './Graph/Graph';
+import _Calendar from './Calendar/Calendar';
+import _Clock from './Clock/Clock';
+import _Breadcrumb_w from './Breadcrumb/Breadcrumb_w';
+import _Breadcrumb from './Breadcrumb/Breadcrumb';
 
 export { _Container as Container };
 export { _Header as Header};
