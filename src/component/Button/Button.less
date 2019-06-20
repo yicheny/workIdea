@@ -1,0 +1,33 @@
+span.x_button{
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 15px;
+  min-width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  &.text{
+    &:hover,&:focus{
+      color: #40a9ff;
+      background-color: #fff;
+      border-color: #40a9ff;
+    }
+  }
+  &.primary{
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    &:hover,&:focus{
+      color: #fff;
+      background-color: #40a9ff;
+      border-color: #40a9ff;
+    }
+  }
+}

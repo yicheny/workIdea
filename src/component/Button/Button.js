@@ -2,13 +2,13 @@ import React from 'react';
 import './Button.less';
 
 function Button(props) {
-    let {type='text',cn,style} = props;
-    cn = ['x_button',...cn].join(' ');
+    let {type='text',cn='',style={},children,...rest} = props;
+    cn = ['x_button',type,...cn].join(' ');
 
     return (
-        <div className={cn} style={style} >
-
-        </div>
+        <span className={cn} style={style} {...rest}>
+            {children}
+        </span>
     );
 }
 
