@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button} from "antd";
 
 function Demo3(props) {
@@ -6,6 +6,9 @@ function Demo3(props) {
         return props.history.push({ pathname : '/wDemo/demo3/B' })
     };
 
+    useEffect(()=>{
+        props.setName('/wDemo/demo3','Demo3页面修改成功')
+    },[]);
     // console.log(props.location.search);
 
     return <div>
