@@ -6,6 +6,7 @@ import _Clock from './Clock/Clock';
 import _Breadcrumb_w from './Breadcrumb/Breadcrumb_w';
 import _Breadcrumb from './Breadcrumb/Breadcrumb';
 import _Button from './Button/Button';
+import _Card from './Card/Card';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -15,3 +16,4 @@ export { _Clock as Clock};
 export { _Breadcrumb_w as Breadcrumb_w};
 export { _Breadcrumb as Breadcrumb};
 export { _Button as Button};
+export { _Card as Card};

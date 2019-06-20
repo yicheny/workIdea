@@ -2,8 +2,8 @@ import React from 'react';
 import './Button.less';
 
 function Button(props) {
-    let {type='text',cn='',style={},children,...rest} = props;
-    cn = ['x_button',type,...cn].join(' ');
+    const {type='text',className='',style={},children,...rest} = props;
+    const cn = ['x_button',type,...className].join(' ');
 
     return (
         <span className={cn} style={style} {...rest}>
