@@ -2,10 +2,10 @@ import React from 'react';
 import './Breadcrumb.less';
 import {Link,Route} from "react-router-dom";
 
-const BreadcrumbItem = ({match,match:{path},Name,separator='/'}) =>{
-    return <Link to={path}>
-            <span className={match.isExact?'current':''}>{Name[path]}</span>
-            {!match.isExact && <span className="separator"> {separator} </span>}
+const BreadcrumbItem = ({match:{path,url,isExact},Name,separator='/'}) =>{
+    return <Link to={url}>
+            <span className={isExact?'current':''}>{Name[path]}</span>
+            {!isExact && <span className="separator"> {separator} </span>}
         </Link>
 };
 
@@ -20,4 +20,6 @@ const Breadcrumb = ({Name,...rest}) => {
 };
 
 export default Breadcrumb
+//通过match.path可以拿到动态路由，比如A/B/:id
+//通过match.url可以拿到实际路由，比如A/B/1
 

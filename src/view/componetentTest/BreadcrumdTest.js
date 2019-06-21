@@ -4,6 +4,7 @@ import {Route, Switch} from "react-router-dom";
 import BreadcrumdTest2 from "./control/BreadcrumdTest2";
 import BreadcrumdTest2Next from "./control/BreadcrumdTest2Next";
 import BreadcrumdTest1 from "./control/BreadcrumdTest1";
+import BreadcrumdTest3 from "./control/BreadcrumdTest3";
 
 function BreadcrumdTest(props) {
     const [Name,setName] = useState({
@@ -11,6 +12,7 @@ function BreadcrumdTest(props) {
             '/cDemo/bread':'cDemo页面',
             '/cDemo/bread/demo2':'demo2页面',
             '/cDemo/bread/demo2/:id':'demo2Next页面',
+            '/cDemo/bread/demo2/:id/demo3':'demo3页面',
         },
         setValue:(n,v)=>{
             Name.value[n] = v;
@@ -22,7 +24,8 @@ function BreadcrumdTest(props) {
         <Breadcrumb Name={Name.value} separator='/'/>
         <Switch>
             <Route path='/cDemo/bread/demo2' render={(props)=><BreadcrumdTest2 {...props} setName={Name.setValue}/>} exact/>
-            <Route path='/cDemo/bread/demo2/:id'  render={(props)=><BreadcrumdTest2Next {...props} setName={Name.setValue}/>}/>
+            <Route path='/cDemo/bread/demo2/:id'  render={(props)=><BreadcrumdTest2Next {...props} setName={Name.setValue}/>} exact/>
+            <Route path='/cDemo/bread/demo2/:id/demo3' component={BreadcrumdTest3}/>
             <Route component={BreadcrumdTest1}/>
         </Switch>
     </Fragment>;
