@@ -7,6 +7,7 @@ import _Breadcrumb_w from './Breadcrumb/Breadcrumb_w';
 import _Breadcrumb from './Breadcrumb/Breadcrumb';
 import _Button from './Button/Button';
 import _Card from './Card/Card';
+import _Icon from './Icon/Icon';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -17,3 +18,4 @@ export { _Breadcrumb_w as Breadcrumb_w};
 export { _Breadcrumb as Breadcrumb};
 export { _Button as Button};
 export { _Card as Card};
+export { _Icon as Icon};

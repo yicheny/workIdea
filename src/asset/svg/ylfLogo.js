@@ -6,18 +6,18 @@ function YlfLogo(props) {
     return <svg style={style}
         // preserveAspectRatio="xMidYMid meet"
         preserveAspectRatio="none" //设置此属性后可以自由设置宽高，否则宽高比例固定
-        data-v-21be7ea2="" width="100%" height="100%" viewBox="0 0 340.000000 250.000000" color-interpolation-filters="sRGB" className="el-tooltip">
-        <rect data-v-21be7ea2="" x="0" y="0" width="100%" height="100%" fill="#0099cc" fill-opacity="1"/>
-        <rect data-v-21be7ea2="" x="0" y="0" width="100%" height="100%" fill="url(#watermark)" fill-opacity="1"
+        data-v-21be7ea2="" width="100%" height="100%" viewBox="0 0 340.000000 250.000000" colorInterpolationFilters="sRGB" className="el-tooltip">
+        <rect data-v-21be7ea2="" x="0" y="0" width="100%" height="100%" fill="#0099cc" fillOpacity="1"/>
+        <rect data-v-21be7ea2="" x="0" y="0" width="100%" height="100%" fill="url(#watermark)" fillOpacity="1"
               className="watermarklayer"/>
         <g data-v-21be7ea2="" fill="#fff" className="bordersvg"
            transform="translate(118.81952667236328,91.64999771118164)">
-            <path fill-opacity="0" stroke="#fff" stroke-width="3"
+            <path fillOpacity="0" stroke="#fff" strokeWidth="3"
                   d="M 56.70000076293945 8.56201171875 A 33.35000038146973 33.35000038146973 0 1 0 56.70000076293945 58.13798904418945"/>
             <g transform="translate(10,8.56201171875)">
                 <g>
-                    <rect stroke-width="2" x="0" y="0" width="93.4000015258789" height="49.57597732543945"
-                          fill-opacity="0"/>
+                    <rect strokeWidth="2" x="0" y="0" width="93.4000015258789" height="49.57597732543945"
+                          fillOpacity="0"/>
                 </g>
                 <g transform="translate(10,3)">
                     <g className="tp-name" transform="translate(0,0)">
