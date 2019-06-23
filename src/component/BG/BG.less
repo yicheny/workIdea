@@ -9,59 +9,45 @@ div.x_bg{
   height:100vh;
   overflow:hidden;
   background: #000;
-  img{
-    display: block;
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0;
-    left:0;
+  span{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    //color: transparent;
+    background-size: cover;
     opacity: 0;
-    &.pic1{
-      opacity: 1;
-/*duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
-      animation: 10s linear 0s infinite normal display_img;
-      @keyframes display_img {
-        25%{
-          opacity: 1;
-        }
-        50%{
-          opacity: 0;
-        }
-        75%{
-          opacity: 0;
-        }
-        100%{
-          opacity: 1;
-        }
-      }
-    }
-    &.pic2{
-      animation: 10s linear 0s infinite normal display_img2;
-      @keyframes display_img2 {
-        25%{
-          opacity: 0;
-        }
-        50%{
-          opacity: 1;
-        }
-        75%{
-          opacity: 1;
-        }
-        100%{
-          opacity: 0;
-        }
-      }
-    }
-    /*&.pic3{
-      animation: 10s linear 0s infinite normal display_img3;
-      @keyframes display_img3 {
+    z-index: -2;
+    backface-visibility: hidden;
+    background-position: 50% 50%;
+    /*duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
+    animation: 36s linear 0s infinite normal none running imageAnimation;
 
+    @keyframes imageAnimation{
+      0% {
+        opacity: 0;
+        animation-timing-function: ease-in;
       }
-    }*/
+      8% {
+        opacity: 1;
+        transform: scale(1.05);
+        animation-timing-function: ease-out;
+      }
+      17% {
+        opacity: 1;
+        transform: scale(1.1) rotate(0deg);
+      }
+      25% {
+        opacity: 0;
+        transform: scale(1.1) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+      }
+    }
   }
 }
-
 
 // linear：匀速
 // ease-in：加速
