@@ -50,7 +50,7 @@ function Login({history}){
             </div>
             <div className="x_login_input">
                 <Input addonBefore={<Icon type='user'/>} onChange={(e)=>setUser(e.target.value)} placeholder={placeholder}/>
-                <Input addonBefore={<Icon type='lock'/>} onChange={(e)=>setPassword(e.target.value)} placeholder='请输入密码'/>
+                <Input type='password' addonBefore={<Icon type='lock'/>} onChange={(e)=>setPassword(e.target.value)} placeholder='请输入密码'/>
                 <Button type="primary" style={{width:200}} onClick={loginClick}>登录</Button>
             </div>
         </Card>
