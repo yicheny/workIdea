@@ -9,7 +9,7 @@ import Bg from "./component/BG/BG";
 function Login(){
     return <div className="x_login">
         <Bg/>
-        {/*<Card style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
+        <Card style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
             <div className="x_login_logo">
                 <Logo/>
             </div>
@@ -18,7 +18,7 @@ function Login(){
                     <Button type="primary" style={{width:200}}>登录</Button>
                 </Link>
             </div>
-        </Card>*/}
+        </Card>
     </div>
 }
 export default Login;
