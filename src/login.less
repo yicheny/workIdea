@@ -4,10 +4,26 @@ div.x_login{
   display: flex;
   justify-content: center;
   align-items: center;
+  &_warn{
+    .x_card{
+      animation: 0.1s ease-in 0s 6 normal none running inputAnimation;
+      @keyframes inputAnimation{
+        from {
+          transform: translateX(40px);
+        }
+        to {
+          transform: translateX(-40px);
+        }
+      }
+    }
+  }
   .x_card{
     background-color: rgba(230,238,232,0.5);
     box-shadow: 0 0 8px black;
     border-radius: 4px;
+    &:hover{
+      box-shadow: black 0 0 50px;
+    }
     .x_card_body{
       display: flex;
       height:420px;
@@ -26,7 +42,6 @@ div.x_login{
     >span{
       margin:0 auto;
     }
-
     .ant-input-group-wrapper{
       padding-bottom: 36px;
     }

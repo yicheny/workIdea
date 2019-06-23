@@ -9,6 +9,7 @@ function Login({history}){
     const [user,setUser] = useState('');
     const [password,setPassword] = useState('');
     const [placeholder,setPlaceholder] = useState('');
+    const [loginMode,setLoginMode] = useState('');
 
     let index = 0;
     let textArr = ['无法登录？','请检查账号和密码是否输入正确'];
@@ -28,13 +29,20 @@ function Login({history}){
         return ()=>clearInterval(id)
     },[]);
 
+    useEffect(()=>{
+        if(loginMode==='update'){
+            setLoginMode('x_login_warn');
+        }
+    },[loginMode]);
+
     const loginClick = ()=>{
         if (user==='123123'&&password==='321321'){
             return history.push({pathname:'/cDemo'});
         }
+        setLoginMode('update');
     };
 
-    return <div className="x_login">
+    return <div className={["x_login",loginMode].join(' ')}>
         <Bg/>
         <Card style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
             <div className="x_login_logo">
