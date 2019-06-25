@@ -2,15 +2,20 @@ import React, {useState} from 'react';
 import {Container, Tabs} from "../../component";
 
 function TabsTest(props) {
-    const [active,setActive] = useState('1');
+    const [active,setActive] = useState('Tab1');
+    const showMap = {
+        Tab1:'Tab1',
+        Tab2:'Tab2',
+        Tab3:'Tab3',
+    }
     const tabData = [{
-        id:'1',
+        id:'Tab1',
         text:"Tab1"
     }, {
-        id:'2',
+        id:'Tab2',
         text:"Tab2"
     }, {
-        id:'3',
+        id:'Tab3',
         text:"Tab3"
     }];
 
@@ -18,6 +23,7 @@ function TabsTest(props) {
         <div>
             <Container>
                 <Tabs tabData={tabData} active={active} onClick={(v)=>setActive(v)}/>
+                {showMap[active]}
             </Container>
         </div>
     );
