@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import './login.less';
-import {Button,Card,Icon} from "./component";
+import {Button,Card,Icon,Input} from "./component";
 import Logo from './asset/svg/ylfLogo';
 import Bg from "./component/BG/BG";
-import {Input} from "antd";
 
 function Login({history}){
     const [user,setUser] = useState('');

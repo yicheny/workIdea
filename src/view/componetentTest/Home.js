@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Header, Graph, Calendar, Button} from '../../component'
+import {Container, Header, Graph, Calendar, Button,Input} from '../../component'
 
 function Home(){
     return <Container>
@@ -16,6 +16,8 @@ function Home(){
             <Button>Button_text</Button>
             <Button type='primary'>Button_primary</Button>
         </div>
+
+        <Input style={{padding:10}}/>
 
         <Calendar/>
     </Container>

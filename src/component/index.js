@@ -8,6 +8,7 @@ import _Button from './Button/Button';
 import _Card from './Card/Card';
 import _Icon from './Icon/Icon';
 import _Tabs from './Tabs/Tabs';
+import _Input from './Input/Input';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -19,3 +20,4 @@ export { _Button as Button};
 export { _Card as Card};
 export { _Icon as Icon};
 export {_Tabs as Tabs};
+export {_Input as Input};
