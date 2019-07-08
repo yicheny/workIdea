@@ -4,10 +4,11 @@ import '../asset/style/View/mainPanel.less';
 import LeftMenu from './LeftMenu';
 import Game from './game/Game';
 import Work from './business/WorkHome'
-import ReactHome from "./reactTest/ReactHome";
+import ReactRouter from "./reactTest/ReactRouter";
 import ESHome from './esTest/ESHome';
 import RouterHome from './router/RouterHome';
 import ComponentTestHome from "./componetentTest/.ComponentTestHome";
+import HttpRouter from "./httpTest/HttpRouter";
 
 function MainPanel(){
     return <div className='mainPanel'>
@@ -17,10 +18,10 @@ function MainPanel(){
                 <Route path='/wDemo' component={Work}/>
                 <Route path='/game' component={Game}/>
                 <Route path='/cDemo' component={ComponentTestHome}/>
-                <Route path='/rDemo' component={ReactHome}/>
+                <Route path='/rDemo' component={ReactRouter}/>
                 <Route path='/esDemo' component={ESHome}/>
                 <Route path='/router' component={RouterHome}/>
-
+                <Route path='/http' component={HttpRouter}/>
                 <Redirect exact from="/" to="/login" />
             </Switch>
         </div>

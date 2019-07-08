@@ -88,6 +88,18 @@ function LeftMenu(props) {
                     <Link to='/router'>Router_Demo</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub6'
+                     title={
+                         <span>
+                             <Icon type="ie" />
+                             <span>HTTP学习</span>
+                         </span>
+                     }>
+                <Item key='s6_1'>
+                    <Link to='/http'>Http_Home</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }
