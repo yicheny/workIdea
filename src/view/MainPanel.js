@@ -9,6 +9,7 @@ import ESHome from './esTest/ESHome';
 import RouterHome from './router/RouterHome';
 import ComponentTestHome from "./componetentTest/.ComponentTestHome";
 import HttpRouter from "./httpTest/HttpRouter";
+import DesignPatternRouter from "./designPattern/DesignPatternRouter";
 
 function MainPanel(){
     return <div className='mainPanel'>
@@ -22,6 +23,7 @@ function MainPanel(){
                 <Route path='/esDemo' component={ESHome}/>
                 <Route path='/router' component={RouterHome}/>
                 <Route path='/http' component={HttpRouter}/>
+                <Route path='/design' component={DesignPatternRouter}/>
                 <Redirect exact from="/" to="/login" />
             </Switch>
         </div>

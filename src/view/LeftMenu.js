@@ -100,6 +100,18 @@ function LeftMenu(props) {
                     <Link to='/http'>Http_Home</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub7'
+                     title={
+                         <span>
+                             <Icon type="html5" />
+                             <span>React-Router</span>
+                         </span>
+                     }>
+                <Item key='s7_1'>
+                    <Link to='/design'>设计模式</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }
