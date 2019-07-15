@@ -42,3 +42,9 @@ function DualStateSave(props) {
 }
 
 export default DualStateSave;
+
+//点击买入/卖出，获取当前flag(b/s)
+//获取当前模块的数据currentData(bData/sData)与切换前的模块数据preData
+//获取切换前的子模块号(active)与当前子模块号(preActive)
+//将当前显示数据(opts)设置为current(preActive)
+//将切换前的数据存入preData(active)
