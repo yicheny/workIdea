@@ -5,10 +5,10 @@ function DualStateSave(props) {
     const [active,setActive] = useState('Tab1');
     const showMap = {
         Tab1:{
-
+            
         },
         Tab2:{
-
+            
         },
         Tab3:{
             
