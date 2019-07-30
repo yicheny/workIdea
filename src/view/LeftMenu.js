@@ -112,6 +112,18 @@ function LeftMenu(props) {
                     <Link to='/design'>设计模式</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub8'
+                     title={
+                         <span>
+                             <Icon type="dingding" />
+                             <span>Css测试</span>
+                         </span>
+                     }>
+                <Item key='s8_1'>
+                    <Link to='/cssTest'>Css测试导航页</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }
