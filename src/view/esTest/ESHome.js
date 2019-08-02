@@ -1,12 +1,13 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
-import DateTest from './DateTest';
+import EsRouter from "./ESRouter";
+import MLodash_get from "./mLodash/MLodash_get";
 
 function ESHome() {
     return <div>
         <Switch>
-            <Route component={DateTest}/>
-            <Route path='/esDemo/date' component={DateTest}/>
+            <Route path='/es/mlodash/get' component={MLodash_get}/>
+            <Route component={EsRouter}/>
         </Switch>
     </div>
 }

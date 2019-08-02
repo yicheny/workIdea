@@ -21,7 +21,7 @@ function MainPanel(){
                 <Route path='/game' component={Game}/>
                 <Route path='/cDemo' component={ComponentTestHome}/>
                 <Route path='/rDemo' component={ReactRouter}/>
-                <Route path='/esDemo' component={ESHome}/>
+                <Route path='/es' component={ESHome}/>
                 <Route path='/router' component={RouterHome}/>
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPatternRouter}/>

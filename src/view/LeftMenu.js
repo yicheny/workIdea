@@ -73,7 +73,7 @@ function LeftMenu(props) {
                          </span>
                      }>
                 <Item key='s4_1'>
-                    <Link to='/esDemo/date'>Date</Link>
+                    <Link to='/es'>JS原生导航页</Link>
                 </Item>
             </SubMenu>
 
