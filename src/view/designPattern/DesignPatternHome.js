@@ -3,12 +3,10 @@ import {Link} from "react-router-dom";
 
 function DesignPatternHome(props) {
     return (<div className='design'>
-        <div className="design_document">
-            <div>
-                <Link to='/design/doc1'>doc1</Link>
-            </div>
+        <div>
+            <Link to='/design/base1'>基础常识01</Link><br/>
+            <Link to='/design/prototype'>原型模式</Link>
         </div>
-        <div className="design_practice">实践</div>
     </div>);
 }
 

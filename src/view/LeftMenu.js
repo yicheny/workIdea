@@ -105,11 +105,11 @@ function LeftMenu(props) {
                      title={
                          <span>
                              <Icon type="html5" />
-                             <span>React-Router</span>
+                             <span>设计模式</span>
                          </span>
                      }>
                 <Item key='s7_1'>
-                    <Link to='/design'>设计模式</Link>
+                    <Link to='/design'>设计模式导航页</Link>
                 </Item>
             </SubMenu>
 
