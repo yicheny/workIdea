@@ -6,6 +6,7 @@ function DesignPatternHome(props) {
         <Link to='/design/base1'>基础常识01</Link>
         <Link to='/design/prototype'>原型模式</Link>
         <Link to='/design/singleton'>单例模式</Link>
+        <Link to='/design/strategy'>策略模式</Link>
     </div>);
 }
 
