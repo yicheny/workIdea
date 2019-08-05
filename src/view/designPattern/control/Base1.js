@@ -20,3 +20,8 @@ function Base1(props) {
 }
 
 export default Base1;
+//关于this指向，大致可分为
+//1.普通函数——window
+//2.对象方法——对象本身
+//3.构造器调用——实例
+//4.call,apply,bind——修改后的对象
