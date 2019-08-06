@@ -7,6 +7,7 @@ import PrototypePattern from "./control/PrototypePattern";
 import SingleTon from "./control/SingleTon";
 import Strategy from "./control/Strategy";
 import Proxy from "./control/Proxy";
+import Iterator from "./control/Iterator";
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -15,6 +16,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/singleton' component={SingleTon}/>
         <Route path='/design/strategy' component={Strategy}/>
         <Route path='/design/proxy' component={Proxy}/>
+        <Route path='/design/iterator' component={Iterator}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }

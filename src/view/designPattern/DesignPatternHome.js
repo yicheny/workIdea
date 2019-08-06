@@ -8,6 +8,7 @@ function DesignPatternHome(props) {
         <Link to='/design/singleton'>单例模式</Link>
         <Link to='/design/strategy'>策略模式</Link>
         <Link to='/design/proxy'>代理模式</Link>
+        <Link to='/design/iterator'>迭代器模式</Link>
     </div>);
 }
 
