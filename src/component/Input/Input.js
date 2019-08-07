@@ -2,7 +2,7 @@ import React from 'react';
 import './Input.less';
 
 function Input(props) {
-    const {addonBefore,style,className,...rest} = props;
+    const {addonBefore,style,className,noBorder,...rest} = props;
     const cn = ["x_input_wrapper",className,addonBefore?'addonBefore':''].join(' ');
 
     return <span className={cn} style={style}>
@@ -15,6 +15,7 @@ Input.defaultProps = {
     style:{},
     className:'',
     addonBefore:false,
+    noBorder:false
 };
 
 export default Input;

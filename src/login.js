@@ -43,7 +43,7 @@ function Login({history}){
 
     return <div className={["x_login",loginMode].join(' ')}>
         <Bg/>
-        <Card style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
+        <Card className='bg_glass' style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
             <div className="x_login_logo">
                 <Logo/>
             </div>

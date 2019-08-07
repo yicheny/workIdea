@@ -2,7 +2,7 @@ import React from 'react';
 import './Button.less';
 
 function Button(props) {
-    const {type='text',className,style,children,...rest} = props;
+    const {type,className,style,children,...rest} = props;
     const cn = ['x_button',type,className].join(' ');
 
     return (
@@ -15,7 +15,7 @@ Button.defaultProps={
     type:'text',
     className:'',
     style:{},
-    children:''
+    children:'',
 };
 
 export default Button;
