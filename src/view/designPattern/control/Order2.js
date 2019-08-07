@@ -3,12 +3,8 @@ import {Button} from "../../../component";
 import './Order2.less';
 
 const btns = ['C','DEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'='];
-const isFuncBtns = function (value) {
-    return ['C','DEL','RE','=','CANCEL'].includes(value)
-};
-const isOperation = function(value){
-    return ['+','-','*','/'].includes(value);
-};
+const isFuncBtns = value=>['C','DEL','RE','=','CANCEL'].includes(value);
+const isOperation = (value)=>['+','-','*','/'].includes(value);
 
 function Order2(props) {
     const [temp,setTemp] = useState('');
@@ -57,10 +53,7 @@ function Order2(props) {
             return setOpera(value)
         }
 
-        if(curr===0){
-            return setCurr(Number(value))
-        }
-        setCurr(Number(curr+value))
+        curr===0? setCurr(Number(value)):setCurr(Number(curr+value))
     }
 
     return (
