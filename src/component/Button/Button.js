@@ -2,8 +2,8 @@ import React from 'react';
 import './Button.less';
 
 function Button(props) {
-    const {type='text',className='',style={},children,...rest} = props;
-    const cn = ['x_button',type,...className].join(' ');
+    const {type='text',className,style,children,...rest} = props;
+    const cn = ['x_button',type,className].join(' ');
 
     return (
         <span className={cn} style={style} {...rest}>
@@ -11,5 +11,11 @@ function Button(props) {
         </span>
     );
 }
+Button.defaultProps={
+    type:'text',
+    className:'',
+    style:{},
+    children:''
+};
 
 export default Button;

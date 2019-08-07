@@ -10,6 +10,8 @@ function DesignPatternHome(props) {
         <Link to='/design/proxy'>代理模式</Link>
         <Link to='/design/iterator'>迭代器模式</Link>
         <Link to='/design/pubSub'>发布-订阅模式</Link>
+        <Link to='/design/order'>命令模式【撤销】</Link>
+        <Link to='/design/order2'>命令模式【重做/回放】</Link>
     </div>);
 }
 
