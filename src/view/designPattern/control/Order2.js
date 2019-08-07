@@ -3,31 +3,43 @@ import {Button} from "../../../component";
 import './Order2.less';
 import _ from 'lodash'
 
-const btns = ['CE','DEL','CANCEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'=','RE'];
-const function_btns = ['CE','DEL','RE','=','CANCEL'];
-const operation_btns = ['+','-','*','/'];
+const btns = ['C','DEL','CANCEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'=','RE'];
+
+const isFuncBtns = function (value) {
+    return ['C','DEL','RE','=','CANCEL'].includes(value)
+};
 
 const isOperation = function(value){
-    return operation_btns.includes(value);
+    return ['+','-','*','/'].includes(value);
 };
 
 function Order2(props) {
-    const [res,setRes] = useState('');
-    const [course,setCourse] = useState(0);
+    const [temp,setTemp] = useState('');
+    const [opera,setOpera] = useState('');
+    const [curr,setCurr] = useState(0);
 
     //算法
     const scheduler = {
-        '=':()=>{
-            if(isOperation(_.last(course))) return;
-
+        '+':()=>{
+            setCurr(temp + curr)
         },
-        CE:()=>{
-            setRes('');
-            setCourse(0)
+        '-':()=>{
+            setCurr(temp - curr)
+        },
+        '*':()=>{
+            setCurr(temp * curr)
+        },
+        '/':()=>{
+            setCurr(temp / curr)
+        },
+        '=':()=>{
+            scheduler[opera]();
+        },
+        C:()=>{
+            setCurr(0)
         },
         DEL:()=>{
-            if(course.length<=1) return;
-            setCourse(course.substring(0,course.length-1))
+            setCurr(Number(curr.toString().substr(0,curr.toString().length-1)))
         },
         RE:()=>{
 
@@ -38,19 +50,25 @@ function Order2(props) {
     };
 
     function btnClick(value) {
-        if(function_btns.includes(value)){
-            return scheduler[value]();
+        if(isFuncBtns(value)){
+            return scheduler[value]()
+        }
+        if(isOperation(value)){
+            setTemp(curr);
+            setCurr(0);
+            return setOpera(value)
         }
 
-        if(isOperation(_.last(course)) && isOperation(value)) return;
-
-        setCourse(course+value)
+        if(curr===0){
+            return setCurr(Number(value))
+        }
+        setCurr(Number(curr+value))
     }
     return (
         <div className='x_order2' style={{margin:20}}>
             <h3>命令模式-实现回放</h3>
-            <h4>1. =：进行运算，显示结果</h4>
-            <h4>2. CE：清除运算</h4>
+            <h4>1. =：进行运算，显示结果【连续点击，可连续运算】</h4>
+            <h4>2. C：清除运算</h4>
             <h4>3. DEL：删除一位</h4>
             <h4>4. CANCEL：撤销到上一次运算结果【最多支持100次撤销】</h4>
             <h4>5. RE：回放操作</h4>
@@ -58,10 +76,10 @@ function Order2(props) {
             <div className="calputer box" style={{width:280,paddingTop:0}}>
                 <div className="calputer_show box">
                     <div className="calputer_course">
-                        {course}
+                        {temp + opera}
                     </div>
                     <div className="calputer_res">
-                        {res}
+                        {curr}
                     </div>
                 </div>
                 <div className="calputer_main">
