@@ -5,6 +5,8 @@ import './Calputer.less';
 const btns = ['CE','DEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'=','CLEAR'];
 const isFuncBtns = value=>['CE','DEL','=','CLEAR'].includes(value);
 const isOperation = (value)=>['+','-','*','/'].includes(value);
+const format=(value)=>value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+
 
 function Calputer(props) {
     const [temp,setTemp] = useState('');
@@ -56,7 +58,7 @@ function Calputer(props) {
 
     return (
         <div className='x_order2' style={{margin:20}}>
-            <h3>命令模式-实现回放</h3>
+            <h3>计算器</h3>
             <h4>1. =：进行运算，显示结果【连续点击，可连续运算】</h4>
             <h4>2. CE：清除运算结果</h4>
             <h4>3. DEL：删除一位</h4>
@@ -68,7 +70,7 @@ function Calputer(props) {
                         {temp + opera}
                     </div>
                     <div className="calputer_res">
-                        {curr}
+                        {format(curr)}
                     </div>
                 </div>
                 <div className="calputer_main">
