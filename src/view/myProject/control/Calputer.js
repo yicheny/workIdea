@@ -1,12 +1,12 @@
 import React, {useRef, useState} from 'react';
 import {Button} from "../../../component";
-import './Order2.less';
+import './Calputer.less';
 
 const btns = ['C','DEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'='];
 const isFuncBtns = value=>['C','DEL','RE','=','CANCEL'].includes(value);
 const isOperation = (value)=>['+','-','*','/'].includes(value);
 
-function Order2(props) {
+function Calputer(props) {
     const [temp,setTemp] = useState('');
     const [opera,setOpera] = useState('');
     const [curr,setCurr] = useState(0);
@@ -65,7 +65,7 @@ function Order2(props) {
             {/*<h4>4. CANCEL：撤销到上一次运算结果【最多支持100次撤销】</h4>*/}
             {/*<h4>5. RE：回放操作</h4>*/}
 
-            <div className="calputer box" style={{width:280,paddingTop:0,background:'#fff'}}>
+            <div className="calputer box" style={{width:280,paddingTop:0}}>
                 <div className="calputer_show box">
                     <div className="calputer_course">
                         {temp + opera}
@@ -85,4 +85,4 @@ function Order2(props) {
         </div>
 );}
 
-export default Order2;
+export default Calputer;

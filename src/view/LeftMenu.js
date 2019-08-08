@@ -124,6 +124,18 @@ function LeftMenu(props) {
                     <Link to='/cssTest'>Css测试导航页</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub9'
+                     title={
+                         <span>
+                             <Icon type="ant-design" />
+                             <span>my_project</span>
+                         </span>
+                     }>
+                <Item key='s9_1'>
+                    <Link to='/mProj'>my_project导航页</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }

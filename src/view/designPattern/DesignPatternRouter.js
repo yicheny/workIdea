@@ -10,7 +10,6 @@ import Proxy from "./control/Proxy";
 import Iterator from "./control/Iterator";
 import PubSub from "./control/PubSub";
 import Order from "./control/Order";
-import Order2 from "./control/Order2";
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -22,7 +21,6 @@ function DesignPatternRouter(props) {
         <Route path='/design/iterator' component={Iterator}/>
         <Route path='/design/pubSub' component={PubSub}/>
         <Route path='/design/order' component={Order}/>
-        <Route path='/design/order2' component={Order2}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }

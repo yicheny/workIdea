@@ -2,7 +2,7 @@ import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import '../asset/style/View/mainPanel.less';
 import LeftMenu from './LeftMenu';
-import Game from './game/Game';
+import myProjectRouter from './myProject/MyProjectRouter';
 import Work from './business/WorkHome'
 import ReactRouter from "./reactTest/ReactRouter";
 import ESHome from './esTest/ESHome';
@@ -18,7 +18,6 @@ function MainPanel(){
         <div className="mainPanel_content">
             <Switch>
                 <Route path='/wDemo' component={Work}/>
-                <Route path='/game' component={Game}/>
                 <Route path='/cDemo' component={ComponentTestHome}/>
                 <Route path='/rDemo' component={ReactRouter}/>
                 <Route path='/es' component={ESHome}/>
@@ -26,6 +25,7 @@ function MainPanel(){
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPatternRouter}/>
                 <Route path='/cssTest' component={CssTestRouter}/>
+                <Route path='/mProj' component={myProjectRouter}/>
                 <Redirect exact from="/" to="/login" />
             </Switch>
         </div>
