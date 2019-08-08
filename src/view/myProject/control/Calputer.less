@@ -1,42 +1,62 @@
-.x_order2 {
+.calputer {
+  &.carton_bg{
+    background: rgba(0,0,0,0) url('../../../asset/img/calputer_bg.jpg');
+    .calputer_show{
+      opacity: 0.85;
+    }
+    .x_button{
+      opacity: 0.9;
+    }
+  }
+  &_show{
+    >div{
+      padding:5px 10px;
+    }
+  }
+  &_course{
+    height:30px;
+    border-bottom:1px solid #d9d9d9;
+  }
+  &_res{
+    height:42px;
+    line-height: 42px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  &_main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
 
-  .calputer {
-    &_show{
-      >div{
-        padding:5px 10px;
+    > .x_button {
+      background: gainsboro;
+      &:nth-child(1) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      &:nth-child(2),&:nth-last-child(2) {
+        grid-column-start: 3;
+        grid-column-end: 5;
+      }
+      &:nth-last-child(1){
+        grid-column-start: 1 ;
+        grid-column-end:5;
       }
     }
-    &_course{
-      height:30px;
-      border-bottom:1px solid #d9d9d9;
-    }
-    &_res{
-      height:42px;
-      line-height: 42px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    &_main {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 5px;
 
-      > .x_button {
-        background: gainsboro;
-        &:nth-child(1) {
-          grid-column-start: 1;
-          grid-column-end: 3;
-        }
-        &:nth-child(2),&:nth-last-child(2) {
-          grid-column-start: 3;
-          grid-column-end: 5;
-        }
-        &:nth-last-child(1){
-          grid-column-start: 1 ;
-          grid-column-end:5;
-        }
-      }
-
+  }
+  .x_button{
+    background: #eee;
+    border:solid 1px silver;
+    &.text:hover{
+      color:#4f4f4f;
+      border:solid 1px silver;
+      background: #dedede;
+      //transform: scale(1.03);//会导致字体和边框模糊
+    }
+    &.text:active{
+      opacity: 0.6;
+      transition: 0.3s;
     }
   }
 }

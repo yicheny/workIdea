@@ -57,14 +57,14 @@ function Calputer(props) {
     }
 
     return (
-        <div className='x_order2' style={{margin:20}}>
+        <div style={{margin:20}}>
             <h3>计算器</h3>
             <h4>1. =：进行运算，显示结果【连续点击，可连续运算】</h4>
             <h4>2. CE：清除运算结果</h4>
             <h4>3. DEL：删除一位</h4>
             <h4>4. CLEAR：清空所有</h4>
 
-            <div className="calputer box" style={{width:280,paddingTop:0}}>
+            <div className="calputer box carton_bg" style={{width:280,paddingTop:0}}>
                 <div className="calputer_show box">
                     <div className="calputer_course">
                         {temp + opera}
