@@ -11,6 +11,7 @@ function DesignPatternHome(props) {
         <Link to='/design/iterator'>迭代器模式</Link>
         <Link to='/design/pubSub'>发布-订阅模式</Link>
         <Link to='/design/order'>命令模式</Link>
+        <Link to='/design/combination'>组合模式</Link>
     </div>);
 }
 

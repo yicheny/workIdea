@@ -3,7 +3,7 @@ import {Container, Header, Graph, Calendar, Button,Input} from '../../component'
 
 function Home(){
     return <Container>
-        <Header value='标题' style={{color:'red'}}/>
+        <Header style={{color:'red'}}>标题</Header>
 
         <div>
             <Graph/>
