@@ -11,6 +11,7 @@ import ComponentTestHome from "./componetentTest/.ComponentTestHome";
 import HttpRouter from "./httpTest/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";
 import CssTestRouter from "./cssTest/CssTestRouter";
+import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 
 function MainPanel(){
     return <div className='mainPanel'>
@@ -26,6 +27,7 @@ function MainPanel(){
                 <Route path='/design' component={DesignPatternRouter}/>
                 <Route path='/cssTest' component={CssTestRouter}/>
                 <Route path='/mProj' component={myProjectRouter}/>
+                <Route path='/recons' component={ReconsitutionRouter}/>
                 <Redirect exact from="/" to="/login" />
             </Switch>
         </div>

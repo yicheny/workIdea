@@ -136,6 +136,18 @@ function LeftMenu(props) {
                     <Link to='/mProj'>my_project导航页</Link>
                 </Item>
             </SubMenu>
+
+            <SubMenu key='sub10'
+                     title={
+                         <span>
+                             <Icon type="ant-design" />
+                             <span>重构-改善代码既有设计</span>
+                         </span>
+                     }>
+                <Item key='s9_1'>
+                    <Link to='/recons'>重构导航页</Link>
+                </Item>
+            </SubMenu>
         </Menu>
     </div>
 }
