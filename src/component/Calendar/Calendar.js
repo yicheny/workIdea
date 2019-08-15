@@ -5,7 +5,7 @@ import {Icon} from 'antd/lib/index';
 import './Calendar.less';
 
 function DateChange(props) {
-    let {date, unit,switch_=true,setDate } = props;
+    let {date, unit,setDate } = props;
 
     const handleClick = (alg)=>{
         if(alg==='add') setDate(++date);

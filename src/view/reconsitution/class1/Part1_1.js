@@ -92,7 +92,7 @@ function renderPainText (data) {
 }
 
 //下面的代码没有使用，可以利用对象的多态性或者分离文件使用
-function htmlStatement (invoice, plays) {
+/*function htmlStatement (invoice, plays) {
     return renderHtml(createStatementData(invoice, plays));
 }
 function renderHtml (data) {
@@ -107,6 +107,6 @@ function renderHtml (data) {
     result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`;
     result += `<p>You earned <em>${data.totalVolumeCredits}</em> credits</p>\n`;
     return result;
-}
+}*/
 
 export default statement;

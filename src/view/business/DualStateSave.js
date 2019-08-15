@@ -3,7 +3,7 @@ import {Container, Tabs, Input} from "../../component";
 
 function DualStateSave(props) {
     const [active,setActive] = useState('Tab1');
-    const showMap = {
+   /* const showMap = {
         Tab1:{
             
         },
@@ -13,7 +13,7 @@ function DualStateSave(props) {
         Tab3:{
             
         },
-    };
+    };*/
     const tabData = [{
         id:'Tab1',
         text:"Tab1"

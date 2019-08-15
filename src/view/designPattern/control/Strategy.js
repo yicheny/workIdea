@@ -2,7 +2,7 @@ import React from 'react';
 
 function Strategy(props) {
     //原始状态--非策略模式
-    var calculateBonus = function( performanceLevel, salary ){
+    /*var calculateBonus = function( performanceLevel, salary ){
         if ( performanceLevel === 'S' ){
             return salary * 4;
         }
@@ -14,7 +14,7 @@ function Strategy(props) {
         }
     };
     console.log(calculateBonus('B', 20000));      // 输出：40000
-    console.log(calculateBonus('S', 6000));      // 输出：24000
+    console.log(calculateBonus('S', 6000));      // 输出：24000*/
 
     //策略模式
     var strategies = {
