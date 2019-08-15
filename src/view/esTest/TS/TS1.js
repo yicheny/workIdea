@@ -1,8 +1,11 @@
 import React from 'react';
+import {Container} from "../../../component";
 
 function TS1(props) {
     return (
-        <div>123</div>
+        <Container header='TS1'>
+
+        </Container>
     );
 }
 
