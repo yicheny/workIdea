@@ -7,7 +7,7 @@ import Work from './business/WorkHome'
 import ReactRouter from "./reactTest/ReactRouter";
 import ESRouter from './esTest/ESRouter';
 import RouterHome from './router/RouterHome';
-import ComponentTestHome from "./componetentTest/.ComponentTestHome";
+import ComponentRouter from "./componetentTest/ComponentRouter";
 import HttpRouter from "./httpTest/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";
 import CssTestRouter from "./cssTest/CssTestRouter";
@@ -23,7 +23,7 @@ function MainPanel(props){
         <div className="mainPanel_content">
             <Switch>
                 <Route path='/wDemo' component={Work}/>
-                <Route path='/cDemo' component={ComponentTestHome}/>
+                <Route path='/cDemo' component={ComponentRouter}/>
                 <Route path='/rDemo' component={ReactRouter}/>
                 <Route path='/es' component={ESRouter}/>
                 <Route path='/router' component={RouterHome}/>

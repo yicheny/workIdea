@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Tabs} from "../../component";
+import {Container, Tabs} from "../../../component";
 
 function TabsTest(props) {
     const [active,setActive] = useState('Tab1');

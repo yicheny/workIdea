@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Container} from "../../../component";
 
-function total(a:number=0xf00d,b:number=0xf00d) {
+function total(a:number=0xf00d,b:number=0xf00d):number {
     return a+b;
 }
 

@@ -1,10 +1,10 @@
 import React, {Fragment, useState} from 'react';
-import {Breadcrumb} from "../../component";
+import {Breadcrumb} from "../../../component";
 import {Route, Switch} from "react-router-dom";
-import BreadcrumdTest2 from "./control/BreadcrumdTest2";
-import BreadcrumdTest2Next from "./control/BreadcrumdTest2Next";
-import BreadcrumdTest1 from "./control/BreadcrumdTest1";
-import BreadcrumdTest3 from "./control/BreadcrumdTest3";
+import BreadcrumdTest2 from "./BreadcrumdTest2";
+import BreadcrumdTest2Next from "./BreadcrumdTest2Next";
+import BreadcrumdTest1 from "./BreadcrumdTest1";
+import BreadcrumdTest3 from "./BreadcrumdTest3";
 
 function BreadcrumdTest(props) {
     const [Name,setName] = useState({

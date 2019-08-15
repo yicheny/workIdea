@@ -39,12 +39,6 @@ function LeftMenu(props) {
                 <Item key='s2_1'>
                     <Link to='/cDemo'>综合测试</Link>
                 </Item>
-                <Item key='s2_2'>
-                    <Link to='/cDemo/bread'>面包屑组件</Link>
-                </Item>
-                <Item key='s2_3'>
-                    <Link to='/cDemo/tabs'>Tabs组件</Link>
-                </Item>
             </SubMenu>
 
             <SubMenu key='sub3'

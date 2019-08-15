@@ -1,7 +1,7 @@
 import React from 'react';
-import {Container, Header, Graph, Calendar, Button,Input} from '../../component'
+import {Container, Header, Graph, Calendar, Button,Input} from '../../../component'
 
-function Home(){
+function All(){
     return <Container>
         <Header style={{color:'red'}}>标题</Header>
 
@@ -23,4 +23,4 @@ function Home(){
     </Container>
 }
 
-export default Home;
+export default All;
