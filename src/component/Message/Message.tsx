@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom'
 import './Message.less';
+// import {sleep} from "../../utils/publicFun";
 
 function Notice(info:string) {
     return <div className='notice'>
@@ -12,41 +13,68 @@ Notice.defaultProps={
 };
 
 class Message{
-    div:HTMLDivElement;
+    box:HTMLDivElement;
     timeId:number;
     destoryTime:number;
+    infos:string[];
+    divQueue:HTMLDivElement[];
+    // infoMaxLen:number;
 
     constructor(){
-        this.div = null;
+        this.box = null;
         this.timeId = null;
         this.destoryTime = 1200;
+        this.infos = [];
+        this.divQueue = [];
+        // this.infoMaxLen = 10;
     }
 
-    autoDestory:Function = ()=>{
+    autoDestory = ()=>{
         this.timeId = setTimeout(()=>{
             this.destory()
         },this.destoryTime);
     };
 
-    destory:Function = ()=>{
-        if(this.div){
-            this.div.parentNode.removeChild(this.div);
-            this.div=null;
+    destory = ()=>{
+        const div = this.divQueue.shift();
+        this.infos.shift();
+        div.parentNode.removeChild(div);
+    };
+
+    addBox = ()=>{
+        if(!this.box){
+            this.box = document.createElement('div');
+            this.box.className = 'x_message_box';
+            document.body.appendChild(this.box);
         }
     };
 
-    addDiv:Function = (info:string,callback:Function=()=>{})=>{
-        if(this.div) return;
-        this.div = document.createElement('div');
-        this.div.className = 'x_message';
-        document.body.appendChild(this.div);
-        ReactDOM.render(Notice(info),this.div);
-        callback();
+    addDivQueue = (div:HTMLDivElement)=>{
+        this.divQueue.push(div);
     };
 
-    show:Function = (info:string,destoryTime:number)=>{
+    addDiv = (info:string)=>{
+        this.addBox();
+        const div = document.createElement('div');
+        div.className = 'x_message';
+        this.box.appendChild(div);
+        this.addDivQueue(div);
+        ReactDOM.render(Notice(info),div);
+    };
+
+    addInfo = (info:string)=>{
+        this.infos.push(info)
+    };
+
+    show = (info:string,destoryTime:number)=>{
         if(destoryTime) this.destoryTime=destoryTime;
-        this.addDiv(info,this.autoDestory);
+        this.addInfo(info);
+        this.addDiv(info);
+        setTimeout(()=>{
+            this.autoDestory();
+        },0);
+        // this.addDiv(info);
+        // sleep(400);
     };
 }
 

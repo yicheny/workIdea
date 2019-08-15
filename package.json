@@ -120,5 +120,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@types/es6-promise": "^3.3.0"
   }
 }

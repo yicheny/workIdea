@@ -1,11 +1,16 @@
 .x_message{
-  position:fixed;
-  top:0;
-  left:50%;
-  transform: translate(-50%,0%);
-  width:400px;
-  z-index:100;
-  background: transparent;
+  &_box{
+    display: flex;
+    flex-direction: column;
+    position:fixed;
+    top:42px;
+    left:50%;
+    transform: translate(-50%,0%);
+    width:400px;
+    z-index:100;
+    background: transparent;
+  }
+  margin:6px 0;
 
   .notice{
     font-size: 16px;
@@ -13,25 +18,26 @@
     background: #40a9ff;
     border-radius: 4px;
     box-shadow: 0 0 4px 0 gray;
+    transform: translateY(0%);
     opacity: 0;
 
     animation: 1.2s linear 0s 1 normal none running spin;
     @keyframes spin{
       0% {
-        opacity: 0;
+        opacity: 1;
         transform: translateY(0%);
       }
       10%{
         opacity: 1;
-        transform: translateY(100%);
+        transform: translateY(-50%);
       }
-      80%{
+      90%{
         opacity: 1;
-        transform: translateY(100%);
+        transform: translateY(-50%);
       }
-      90% {
+      100%{
+        transform: translateY(-100%);
         opacity: 0;
-        transform: translateY(100%);
       }
     }
   }
