@@ -7,6 +7,7 @@ function ComponentHome(props) {
             <Link to='/cDemo/all'>综合测试</Link>
             <Link to='/cDemo/bread'>Breadcrumd</Link>
             <Link to='/cDemo/tabs'>Tabs</Link>
+            <Link to='/cDemo/message'>Message</Link>
         </div>
     );
 }

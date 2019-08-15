@@ -9,6 +9,7 @@ import _Card from './Card/Card';
 import _Icon from './Icon/Icon';
 import _Tabs from './Tabs/Tabs';
 import _Input from './Input/Input';
+import _Message from './Message/Message.tsx';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -21,3 +22,4 @@ export { _Card as Card};
 export { _Icon as Icon};
 export {_Tabs as Tabs};
 export {_Input as Input};
+export {_Message as Message};

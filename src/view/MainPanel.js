@@ -13,9 +13,12 @@ import DesignPatternRouter from "./designPattern/DesignPatternRouter";
 import CssTestRouter from "./cssTest/CssTestRouter";
 import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 import {setCombinKey} from "../utils/CombinKey";
+import {Message} from "../component";
 
 function MainPanel(props){
-    const fn = ()=>props.history.push('/demo');
+    // const fn = ()=>props.history.push('/demo');
+
+    const fn = ()=>Message.show('组合键功能测试');
     setCombinKey([68,74],fn);//D J
 
     return <div className='mainPanel'>
