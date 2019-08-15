@@ -5,7 +5,7 @@ import ReconsitutionHome from "./ReconsitutionHome";
 import Class1Router from "./class1/Class1Router";
 
 function ReconsitutionRouter(props) {
-    return <div className='x_recons'>
+    return <div className='x_recons x_pad'>
         <Switch>
             <Route path='/recons/class1' component={Class1Router}/>
             <Route component={ReconsitutionHome}/>

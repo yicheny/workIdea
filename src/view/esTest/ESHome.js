@@ -1,13 +1,12 @@
 import React from 'react';
-import {Switch,Route} from 'react-router-dom';
-import EsRouter from "./ESRouter";
+import {Link} from "react-router-dom";
 
-function ESHome() {
-    return <div>
-        <Switch>
-            <Route component={EsRouter}/>
-        </Switch>
-    </div>
+function ESHome(props) {
+    return (
+        <div className='x_pad'>
+            <Link to='/es/ts1'>TS1</Link>
+        </div>
+    );
 }
 
 export default ESHome;
