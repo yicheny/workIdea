@@ -9,7 +9,7 @@ import _Card from './Card/Card';
 import _Icon from './Icon/Icon';
 import _Tabs from './Tabs/Tabs';
 import _Input from './Input/Input';
-import _Message from './Message/Message.tsx';
+import _Message from './Message/Message.js';
 
 export { _Container as Container };
 export { _Header as Header};

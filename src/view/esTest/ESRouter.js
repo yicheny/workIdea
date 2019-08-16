@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import ESHome from "./ESHome";
-import TS1 from "./TS/TS1.tsx";
+import TS1 from "./TS/TS1.js";
 
 function ESRouter() {
     return <div>

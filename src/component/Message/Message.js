@@ -1,9 +1,9 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom'
 import './Message.less';
 // import {sleep} from "../../utils/publicFun";
 
-function Notice(info:string) {
+function Notice(info) {
     return <div className='notice'>
         {info}
     </div>
@@ -13,13 +13,6 @@ Notice.defaultProps={
 };
 
 class Message{
-    box:HTMLDivElement;
-    timeId:number;
-    destoryTime:number;
-    infos:string[];
-    divQueue:HTMLDivElement[];
-    // infoMaxLen:number;
-
     constructor(){
         this.box = null;
         this.timeId = null;
@@ -49,11 +42,11 @@ class Message{
         }
     };
 
-    addDivQueue = (div:HTMLDivElement)=>{
+    addDivQueue = (div)=>{
         this.divQueue.push(div);
     };
 
-    addDiv = (info:string)=>{
+    addDiv = (info)=>{
         this.addBox();
         const div = document.createElement('div');
         div.className = 'x_message';
@@ -62,11 +55,11 @@ class Message{
         ReactDOM.render(Notice(info),div);
     };
 
-    addInfo = (info:string)=>{
+    addInfo = (info)=>{
         this.infos.push(info)
     };
 
-    show = (info:string,destoryTime:number)=>{
+    show = (info,destoryTime)=>{
         if(destoryTime) this.destoryTime=destoryTime;
         this.addInfo(info);
         this.addDiv(info);
