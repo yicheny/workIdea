@@ -18,7 +18,7 @@ import {Message} from "../component";
 function MainPanel(props){
     // const fn = ()=>props.history.push('/demo');
 
-    const fn = ()=>Message.show('组合键功能测试');
+    const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
     setCombinKey([68,74],fn);//D J
 
     return <div className='mainPanel'>

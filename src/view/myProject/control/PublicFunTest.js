@@ -1,5 +1,5 @@
 import React from 'react';
-import {sleep} from "../../../utils/publicFun.ts";
+import {sleep} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
 
 function PublicFunTest(props) {

@@ -1,22 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import './Message.less';
+import {Icon} from "../index";
 // import {sleep} from "../../utils/publicFun";
 
-function Notice(info) {
+function Notice(props) {
+    const {info,icon} = props;
+
     return <div className='notice'>
+        {icon && <Icon type={icon} />}
         {info}
     </div>
 }
 Notice.defaultProps={
-    info:''
+    info:'',
+    icon:''
 };
 
 class Message{
     constructor(){
         this.box = null;
-        this.timeId = null;
-        this.destoryTime = 1200;
+        // this.timeId = null;
+        this.destoryTime = 3200;
         this.infos = [];
         this.divQueue = [];
         // this.infoMaxLen = 10;
@@ -63,11 +68,7 @@ class Message{
         if(destoryTime) this.destoryTime=destoryTime;
         this.addInfo(info);
         this.addDiv(info);
-        setTimeout(()=>{
-            this.autoDestory();
-        },0);
-        // this.addDiv(info);
-        // sleep(400);
+        this.autoDestory();
     };
 }
 
