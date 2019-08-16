@@ -8,7 +8,7 @@ function Container (props){
 
     return (
         <div className={cn}>
-            <div className="main">
+            <div className="x_container_main">
                 {header && <Header>{header}</Header>}
                 <div className="x_container_content">
                     {props.children}
