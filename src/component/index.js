@@ -10,6 +10,7 @@ import _Icon from './Icon/Icon';
 import _Tabs from './Tabs/Tabs';
 import _Input from './Input/Input';
 import _Message from './Message/Message.js';
+import _Roll from './Roll/Roll';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -23,3 +24,4 @@ export { _Icon as Icon};
 export {_Tabs as Tabs};
 export {_Input as Input};
 export {_Message as Message};
+export {_Roll as Roll};

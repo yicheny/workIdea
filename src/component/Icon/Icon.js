@@ -6,7 +6,6 @@ function Icon(props) {
     const cn = ['iconfont',`icon-${type}`].join(' ');
     style = {...style,fontSize:size,};
 
-    console.log(cn);
     return (<i className={cn} style={style}>
     </i>)
 }

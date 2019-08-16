@@ -1,0 +1,116 @@
+.x_roll{
+  position:relative;
+  overflow: hidden;
+  width:320px;
+  height:320px;
+  border-radius: 50%;
+  border: #b2a98d 6px solid;
+  box-shadow: 0 0 20px #b2a98d;
+  user-select: none;
+
+  &_light,&_bg,&_gift{
+    position:absolute;
+    top:0;
+    left:0;
+    .item{
+      position:absolute;
+      top:0;
+      left:50%;
+      transform: translateX(-50%);
+      transform-origin: center center;
+    }
+  }
+  &_bg,&_gift{
+    border-radius: 50%;
+    .item{
+    }
+  }
+  &_light{
+    border:5px transparent solid;
+    z-index:10;
+    .item{
+      width:0;
+      height:100%;
+      &:before{
+        content:'';
+        display: block;
+        width:10px;
+        height:10px;
+        border-radius: 50%;
+      }
+      &:nth-of-type(even):before{
+        background: #FFAA20;
+        animation:1s linear 0s infinite normal none running glitter;
+      }
+      &:nth-of-type(odd):before{
+        background: #fff;
+        animation:1s linear 0s infinite reverse none running glitter;
+      }
+      @keyframes glitter{
+        0%{
+          background: #FFAA20;
+        }
+        100%{
+          background: #fff;
+        }
+      }
+    }
+  }
+  &_bg{
+    border:20px #d9ffc2 solid;
+    .item{
+      height:100%;
+      background: #D3D6DA;
+      width:1px;
+    }
+  }
+  &_gift{
+    border:30px transparent solid;
+    transform: rotate(25deg);
+    .item{
+      height:100%;
+      width:0;
+      >span{
+        color:red;
+      }
+    }
+  }
+
+  &_pointer{
+    &.forbid{
+      cursor:not-allowed;
+    }
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width:56px;
+    height:56px;
+    padding:0 4px;
+    border:5px solid #1890ff;
+    background: #fff;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    z-index: 20;
+    &:before{
+      content: '';
+      position: absolute;
+      top: -52px;
+      left: 50%;
+      right: 0;
+      transform: translateX(-50%);
+      width: 0;
+      border-style: solid;
+      border-color: transparent transparent #1890ff transparent;
+      border-width: 25px 10px 25px 10px;
+    }
+  }
+}
+
+.fill{
+  width:100%;
+  height:100%;
+}
