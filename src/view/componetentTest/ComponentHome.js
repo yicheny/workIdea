@@ -8,6 +8,7 @@ function ComponentHome(props) {
             <Link to='/cDemo/bread'>Breadcrumd</Link>
             <Link to='/cDemo/tabs'>Tabs</Link>
             <Link to='/cDemo/message'>Message</Link>
+            <Link to='/cDemo/modal'>Modal</Link>
         </div>
     );
 }

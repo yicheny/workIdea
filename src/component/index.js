@@ -11,6 +11,7 @@ import _Tabs from './Tabs/Tabs';
 import _Input from './Input/Input';
 import _Message from './Message/Message.js';
 import _Roll from './Roll/Roll';
+import _Modal from './Modal/Modal';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -25,3 +26,4 @@ export {_Tabs as Tabs};
 export {_Input as Input};
 export {_Message as Message};
 export {_Roll as Roll};
+export {_Modal as Modal}
