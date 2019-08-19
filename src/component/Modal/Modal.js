@@ -12,12 +12,12 @@ function Modal(props) {
     const modalRef = createRef();
 
     return <div className={cn}
-                onMouseMove={(e) => handleMouseMove(e)}
-                onMouseUp={(e) => handleMouseUp(e)}
-                onMouseLeave={(e) => handleMouseUp(e)}>
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}>
         <div ref={modalRef} className="x_modal" style={style}>
             <div className="x_modal_header"
-                 onMouseDown={(e) => handleMouseDown(e)}>
+                 onMouseDown={handleMouseDown}>
                 {header}
             </div>
             <div className="x_modal_main">
