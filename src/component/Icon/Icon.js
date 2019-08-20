@@ -2,8 +2,8 @@ import React from 'react';
 import './Icon.less';
 
 function Icon(props) {
-    let {type,size,style} = props;
-    const cn = ['iconfont',`icon-${type}`].join(' ');
+    let {type,size,style,className} = props;
+    const cn = ['iconfont',`icon-${type}`,className].join(' ');
     style = {...style,fontSize:size,};
 
     return (<i className={cn} style={style}>
@@ -12,7 +12,8 @@ function Icon(props) {
 Icon.defaultProps={
     type:'',
     size:20,
-    style:{}
+    style:{},
+    className:''
 };
 
 export default Icon;

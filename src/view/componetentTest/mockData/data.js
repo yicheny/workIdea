@@ -8,7 +8,7 @@ export const menuData = [
             {tit:'子级标题3',
                 details: [
                     {tit:'第3级标题1'},
-                    {tit:'第3级级标题2'},
+                    {tit:'第3级标题2'},
                 ]
             },
         ]

@@ -1,19 +1,29 @@
 .x_menu{
+  &.arrow_down{
+    height:0;
+    overflow: hidden;
+  }
+  background: #001529;
+  color: rgba(255,255,255,0.65);
   &_wrap{
     min-width:256px;
   }
-  //width:256px;
-  background: #001529;
-  color: rgba(255,255,255,0.65);
   &_item{
     padding-left:24px;
-    >div{
+    &_main{
+      display: flex;
+      justify-content: space-between;
       margin:4px 0;
       padding-right:16px;
       height:40px;
-      width: 256px;
       line-height: 40px;
       cursor:pointer;
+      .icon-arrowDown{
+        transition: 0.3s transform ease;
+        &.arrow_up{
+          transform: rotate(180deg);
+        }
+      }
     }
     .iconfont{
       margin-right: 10px;
@@ -22,4 +32,5 @@
       color:#fff;
     }
   }
+
 }
