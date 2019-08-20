@@ -6,6 +6,7 @@ function MessageTest(props) {
         <Button onClick={() => Message.show({info:'恭喜点击A成功',icon:'success'})}>点击A</Button>
         <Button onClick={() => Message.show({info:'抱歉点击B失败',icon:'error'})}>点击B</Button>
         <Button onClick={() => Message.show({info:'警告,点击C有风险',icon:'warn'})}>点击C</Button>
+        <Button onClick={() => Message.show({info:'消息提示,点击D',icon:'info'})}>点击D</Button>
     </Container>
 }
 
