@@ -24,6 +24,9 @@
   background: #fff;
   border-radius: 4px;
   &_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding:8px 12px;
     border-radius: 4px 4px 0 0;
     font-size: 21px;
@@ -31,6 +34,19 @@
     user-select: none;
     background: #1B2631;
     color:#fff;
+    overflow: hidden;
+    .exit{
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width:28px;
+      height:28px;
+      border-radius: 50%;
+      cursor: pointer;
+      &:hover{
+        background: rgba(160,160,160,0.2);
+      }
+    }
   }
   &_main{
     position:relative;

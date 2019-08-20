@@ -1,6 +1,7 @@
 import React, {createRef} from 'react';
 import './Modal.less';
-import {Button} from "../index";
+import Button from '../Button/Button';
+import Icon from "../Icon/Icon";
 
 function Modal(props) {
     let {children, header, confirm, cancel, confirmText, cancelText, width, height, style, layout, cancelVisible} = props;
@@ -18,7 +19,10 @@ function Modal(props) {
         <div ref={modalRef} className="x_modal" style={style}>
             <div className="x_modal_header"
                  onMouseDown={handleMouseDown}>
-                {header}
+                <span>{header}</span>
+                <span className="exit" onClick={cancel}>
+                    <Icon type='cancel' size={12}/>
+                </span>
             </div>
             <div className="x_modal_main">
                 {children}
