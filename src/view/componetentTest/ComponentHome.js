@@ -9,6 +9,7 @@ function ComponentHome(props) {
             <Link to='/cDemo/tabs'>Tabs</Link>
             <Link to='/cDemo/message'>Message</Link>
             <Link to='/cDemo/modal'>Modal</Link>
+            <Link to='/cDemo/menu'>Menu</Link>
         </div>
     );
 }

@@ -6,6 +6,7 @@ import TabsTest from "./control/TabsTest";
 import ComponentHome from "./ComponentHome";
 import MessageTest from "./control/MessageTest";
 import ModalTest from "./control/ModalTest";
+import MenuDemo from "./control/MenuDemo";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -14,6 +15,7 @@ function ComponentRouter(props) {
         <Route path='/cDemo/tabs' component={TabsTest}/>
         <Route path='/cDemo/message' component={MessageTest}/>
         <Route path='/cDemo/modal' component={ModalTest}/>
+        <Route path='/cDemo/menu' component={MenuDemo}/>
         <Route component={ComponentHome}/>
     </Switch>
 

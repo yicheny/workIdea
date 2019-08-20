@@ -12,6 +12,7 @@ import _Input from './Input/Input';
 import _Message from './Message/Message.js';
 import _Roll from './Roll/Roll';
 import _Modal from './Modal/Modal';
+import _Menu from './Menu/Menu';
 
 export { _Container as Container };
 export { _Header as Header};
@@ -27,3 +28,4 @@ export {_Input as Input};
 export {_Message as Message};
 export {_Roll as Roll};
 export {_Modal as Modal}
+export {_Menu as Menu}
