@@ -3,12 +3,12 @@ import './PkCard.less';
 import {mergeCn} from '../../utils/publicFun';
 
 function PkCard(props) {
-    let {graph,value,face} = props;
+    let {graph,value,face,onClick} = props;
     const cn = mergeCn('x_pkCard',face);
     const graphCn = mergeCn('x_graph',graph);
 
     return (
-        <div className={cn}>
+        <div className={cn} onClick={onClick}>
             <div className="x_pkCard_main fill">
                 <div className="x_pkCard_backBg fill">
                 </div>

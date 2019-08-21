@@ -6,7 +6,7 @@ function Overturn(props) {
     return <Container className='x_overturn' header='卡片翻转'>
         <ul>
             <h3>关键点总结</h3>
-            <li>1.为最外层容器设置perspective: 1000;</li>
+            <li>1.为最外层容器设置perspective: 1000;为内层容器设置transform-style: preserve-3d;</li>
             <li>2.为正面和背面卡片设置绝对定位，并设置backface-visibility: hidden;</li>
             <li>3.为正面卡片设置一个比背面卡片高的z-index值</li>
             <li>4.为背面卡片设置transform: rotateY(180deg);</li>

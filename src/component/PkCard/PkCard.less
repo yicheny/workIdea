@@ -2,9 +2,25 @@
   width: 150px;
   height:220px;
   perspective: 1000px;//翻转关键
-  &:hover{
+  user-select: none;
+  &.back{
     .x_pkCard_main{
-      transform: scale(1.2) rotateY(0deg);
+      transform: rotateY(180deg);
+    }
+    &:hover{
+      .x_pkCard_main{
+        transform: rotateY(180deg) scale(1.2);
+      }
+    }
+  }
+  &.front{
+    .x_pkCard_main{
+      transform:rotateY(0deg);
+    }
+    &:hover{
+      .x_pkCard_main{
+        transform: rotateY(0deg) scale(1.2);
+      }
     }
   }
   &_main{
@@ -12,7 +28,6 @@
     box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
     transition: 0.6s;
     transform-style: preserve-3d;//翻转关键
-    transform: rotateY(180deg);
     //border-radius: 6px;
     //overflow: hidden;//加上这一行无法实现翻转，没有这一行圆角不出现，待解决
   }
@@ -22,18 +37,16 @@
     top: 0;
     left: 0;
   }
-  &.back{
-    .x_pkCard_backBg{
-      transform: rotateY(180deg);//翻转关键
-      background: #eee;
-      background-image:
-              linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
-              linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
-      background-position:0 0, 15px 15px;
-      background-size: 30px 30px;
-    }
-  }
 
+  .x_pkCard_backBg{
+    z-index: 2;
+    background: #eee;
+    background-image:
+            linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
+            linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
+    background-position:0 0, 15px 15px;
+    background-size: 30px 30px;
+  }
   &_front{
     display: flex;
     flex-direction: column;
