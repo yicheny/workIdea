@@ -1,0 +1,37 @@
+.x_overturn{
+  &_box{
+    width:320px;
+    height:480px;
+    perspective: 1000px;
+    &:hover{
+      .x_overturn_main{
+        transform: translateY(180deg);
+      }
+    }
+  }
+
+  &_main{
+    width:320px;
+    height:480px;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position:relative;
+  }
+
+  .x_front,.x_back{
+    width:320px;
+    height:480px;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .x_front{
+    background: #1890ff;
+    z-index: 2;
+  }
+  .x_back{
+    background: #faad14;
+    transform: rotateY(180deg);
+  }
+}
