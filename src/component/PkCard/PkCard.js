@@ -9,14 +9,15 @@ function PkCard(props) {
 
     return (
         <div className={cn}>
-            <div className="x_backBg">
-
-            </div>
-            <div className="x_pkCard_main">
-                <i className={graphCn}/>
-                <span className="x_value">
+            <div className="x_pkCard_main fill">
+                <div className="x_pkCard_backBg fill">
+                </div>
+                <div className="x_pkCard_front fill">
+                    <i className={graphCn}/>
+                    <span className="x_value">
                 {value}
             </span>
+                </div>
             </div>
         </div>
     );
