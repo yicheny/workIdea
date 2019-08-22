@@ -19,6 +19,20 @@ export function shuffle(array) {
     return newArray;
 }
 
+export function setObj(obj) {
+    const keys = Object.keys(obj);
+    const values = Object.values(obj);
+    return [keys,values]
+}
+
+export function getName(names={}) {
+    const data = {...names};
+    const [keys,values] = setObj(data);
+    let res = keys.filter((el,i)=>values[i]);
+    if(res.length) return res;
+    return [''];
+}
+
 // export function setMap(map) {
 //     function get(key) {
 //         return map[key];
