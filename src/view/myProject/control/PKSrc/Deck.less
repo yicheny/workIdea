@@ -1,0 +1,26 @@
+.x_deck{
+  user-select: none;
+  overflow: hidden;
+  &_header{
+    height:40px;
+    font-size: 16px;
+    .card_count{
+      font-weight: 700;
+    }
+  }
+  &_content{
+    position: relative;
+    border:3px solid #888;
+    width:224px;
+    height:288px;
+    font-size: 48px;
+    writing-mode: vertical-lr;
+    color:red;
+    .x_pkCard{
+      position: absolute;
+      &_main{
+        box-shadow: 0 0 1px rgba(0,0,0,0.1);
+      }
+    }
+  }
+}

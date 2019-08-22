@@ -10,6 +10,7 @@ function ComponentHome(props) {
             <Link to='/cDemo/message'>Message</Link>
             <Link to='/cDemo/modal'>Modal</Link>
             <Link to='/cDemo/menu'>Menu</Link>
+            <Link to='/cDemo/pkCard'>PkCard</Link>
         </div>
     );
 }

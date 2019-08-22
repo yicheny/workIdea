@@ -3,14 +3,14 @@ import {sleep,getName} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
 
 function PublicFunTest(props) {
-    // async function fn() {
-    //     for (let i = 0; i <= 10; i++) {
-    //         await sleep(100);
-    //         console.log(i);
-    //     }
-    // }
+    async function fn() {
+        for (let i = 0; i <= 10; i++) {
+            await sleep(100);
+            console.log(i);
+        }
+    }
 
-    // fn();
+    fn();
 
     const names = {
         A:true,

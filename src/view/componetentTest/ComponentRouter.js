@@ -7,6 +7,7 @@ import ComponentHome from "./ComponentHome";
 import MessageTest from "./control/MessageTest";
 import ModalTest from "./control/ModalTest";
 import MenuDemo from "./control/MenuDemo";
+import PkCardTest from "./control/PkCardTest";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -16,6 +17,7 @@ function ComponentRouter(props) {
         <Route path='/cDemo/message' component={MessageTest}/>
         <Route path='/cDemo/modal' component={ModalTest}/>
         <Route path='/cDemo/menu' component={MenuDemo}/>
+        <Route path='/cDemo/pkCard' component={PkCardTest}/>
         <Route component={ComponentHome}/>
     </Switch>
 
