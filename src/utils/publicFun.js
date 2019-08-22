@@ -1,7 +1,9 @@
+//延时——需搭配异步使用
 export function sleep(ms) {
     return new Promise(reslove=>setTimeout(reslove,ms))
 }
 
+//用于合并类名【这里指标签类名】
 export function mergeCn(...cns) {
     return [...cns].join(' ')
 }
@@ -19,18 +21,31 @@ export function shuffle(array) {
     return newArray;
 }
 
+//返回一个对象的keys数组和values数组
 export function setObj(obj) {
     const keys = Object.keys(obj);
     const values = Object.values(obj);
     return [keys,values]
 }
 
+//返回一个数组中所有值为真值的变量名
 export function getName(names={}) {
     const data = {...names};
     const [keys,values] = setObj(data);
     let res = keys.filter((el,i)=>values[i]);
     if(res.length) return res;
     return [''];
+}
+
+//数组切片
+export function chunk(arr,size=1) {
+    let oriArr = [...arr],
+        newArr = [];
+
+    while(oriArr.length){
+        newArr.push(oriArr.splice(0,size))
+    }
+    return newArr;
 }
 
 // export function setMap(map) {

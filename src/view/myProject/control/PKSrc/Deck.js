@@ -3,7 +3,13 @@ import PkCard from "../../../../component/PkCard/PkCard";
 import './Deck.less';
 
 function Deck(props) {
-    const {data} = props;
+    const {
+        data=[],
+        setCards=()=>{},
+        extraCount=1,//发牌数量
+        resetCount=20,//重置限界
+    } = props;
+
     let cardData = useRef([...data]);
     const [, forceUpdate] = useReducer(x => x + 1, 0);//hook下替代forceUpdate方案
 
@@ -26,16 +32,35 @@ function Deck(props) {
         return {top:`${-0.35*i + 24}px`,right:`${-0.35*i + 28}px`}
     }
     function cardClick() {
-        if(cardData.current.length>20){
-            cardData.current.shift();
+        let res = [];
+
+        if(cardData.current.length>resetCount){
+            while(res.length<extraCount){
+                res.push(cardData.current.shift())
+            }
         }else{
             cardData.current = [...data];
         }
-        return forceUpdate();
+
+        forceUpdate();
+
+        return setCards(res);
     }
+
+    // function extractionMode(mode) {
+    //     const extractionMap = {
+    //         'default':()=>{
+    //             if(cardData.current.length>20){
+    //                 cardData.current.shift();
+    //             }else{
+    //                 cardData.current = [...data];
+    //             }
+    //             return forceUpdate();
+    //         }
+    //     }
+    //
+    //     return extractionMap[mode];
+    // }
 }
-Deck.defalutProps={
-    data:[]
-};
 
 export default Deck;
