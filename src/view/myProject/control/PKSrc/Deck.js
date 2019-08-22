@@ -22,9 +22,7 @@ function Deck(props) {
                 !!cardData.current.length && cardData.current.map((el,i)=><PkCard data={el} style={setLayout(i)} key={i} onClick={cardClick}/>)
             }
 
-            <div className="card_empty">
-                牌组清空
-            </div>
+            {/*<div className="card_empty">牌组清空</div>*/}
         </div>
     </div>;
 
