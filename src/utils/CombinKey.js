@@ -13,7 +13,7 @@ class SingleTon {
     }
 }
 
-const ProxySingleTon = (()=>{
+/*const ProxySingleTon = (()=>{
     let instance;
     return function (fn) {
         if(!instance){
@@ -22,7 +22,7 @@ const ProxySingleTon = (()=>{
         }
         return ()=>{}
     }
-})();
+})();*/
 
 class CombinKey{
     constructor(appointKeys=[],receiver=null){
@@ -70,7 +70,8 @@ export function setCombinKey(appointKeys=[],fn=()=>{}) {
         });
     };
 
-    new ProxySingleTon(keyEvent);
+    // new ProxySingleTon(keyEvent);
+    return new SingleTon(keyEvent).executor()
 }
 
 //实现逻辑
