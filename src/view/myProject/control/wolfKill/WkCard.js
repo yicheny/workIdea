@@ -5,7 +5,7 @@ import {mergeCn,shuffle} from "../../../../utils/publicFun";
 function WkCard(props) {
     const {className,identity,code,user,face} = props;
     const cn = mergeCn('wkCard flex-y center', className);
-    const mainCn = mergeCn("wkCard_main", getCamp(),faceFor());
+    const mainCn = mergeCn("wkCard_main", getCamp(),face);
 
     return (<div className={cn}>
         <div className="wkCard_header">
@@ -26,9 +26,6 @@ function WkCard(props) {
 
         if (wolfCamp.includes(identity)) return 'wolf';
         return 'man'
-    }
-    function faceFor() {
-        return face?'front':'back';
     }
 }
 
@@ -68,7 +65,8 @@ function WkCardBox(props) {
 
     function cardFaceFor(item) {
         // console.log(item, current);
-        return item === current;
+        const face = item === current;
+        return face?'front':'back';
     }
 }
 export {WkCardBox};
