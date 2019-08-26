@@ -3,9 +3,9 @@ import './WkCard.less'
 import {mergeCn,shuffle} from "../../../../utils/publicFun";
 
 function WkCard(props) {
-    const {className,identity,code,user} = props;
+    const {className,identity,code,user,face} = props;
     const cn = mergeCn('wkCard flex-y center', className);
-    const mainCn = mergeCn("wkCard_main box2 flex center", getCamp(identity));
+    const mainCn = mergeCn("wkCard_main", getCamp(),faceFor());
 
     return (<div className={cn}>
         <div className="wkCard_header">
@@ -13,26 +13,35 @@ function WkCard(props) {
             <span className="name">{user}</span>
         </div>
         <div className={mainCn}>
-            {identity}
+            <div className="card_back fill"> </div>
+            <div className="card_front fill box2 flex center">
+                {identity}
+            </div>
         </div>
     </div>);
 
-    function getCamp(id) {
+    function getCamp() {
         // const manCamp = ['村民','女巫','猎人','守卫','预言家'];
         const wolfCamp = ['狼人'];
 
-        if (wolfCamp.includes(id)) return 'wolf';
+        if (wolfCamp.includes(identity)) return 'wolf';
         return 'man'
+    }
+    function faceFor() {
+        return face?'front':'back';
     }
 }
 
 WkCard.defaultProps = {
     className: '',
     identity: '村民',//身份
+    code:0,//编号
+    name:'',//玩家名称
+    face:'',//牌面
 };
 
 function WkCardBox(props) {
-    const {data,className} = props;
+    const {data,className,current} = props;
     const cn = mergeCn('wkCardBox flex wrap', className);
 
     return <div className={cn}>
@@ -42,7 +51,7 @@ function WkCardBox(props) {
     function setIdentity() {
         const ids = creIds();
         return data.map((el,i)=>{
-            return <WkCard identity={ids.pop()} user={el} code={i+1} key={i}/>
+            return <WkCard identity={ids.pop()} user={el} code={i+1} key={i} face={cardFaceFor(el)}/>
         })
     }
 
@@ -57,5 +66,9 @@ function WkCardBox(props) {
         return shuffle(ids);
     }
 
+    function cardFaceFor(item) {
+        // console.log(item, current);
+        return item === current;
+    }
 }
-export {WkCard,WkCardBox};
+export {WkCardBox};

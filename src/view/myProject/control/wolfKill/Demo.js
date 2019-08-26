@@ -1,13 +1,13 @@
 import React,{useState} from 'react';
 import {Container} from "../../../../component";
-import {WkCard,WkCardBox} from "./WkCard";
+import {WkCardBox} from "./WkCard";
 
 function Demo(props) {
-    const {user,setUser} = useState('A');
+    const [user,setUser] = useState('A');
 
     return <Container header='卡片'>
         <div className="wolfKill_demo">
-            <WkCardBox data={creUser()}/>
+            <WkCardBox data={creUser()} current={user}/>
         </div>
     </Container>;
 
