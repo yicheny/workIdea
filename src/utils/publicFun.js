@@ -48,6 +48,13 @@ export function chunk(arr,size=1) {
     return newArr;
 }
 
+//随机返回数组中的一个值
+export function arrRandom(array) {
+    if (!array.length) return null;
+    const index = Math.floor(Math.random()*array.length);
+    return array[index];
+}
+
 // export function setMap(map) {
 //     function get(key) {
 //         return map[key];
