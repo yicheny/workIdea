@@ -26,7 +26,7 @@ function Iterator(props) {
     // console.log(iterator1.next());
 
     var compare = function (iterator1,iterator2) {
-        if(iterator1.lenght !== iterator2.length) return console.log('不相等');
+        if(iterator1.length !== iterator2.length) return console.log('不相等');
         while(!iterator1.isDone()&&!iterator2.isDone()){
             if(iterator1.getCurrentItem() !== iterator2.getCurrentItem()){
                 return console.log('不相等');
@@ -37,8 +37,21 @@ function Iterator(props) {
         console.log('相等');
     };
 
-    compare(iterator1,iterator2);
+    compare(1,iterator2);
     compare(iterator2,iterator3);
+
+    //es6的迭代器
+    function* gen(list) {
+        yield* list;
+    }
+
+    var iterator4 = gen([1,2,3]);
+    console.log(iterator4.next().value);
+    console.log(iterator4.next().value);
+    console.log(iterator4.next().value);
+    console.log(iterator4.next().value);
+    console.log(iterator4.next().value);
+
     return (
         <div>迭代器模式</div>
     );
