@@ -8,6 +8,7 @@ import MessageTest from "./control/MessageTest";
 import ModalTest from "./control/ModalTest";
 import MenuDemo from "./control/MenuDemo";
 import PkCardTest from "./control/PkCardTest";
+import CalendarTest from "./control/CalendarTest";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -18,6 +19,7 @@ function ComponentRouter(props) {
         <Route path='/cDemo/modal' component={ModalTest}/>
         <Route path='/cDemo/menu' component={MenuDemo}/>
         <Route path='/cDemo/pkCard' component={PkCardTest}/>
+        <Route path='/cDemo/calendar' component={CalendarTest}/>
         <Route component={ComponentHome}/>
     </Switch>
 

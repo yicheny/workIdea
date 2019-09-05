@@ -11,6 +11,7 @@ function ComponentHome(props) {
             <Link to='/cDemo/modal'>Modal</Link>
             <Link to='/cDemo/menu'>Menu</Link>
             <Link to='/cDemo/pkCard'>PkCard</Link>
+            <Link to='/cDemo/calendar'>Calendar</Link>
         </div>
     );
 }

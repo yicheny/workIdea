@@ -55,6 +55,11 @@ export function arrRandom(array) {
     return array[index];
 }
 
+//返回数组最后一项
+export function last(array) {
+    return array[array.length-1];
+}
+
 // export function setMap(map) {
 //     function get(key) {
 //         return map[key];
