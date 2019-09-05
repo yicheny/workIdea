@@ -1,17 +1,17 @@
 import React,{useState} from 'react';
 import {last} from '../../utils/publicFun';
 import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth} from '../../utils/date'
-import {Button} from "../index";
 
+import {Button} from "../index";
 function Calendar(props) {
     const [date,setDate] = useState(nowDateItemFor('addZero'));
-    dateTableFor();
+    // console.log(dateTableFor());
     // printInfo();
 
     return <div className="x_calendar">
         <div className="x_calendar_header">
             <div>{dateUnitFor(date)}</div>
-            <div>{weekDayFor(dateSymFor(date,' '))}</div>
+            <div>{weekDayFor(date)}</div>
             <Button onClick={()=>setDate(changeMonth(date, 'add'))}>加一个月</Button>
             <Button onClick={()=>setDate(changeMonth(date,'sub'))}>减一个月</Button>
         </div>
@@ -25,21 +25,27 @@ function Calendar(props) {
         console.log(dateSymFor(date,'-'));
         console.log(dateSymFor(date));
         console.log(dateUnitFor(date));
-        console.log(weekDayFor(dateSymFor(date,' ')));
+        console.log(weekDayFor(date));
     }
 
     function dateTableFor() {
-        const preDate = changeMonth(date,'sub');
-        const nextDate = changeMonth(date,'add');
-        const preDayList = genDayList(preDate.month).slice(startDayFor()*-1);//startDayFor()为0时有问题
-        const curDayList = genDayList(date.month);
-        const nextDayList = genDayList(nextDate.month).slice(0,endDayFor());
-        const dateTableList = preDayList.concat(curDayList).concat(nextDayList);
+        return {
+            preDayList:preDayListFor(),
+            curDayList:genDayList(date.month),
+            nextDayList:nextDayListFor()
+        };
 
-        console.log(preDayList, curDayList, nextDayList);
-        // console.log(dateTableList);
-
-
+        function preDayListFor() {
+            const preDate = changeMonth(date,'sub');
+            const startIndex = weekDayIndexFor({...date,day:1});
+            if(!startIndex) return [];
+            return genDayList(preDate.month).slice(startIndex*-1);
+        }
+        function nextDayListFor() {
+            const nextDate = changeMonth(date,'add');
+            const endIndex = weekDayIndexFor({...date,day:last(genDayList(date.month))});
+            return genDayList(nextDate.month).slice(0,endIndex);
+        }
         function genDayList(month){
             const days = monthCountFor(month);
             return Array.from(Array(days),(el,i)=>i+1);
@@ -60,15 +66,8 @@ function Calendar(props) {
                 }
             }
         }
-        function startDayFor() {
-            return weekDayIndexFor({...date,day:1})
-        }
-        function endDayFor() {
-            return weekDayIndexFor({...date,day:last(curDayList)})
-        }
         function weekDayIndexFor(date) {
-            const startDate = dateSymFor(date,' ');
-            return new Date(startDate).getDay();
+            return new Date(dateSymFor(date,' ')).getDay();
         }
     }
 }
