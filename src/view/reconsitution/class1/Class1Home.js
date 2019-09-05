@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {Container} from "../../../component";
 
-function ClassHome(props) {
+function Class1Home(props) {
     return <Fragment>
         <Container>
             <h2>这部分可以进行任意的重构测试</h2>
@@ -11,4 +11,4 @@ function ClassHome(props) {
     </Fragment>
 }
 
-export default ClassHome;
+export default Class1Home;
