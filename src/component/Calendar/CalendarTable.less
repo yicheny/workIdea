@@ -1,0 +1,22 @@
+.calendarTable{
+  user-select: none;
+
+  &_header{
+    font-size: 16px;
+  }
+  &_cell{
+    margin:5px 4px;
+    padding:3px 0;
+    width:30px;
+    text-align: center;
+    &.cellMain{
+      cursor: pointer;
+      &:hover{
+        background: #e6f7ff;
+      }
+      &.current{
+        background: #1890ff;
+      }
+    }
+  }
+}

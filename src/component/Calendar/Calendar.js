@@ -3,6 +3,7 @@ import {last} from '../../utils/publicFun';
 import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth} from '../../utils/date'
 
 import {Button} from "../index";
+import CalendarTable from "./CalendarTable";
 function Calendar(props) {
     const [date,setDate] = useState(nowDateItemFor('addZero'));
     // console.log(dateTableFor());
@@ -16,7 +17,7 @@ function Calendar(props) {
             <Button onClick={()=>setDate(changeMonth(date,'sub'))}>减一个月</Button>
         </div>
         <div className="x_calendar_content">
-
+            <CalendarTable data={dateTableFor()}/>
         </div>
     </div>;
 
@@ -29,11 +30,7 @@ function Calendar(props) {
     }
 
     function dateTableFor() {
-        return {
-            preDayList:preDayListFor(),
-            curDayList:genDayList(date.month),
-            nextDayList:nextDayListFor()
-        };
+        return preDayListFor().concat(genDayList(date.month)).concat(nextDayListFor());
 
         function preDayListFor() {
             const preDate = changeMonth(date,'sub');
@@ -43,7 +40,7 @@ function Calendar(props) {
         }
         function nextDayListFor() {
             const nextDate = changeMonth(date,'add');
-            const endIndex = weekDayIndexFor({...date,day:last(genDayList(date.month))});
+            const endIndex = 6 - weekDayIndexFor({...date,day:last(genDayList(date.month))});
             return genDayList(nextDate.month).slice(0,endIndex);
         }
         function genDayList(month){
