@@ -58,7 +58,7 @@ function ChangeFunctionDeclaration(props) {
 
         <h3>3. 关于修改参数部分的手法详细介绍</h3>
         <div className="box">
-            
+
         </div>
     </Container>
 }

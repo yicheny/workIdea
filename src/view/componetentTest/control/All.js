@@ -2,8 +2,7 @@ import React from 'react';
 import {Container, Header, Graph, Calendar, Button,Input} from '../../../component'
 
 function All(){
-    return <Container>
-        <Header style={{color:'red'}}>标题</Header>
+    return <Container header='综合测试'>
 
         <div>
             <Graph/>
@@ -18,8 +17,6 @@ function All(){
         </div>
 
         <Input style={{padding:10}}/>
-
-        <Calendar/>
     </Container>
 }
 
