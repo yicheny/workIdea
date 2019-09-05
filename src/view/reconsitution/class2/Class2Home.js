@@ -9,6 +9,7 @@ function Class2Home(props) {
             <Link to='/recons/class2/extractFunction'>提炼函数</Link>
             <Link to='/recons/class2/inlineFunction'>内联函数</Link>
             <Link to='/recons/class2/extractVariable'>提炼变量</Link>
+            <Link to='/recons/class2/inlineVariable'>内联变量</Link>
         </div>
     </Container>
 }
