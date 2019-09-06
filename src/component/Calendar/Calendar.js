@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth,dateCompare} from '../../utils/date'
+import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth,dateCompare,changeYear} from '../../utils/date'
 import {Button} from "../index";
 import CalendarTable from "./CalendarTable";
 
@@ -13,6 +13,8 @@ function Calendar(props) {
         <div className="x_calendar_header">
             <div>{dateUnitFor(date)}</div>
             <div>{weekDayFor(date)}</div>
+            <Button onClick={()=>setDate(changeYear(date, 'add'))}>加一年</Button>
+            <Button onClick={()=>setDate(changeYear(date,'sub'))}>减一年</Button>
             <Button onClick={()=>setDate(changeMonth(date, 'add'))}>加一个月</Button>
             <Button onClick={()=>setDate(changeMonth(date,'sub'))}>减一个月</Button>
         </div>

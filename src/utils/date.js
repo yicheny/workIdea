@@ -65,6 +65,24 @@ export function changeMonth(date,operate='add'){
     }
 }
 
+//这里与changeMonth部分逻辑重复，待重构
+export function changeYear(date,operate='add') {
+    date = {...date};
+    const changeMonthStragegy = {
+        'add':addOperate,
+        'sub': subtractOperate
+    };
+    changeMonthStragegy[operate]();
+    return date;
+
+    function addOperate() {
+        date.year++
+    }
+    function subtractOperate() {
+        date.year--
+    }
+}
+
 export function dateCompare(o1,o2) {
     return compare(o1,o2,['year','month','day'])
 }
