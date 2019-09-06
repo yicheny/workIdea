@@ -1,0 +1,30 @@
+.calendarTable{
+  user-select: none;
+
+  &_header{
+    font-size: 16px;
+  }
+  &_cell{
+    margin:8px 6px;
+    padding:2px 0;
+    width:28px;
+    text-align: center;
+    &.cellMain{
+      cursor: pointer;
+      border-radius: 2px;
+      &:hover{
+        background: #e6f7ff;
+      }
+      &.noCurMonth{
+        color:rgba(0,0,0,0.25);
+      }
+      &.curDay{
+        border:1px #1890ff solid;
+      }
+      &.selected{
+        color:#fff;
+        background: #1890ff;
+      }
+    }
+  }
+}
