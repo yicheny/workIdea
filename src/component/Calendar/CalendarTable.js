@@ -6,7 +6,7 @@ import {nowDateItemFor} from "../../utils/date";
 function WeekItem(props) {
     const {data} = props;
     return <div className="calendarTable_rowItem flex">
-        {data.map((el,i)=><Cell value={el} key={i}/>)}
+        {data.map((el,i)=><Cell value={el.value} key={i}/>)}
     </div>
 }
 
@@ -30,8 +30,7 @@ function CalendarTableHeader(props) {
 
 function CalendarTable(props) {
     const {data} = props;
-    const current = nowDateItemFor('addZero').day;
-    console.log(current);
+    console.log(data);
 
     return (
         <div className='calendarTable'>

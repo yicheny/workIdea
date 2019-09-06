@@ -30,36 +30,49 @@ function Calendar(props) {
     }
 
     function dateTableFor() {
-        return preDayListFor().concat(genDayList(date.month)).concat(nextDayListFor());
+        return preDayListFor().concat(curDayListFor()).concat(nextDayListFor());
 
+        function curDayListFor() {
+            return genDayList(date,true);
+        }
         function preDayListFor() {
             const preDate = changeMonth(date,'sub');
             const startIndex = weekDayIndexFor({...date,day:1});
             if(!startIndex) return [];
-            return genDayList(preDate.month).slice(startIndex*-1);
+            return genDayList(preDate).slice(startIndex*-1);
         }
         function nextDayListFor() {
             const nextDate = changeMonth(date,'add');
-            const endIndex = 6 - weekDayIndexFor({...date,day:last(genDayList(date.month))});
-            return genDayList(nextDate.month).slice(0,endIndex);
+            const endIndex = 6 - weekDayIndexFor({...date,day:monthCountFor(date.month)});
+            return genDayList(nextDate).slice(0,endIndex);
         }
-        function genDayList(month){
-            const days = monthCountFor(month);
-            return Array.from(Array(days),(el,i)=>i+1);
+        function genDayList(date,isCurMonth=false){
+            const days = monthCountFor(date.month);
+            return Array.from(Array(days),(el,i)=>({
+                value:i+1,
+                isCurMonth,
+                isCurDay:isCurDayFor(i+1)
+            }));
 
-            function monthCountFor(month){
-                const index = --month;
-                return monthCountListFor()[index];
+            function isCurDayFor(day) {
+                if(!isCurMonth) return false;
+                if(date.year !== nowDateItemFor().year) return false;
+                if(date.month !== nowDateItemFor().month) return false;
+                return (day === nowDateItemFor().day);
+            }
+        }
+        function monthCountFor(month){
+            const index = --month;
+            return monthCountListFor()[index];
 
-                function monthCountListFor(){
-                    const monthCountList = [31,28,31,30,31,30,31,31,30,31,30,31];
-                    const leapYearMonthCountList = [31,28,31,30,31,30,31,31,30,31,30,31];
-                    return isLeapYear(date.year) ? leapYearMonthCountList : monthCountList;
+            function monthCountListFor(){
+                const monthCountList = [31,28,31,30,31,30,31,31,30,31,30,31];
+                const leapYearMonthCountList = [31,28,31,30,31,30,31,31,30,31,30,31];
+                return isLeapYear(date.year) ? leapYearMonthCountList : monthCountList;
 
-                    function isLeapYear(year) {
-                        if(!(year%100)) return !(year%400);
-                        return !(year%4);
-                    }
+                function isLeapYear(year) {
+                    if(!(year%100)) return !(year%400);
+                    return !(year%4);
                 }
             }
         }
