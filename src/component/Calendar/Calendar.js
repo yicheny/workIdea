@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
 import {compare} from '../../utils/publicFun';
 import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth} from '../../utils/date'
-
 import {Button} from "../index";
 import CalendarTable from "./CalendarTable";
+
 function Calendar(props) {
     const [date,setDate] = useState(nowDateItemFor('addZero'));
 
@@ -61,7 +61,6 @@ function Calendar(props) {
                 };
 
                 function isCurDayFor(date) {
-                    if(!isCurMonth) return false;
                     return compare(date,nowDateItemFor(),['year','month','day']);
                 }
             }

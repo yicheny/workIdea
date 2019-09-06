@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './CalendarTable.less';
 import {chunk, mergeCn,compare} from '../../utils/publicFun';
 
@@ -30,6 +30,10 @@ function CalendarTableHeader(props) {
 
 function CalendarTable(props) {
     const [data,setData] = useState(props.data);
+
+    useEffect(()=>{
+        setData(props.data);
+    },[props.data]);
 
     return (
         <div className='calendarTable'>
