@@ -49,9 +49,11 @@ function Calendar(props) {
         function genDayList(date,isCurMonth=false){
             const days = monthCountFor(date.month);
             return Array.from(Array(days),(el,i)=>({
-                value:i+1,
+                ...date,
+                day:i+1,
                 isCurMonth,
-                isCurDay:isCurDayFor(i+1)
+                isCurDay:isCurDayFor(i+1),
+                isSelected:isCurDayFor(i+1)
             }));
 
             function isCurDayFor(day) {
