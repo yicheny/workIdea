@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './CalendarTable.less';
 import {dateCompare} from "../../utils/date";
 import {chunk, mergeCn} from '../../utils/publicFun';
@@ -6,15 +6,15 @@ import {chunk, mergeCn} from '../../utils/publicFun';
 function WeekItem(props) {
     const {data,...rest} = props;
     return <div className="calendarTable_rowItem flex">
-        {data.map((el,i)=><Cell key={i} date={el} {...rest}/>)}
+        {data.map((el,i)=><Cell value={el.day} key={i} date={el} {...rest}/>)}
     </div>
 }
 
 function Cell(props) {
-    const {cellMain,date,click,selectedDate} = props;
+    const {value,cellMain,date,click,selectedDate} = props;
 
     return <div className={cnFor()} onClick={(e)=>click(e,date)}>
-        {date.day}
+        {value}
     </div>;
 
     function cnFor() {
