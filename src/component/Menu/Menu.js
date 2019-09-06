@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {mergeCn} from "../../utils/publicFun";
 import './Menu.less';
 import Icon from '../Icon/Icon';
 
@@ -7,14 +8,12 @@ function MenuItem(props) {
     const [arrowCn,setArrowCn] = useState('arrow_down');
 
     return <li className='x_menu_item'>
-        <div className='x_menu_item_main' onClick={handleClick}>
+        <div className='x_menu_item_main' onClick={arrowCnChange}>
             <span className='tit'>
                 <Icon type='success' size={18}/>
                 <span>{data.tit}</span>
             </span>
-            {
-                data.details && <Icon className={arrowCn} type='arrowDown' size={18}/>
-            }
+            {data.details && <Icon className={arrowCn} type='arrowDown' size={18}/>}
         </div>
         {
             data.details && <Menu data={data.details} className={arrowCn}/>
@@ -28,9 +27,6 @@ function MenuItem(props) {
         };
         setArrowCn(arrowMap[arrowCn])
     }
-    function handleClick() {
-        arrowCnChange();
-    }
 }
 
 function Menu(props) {
@@ -38,21 +34,13 @@ function Menu(props) {
     const cn = mergeCn('x_menu',className);
 
     return <ul className={cn}>
-        {
-            data.map((el, i) => {
-                return <MenuItem data={el} key={i}/>
-            })
-        }
-    </ul>
-
-    function mergeCn(...cns) {
-        return [...cns].join(' ')
-    }
+        {data.map((el, i) => <MenuItem data={el} key={i}/>)}
+    </ul>;
 }
 Menu.defaultProps = {
     data:[],
     className:''
-}
+};
 
 function MenuWrap(props) {
     const {data, ...rest} = props;
@@ -60,9 +48,5 @@ function MenuWrap(props) {
         <Menu data={data}/>
     </div>
 }
-
-Menu.defaultProps = {
-    data: []
-};
 
 export default MenuWrap;

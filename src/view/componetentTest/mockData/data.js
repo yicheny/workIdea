@@ -1,17 +1,13 @@
 export const menuData = [
     {
-        tit:'标题1',
-        url:'https://www.baidu.com',
-        details:[
-            {tit:'子级标题1'},
-            {tit:'子级标题2'},
-            {tit:'子级标题3',
-                details: [
-                    {tit:'第3级标题1'},
-                    {tit:'第3级标题2'},
-                ]
-            },
-        ]
+        tit:'my组件库测试',
+        details:[{
+            tit:'综合测试',
+            url:'/cDemo/menu',
+            details:[{
+                tit:'第三级'
+            }]
+        }]
     },
     {
         tit:'标题2',
