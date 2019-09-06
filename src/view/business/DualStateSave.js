@@ -28,7 +28,7 @@ function DualStateSave(props) {
     return (
         <div>
             <Container>
-                <Tabs tabData={tabData} active={active} onClick={(v)=>setActive(v)}/>
+                <Tabs data={tabData} active={active} onClick={(v)=>setActive(v)}/>
 
                 <ul className="main">
                     <li>姓名：<Input/></li>
