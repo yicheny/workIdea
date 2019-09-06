@@ -1,18 +1,25 @@
 import {compare} from "./publicFun";
 
-export function dateSymFor(date,sym='',scope='sec') {
+export function dateSymFor(date,sym='',scope='day') {
     const {year,month,day,hour,minute,sec} = date;
-    if(scope==='sec') return setDateUnit([hour,minute,sec]);
-    return setDateUnit([year,month,day]);
+    return scopeStragegy(scope);
 
-    function setDateUnit(list) {
-        const date = list.reduce((acc, el) => `${acc}${addZeroFormat(el)}${sym}`, '');
-        if (!sym) return date;
-        return date.slice(0,-1);
+    function scopeStragegy(key) {
+        const scopeStragegyMap = {
+            day:setDateUnit([year,month,day]),
+            sec:setDateUnit([hour,minute,sec])
+        };
+        return scopeStragegyMap[key]
 
-        function addZeroFormat(value) {
-            if (value < 10) return '0' + value;
-            return value;
+        function setDateUnit(list) {
+            const date = list.reduce((acc, el) => `${acc}${addZeroFormat(el)}${sym}`, '');
+            if (!sym) return date;
+            return date.slice(0,-1);
+
+            function addZeroFormat(value) {
+                if (value < 10) return '0' + value;
+                return value;
+            }
         }
     }
 }
