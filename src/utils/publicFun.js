@@ -60,6 +60,11 @@ export function last(array) {
     return array[array.length-1];
 }
 
+//两个对象针对指定属性进行对比，全部相同时才返回true
+export function compare(o1,o2,keys) {
+    return keys.every((el)=> o1[el]===o2[el]);
+}
+
 // export function setMap(map) {
 //     function get(key) {
 //         return map[key];

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './CalendarTable.less';
-import {chunk, mergeCn} from '../../utils/publicFun';
+import {chunk, mergeCn,compare} from '../../utils/publicFun';
 
 function WeekItem(props) {
     const {data,handleClick} = props;
@@ -46,14 +46,10 @@ function CalendarTable(props) {
 
     function handleClick(e,o) {
         data.forEach((el,i)=>{
-            if(compare(el,o)) return el.isSelected = true;
+            if(compare(el,o,['year','month','day'])) return el.isSelected = true;
             el.isSelected = false;
         });
         setData([...data]);
-
-        function compare(o1,o2) {
-            return o1.year===o2.year&& o1.month===o2.month&& o1.day === o2.day;
-        }
     }
 }
 

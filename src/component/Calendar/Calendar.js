@@ -1,11 +1,12 @@
 import React,{useState} from 'react';
-import {last} from '../../utils/publicFun';
+import {compare} from '../../utils/publicFun';
 import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth} from '../../utils/date'
 
 import {Button} from "../index";
 import CalendarTable from "./CalendarTable";
 function Calendar(props) {
     const [date,setDate] = useState(nowDateItemFor('addZero'));
+
     // console.log(dateTableFor());
     // printInfo();
 
@@ -21,13 +22,13 @@ function Calendar(props) {
         </div>
     </div>;
 
-    function printInfo() {
+    /*function printInfo() {
         console.log(date);
         console.log(dateSymFor(date,'-'));
         console.log(dateSymFor(date));
         console.log(dateUnitFor(date));
         console.log(weekDayFor(date));
-    }
+    }*/
 
     function dateTableFor() {
         return preDayListFor().concat(curDayListFor()).concat(nextDayListFor());
@@ -48,19 +49,21 @@ function Calendar(props) {
         }
         function genDayList(date,isCurMonth=false){
             const days = monthCountFor(date.month);
-            return Array.from(Array(days),(el,i)=>({
-                ...date,
-                day:i+1,
-                isCurMonth,
-                isCurDay:isCurDayFor(i+1),
-                isSelected:isCurDayFor(i+1)
-            }));
+            return Array.from(Array(days),(el,i)=>genDayItem(i+1));
 
-            function isCurDayFor(day) {
-                if(!isCurMonth) return false;
-                if(date.year !== nowDateItemFor().year) return false;
-                if(date.month !== nowDateItemFor().month) return false;
-                return (day === nowDateItemFor().day);
+            function genDayItem(day) {
+                const newDate = {...date, day};
+                return {
+                    ...newDate,
+                    isCurMonth,
+                    isCurDay:isCurDayFor(newDate),
+                    isSelected:isCurDayFor(newDate)
+                };
+
+                function isCurDayFor(date) {
+                    if(!isCurMonth) return false;
+                    return compare(date,nowDateItemFor(),['year','month','day']);
+                }
             }
         }
         function monthCountFor(month){
