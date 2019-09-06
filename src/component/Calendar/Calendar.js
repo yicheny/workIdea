@@ -19,7 +19,7 @@ function Calendar(props) {
             <Button onClick={()=>setDate(changeMonth(date,'sub'))}>减一个月</Button>
         </div>
         <div className="x_calendar_content">
-            <CalendarTable data={dateTableFor()} selectedDate={nowDateItemFor()}/>
+            <CalendarTable data={dateTableFor()} selectedDate={nowDateItemFor()} setDate={setDate}/>
         </div>
     </div>;
 

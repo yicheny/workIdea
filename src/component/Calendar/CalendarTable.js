@@ -47,7 +47,7 @@ function CalendarTable(props) {
                     <WeekItem
                         data={week}
                         key={i}
-                        click={(e,o)=>setSelectedDate(o)}
+                        click={(e,o)=>handleClick(o)}
                         selectedDate={selectedDate}
                     />)}
             </div>
@@ -56,6 +56,11 @@ function CalendarTable(props) {
 
     function weekTitsFor() {
         return ['日','一','二','三','四','五','六'];
+    }
+
+    function handleClick(o) {
+        setSelectedDate(o);
+        props.setDate(o);
     }
 }
 
