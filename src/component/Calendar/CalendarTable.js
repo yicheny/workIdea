@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './CalendarTable.less';
 import {dateCompare} from "../../utils/date";
 import {chunk, mergeCn} from '../../utils/publicFun';
@@ -37,8 +37,6 @@ function CalendarTableHeader(props) {
 }
 
 function CalendarTable(props) {
-    const [selectedDate,setSelectedDate] = useState(props.selectedDate);
-
     return (
         <div className='calendarTable'>
             <CalendarTableHeader data={weekTitsFor()}/>
@@ -47,8 +45,8 @@ function CalendarTable(props) {
                     <WeekItem
                         data={week}
                         key={i}
-                        click={(e,o)=>handleClick(o)}
-                        selectedDate={selectedDate}
+                        click={(e,o)=>props.setDate(o)}
+                        selectedDate={props.selectedDate}
                     />)}
             </div>
         </div>
@@ -56,11 +54,6 @@ function CalendarTable(props) {
 
     function weekTitsFor() {
         return ['日','一','二','三','四','五','六'];
-    }
-
-    function handleClick(o) {
-        setSelectedDate(o);
-        props.setDate(o);
     }
 }
 
