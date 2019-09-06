@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Container} from "../../../component";
+import {Container} from "../../../component";
 
 function ExtractFunction(props) {
     const person = {

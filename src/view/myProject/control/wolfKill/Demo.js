@@ -3,7 +3,7 @@ import {Container} from "../../../../component";
 import {WkCardBox} from "./WkCard";
 
 function Demo(props) {
-    const [user,setUser] = useState('A');
+    const [user] = useState('A');
 
     return <Container header='卡片'>
         <div className="wolfKill_demo">

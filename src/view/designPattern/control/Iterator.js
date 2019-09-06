@@ -20,7 +20,7 @@ function Iterator(props) {
     var iterator1 = Iterator([1,2,3,4]);
     var iterator2 = Iterator([4,5,7,6]);
     var iterator3 = Iterator([4,5,7,6,7]);
-    // console.log(iterator1.getCurrentItem());
+    console.log(iterator1.getCurrentItem());
     // console.log(iterator1.next());
     // console.log(iterator1.next());
     // console.log(iterator1.next());

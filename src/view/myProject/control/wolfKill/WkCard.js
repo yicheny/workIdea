@@ -1,7 +1,6 @@
 import React from 'react';
 import './WkCard.less'
 import {mergeCn,shuffle} from "../../../../utils/publicFun";
-import {setCombinKey} from "../../../../utils/CombinKey";
 
 function WkCard(props) {
     const {className,identity,code,user,face} = props;

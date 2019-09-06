@@ -1,7 +1,8 @@
 import {compare} from "./publicFun";
 
-export function dateSymFor(date,sym='') {
-    const {year,month,day} = date;
+export function dateSymFor(date,sym='',scope='sec') {
+    const {year,month,day,hour,minute,sec} = date;
+    if(scope==='sec') return setDateUnit([hour,minute,sec]);
     return setDateUnit([year,month,day]);
 
     function setDateUnit(list) {
@@ -27,11 +28,12 @@ export function nowDateItemFor() {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return {year,month,day};
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const sec = date.getSeconds();
+    return {year,month,day,hour,minute,sec};
 
-    // const hour = date.getHours();
-    // const minute = date.getMinutes();
-    // const sec = date.getSeconds();
+
 }
 
 export function weekDayFor(date){

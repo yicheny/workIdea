@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Header, Graph, Calendar, Button,Input} from '../../../component'
+import {Container, Graph, Button, Input, Clock} from '../../../component'
 
 function All(){
     return <Container header='综合测试'>
@@ -17,6 +17,8 @@ function All(){
         </div>
 
         <Input style={{padding:10}}/>
+
+        <Clock/>
     </Container>
 }
 

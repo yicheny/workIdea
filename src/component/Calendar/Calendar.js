@@ -4,7 +4,7 @@ import {Button} from "../index";
 import CalendarTable from "./CalendarTable";
 
 function Calendar(props) {
-    const [date,setDate] = useState(nowDateItemFor('addZero'));
+    const [date,setDate] = useState(nowDateItemFor());
 
     // console.log(dateTableFor());
     // printInfo();

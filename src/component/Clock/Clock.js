@@ -1,26 +1,16 @@
 import React, {useState,useEffect} from 'react';
+import {dateSymFor, nowDateItemFor} from "../../utils/date";
 
 function Clock(){
-    const [date,setDate] = useState(new Date());
+    const [date,setDate] = useState(nowDateItemFor());
 
     useEffect(()=>{
-        // console.log(date);
-    });
-
-    useEffect(()=>{
-        let id = setInterval(()=>setDate(new Date()),1000);//问题的关键在于如何使用到最新的props和state
-        return () => clearInterval(id);
+        const timeId = setInterval(()=>{setDate(nowDateItemFor())},1000);
+        return ()=>clearInterval(timeId);
     },[]);
 
-    const timeFormat = (v)=>{
-        if(v<10){
-            return '0'+v;
-        }
-        return v
-    };
-
-    return <span className='clock'>
-        {`${timeFormat(date.getHours())}:${timeFormat(date.getMinutes())}:${timeFormat(date.getSeconds())}`}
+    return <span className='clock' style={{'userSelect':'none'}}>
+        {dateSymFor(date,':','sec')}
     </span>
 }
 
