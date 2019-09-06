@@ -1,18 +1,20 @@
 import React from 'react';
 import './CalendarTable.less';
 import {chunk, mergeCn} from '../../utils/publicFun';
-import {nowDateItemFor} from "../../utils/date";
 
 function WeekItem(props) {
     const {data} = props;
     return <div className="calendarTable_rowItem flex">
-        {data.map((el,i)=><Cell value={el.value} key={i}/>)}
+        {data.map((el,i)=>{
+            const cn = mergeCn(el.isCurMonth||'noCurMonth',el.isCurDay&&'curDay selected');
+            return <Cell value={el.value} key={i} className={cn}/>
+        })}
     </div>
 }
 
 function Cell(props) {
-    const {value,cellMain} = props;
-    const cn = mergeCn("calendarTable_cell",cellMain);
+    const {value,cellMain,className} = props;
+    const cn = mergeCn("calendarTable_cell",cellMain,className);
 
     return <div className={cn}>
         {value}
