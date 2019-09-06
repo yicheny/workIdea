@@ -13,10 +13,10 @@ function Calendar(props) {
         <div className="x_calendar_header">
             <div>{dateUnitFor(date)}</div>
             <div>{weekDayFor(date)}</div>
-            <Button onClick={()=>setDate(changeYear(date, 'add'))}>加一年</Button>
             <Button onClick={()=>setDate(changeYear(date,'sub'))}>减一年</Button>
-            <Button onClick={()=>setDate(changeMonth(date, 'add'))}>加一个月</Button>
+            <Button onClick={()=>setDate(changeYear(date, 'add'))}>加一年</Button>
             <Button onClick={()=>setDate(changeMonth(date,'sub'))}>减一个月</Button>
+            <Button onClick={()=>setDate(changeMonth(date, 'add'))}>加一个月</Button>
         </div>
         <div className="x_calendar_content">
             <CalendarTable data={dateTableFor()} selectedDate={nowDateItemFor()} setDate={setDate}/>
