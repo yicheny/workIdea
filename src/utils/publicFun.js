@@ -62,6 +62,7 @@ export function last(array) {
 
 //两个对象针对指定属性进行对比，全部相同时才返回true
 export function compare(o1,o2,keys) {
+    if(!o1 || !o2) return false;
     return keys.every((el)=> o1[el]===o2[el]);
 }
 

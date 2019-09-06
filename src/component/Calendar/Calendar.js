@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
-import {compare} from '../../utils/publicFun';
-import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth} from '../../utils/date'
+import {nowDateItemFor, dateSymFor, dateUnitFor,weekDayFor,changeMonth,dateCompare} from '../../utils/date'
 import {Button} from "../index";
 import CalendarTable from "./CalendarTable";
 
@@ -18,7 +17,7 @@ function Calendar(props) {
             <Button onClick={()=>setDate(changeMonth(date,'sub'))}>减一个月</Button>
         </div>
         <div className="x_calendar_content">
-            <CalendarTable data={dateTableFor()}/>
+            <CalendarTable data={dateTableFor()} selectedDate={nowDateItemFor()}/>
         </div>
     </div>;
 
@@ -56,12 +55,11 @@ function Calendar(props) {
                 return {
                     ...newDate,
                     isCurMonth,
-                    isCurDay:isCurDayFor(newDate),
-                    isSelected:isCurDayFor(newDate)
+                    isCurDay:isCurDay(newDate),
                 };
 
-                function isCurDayFor(date) {
-                    return compare(date,nowDateItemFor(),['year','month','day']);
+                function isCurDay(date) {
+                    return dateCompare(date,nowDateItemFor());
                 }
             }
         }

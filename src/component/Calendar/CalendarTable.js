@@ -1,21 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import './CalendarTable.less';
-import {chunk, mergeCn,compare} from '../../utils/publicFun';
+import {dateCompare} from "../../utils/date";
+import {chunk, mergeCn} from '../../utils/publicFun';
 
 function WeekItem(props) {
-    const {data,handleClick} = props;
+    const {data,...rest} = props;
     return <div className="calendarTable_rowItem flex">
-        {data.map((el,i)=><Cell key={i} date={el} onClick={handleClick}/>)}
+        {data.map((el,i)=><Cell key={i} date={el} {...rest}/>)}
     </div>
 }
 
 function Cell(props) {
-    const {cellMain,date,onClick} = props;
-    const cn = mergeCn("calendarTable_cell",cellMain,date.isCurMonth||'noCurMonth',date.isCurDay&&'curDay',date.isSelected&&'selected');
+    const {cellMain,date,click,selectedDate} = props;
 
-    return <div className={cn} onClick={(e)=>onClick(e,date)}>
+    return <div className={cnFor()} onClick={(e)=>click(e,date)}>
         {date.day}
-    </div>
+    </div>;
+
+    function cnFor() {
+        return mergeCn("calendarTable_cell", cellMain,
+            date.isCurMonth||'noCurMonth',
+            date.isCurDay&&'curDay',
+            dateCompare(date,selectedDate)&&'selected'
+        );
+    }
 }
 Cell.defaultProps={
     cellMain:'cellMain',
@@ -29,31 +37,25 @@ function CalendarTableHeader(props) {
 }
 
 function CalendarTable(props) {
-    const [data,setData] = useState(props.data);
-
-    useEffect(()=>{
-        setData(props.data);
-    },[props.data]);
+    const [selectedDate,setSelectedDate] = useState(props.selectedDate);
 
     return (
         <div className='calendarTable'>
             <CalendarTableHeader data={weekTitsFor()}/>
             <div className="calendarTable_content">
-                {chunk(data,7).map((week,i)=><WeekItem data={week} key={i} handleClick={(e,o)=>handleClick(e,o)}/>)}
+                {chunk(props.data,7).map((week,i)=>
+                    <WeekItem
+                        data={week}
+                        key={i}
+                        click={(e,o)=>setSelectedDate(o)}
+                        selectedDate={selectedDate}
+                    />)}
             </div>
         </div>
     );
 
     function weekTitsFor() {
         return ['日','一','二','三','四','五','六'];
-    }
-
-    function handleClick(e,o) {
-        data.forEach((el,i)=>{
-            if(compare(el,o,['year','month','day'])) return el.isSelected = true;
-            el.isSelected = false;
-        });
-        setData([...data]);
     }
 }
 

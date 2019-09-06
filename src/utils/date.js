@@ -1,3 +1,5 @@
+import {compare} from "./publicFun";
+
 export function dateSymFor(date,sym='') {
     const {year,month,day} = date;
     return setDateUnit([year,month,day]);
@@ -63,6 +65,9 @@ export function changeMonth(date,operate='add'){
     }
 }
 
+export function dateCompare(o1,o2) {
+    return compare(o1,o2,['year','month','day'])
+}
 // function dateItemFor(date) {
 //     const reg = /([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/;
 //     const match = reg.exec(date);
