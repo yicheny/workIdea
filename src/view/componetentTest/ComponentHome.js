@@ -13,6 +13,7 @@ function ComponentHome(props) {
             <Link to='/cDemo/pkCard'>PkCard</Link>
             <Link to='/cDemo/calendar'>Calendar_通用</Link>
             {/*<Link to='/cDemo/calendarW'>CalendarW_自用业务</Link>*/}
+            <Link to='/cDemo/menuM'>MenuM</Link>
         </div>
     );
 }

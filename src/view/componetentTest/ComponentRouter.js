@@ -10,6 +10,7 @@ import MenuDemo from "./control/MenuDemo";
 import PkCardTest from "./control/PkCardTest";
 import CalendarTest from "./control/CalendarTest";
 import CalendarWTest from "./control/CalendarWTest";
+import MenuMTest from "./control/MenuMTest";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -22,6 +23,7 @@ function ComponentRouter(props) {
         <Route path='/cDemo/pkCard' component={PkCardTest}/>
         <Route path='/cDemo/calendar' component={CalendarTest}/>
         <Route path='/cDemo/calendarW' component={CalendarWTest}/>
+        <Route path='/cDemo/menuM' component={MenuMTest}/>
         <Route component={ComponentHome}/>
     </Switch>
 
