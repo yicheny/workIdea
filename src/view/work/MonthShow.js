@@ -53,7 +53,7 @@ function Table(props) {
     </table>
 }
 
-class Demo extends React.Component{
+class MonthShow extends React.Component{
     constructor(props){
         super(props);
         this.state={
@@ -148,4 +148,4 @@ class Demo extends React.Component{
         </div>
     }
 }
-export default Demo;
+export default MonthShow;

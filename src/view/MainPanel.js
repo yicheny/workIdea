@@ -3,7 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import '../asset/style/View/mainPanel.less';
 import LeftMenu from './LeftMenu';
 import myProjectRouter from './myProject/MyProjectRouter';
-import Work from './business/WorkHome'
+import WorkRouter from './work/WorkRouter'
 import ReactRouter from "./reactTest/ReactRouter";
 import ESRouter from './esTest/ESRouter';
 import RouterHome from './router/RouterHome';
@@ -25,7 +25,7 @@ function MainPanel(props){
         <LeftMenu className='mainPanel_leftMenu'/>
         <div className="mainPanel_content">
             <Switch>
-                <Route path='/wDemo' component={Work}/>
+                <Route path='/wDemo' component={WorkRouter}/>
                 <Route path='/cDemo' component={ComponentRouter}/>
                 <Route path='/rDemo' component={ReactRouter}/>
                 <Route path='/es' component={ESRouter}/>

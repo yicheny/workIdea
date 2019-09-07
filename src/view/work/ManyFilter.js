@@ -2,7 +2,7 @@ import React,{Fragment} from "react";
 import {Data} from '../../data/business/data2';
 import '../../asset/style/View/business/demo2.less';
 
-export default class Demo2 extends React.Component{
+export default class ManyFilter extends React.Component{
     condSymMap = {
         '等于': '=',
         '不等于': '!=',
@@ -22,7 +22,7 @@ export default class Demo2 extends React.Component{
         return <Fragment>
             {
                 data.map((item,index) =>{
-                    return <div key={index} className={item.show?'business show':"business"}>
+                    return <div key={index} className={item.show?'work show':"business"}>
                         <span>{item.text}</span>
                         <span>{this.condSymMap[item.status] || item.status}</span>
                         <span>{Array.isArray(item.value)? this.condValMap[item.status](item.value) : item.value}</span>

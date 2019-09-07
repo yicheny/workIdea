@@ -22,10 +22,7 @@ function LeftMenu(props) {
                     </span>
                 }>
                 <Item key='s1_1'>
-                    <Link to='/wDemo'>工作台</Link>
-                </Item>
-                <Item key='s1_2'>
-                    <Link to='/wDemo/dualStateSave'>双重状态保存</Link>
+                    <Link to='/wDemo'>工作业务导航页</Link>
                 </Item>
             </SubMenu>
 
