@@ -6,7 +6,7 @@ import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
 import ReactRouter from "./reactTest/ReactRouter";
 import ESRouter from './esTest/ESRouter';
-import RouterHome from './router/RouterHome';
+import RouterHome from './routerTest/RouterHome';
 import ComponentRouter from "./componetentTest/ComponentRouter";
 import HttpRouter from "./httpTest/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";

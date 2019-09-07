@@ -46,13 +46,7 @@ function LeftMenu(props) {
                          </span>
                      }>
                 <Item key='s3_1'>
-                    <Link to='/rDemo'>生命周期-16.3以前</Link>
-                </Item>
-                <Item key='s3_2'>
-                    <Link to='/rDemo/context'>Context</Link>
-                </Item>
-                <Item key='s3_3'>
-                    <Link to='/rDemo/hoc'>高阶组件HOC</Link>
+                    <Link to='/rDemo'>React导航页</Link>
                 </Item>
             </SubMenu>
 
