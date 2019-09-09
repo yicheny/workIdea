@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {Button} from "antd";
+import {Button} from "antd/lib/index";
 
 function RouterDemo1(props) {
     return <div>

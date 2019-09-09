@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
-import Part1 from "./Part1";
+import Part1 from "./HttpPart1";
 import HttpHome from "./HttpHome";
 
 function HttpRouter(props) {

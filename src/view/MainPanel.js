@@ -6,7 +6,6 @@ import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
 import ReactRouter from "./reactTest/ReactRouter";
 import ESRouter from './esTest/ESRouter';
-import RouterHome from './routerTest/RouterHome';
 import ComponentRouter from "./componetentTest/ComponentRouter";
 import HttpRouter from "./httpTest/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";
@@ -14,6 +13,7 @@ import CssTestRouter from "./cssTest/CssTestRouter";
 import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 import {setCombinKey} from "../utils/CombinKey";
 import {Message} from "../component";
+import RouterRouter from "./routerTest/RouterRouter";
 
 function MainPanel(props){
     // const fn = ()=>props.history.push('/demo');
@@ -29,7 +29,7 @@ function MainPanel(props){
                 <Route path='/cDemo' component={ComponentRouter}/>
                 <Route path='/rDemo' component={ReactRouter}/>
                 <Route path='/es' component={ESRouter}/>
-                <Route path='/router' component={RouterHome}/>
+                <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPatternRouter}/>
                 <Route path='/cssTest' component={CssTestRouter}/>
