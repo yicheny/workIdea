@@ -1,19 +1,10 @@
-import React, {useState,useEffect} from 'react';
-import axios from 'axios'
+import React from 'react';
+import {Link} from "react-router-dom";
 
 function HttpHome(props) {
-    const [info,setInfo] = useState('')
-
-    useEffect(()=>{
-        axios.get('http://localhost:5000/login').then(res=>{
-            setInfo(res.data)
-        })
-    });
-    return (
-        <div>
-            {info}
-        </div>
-    );
+    return <div className="x_pad">
+        <Link to='/http/p1'>Part1</Link>
+    </div>
 }
 
 export default HttpHome;
