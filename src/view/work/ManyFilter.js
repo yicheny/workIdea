@@ -1,5 +1,5 @@
 import React,{Fragment} from "react";
-import {Data} from '../../data/business/data2';
+import {Data} from './data/data2';
 import '../../asset/style/View/business/demo2.less';
 
 export default class ManyFilter extends React.Component{

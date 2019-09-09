@@ -1,6 +1,6 @@
 import React from "react";
 import _ from 'lodash';
-import {data} from "../../data/business/data"
+import {data} from "./data/data"
 import '../../asset/style/View/business/demo.less'
 
 function ChangeDisplay(props) {
