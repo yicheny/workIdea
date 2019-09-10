@@ -4,7 +4,7 @@ import {Container} from "../../../component";
 
 function Class2Home(props) {
     return <Container header='常用重构技巧'>
-        <div className="x_pad">
+        <div className="pad">
             <Link to='/recons/class2/extractFunction'>提炼函数</Link>
             <Link to='/recons/class2/inlineFunction'>内联函数</Link>
             <Link to='/recons/class2/extractVariable'>提炼变量</Link>

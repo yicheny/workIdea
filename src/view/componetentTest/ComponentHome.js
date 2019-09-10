@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 function ComponentHome(props) {
     return (
-        <div className='x_pad'>
+        <div className='pad'>
             <Link to='/component/all'>综合测试</Link>
             <Link to='/component/bread'>Breadcrumd</Link>
             <Link to='/component/tabs'>Tabs</Link>

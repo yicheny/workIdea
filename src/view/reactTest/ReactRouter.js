@@ -6,6 +6,7 @@ import HOC from "./part1/HOC";
 import ReactHome from "./ReactHome";
 import ChildrenTest from "./children/ChildrenTest";
 import HookBase from "./hook/HookBase";
+import ReactDemoRouter from "./demo/ReactDemoRouter";
 
 function ReactRouter() {
     return <div>
@@ -15,6 +16,7 @@ function ReactRouter() {
             <Route path='/react/hoc' component={HOC}/>
             <Route path='/react/children' component={ChildrenTest}/>
             <Route path='/react/hookBase' component={HookBase}/>
+            <Route path='/react/demo' component={ReactDemoRouter}/>
             <Route component={ReactHome}/>
         </Switch>
     </div>
