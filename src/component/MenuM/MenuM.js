@@ -4,11 +4,9 @@ import {Icon} from "antd";
 import './MenuM.less'
 import {mergeCn} from "../../utils/publicFun";
 
-let middle = {};
-
 function MenuItemM(props) {
-    const {icon, tit, url} = props;
-    const cn = mergeCn("x_menuItemM",tit===middle.selected&&'selected');
+    const {icon, tit, url,selected,setSelected} = props;
+    const cn = mergeCn("x_menuItemM",tit===selected&&'selected');
 
     return <Link to={url} className={cn} onClick={handleClick}>
         <Icon type={icon}/>
@@ -18,18 +16,24 @@ function MenuItemM(props) {
     </Link>;
 
     function handleClick() {
-        middle.setSelected(tit)
+        setSelected(tit)
     }
 }
 
 function MenuM(props) {
-    let {style, children} = props;
     const [selected,setSelected] = useState(props.selected);
-    middle = {selected,setSelected};
 
-    return <div className='x_menuM flex-y' style={style}>
-        {children}
+    return <div className='x_menuM flex-y' style={props.style}>
+        {renderChildren()}
     </div>;
+
+    function renderChildren() {
+        return React.Children.map(props.children,child=>{
+            return React.cloneElement(child,{
+                selected,setSelected
+            })
+        })
+    }
 }
 
 MenuM.defaultProps = {
