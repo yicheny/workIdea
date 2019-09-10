@@ -26,7 +26,7 @@ function MainPanel(props){
         <div className="mainPanel_content">
             <Switch>
                 <Route path='/work' component={WorkRouter}/>
-                <Route path='/cDemo' component={ComponentRouter}/>
+                <Route path='/component' component={ComponentRouter}/>
                 <Route path='/react' component={ReactRouter}/>
                 <Route path='/es' component={ESRouter}/>
                 <Route path='/router' component={RouterRouter}/>

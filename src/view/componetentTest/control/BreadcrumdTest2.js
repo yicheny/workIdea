@@ -3,7 +3,7 @@ import {Button} from "antd/lib/index";
 
 function BreadcrumdTest2(props) {
     const handleClick = () => {
-        return props.history.push({pathname: '/cDemo/bread/demo2/B'})
+        return props.history.push({pathname: '/component/bread/demo2/B'})
     };
 
     useEffect(() => {

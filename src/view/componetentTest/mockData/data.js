@@ -3,7 +3,7 @@ export const menuData = [
         tit:'my组件库测试',
         details:[{
             tit:'综合测试',
-            url:'/cDemo/menu',
+            url:'/component/menu',
             details:[{
                 tit:'第三级'
             }]

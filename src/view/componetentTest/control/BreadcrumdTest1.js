@@ -4,14 +4,14 @@ import {Button} from 'antd/lib/index'
 
 function BreadcrumdTest1(props) {
     // const handleClick = ()=>{
-    //     props.history.push({ pathname : '/cDemo/demo2' , search:'?id=100&&name=ylf',query : { param:[1,2,3,4,5,6]} })
+    //     props.history.push({ pathname : '/component/demo2' , search:'?id=100&&name=ylf',query : { param:[1,2,3,4,5,6]} })
     // };
     return <div>
         {/*<Button onClick={handleClick} type={"primary"}>点击跳转到demo2</Button>*/}
-        <Link to='/cDemo/bread/demo2'>
+        <Link to='/component/bread/demo2'>
             <Button>点击跳转到demo2</Button>
         </Link>
-        <Link to='/cDemo'>
+        <Link to='/component'>
             <Button type='primary'>点击跳转到组件测试首页</Button>
         </Link>
     </div>

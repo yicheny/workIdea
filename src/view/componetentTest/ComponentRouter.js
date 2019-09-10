@@ -14,16 +14,16 @@ import MenuMTest from "./control/MenuMTest";
 
 function ComponentRouter(props) {
     return <Switch>
-        <Route path='/cDemo/all' component={All}/>
-        <Route path='/cDemo/bread' component={BreadcrumdTest}/>
-        <Route path='/cDemo/tabs' component={TabsTest}/>
-        <Route path='/cDemo/message' component={MessageTest}/>
-        <Route path='/cDemo/modal' component={ModalTest}/>
-        <Route path='/cDemo/menu' component={MenuDemo}/>
-        <Route path='/cDemo/pkCard' component={PkCardTest}/>
-        <Route path='/cDemo/calendar' component={CalendarTest}/>
-        <Route path='/cDemo/calendarW' component={CalendarWTest}/>
-        <Route path='/cDemo/menuM' component={MenuMTest}/>
+        <Route path='/component/all' component={All}/>
+        <Route path='/component/bread' component={BreadcrumdTest}/>
+        <Route path='/component/tabs' component={TabsTest}/>
+        <Route path='/component/message' component={MessageTest}/>
+        <Route path='/component/modal' component={ModalTest}/>
+        <Route path='/component/menu' component={MenuDemo}/>
+        <Route path='/component/pkCard' component={PkCardTest}/>
+        <Route path='/component/calendar' component={CalendarTest}/>
+        <Route path='/component/calendarW' component={CalendarWTest}/>
+        <Route path='/component/menuM' component={MenuMTest}/>
         <Route component={ComponentHome}/>
     </Switch>
 
