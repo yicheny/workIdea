@@ -45,8 +45,7 @@ function Combination(props) {
     superCommand.add(stationaryCommand,restCommand,studyCommand);
 
     return (
-        <Container className='x_combi'>
-            <Header>组合模式</Header>
+        <Container className='x_combi' header='组合模式'>
             <Button type='primary' onClick={superCommand.executor}>超级命令</Button><br/>
 
             <Button type='primary' onClick={stationaryCommand.executor}>固定</Button>
