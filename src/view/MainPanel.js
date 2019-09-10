@@ -25,7 +25,7 @@ function MainPanel(props){
         <LeftMenu className='mainPanel_leftMenu'/>
         <div className="mainPanel_content">
             <Switch>
-                <Route path='/wDemo' component={WorkRouter}/>
+                <Route path='/work' component={WorkRouter}/>
                 <Route path='/cDemo' component={ComponentRouter}/>
                 <Route path='/react' component={ReactRouter}/>
                 <Route path='/es' component={ESRouter}/>

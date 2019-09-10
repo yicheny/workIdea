@@ -7,9 +7,9 @@ import WorkHome from "./WorkHome";
 
 function WorkRouter(props) {
     return <Switch>
-        <Route path='/wDemo/monthShow' component={MonthShow}/>
-        <Route path='/wDemo/manyFilter' component={ManyFilter}/>
-        <Route path='/wDemo/dualStateSave' component={DualStateSave}/>
+        <Route path='/work/monthShow' component={MonthShow}/>
+        <Route path='/work/manyFilter' component={ManyFilter}/>
+        <Route path='/work/dualStateSave' component={DualStateSave}/>
         <Route component={WorkHome}/>
     </Switch>
 }

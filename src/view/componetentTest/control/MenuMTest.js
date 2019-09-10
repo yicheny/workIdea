@@ -3,7 +3,7 @@ import {MenuM,MenuItemM} from "../../../component";
 
 function MenuMTest(props) {
     return <MenuM name='menuMTest'>
-        <MenuItemM icon='compass' tit='工作业务演示' url='/wDemo'/>
+        <MenuItemM icon='compass' tit='工作业务演示' url='/work'/>
         <MenuItemM icon='tool' tit='组件库测试' url='/cDemo'/>
         <MenuItemM icon='read' tit='React实践' url='/react'/>
         <MenuItemM icon='html5' tit='JS原生实践' url='/es'/>

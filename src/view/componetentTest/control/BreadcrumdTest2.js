@@ -7,7 +7,7 @@ function BreadcrumdTest2(props) {
     };
 
     useEffect(() => {
-        props.setName('/wDemo/bread/demo3', 'Demo3页面修改成功')
+        props.setName('/work/bread/demo3', 'Demo3页面修改成功')
     }, []);
 
     return <div>
