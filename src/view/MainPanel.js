@@ -27,7 +27,7 @@ function MainPanel(props){
             <Switch>
                 <Route path='/wDemo' component={WorkRouter}/>
                 <Route path='/cDemo' component={ComponentRouter}/>
-                <Route path='/rDemo' component={ReactRouter}/>
+                <Route path='/react' component={ReactRouter}/>
                 <Route path='/es' component={ESRouter}/>
                 <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>

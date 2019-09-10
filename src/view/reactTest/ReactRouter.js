@@ -10,11 +10,11 @@ import HookBase from "./hook/HookBase";
 function ReactRouter() {
     return <div>
         <Switch>
-            <Route path='/rDemo/lifeCycle' component={LifeCycle}/>
-            <Route path='/rDemo/context' component={Context_App}/>
-            <Route path='/rDemo/hoc' component={HOC}/>
-            <Route path='/rDemo/children' component={ChildrenTest}/>
-            <Route path='/rDemo/hookBase' component={HookBase}/>
+            <Route path='/react/lifeCycle' component={LifeCycle}/>
+            <Route path='/react/context' component={Context_App}/>
+            <Route path='/react/hoc' component={HOC}/>
+            <Route path='/react/children' component={ChildrenTest}/>
+            <Route path='/react/hookBase' component={HookBase}/>
             <Route component={ReactHome}/>
         </Switch>
     </div>
