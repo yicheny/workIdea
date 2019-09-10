@@ -16,12 +16,17 @@ function MenuItemM(props) {
     </Link>;
 
     function handleClick() {
-        setSelected(tit)
+        setSelected(tit);
+        saveSelected();
+
+        function saveSelected() {
+            return sessionStorage.setItem(props.menuName,tit);
+        }
     }
 }
 
 function MenuM(props) {
-    const [selected,setSelected] = useState(props.selected);
+    const [selected,setSelected] = useState(loadSelected());
 
     return <div className='x_menuM flex-y' style={props.style}>
         {renderChildren()}
@@ -30,9 +35,13 @@ function MenuM(props) {
     function renderChildren() {
         return React.Children.map(props.children,child=>{
             return React.cloneElement(child,{
-                selected,setSelected
+                selected,setSelected,menuName:props.menuName
             })
         })
+    }
+
+    function loadSelected() {
+        return sessionStorage.getItem(props.menuName) || props.selected
     }
 }
 

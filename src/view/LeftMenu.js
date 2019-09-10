@@ -2,7 +2,7 @@ import React from 'react';
 import {MenuItemM, MenuM} from "../component";
 
 function LeftMenu(props) {
-    return <MenuM selected='工作业务演示'>
+    return <MenuM menuName='leftMenu' selected='工作业务演示'>
         <MenuItemM icon='compass' tit='工作业务演示' url='/wDemo'/>
         <MenuItemM icon='tool' tit='组件库测试' url='/cDemo'/>
         <MenuItemM icon='read' tit='React实践' url='/rDemo'/>
