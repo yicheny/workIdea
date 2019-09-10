@@ -30,7 +30,8 @@ function HookBase(props) {
 
         <h3>自定义hook</h3>
         <div className="box">
-            <p><Link to='/react/demo/customHook'>自定义hookDemo</Link></p>
+            <p><Link to='/react/demo/customHook'>组件式Demo</Link></p>
+            <p><Link to='/react/demo/customHook2'>自定义hook实现Demo</Link></p>
             <p><b>自定义hook规则：</b></p>
             <p>1. 自定义hook是一个函数</p>
             <p>2. 自定义hook名称以use开头，函数体内部可以调用其他hook</p>

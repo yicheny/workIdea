@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Button, Container} from "../../../component";
 import {userData} from "./data/CustomHookData";
 
-//使用组件形式
-function CustomHook(props) {
+//使用自定义hook
+function CustomHook2(props) {
     const [userName,setUserName] = useState('小明');
     const [online,setOnline] = useState('登录中...');
 
@@ -11,7 +11,7 @@ function CustomHook(props) {
         <div>当前选择： {userName} {online}</div>
 
         {
-            userData.map((el)=><Online key={el.id} user={el} onClick={handleClick}/>)
+            userData.map((el)=>useOnline(el,handleClick))
         }
     </Container>;
 
@@ -21,28 +21,28 @@ function CustomHook(props) {
     }
 }
 
-function Online(props) {
+function useOnline(user,callback) {
     const [online,setOnline] = useState(null);
 
     useEffect(()=>{
         autoChangeOnline()
     },[]);
 
-    return <div className='flex center-y' style={{margin:4}}>
+    return <div key={user.id} className='flex center-y' style={{margin:4}}>
         <Button onClick={changeIsOnline} type='primary' style={{marginRight:8}}>切换状态</Button>
-        <span style={{color:'orange'}}>{props.user.name}</span>登录状态：{onlineMap(online)}
+        <span style={{color:'orange'}}>{user.name}</span>登录状态：{onlineMap(online)}
     </div>;
 
     function changeIsOnline(e) {
         e && e.stopPropagation();
         setOnline(!online);
-        props.onClick(onlineMap(!online),props.user.name)
+        callback(onlineMap(!online),user.name)
     }
-    
+
     function autoChangeOnline() {
         setTimeout(()=>{
             changeIsOnline()
-        },props.user.time)
+        },user.time)
     }
 
     function onlineMap(status) {
@@ -51,4 +51,4 @@ function Online(props) {
     }
 }
 
-export default CustomHook;
+export default CustomHook2;
