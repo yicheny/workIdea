@@ -28,6 +28,12 @@ function HookBase(props) {
             <p>关于JS中的this存在，是一道屏障，使用class需要深入理解JS中的this用法，而且实际上class的使用语法相对于函数式写法来说更繁杂一些。</p>
         </div>
 
+        <h3>Hook规则</h3>
+        <div className="box">
+            <p><b>1. 旨在最顶层使用hook,不要在循环、条件或嵌套函数中使用hook</b>__这是为了保证hook在每一次调用中以同样的顺序被调用——<Link to=''>Demo</Link></p>
+            <p><b>只在React函数中调用hook</b>__在React函数组件或自定义hook中使用</p>
+        </div>
+
         <h3>自定义hook</h3>
         <div className="box">
             <p><Link to='/react/demo/customHook'>组件式Demo</Link></p>
@@ -36,8 +42,8 @@ function HookBase(props) {
             <p>1. 自定义hook是一个函数</p>
             <p>2. 自定义hook名称以use开头，函数体内部可以调用其他hook</p>
             <p>3. 在两个及以上函数共享逻辑时，可以将其提取到第三个函数（自定义hook）中</p>
-
         </div>
+
     </Container>
 }
 

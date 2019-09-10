@@ -1,6 +1,6 @@
 import React from 'react';
 import './Combination.less';
-import {Button, Container, Header} from "../../../component";
+import {Button, Container} from "../../../component";
 
 class Combin {
     constructor(){

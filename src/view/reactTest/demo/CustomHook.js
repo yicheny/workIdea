@@ -25,7 +25,10 @@ function Online(props) {
     const [online,setOnline] = useState(null);
 
     useEffect(()=>{
-        autoChangeOnline()
+        const timeId = setTimeout(()=>{
+            changeIsOnline()
+        },props.user.time);
+        return ()=>clearTimeout(timeId);
     },[]);
 
     return <div className='flex center-y' style={{margin:4}}>
@@ -37,12 +40,6 @@ function Online(props) {
         e && e.stopPropagation();
         setOnline(!online);
         props.onClick(onlineMap(!online),props.user.name)
-    }
-    
-    function autoChangeOnline() {
-        setTimeout(()=>{
-            changeIsOnline()
-        },props.user.time)
     }
 
     function onlineMap(status) {
