@@ -13,9 +13,7 @@ function Bg(props) {
     return (
         <div className='x_bg'>
             {
-                picArr.map((el,i,thisArg)=> {
-                    return <span key={i} style={{backgroundImage:`url(${el})`,animationDelay:`${6*i}s`}}></span>
-                })
+                picArr.map((el,i)=> <span key={i} style={{backgroundImage:`url(${el})`,animationDelay:`${6*i}s`}}> </span>)
             }
         </div>
     );
