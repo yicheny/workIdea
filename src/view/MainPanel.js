@@ -14,6 +14,7 @@ import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 import {setCombinKey} from "../utils/CombinKey";
 import {Message} from "../component";
 import RouterRouter from "./routerTest/RouterRouter";
+import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 
 function MainPanel(props){
     // const fn = ()=>props.history.push('/demo');
@@ -35,6 +36,7 @@ function MainPanel(props){
                 <Route path='/cssTest' component={CssTestRouter}/>
                 <Route path='/mProj' component={myProjectRouter}/>
                 <Route path='/recons' component={ReconsitutionRouter}/>
+                <Route path='/hugeSura' component={HugeSuraDemoRouter}/>
                 <Redirect exact from="/" to="/login" />
             </Switch>
         </div>
