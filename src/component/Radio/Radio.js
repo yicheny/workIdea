@@ -6,7 +6,7 @@ function Radio(props) {
 
     return <span className="x_radio flex center-y" onClick={()=>props.onChange(props.value)}>
         <span className={boxCnFor()}> </span>
-        <span className="x_radio_value">{props.value}</span>
+        <span className="x_radio_value">{props.children}</span>
     </span>;
 
     function boxCnFor() {

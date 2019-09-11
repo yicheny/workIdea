@@ -16,6 +16,7 @@ import _Modal from './Modal/Modal';
 import _Menu from './Menu/Menu';
 import {MenuM as _MenuM, MenuItemM as _MenuItemM} from './MenuM/MenuM';
 import {Radio as _Radio, RadioGroup as _RadioGroup} from "./Radio/Radio";
+import {CheckBox as _CheckBox, CheckBoxGroup as _CheckBoxGroup} from "./CheckBox/CheckBox";
 
 export { _Container as Container };
 export { _Header as Header};
@@ -35,3 +36,4 @@ export {_Modal as Modal};
 export {_Menu as Menu};
 export {_MenuM as MenuM, _MenuItemM as MenuItemM};
 export {_Radio as Radio,  _RadioGroup as RadioGroup};
+export {_CheckBox as CheckBox, _CheckBoxGroup as CheckBoxGroup};

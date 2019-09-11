@@ -5,10 +5,10 @@ function RadioDemo(props) {
     const [value,setValue] = useState('A');
     return <Container header='单选按钮测试'>
         <RadioGroup selected={value} onChange={(v)=>setValue(v)}>
-            <Radio value='A'/>
-            <Radio value='B'/>
-            <Radio value='C'/>
-            <Radio value='D'/>
+            <Radio value='A'>AQ</Radio>
+            <Radio value='B'>BQ</Radio>
+            <Radio value='C'>CQ</Radio>
+            <Radio value='D'>DQ</Radio>
         </RadioGroup>
     </Container>
 }

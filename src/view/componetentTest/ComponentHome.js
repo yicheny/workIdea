@@ -15,6 +15,7 @@ function ComponentHome(props) {
             {/*<Link to='/component/calendarW'>CalendarW_自用业务</Link>*/}
             <Link to='/component/menuM'>MenuM</Link>
             <Link to='/component/radio'>Radio</Link>
+            <Link to='/component/checkBox'>CheckBox</Link>
         </div>
     );
 }

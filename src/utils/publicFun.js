@@ -66,13 +66,12 @@ export function compare(o1,o2,keys) {
     return keys.every((el)=> o1[el]===o2[el]);
 }
 
-// export function setMap(map) {
-//     function get(key) {
-//         return map[key];
-//     }
-//     function set(key,value){
-//         map[key] = value;
-//     }
-//     return [get,set];
-// }
+//删除数组指定项--不会改变原数组
+export function delArrItem(array,item){
+    array = [...array];
+
+    if(!array.includes(item)) return array;
+    array.splice(array.indexOf(item),1);
+    return array;
+}
 
