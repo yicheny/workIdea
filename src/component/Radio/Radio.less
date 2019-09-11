@@ -1,0 +1,29 @@
+.x_radio{
+  margin-right:18px;
+  cursor: pointer;
+  &_box{
+    display: inline-block;
+    position:relative;
+    width:16px;
+    height:16px;
+    border-radius: 50%;
+    border:solid 1px #d9d9d9;
+    &.checked{
+      border:solid 1px #1890ff;
+      &::before{
+        content:'';
+        display: table;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 8px;
+        height: 8px;
+        background-color: #1890ff;
+        border-radius: 50%;
+      }
+    }
+  }
+  &_value{
+    padding:0 6px;
+  }
+}
