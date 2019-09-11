@@ -30,8 +30,8 @@ function HookBase(props) {
 
         <h3>Hook规则</h3>
         <div className="box">
-            <p><b>1. 旨在最顶层使用hook,不要在循环、条件或嵌套函数中使用hook</b>__这是为了保证hook在每一次调用中以同样的顺序被调用——<Link to=''>Demo</Link></p>
-            <p><b>只在React函数中调用hook</b>__在React函数组件或自定义hook中使用</p>
+            <p><b>1. 旨在最顶层使用hook,不要在循环、条件或嵌套函数中使用hook</b>__这是为了保证hook在每一次调用中以同样的顺序被调用——<Link to='/react/demo/hookRule'>Demo</Link></p>
+            <p><b>2. 只在React函数中调用hook</b>__在React函数组件或自定义hook中使用</p>
         </div>
 
         <h3>自定义hook</h3>
