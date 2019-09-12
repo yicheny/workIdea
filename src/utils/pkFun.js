@@ -1,7 +1,7 @@
 import {shuffle} from "./publicFun";
 
 export function crePkCards(props) {
-    const {isRandom=false,face='back'} = props;
+    const {isRandom,face} = props;
 
     let cards = [];
     const flowerColors = ['hearts','spade','plum','diamonds'];//红桃、黑桃、梅花、方块;
@@ -33,8 +33,7 @@ export function crePkCards(props) {
         ]
     }
 }
-//目前这种写法无效
-// crePkCards.defalutProps={
-//     isRandom: false,
-//     face:'front' // back-反 front-正
-// };
+crePkCards.defaultProps={
+    isRandom: false,
+    face:'front' // back-反 front-正
+};
