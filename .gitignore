@@ -30,3 +30,4 @@ yarn-error.log*
 
 /src/asset/img/*.jpg
 /src/view/myProject/control/wolfKill/img
+/src/view/myProject/control/redLine/img

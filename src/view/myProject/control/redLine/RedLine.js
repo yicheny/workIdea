@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {staffs,rivalStaffs, guests} from "./ReadLineData";
+import {staffs,rivalStaffs,guests} from "./ReadLineData";
 import {Button} from "../../../../component";
 import StaffArea from "./staffArea";
 
