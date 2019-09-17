@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, createRef} from 'react';
 import './StaffArea.less'
 import StaffCard from "./StaffCard";
 import {mergeCn} from "../../../../../utils/publicFun";
@@ -6,9 +6,15 @@ import {mergeCn} from "../../../../../utils/publicFun";
 function StaffArea(props) {
     const [modal,setModal] = useState(false);
     const [curStaff,setCurStaff] = useState(props.data[0]);
+    const staffRef = createRef();
+
+    useEffect(()=>{
+        getRefInfo();
+        props.setStaff(curStaff);
+    },[curStaff]);
 
     return <div className={cnFor()}>
-        <StaffCard onClick={switchStaff} data={curStaff} isRival={props.isRival} className='curStaff'/>
+        <StaffCard middleRef={staffRef} onClick={switchStaff} data={curStaff} isRival={props.isRival} className='curStaff'/>
         {modal && <StaffModal data={props.data} setCurStaff={setCurStaff} close={close}/>}
     </div>;
 
@@ -21,6 +27,9 @@ function StaffArea(props) {
     }
     function cnFor() {
         return mergeCn('staff_area flex-y center',props.isRival?'rival':'my')
+    }
+    function getRefInfo() {
+        console.dir(staffRef.current);
     }
 }
 StaffArea.defaultProps={

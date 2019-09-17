@@ -3,9 +3,9 @@ import './StaffCard.less';
 import {mergeCn} from "../../../../../utils/publicFun";
 
 function StaffCard(props) {
-    const {isRival,className,...rest} = props;
+    const {isRival,className,middleRef,onClick} = props;
 
-    return <div className={cnFor()} {...rest}>
+    return <div className={cnFor()} onClick={onClick} ref={middleRef}>
         <p className="staff_name"> {props.data.name} </p>
         <p> 外形：{genLevelSpan(props.data.looks)}</p>
         <p> 技能：{genLevelSpan(props.data.skill)}</p>

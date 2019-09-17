@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,createRef} from 'react';
 import './RedLine.less';
 import {staffs,rivalStaffs} from "./redLineData/ReadLineData";
 import {guests} from "./redLineData/GenGuestData";
@@ -11,22 +11,26 @@ const MAX_VALUE= 24;
 
 function RedLine(props) {
     const [cps,setCps] = useState([]);
+    const [myStaff,setMyStaff] = useState(null);
+    const [rivalStaff,setRivalStaff] = useState(null);
     const [res,setRes] = useState(0);
+
+    const guestRef = createRef();
 
     return <div className='flex-y redLine fill'>
         <div className="redLine_staff flex">
-            <StaffArea data={staffs}/>
-            <StaffArea data={rivalStaffs} isRival={true}/>
+            <StaffArea data={staffs} setStaff={setMyStaff}/>
+            <StaffArea data={rivalStaffs} isRival={true} setStaff={setRivalStaff}/>
         </div>
 
         <div className="redLine_control flex">
             <div className=''>
-                <GuestList data={guests}/>
+                {guests.length && <GuestList data={guests}/>}
             </div>
 
             <div className="redLine_opera flex-y center">
                 <div className="flex center">
-                    <GuestGraph/>
+                    <GuestGraph middleRef={guestRef}/>
                 </div>
 
                 <div className='flex-y'>
@@ -38,9 +42,20 @@ function RedLine(props) {
         </div>
     </div>;
 
-    function cpDeal() {
-        setCps(getNewCps());
+    function cpDeal(e) {
+        console.log(myStaff, rivalStaff);
+        // guestMove();
+        // setCps(getNewCps());
 
+        function guestMove() {
+            const x = -20;
+            const y = -350;
+
+            guestRef.current.style.transform = `translate(${x}px,${y}px)`;
+            setTimeout(()=>{
+                guestRef.current.style.visibility = 'hidden';
+            },1200)
+        }
         function getNewCps() {
             cps.push({
                 staff:staffs[0],
