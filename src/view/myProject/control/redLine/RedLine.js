@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
 import './RedLine.less';
-import {staffs,rivalStaffs,guests} from "./readLineData/ReadLineData";
+import {staffs,rivalStaffs} from "./redLineData/ReadLineData";
+import {guests} from "./redLineData/GenGuestData";
 import {Button} from "../../../../component";
-import StaffArea from "./staffArea";
-import GuestGraph from "./GuestGraph";
+import StaffArea from "./redLineComponent/staffArea";
+import GuestGraph from "./redLineComponent/GuestGraph";
 
 const MAX_VALUE= 24;
 

@@ -73,13 +73,3 @@ export const rivalStaffs = [
         // talent:[]
     },
 ];
-
-export const guests = [
-    {
-        name:'客人1号',
-        money:13000,
-        // hobby:null,
-        // buff:null,
-        // talent:[]
-    }
-];
