@@ -1,7 +1,7 @@
 .staff{
   &.rival{
     .staff_name{
-      color:red;
+      color:gray;
     }
   }
   margin:16px;
@@ -13,14 +13,30 @@
   box-shadow: 0 7px 24px rgba(0, 0, 0, 0.07);
   user-select: none;
   cursor:pointer;
+  font-family: "Calisto MT";
 
   &_name{
     font-size: 24px;
-    color:#40a9ff;
-    font-weight: 600;
+    color:green;
+    font-weight:600;
   }
   >:not(.staff_name){
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 500;
+    .staff_level{
+      &.S{
+        color:gold;
+      }
+      &.A{
+        color:red;
+      }
+      &.N{
+        color:#8f8f8f;
+      }
+      font-family: "Segoe Print";
+      font-weight: bolder;
+      font-size: 24px;
+      color:#1890ff;
+    }
   }
 }

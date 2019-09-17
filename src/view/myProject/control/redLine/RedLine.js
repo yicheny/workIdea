@@ -3,6 +3,8 @@ import {staffs,rivalStaffs, guests} from "./ReadLineData";
 import {Button} from "../../../../component";
 import StaffArea from "./staffArea";
 
+const MAX_VALUE= 24;
+
 function RedLine(props) {
     const [cps,setCps] = useState([]);
     const [res,setRes] = useState(0);
@@ -43,8 +45,7 @@ function RedLine(props) {
 
 
         function gainRadioFor(value){
-            const maxValue = 24;
-            return value/maxValue;
+            return value/MAX_VALUE;
         }
     }
 }
