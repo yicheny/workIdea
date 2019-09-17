@@ -7,6 +7,7 @@ import PublicFunTest from "./control/PublicFunTest";
 import DrawRolls from "./control/DrawRolls";
 import FriedGoldenFlower from "./control/FriedGoldenFlower";
 import Demo from "./control/wolfKill/Demo";
+import RedLine from "./control/redLine/RedLine";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -15,6 +16,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/drawRolls' component={DrawRolls}/>
         <Route path='/mProj/friedGoldenFlower' component={FriedGoldenFlower}/>
         <Route path='/mProj/wolfKill' component={Demo}/>
+        <Route path='/mProj/redLine' component={RedLine}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
