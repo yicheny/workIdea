@@ -1,3 +1,26 @@
+.staff_area{
+  &.my{
+    .curStaff{
+      position:relative;
+      &:hover{
+        &:before{
+          content:'点击可切换员工';
+          position:absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width:100%;
+          height:100%;
+          background: rgba(165, 216, 96, 0.56);
+          color:#fff;
+          font-size: 24px;
+          writing-mode:vertical-lr
+        }
+      }
+    }
+  }
+}
+
 .staff_modal{
   position:fixed;
   top:0;
@@ -5,6 +28,7 @@
   width:100vw;
   height:100vh;
   background: rgba(0,0,0,.12);
+  z-index: 1000;
   &_main{
     flex-wrap: wrap;
     width:972px;

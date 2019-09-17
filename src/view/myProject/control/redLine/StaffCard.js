@@ -3,7 +3,7 @@ import './StaffCard.less';
 import {mergeCn} from "../../../../utils/publicFun";
 
 function StaffCard(props) {
-    const {...rest} = props;
+    const {isRival,className,...rest} = props;
 
     return <div className={cnFor()} {...rest}>
         <p className="staff_name"> {props.data.name} </p>
@@ -13,12 +13,13 @@ function StaffCard(props) {
     </div>;
 
     function cnFor() {
-        return mergeCn('staff flex-y center',props.isRival&&'rival')
+        return mergeCn('staff flex-y center',className,isRival&&'rival')
     }
 }
 
 StaffCard.defalutProps={
-    isRival:false
+    isRival:false,
+    className:''
 };
 
 export default StaffCard;

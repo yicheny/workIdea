@@ -8,7 +8,7 @@ function StaffArea(props) {
     const [curStaff,setCurStaff] = useState(props.data[0]);
 
     return <div className={cnFor()}>
-        <StaffCard onClick={switchStaff} data={curStaff} isRival={props.isRival}/>
+        <StaffCard onClick={switchStaff} data={curStaff} isRival={props.isRival} className='curStaff'/>
         {modal && <StaffModal data={props.data} setCurStaff={setCurStaff} close={close}/>}
     </div>;
 
@@ -20,7 +20,7 @@ function StaffArea(props) {
         setModal(false)
     }
     function cnFor() {
-        return mergeCn('flex-y center',props.isRival&&'rival')
+        return mergeCn('staff_area flex-y center',props.isRival?'rival':'my')
     }
 }
 StaffArea.defaultProps={
