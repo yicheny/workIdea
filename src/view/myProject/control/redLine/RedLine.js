@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
-import {staffs,rivalStaffs,guests} from "./ReadLineData";
+import './RedLine.less';
+import {staffs,rivalStaffs,guests} from "./readLineData/ReadLineData";
 import {Button} from "../../../../component";
 import StaffArea from "./staffArea";
+import GuestGraph from "./GuestGraph";
 
 const MAX_VALUE= 24;
 
@@ -9,16 +11,27 @@ function RedLine(props) {
     const [cps,setCps] = useState([]);
     const [res,setRes] = useState(0);
 
-    return <div style={{margin: 16}} className='flex center'>
-        {!!res&&<div>{res}</div>}
-        <div className='flex-y'>
-            <Button type='primary' onClick={cpDeal}>点击进行交互</Button>
-            <Button type='primary' onClick={calculateRes}>结束交互，计算结果</Button>
+    return <div className='flex-y redLine fill'>
+        <div className="redLine_staff flex">
+            <StaffArea data={staffs}/>
+            <StaffArea data={rivalStaffs} isRival={true}/>
         </div>
-        <StaffArea data={staffs}/>
-        <StaffArea data={rivalStaffs} isRival={true}/>
-        {/*<StaffCard data={staffs[0]}/>*/}
-        {/*<GuestCard data={guests[0]}/>*/}
+
+        <div className="redLine_control flex">
+            <div className='flex center'>客户区域</div>
+
+            <div className="redLine_opera flex-y center">
+                <div className="flex center">
+                    <GuestGraph/>
+                </div>
+
+                <div className='flex-y'>
+                    <Button type='primary' style={{width:132}} onClick={cpDeal}>点击进行交互</Button>
+                    <Button type='primary' style={{width:132}} onClick={calculateRes}>结束交互，计算结果</Button>
+                    {!!res&&<div>{res}</div>}
+                </div>
+            </div>
+        </div>
     </div>;
 
     function cpDeal() {
