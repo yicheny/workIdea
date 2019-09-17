@@ -1,0 +1,29 @@
+@border-color:#daac22;
+
+.guest_list {
+  border: 2px solid @border-color;
+  background: rgba(0, 0, 0, 0.20);
+  user-select: none;
+
+  > :not(:last-child) {
+    border-bottom: 2px solid @border-color;
+  }
+}
+
+.guest_item {
+  font-size: 21px;
+  font-weight: 500;
+  color: #fff;
+  /*> :not(:last-child){
+    border-right: 2px solid @border-color;
+  }*/
+
+  .guest_cell {
+    display: inline-block;
+    padding: 0 6px;
+    width: 120px;
+    line-height: 56px;
+    border-right: 2px solid @border-color;
+    text-align: center;
+  }
+}

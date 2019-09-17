@@ -5,6 +5,7 @@ import {guests} from "./redLineData/GenGuestData";
 import {Button} from "../../../../component";
 import StaffArea from "./redLineComponent/staffArea";
 import GuestGraph from "./redLineComponent/GuestGraph";
+import GuestList from "./redLineComponent/GuestList";
 
 const MAX_VALUE= 24;
 
@@ -19,7 +20,9 @@ function RedLine(props) {
         </div>
 
         <div className="redLine_control flex">
-            <div className='flex center'>客户区域</div>
+            <div className=''>
+                <GuestList data={guests}/>
+            </div>
 
             <div className="redLine_opera flex-y center">
                 <div className="flex center">
