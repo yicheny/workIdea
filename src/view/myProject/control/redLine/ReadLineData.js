@@ -57,6 +57,16 @@ export const staffs = [
     }
 ];
 
+export const rivalStaffs = [
+    {
+        name:'对手员工1号',
+        looks:13,
+        skill:14,
+        spirit:12,
+        // talent:[]
+    },
+];
+
 export const guests = [
     {
         name:'客人1号',

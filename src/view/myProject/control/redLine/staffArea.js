@@ -1,22 +1,31 @@
 import React, {useState} from 'react';
 import './StaffArea.less'
 import StaffCard from "./StaffCard";
-import {Button} from "../../../../component";
+import {mergeCn} from "../../../../utils/publicFun";
 
 function StaffArea(props) {
     const [modal,setModal] = useState(false);
     const [curStaff,setCurStaff] = useState(props.data[0]);
 
-    return <div className='flex-y center'>
-        <StaffCard data={curStaff}/>
-        <Button type='primary' onClick={()=>setModal(true)}>切换员工</Button>
+    return <div className={cnFor()}>
+        <StaffCard onClick={switchStaff} data={curStaff} isRival={props.isRival}/>
         {modal && <StaffModal data={props.data} setCurStaff={setCurStaff} close={close}/>}
     </div>;
 
+    function switchStaff() {
+        if(props.isRival) return;
+        setModal(true)
+    }
     function close() {
         setModal(false)
     }
+    function cnFor() {
+        return mergeCn('flex-y center',props.isRival&&'rival')
+    }
 }
+StaffArea.defaultProps={
+    isRival:false
+};
 
 function StaffModal(props) {
     return <div className='staff_modal flex center'>

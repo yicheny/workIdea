@@ -1,4 +1,9 @@
 .staff{
+  &.rival{
+    .staff_name{
+      color:red;
+    }
+  }
   margin:16px;
   padding:12px;
   width:210px;
@@ -7,14 +12,15 @@
   background: #fff;
   box-shadow: 0 7px 24px rgba(0, 0, 0, 0.07);
   user-select: none;
+  cursor:pointer;
 
   &_name{
-    font-size: 21px;
+    font-size: 24px;
     color:#40a9ff;
     font-weight: 600;
   }
   >:not(.staff_name){
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 500;
   }
 }
