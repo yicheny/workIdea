@@ -8,6 +8,7 @@ function CssTestHome(props) {
             <Link to='/cssTest/table1'>Table1-一列固定，其余平分</Link>
             <Link to='/cssTest/overturn'>卡片翻转</Link>
             <Link to='/cssTest/move'>指哪走哪</Link>
+            <Link to='/cssTest/bounce'>弹跳旋转</Link>
         </div>
     );
 }

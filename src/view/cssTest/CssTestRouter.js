@@ -5,6 +5,7 @@ import CssTestHome from "./CssTestHome";
 import Table1 from "./layout/table1";
 import Overturn from "./css3/Overturn";
 import Move from "./css3/Move";
+import Bounce from "./css3/Bounce";
 
 function CssTestRouter(props) {
     return <Switch>
@@ -12,6 +13,7 @@ function CssTestRouter(props) {
         <Route path='/cssTest/table1' component={Table1}/>
         <Route path='/cssTest/overturn' component={Overturn}/>
         <Route path='/cssTest/move' component={Move}/>
+        <Route path='/cssTest/bounce' component={Bounce}/>
         <Route component={CssTestHome}/>
     </Switch>
 }

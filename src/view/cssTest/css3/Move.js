@@ -4,7 +4,7 @@ import './Move.less';
 function Move(props) {
     const guestRef = createRef();
 
-    return <div className="move" onClick={handleClick}>
+    return <div className="move fill" onClick={handleClick}>
             <div className="move_guest" ref={guestRef}> </div>
     </div>;
 
