@@ -1,8 +1,7 @@
 import React,{useState} from 'react';
 import {staffs, guests} from "./ReadLineData";
 import {Button} from "../../../../component";
-import StaffCard from "./StaffCard";
-import GuestCard from "./GuestCard";
+import StaffArea from "./staffArea";
 
 function RedLine(props) {
     const [cps,setCps] = useState([]);
@@ -14,8 +13,9 @@ function RedLine(props) {
             <Button type='primary' onClick={cpDeal}>点击进行交互</Button>
             <Button type='primary' onClick={calculateRes}>结束交互，计算结果</Button>
         </div>
-        <StaffCard data={staffs[0]}/>
-        <GuestCard data={guests[0]}/>
+        <StaffArea data={staffs}/>
+        {/*<StaffCard data={staffs[0]}/>*/}
+        {/*<GuestCard data={guests[0]}/>*/}
     </div>;
 
     function cpDeal() {
