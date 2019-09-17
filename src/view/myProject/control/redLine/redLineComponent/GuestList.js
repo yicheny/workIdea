@@ -1,18 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './GuestList.less';
-import {compare, mergeCn} from "../../../../../utils/publicFun";
+import {mergeCn} from "../../../../../utils/publicFun";
 
 function GuestList(props) {
-    const [curGuest,setCurGuest] = useState(props.data[0]);
-
     return <div className='guest_list'>
         <GuestItem data={genTitData()}/>
-        {props.data.map((el,i)=><GuestItem data={el} key={i} isCurGuest={isCurGuest(el)}/>)}
+        {props.data.map((el,i)=><GuestItem data={el} key={i} isCurGuest={i===0}/>)}
     </div>;
-
-    function isCurGuest(guest) {
-        return compare(curGuest,guest,['name']);
-    }
 
     function genTitData() {
         return {
