@@ -75,3 +75,7 @@ export function delArrItem(array,item){
     return array;
 }
 
+//获取对象指定项组成的新对象
+export function pick(obj,) {
+
+}
