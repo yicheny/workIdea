@@ -3,6 +3,7 @@ import './RedLine.less';
 import {rivalStaffs} from "./redLineData/GenRivalData";
 import {guests} from "./redLineData/GenGuestData";
 import {staffs} from "./redLineData/GenMyStaffData";
+import {orderBy} from "../../../../utils/publicFun";
 import {Button} from "../../../../component";
 import StaffArea from "./redLineComponent/staffArea";
 import GuestGraph from "./redLineComponent/GuestGraph";
@@ -44,9 +45,14 @@ function RedLine(props) {
     </div>;
 
     function cpDeal(e) {
-        console.log(myStaff, rivalStaff);
+        selectStaff([myStaff,rivalStaff]);
+        // console.log(myStaff, rivalStaff);
         // guestMove();
         // setCps(getNewCps());
+
+        function selectStaff(staffs) {
+            return orderBy(staffs, 'looks')[0];
+        }
 
         function guestMove() {
             const x = -20;

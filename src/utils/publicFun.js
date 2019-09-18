@@ -1,20 +1,20 @@
 //延时——需搭配异步使用
 export function sleep(ms) {
-    return new Promise(reslove=>setTimeout(reslove,ms))
+    return new Promise(reslove => setTimeout(reslove, ms))
 }
 
 //用于合并类名【这里指标签类名】
 export function mergeCn(...cns) {
-    return cns.filter(el=>!!el).join(' ')
+    return cns.filter(el => !!el).join(' ')
 }
 
 //将数组打乱顺序——洗牌/抽牌算法
 export function shuffle(array) {
     const newArray = [];
 
-    while(array.length){
-        const index = Math.random()*array.length;
-        const item = array.splice(index,1)[0];
+    while (array.length) {
+        const index = Math.random() * array.length;
+        const item = array.splice(index, 1)[0];
         newArray.push(item);
     }
 
@@ -25,25 +25,25 @@ export function shuffle(array) {
 export function setObj(obj) {
     const keys = Object.keys(obj);
     const values = Object.values(obj);
-    return [keys,values]
+    return [keys, values]
 }
 
 //返回一个数组中所有值为真值的变量名
-export function getName(names={}) {
+export function getName(names = {}) {
     const data = {...names};
-    const [keys,values] = setObj(data);
-    let res = keys.filter((el,i)=>values[i]);
-    if(res.length) return res;
+    const [keys, values] = setObj(data);
+    let res = keys.filter((el, i) => values[i]);
+    if (res.length) return res;
     return [''];
 }
 
 //数组切片
-export function chunk(arr,size=1) {
+export function chunk(arr, size = 1) {
     let oriArr = [...arr],
         newArr = [];
 
-    while(oriArr.length){
-        newArr.push(oriArr.splice(0,size))
+    while (oriArr.length) {
+        newArr.push(oriArr.splice(0, size))
     }
     return newArr;
 }
@@ -51,35 +51,53 @@ export function chunk(arr,size=1) {
 //随机返回数组中的一个值
 export function arrRandom(array) {
     if (!array.length) return null;
-    const index = Math.floor(Math.random()*array.length);
+    const index = Math.floor(Math.random() * array.length);
     return array[index];
 }
 
 //返回数组最后一项
 export function last(array) {
-    return array[array.length-1];
+    return array[array.length - 1];
 }
 
 //两个对象针对指定属性进行对比，全部相同时才返回true
-export function compare(o1,o2,keys) {
-    if(!o1 || !o2) return false;
-    return keys.every((el)=> o1[el]===o2[el]);
+export function compare(o1, o2, keys) {
+    if (!o1 || !o2) return false;
+    return keys.every((el) => o1[el] === o2[el]);
 }
 
 //删除数组指定项--不会改变原数组
-export function delArrItem(array,item){
+export function delArrItem(array, item) {
     array = [...array];
 
-    if(!array.includes(item)) return array;
-    array.splice(array.indexOf(item),1);
+    if (!array.includes(item)) return array;
+    array.splice(array.indexOf(item), 1);
     return array;
 }
 
 //获取对象指定项组成的新对象
-export function pick(obj,keys) {
+export function pick(obj, keys) {
     const res = {};
-    keys.forEach((key)=>{
+    keys.forEach((key) => {
         res[key] = obj[key]
     });
     return res;
+}
+
+//数组对象按指定项排序
+//desc-降序【默认】,asc-升序
+export function orderBy(list, key, order = 'desc') {
+    list = [...list];
+
+    list.sort((a, b) => {
+        if (order === 'desc') {
+            return b[key] - a[key];
+        }
+        if (order === 'asc') {
+            return a[key] - b[key];
+        }
+        return console.err('参数order传入错误')
+    });
+
+    return list;
 }
