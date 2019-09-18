@@ -1,7 +1,7 @@
 import React, {useEffect, useState, createRef} from 'react';
 import './StaffArea.less'
 import StaffCard from "./StaffCard";
-import {mergeCn} from "../../../../../utils/publicFun";
+import {mergeCn, pick} from "../../../../../utils/publicFun";
 
 function StaffArea(props) {
     const [modal,setModal] = useState(false);
@@ -9,8 +9,7 @@ function StaffArea(props) {
     const staffRef = createRef();
 
     useEffect(()=>{
-        getRefInfo();
-        props.setStaff(curStaff);
+        props.setStaff(Object.assign(curStaff,getRefInfo()));
     },[curStaff]);
 
     return <div className={cnFor()}>
@@ -29,7 +28,8 @@ function StaffArea(props) {
         return mergeCn('staff_area flex-y center',props.isRival?'rival':'my')
     }
     function getRefInfo() {
-        console.dir(staffRef.current);
+        // console.log('pick',pick(staffRef.current, ['offsetLeft', 'offsetTop', 'clientWidth', 'clientHeight']));
+        return pick(staffRef.current, ['offsetLeft', 'offsetTop', 'clientWidth', 'clientHeight']);
     }
 }
 StaffArea.defaultProps={
