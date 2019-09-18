@@ -2,14 +2,14 @@ import {compare} from "./publicFun";
 
 export function dateSymFor(date,sym='',scope='day') {
     const {year,month,day,hour,minute,sec} = date;
-    return scopeStragegy(scope);
+    return scopeStrategy(scope);
 
-    function scopeStragegy(key) {
-        const scopeStragegyMap = {
+    function scopeStrategy(key) {
+        const scopeStrategyMap = {
             day:setDateUnit([year,month,day]),
             sec:setDateUnit([hour,minute,sec])
         };
-        return scopeStragegyMap[key]
+        return scopeStrategyMap[key];
 
         function setDateUnit(list) {
             const date = list.reduce((acc, el) => `${acc}${addZeroFormat(el)}${sym}`, '');
@@ -39,8 +39,6 @@ export function nowDateItemFor() {
     const minute = date.getMinutes();
     const sec = date.getSeconds();
     return {year,month,day,hour,minute,sec};
-
-
 }
 
 export function weekDayFor(date){
@@ -51,11 +49,11 @@ export function weekDayFor(date){
 
 export function changeMonth(date,operate='add'){
     date = {...date};
-    const changeMonthStragegy = {
+    const changeMonthStrategy = {
         'add':addOperate,
         'sub': subtractOperate
     };
-    changeMonthStragegy[operate]();
+    changeMonthStrategy[operate]();
     return date;
 
     function addOperate() {
@@ -77,11 +75,11 @@ export function changeMonth(date,operate='add'){
 //这里与changeMonth部分逻辑重复，待重构
 export function changeYear(date,operate='add') {
     date = {...date};
-    const changeMonthStragegy = {
+    const changeMonthStrategy = {
         'add':addOperate,
         'sub': subtractOperate
     };
-    changeMonthStragegy[operate]();
+    changeMonthStrategy[operate]();
     return date;
 
     function addOperate() {
