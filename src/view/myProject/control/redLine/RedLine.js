@@ -4,7 +4,7 @@ import {rivalStaffs} from "./redLineData/GenRivalData";
 import {guests} from "./redLineData/GenGuestData";
 import {staffs} from "./redLineData/GenMyStaffData";
 import {orderBy} from "../../../../utils/publicFun";
-import {Button} from "../../../../component";
+import {Button, CountDown} from "../../../../component";
 import StaffArea from "./redLineComponent/staffArea";
 import GuestGraph from "./redLineComponent/GuestGraph";
 import GuestList from "./redLineComponent/GuestList";
@@ -20,6 +20,9 @@ function RedLine(props) {
     const guestRef = createRef();
 
     return <div className='flex-y redLine fill'>
+        <div className="redLine_countDown">
+            <CountDown time={10}/>
+        </div>
         <div className="redLine_staff flex">
             <StaffArea data={staffs} setStaff={setMyStaff}/>
             <StaffArea data={rivalStaffs} isRival={true} setStaff={setRivalStaff}/>
