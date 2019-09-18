@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Progress} from "../../../component";
-import {numFormat} from "../../../utils/format";
-import './CountDownProgress.less';
+import {Progress} from "../../component";
+import {numFormat} from "../../utils/format";
+import './CountDown.less';
 
-function CountDownProgress(props) {
+function CountDown(props) {
     const initTime = 20;
     const [time,setTime] = useState(initTime);
 
@@ -66,10 +66,4 @@ function CountDownProgress(props) {
     }
 }
 
-function CountDownProgressDis() {
-    return <Container>
-        <CountDownProgress/>
-    </Container>
-}
-
-export default CountDownProgressDis;
+export default CountDown;

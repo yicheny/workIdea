@@ -18,6 +18,7 @@ import {MenuM as _MenuM, MenuItemM as _MenuItemM} from './MenuM/MenuM';
 import {Radio as _Radio, RadioGroup as _RadioGroup} from "./Radio/Radio";
 import {CheckBox as _CheckBox, CheckBoxGroup as _CheckBoxGroup} from "./CheckBox/CheckBox";
 import _Progress from './Progress/Progress';
+import _CountDown from './CountDown/CountDown'
 
 export {_Container as Container};
 export {_Header as Header};
@@ -39,3 +40,4 @@ export {_MenuM as MenuM, _MenuItemM as MenuItemM};
 export {_Radio as Radio, _RadioGroup as RadioGroup};
 export {_CheckBox as CheckBox, _CheckBoxGroup as CheckBoxGroup};
 export {_Progress as Progress};
+export {_CountDown as CountDown};

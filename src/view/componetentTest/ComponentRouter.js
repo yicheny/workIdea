@@ -13,6 +13,7 @@ import CalendarWTest from "./control/CalendarWTest";
 import MenuMTest from "./control/MenuMTest";
 import RadioDemo from "./control/RadioDemo";
 import CheckBoxDemo from "./control/CheckBoxDemo";
+import CountDownDemo from "./control/CountDownDemo";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -28,6 +29,7 @@ function ComponentRouter(props) {
         <Route path='/component/menuM' component={MenuMTest}/>
         <Route path='/component/radio' component={RadioDemo}/>
         <Route path='/component/checkBox' component={CheckBoxDemo}/>
+        <Route path='/component/countDown' component={CountDownDemo}/>
         <Route component={ComponentHome}/>
     </Switch>
 

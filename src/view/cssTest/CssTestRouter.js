@@ -7,7 +7,6 @@ import Overturn from "./css3/Overturn";
 import Move from "./css3/Move";
 import Bounce from "./css3/Bounce";
 import MoveToEle from "./css3/MoveToEle";
-import CountDownProgress from "./css3/CountDownProgress";
 
 function CssTestRouter(props) {
     return <Switch>
@@ -17,7 +16,6 @@ function CssTestRouter(props) {
         <Route path='/cssTest/move' component={Move}/>
         <Route path='/cssTest/bounce' component={Bounce}/>
         <Route path='/cssTest/moveToEle' component={MoveToEle}/>
-        <Route path='/cssTest/countDownProgress' component={CountDownProgress}/>
         <Route component={CssTestHome}/>
     </Switch>
 }
