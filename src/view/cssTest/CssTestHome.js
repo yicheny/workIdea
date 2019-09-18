@@ -9,6 +9,7 @@ function CssTestHome(props) {
             <Link to='/cssTest/overturn'>卡片翻转</Link>
             <Link to='/cssTest/move'>指哪走哪</Link>
             <Link to='/cssTest/bounce'>弹跳旋转</Link>
+            <Link to='/cssTest/moveToEle'>移至指定元素位置</Link>
         </div>
     );
 }
