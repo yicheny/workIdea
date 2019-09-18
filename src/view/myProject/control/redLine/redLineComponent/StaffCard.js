@@ -20,23 +20,23 @@ function StaffCard(props) {
         return <span className={levelCnFor()}>{levelFor()}</span>;
 
         function levelFor() {
-            if(value===0) return 'N';
-            if(value>=1 && value<=3) return 'C';
-            if(value>=4 && value<=6) return 'C+';
-            if(value>=7 && value<=9) return 'B';
-            if(value>=10 && value<=12) return 'B+';
-            if(value>=13 && value<=15) return 'A';
-            if(value>=16 && value<=18) return 'A+';
-            if(value>=19 && value<=21) return 'S';
-            if(value>=22 && value<=24) return 'S+';
+            if(value>=0 && value<=999) return 'N';
+            if(value>=1000 && value<=1999) return 'C';
+            if(value>=2000 && value<=2999) return 'C+';
+            if(value>=3000 && value<=3999) return 'B';
+            if(value>=4000 && value<=4999) return 'B+';
+            if(value>=5000 && value<=5999) return 'A';
+            if(value>=6000 && value<=6999) return 'A+';
+            if(value>=7000 && value<=7999) return 'S';
+            if(value>=8000 && value<=9999) return 'S+';
         }
 
         function levelCnFor() {
             let levelCn = '';
 
-            if(value===0) levelCn='N';
-            if(value>=13 && value<=18) levelCn = 'A';
-            if(value>=19 && value<=24) levelCn='S';
+            if(value>0 && value<=999) levelCn='N';
+            if(value>=5000 && value<=6999) levelCn = 'A';
+            if(value>=7000 && value<=9999) levelCn='S';
 
             return mergeCn("staff_level",levelCn)
         }

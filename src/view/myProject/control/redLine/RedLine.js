@@ -1,13 +1,14 @@
 import React,{useState,createRef} from 'react';
 import './RedLine.less';
-import {staffs,rivalStaffs} from "./redLineData/ReadLineData";
+import {rivalStaffs} from "./redLineData/GenRivalData";
 import {guests} from "./redLineData/GenGuestData";
+import {staffs} from "./redLineData/GenMyStaffData";
 import {Button} from "../../../../component";
 import StaffArea from "./redLineComponent/staffArea";
 import GuestGraph from "./redLineComponent/GuestGraph";
 import GuestList from "./redLineComponent/GuestList";
 
-const MAX_VALUE= 24;
+const MAX_VALUE= 9999;
 
 function RedLine(props) {
     const [cps,setCps] = useState([]);
@@ -73,11 +74,11 @@ function RedLine(props) {
             }
             return acc;
         },0);
-        setRes(Math.round(total));
+        setRes(total);
 
 
         function gainRadioFor(value){
-            return value/MAX_VALUE;
+            return Math.round(value/MAX_VALUE);
         }
     }
 }
