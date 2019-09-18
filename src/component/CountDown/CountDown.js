@@ -4,8 +4,7 @@ import {numFormat} from "../../utils/format";
 import './CountDown.less';
 
 function CountDown(props) {
-    const initTime = 20;
-    const [time,setTime] = useState(initTime);
+    const [time,setTime] = useState(props.time);
 
     useEffect(()=>{
         const timeId = setInterval(()=>{
@@ -22,7 +21,7 @@ function CountDown(props) {
     </div>;
 
     function percentFor() {
-        return Math.round((time / initTime)*100);
+        return Math.round((time / props.time)*100);
     }
     function secToDate(date,prec='sec') {
         if(!check()) return null;
@@ -65,5 +64,8 @@ function CountDown(props) {
         }
     }
 }
+CountDown.defaultProps={
+    time:20,
+};
 
 export default CountDown;

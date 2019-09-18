@@ -3,7 +3,7 @@ import {CountDown,Container} from "../../../component";
 
 function CountDownDemo(props) {
     return <Container>
-        <CountDown/>
+        <CountDown time={30}/>
     </Container>
 }
 
