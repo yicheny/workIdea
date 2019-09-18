@@ -1,9 +1,9 @@
 export const rivalStaffs = [
     {
         name:'对手员工1号',
-        looks:3331,
-        skill:6452,
-        spirit:5232,
+        looks:5331,
+        skill:2452,
+        spirit:7232,
         // talent:[]
     },
     {

@@ -46,8 +46,6 @@ function RedLine(props) {
 
     function cpDeal(e) {
         guestMove();
-        // console.log(myStaff, rivalStaff);
-        // guestMove();
         // setCps(getNewCps());
 
         function selectStaff(staffs) {
@@ -58,10 +56,13 @@ function RedLine(props) {
             const [x1,y1] = coordinateFor(selectStaff([myStaff,rivalStaff]));
             const [x2,y2] = coordinateFor(guestRef.current);
             guestRef.current.style.transform = `translate(${x1-x2}px,${y1-y2}px)`;
-            // setTimeout(()=>{
-            //     guestRef.current.style.visibility = 'hidden';
-            // },1200);
+            // autoHidden();
 
+            function autoHidden() {
+                return setTimeout(()=>{
+                    guestRef.current.style.visibility = 'hidden';
+                },1200);
+            }
             function coordinateFor(box) {
                 const x1 = box.offsetLeft + (box.clientWidth/2);
                 const y1 = box.offsetTop + (box.clientHeight/2);
