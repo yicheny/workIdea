@@ -98,3 +98,7 @@ export function dateCompare(o1,o2) {
 //     const match = reg.exec(date);
 //     console.log(match);
 // }
+
+export function timestampFor() {
+    return new Date().getTime();
+}
