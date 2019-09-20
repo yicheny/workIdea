@@ -39,8 +39,8 @@ function RedLine(props) {
                 </div>
 
                 <div className='flex-y'>
-                    <Button type='primary' style={{width:132}} onClick={cpDeal}>点击进行交互</Button>
-                    <Button type='primary' style={{width:132}} onClick={calculateRes}>结束交互，计算结果</Button>
+                    <Button type='primary' onClick={cpDeal}>点击进行交互</Button>
+                    <Button type='primary' onClick={calculateRes}>结束交互，计算结果</Button>
                     {!!res&&<div>{res}</div>}
                 </div>
             </div>
