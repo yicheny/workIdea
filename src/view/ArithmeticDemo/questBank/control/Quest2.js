@@ -17,7 +17,7 @@ function Quest2(props) {
 
         strs.forEach((el, i) => {
             if (currentStrs.includes(el)) {
-                const index = currentStrs.indexOf(el);
+                const index = currentStrs.indexOf(el);//注意，这里的index和i并不是一个值
                 currentStrs.splice(0,index+1);
             }
             currentStrs.push(el);
