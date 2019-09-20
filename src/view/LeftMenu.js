@@ -13,6 +13,7 @@ function LeftMenu(props) {
         <MenuItemM icon='dingding' tit='CSS测试' url='/cssTest'/>
         <MenuItemM icon='ant-design' tit='my_project' url='/mProj'/>
         <MenuItemM icon='ant-design' tit='重构-改善代码既有设计' url='/recons'/>
+        <MenuItemM icon='codepen' tit='算法练习' url='/arithmetic'/>
         {/*<MenuItemM icon='dingding' tit='HugeSura项目测试' url='/hugeSura'/>*/}
     </MenuM>
 }
