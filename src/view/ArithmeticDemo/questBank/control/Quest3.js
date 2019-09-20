@@ -9,7 +9,7 @@ function Quest3(props) {
 
     </Container>;
 
-    //暴力法--速度和空间使用都很差
+    //中心扩散法--速度和空间使用较差
     function longestPalindrome(s) {
         let longestStr = '';
         for(let i=0;i<s.length;i++){
