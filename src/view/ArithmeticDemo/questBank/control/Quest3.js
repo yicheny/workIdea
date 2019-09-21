@@ -14,7 +14,7 @@ function Quest3(props) {
         let longestStr = '';
         for (let i = 0; i < s.length; i++) {
             const el = s[i];
-            // setLongest(el);
+            setLongest(el);
             check('even', el, i);
             check('odd', el, i);
         }
@@ -25,7 +25,7 @@ function Quest3(props) {
             let leftStr = leftStrFor();
             let rightStr = rightStrFor();
 
-            while (leftStr !== '' && leftStr === rightStr) {
+            while (leftStr !== undefined && leftStr === rightStr) {
                 currentStr = leftStr + currentStr + rightStr;
                 setLongest(currentStr);
                 index++;
@@ -34,12 +34,11 @@ function Quest3(props) {
             }
 
             function leftStrFor() {
-                if (type === 'even') return s.slice(i - index, i - index + 1);
-                if (type === 'odd') return s.slice(i - index - 1, i - index);
+                return type === 'even' ? s[i-index] : s[i - index - 1];
             }
 
             function rightStrFor() {
-                return s.slice(i + index + 1, i + index + 2);
+                return s[i + index + 1]
             }
         }
 
