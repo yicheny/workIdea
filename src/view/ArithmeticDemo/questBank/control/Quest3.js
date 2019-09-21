@@ -9,36 +9,40 @@ function Quest3(props) {
 
     </Container>;
 
-    //暴力法--速度和空间使用都很差
+    //中心扩散法--速度和空间使用都很一般
     function longestPalindrome(s) {
         let longestStr = '';
-        for(let i=0;i<s.length;i++){
+        for (let i = 0; i < s.length; i++) {
             const el = s[i];
-            setLongest(el);
-            check('even',el,i);
-            check('odd',el,i);
+            // setLongest(el);
+            check('even', el, i);
+            check('odd', el, i);
         }
-        function check(type='even',el,i) {
+
+        function check(type = 'even', el, i) {
             let index = 0;
-            let currentStr = type==='even'?'':el;
+            let currentStr = type === 'even' ? '' : el;
             let leftStr = leftStrFor();
             let rightStr = rightStrFor();
 
-            while(leftStr!=='' && leftStr === rightStr){
+            while (leftStr !== '' && leftStr === rightStr) {
                 currentStr = leftStr + currentStr + rightStr;
                 setLongest(currentStr);
                 index++;
                 leftStr = leftStrFor();
                 rightStr = rightStrFor();
             }
+
             function leftStrFor() {
-                if(type==='even') return s.slice(i-index,i-index+1);
-                if(type==='odd') return s.slice(i-index-1,i-index);
+                if (type === 'even') return s.slice(i - index, i - index + 1);
+                if (type === 'odd') return s.slice(i - index - 1, i - index);
             }
+
             function rightStrFor() {
-                return s.slice(i+index+1,i+index+2);
+                return s.slice(i + index + 1, i + index + 2);
             }
         }
+
         function setLongest(str) {
             if (str.length >= longestStr.length) {
                 longestStr = str;
