@@ -14,7 +14,7 @@ import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 import {setCombinKey} from "../utils/CombinKey";
 import {Message} from "../component";
 import RouterRouter from "./routerTest/RouterRouter";
-import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
+// import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 
 function MainPanel(props){
