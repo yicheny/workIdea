@@ -3,12 +3,14 @@ import React from "react";
 import './QuestItem.less';
 
 function QuestItem(props) {
-    const {tit, demo, des, memo, level} = props;
+    const {tit, demo, memo, level,children} = props;
 
     return <div className='questItem box'>
         <h3>{tit}</h3>
         <p className={`questItem_level_${level}`}>难度：{levelFor()}</p>
-        <p>{des}</p>
+        <div>
+            {children}
+        </div>
         {memo && <p style={{color: 'red'}}>备注：{memo}</p>}
         <Link to={`/arithmetic/questBank/${demo}`}>Demo</Link>
     </div>;
