@@ -12,6 +12,8 @@ function QuestBankHome(props) {
                    des='给定一个字符串 s，找到 s 中最长的回文子串'/>
         <QuestItem tit='4.整数反转' demo='4' level='C' memo='溢出返回0'
                    des='给出一个32位的有符号整数，为这个整数的每个数字进行翻转'/>
+        <QuestItem tit='5.回文数'  demo='5' level='C'
+                   des='判断一个整数是否是回文数，返回true/false'/>
     </Container>
 }
 

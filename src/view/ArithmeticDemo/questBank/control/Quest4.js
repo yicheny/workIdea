@@ -2,14 +2,14 @@ import React from 'react';
 import {Container} from "../../../../component";
 
 function Quest4(props) {
-    const x = 1534236469;
+    const x = -123;
 
     console.log(reverse(x));
     return <Container header='整数反转'>
 
     </Container>;
 
-    //解法1--速度极强，空间一般
+    //解法1--速度极强_S，空间一般_C
     //这里应用了十进制数字是位置型数码系统的特性，关键词：位置量
     function reverse(x) {
         const MAX = Math.pow(2,31);
