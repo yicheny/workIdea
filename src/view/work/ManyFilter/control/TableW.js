@@ -2,7 +2,7 @@ import React, {Children} from 'react';
 import './TableW.less';
 
 function Cell(props) {
-    const {data, index, style,convert,bind,width} = props;
+    const {data, index, style,convert,bind,width,align} = props;
     return <div className="tableW_cell" style={styleFor()}>
         {display()}
     </div>;
@@ -18,14 +18,16 @@ function Cell(props) {
     function styleFor() {
         return {
             ...style,
-            width: width + 'px'
+            width: width + 'px',
+            textAlign:align
         }
     }
 }
 
 Cell.defaultPorps = {
     style: {},
-    width:100
+    width:100,
+    align:'center'
 };
 
 function Column(props) {
