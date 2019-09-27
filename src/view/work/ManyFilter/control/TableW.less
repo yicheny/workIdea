@@ -1,0 +1,25 @@
+.tableW{
+  border:1px solid #e1e1e1;
+  &_header{
+    border-bottom:1px solid #e1e1e1;
+    font-weight: 700;
+  }
+  &_cell{
+    width:300px;
+    padding:0 12px;
+    line-height: 32px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  &_main{
+    >.tableW_row:not(:last-child){
+      border-bottom:1px solid #e1e1e1;
+    }
+  }
+  &_row{
+    >.tableW_cell{
+      border-right:1px solid #e1e1e1;
+    }
+  }
+}
