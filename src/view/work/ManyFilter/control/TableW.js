@@ -1,45 +1,62 @@
-import React,{Children} from 'react';
+import React, {Children} from 'react';
 import './TableW.less';
 
-function Column(props) {
-    const {bind,text} = props;
-    return <div></div>
+function Cell(props) {
+    const {data, index, style,convert,bind,width} = props;
+    return <div className="tableW_cell" style={styleFor()}>
+        {display()}
+    </div>;
+
+    function display() {
+        if (convert) return convert('v', data, index);
+
+        const value = data[bind];
+        if ([null, undefined].includes(value)) return '-';
+        return value;
+    }
+
+    function styleFor() {
+        return {
+            ...style,
+            width: width + 'px'
+        }
+    }
 }
 
-function TableW(props) {
-    const {data,children} = props;
+Cell.defaultPorps = {
+    style: {},
+    width:100
+};
 
-    console.log(headerFor());
-    const bindList = bindListFor();
+function Column(props) {
+    const {options} = props;
+    return <div className="tableW_row flex">
+        {options.map((item, i) => <Cell key={i} {...props} {...item}/>)}
+    </div>;
+}
+
+
+function TableW(props) {
+    const {data, children} = props;
+
     return <div className='tableW'>
         <div className="tableW_header tableW_row flex">
             {
-                headerFor().map((el,i) => <div key={i} className='tableW_cell'>{el}</div>)
+                optionsFor().map((el, i) => <Cell key={i} {...el} index={i} convert={()=><span>{el.text}</span>}/>)
             }
         </div>
         <div className="tableW_main">
-            {
-                data.map((el,i)=>{
-                    return <div className="tableW_row flex" key={i}>
-                        {
-                            bindList.map((bind,i2)=>{
-                                return <div className="tableW_cell" key={i2}>
-                                    {el[bind]}
-                                </div>
-                            })
-                        }
-                    </div>
-                })
-            }
+            {renderChildren()}
         </div>
     </div>;
 
-    function headerFor() {
-        return Children.map(children,child=>child.props.text)
+    function renderChildren() {
+        return data.map((el, i) => <Column key={i} data={el} index={i} options={optionsFor()}/>);
     }
-    function bindListFor() {
-        return Children.map(children,child=>child.props.bind)
+
+    function optionsFor() {
+        return Children.map(children, child => child.props)
     }
 }
 
-export {TableW,Column};
+export {TableW, Column};

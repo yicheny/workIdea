@@ -4,8 +4,8 @@ import Header from "../Header/Header";
 import {mergeCn} from "../../utils/publicFun";
 
 function Container (props){
-    let {className,header} = props;
-    const cn = mergeCn('x_container',className);
+    let {className,header,nopad} = props;
+    const cn = mergeCn('x_container',className,nopad&&'nopad');
 
     return (
         <div className={cn}>
