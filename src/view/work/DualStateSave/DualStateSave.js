@@ -1,19 +1,8 @@
 import React, {useState} from 'react';
-import {Container, Tabs, Input} from "../../component";
+import {Container, Tabs, Input} from "../../../component";
 
 function DualStateSave(props) {
     const [active,setActive] = useState('Tab1');
-   /* const showMap = {
-        Tab1:{
-            
-        },
-        Tab2:{
-            
-        },
-        Tab3:{
-            
-        },
-    };*/
     const tabData = [{
         id:'Tab1',
         text:"Tab1"

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom'
-import MonthShow from './MonthShow';
-import ManyFilter from './ManyFilter';
-import DualStateSave from "./DualStateSave";
+import MonthShow from './MonthShow/MonthShow';
+import ManyFilter from './ManyFilter/ManyFilter';
+import DualStateSave from "./DualStateSave/DualStateSave";
 import WorkHome from "./WorkHome";
 
 function WorkRouter(props) {

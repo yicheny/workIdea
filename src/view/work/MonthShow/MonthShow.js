@@ -1,7 +1,7 @@
 import React from "react";
 import _ from 'lodash';
-import {data} from "./data/data"
-import '../../asset/style/View/business/demo.less'
+import {data} from "./Data/data"
+import '../../../asset/style/View/business/demo.less'
 
 function ChangeDisplay(props) {
     const {v,max,min} = props;

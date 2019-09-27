@@ -1,6 +1,6 @@
 import React,{Fragment} from "react";
-import {Data} from './data/data2';
-import '../../asset/style/View/business/demo2.less';
+import {Data} from './Data/data';
+import '../../../asset/style/View/business/demo2.less';
 
 export default class ManyFilter extends React.Component{
     condSymMap = {
