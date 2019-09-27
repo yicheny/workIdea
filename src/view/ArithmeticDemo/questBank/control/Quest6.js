@@ -18,7 +18,6 @@ function Quest6(props) {
     return <Container header='有效的数独'/>;
 
     //速度极快_S,空间差_E
-    //代码太多了，想办法简化下...
     function isValidSudoku(board) {
         if (!boardCheck(board)) return false;
         if (!boardCheck(genVBoard())) return false;
@@ -60,18 +59,17 @@ function Quest6(props) {
 
         function boardCheck(board) {
             return board.every(item => isRepetition(item));
-        }
+            function isRepetition(array) {
+                array = array.filter(item => item !== '.');
+                const array2 = [];
 
-        function isRepetition(array) {
-            array = array.filter(item => item !== '.');
-            const array2 = [];
+                for (let i = 0; i < array.length; i++) {
+                    if (array2.includes(array[i])) return false;
+                    array2.push(array[i]);
+                }
 
-            for (let i = 0; i < array.length; i++) {
-                if (array2.includes(array[i])) return false;
-                array2.push(array[i]);
+                return true;
             }
-
-            return true;
         }
     }
 }

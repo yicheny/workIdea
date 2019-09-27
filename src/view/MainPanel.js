@@ -4,16 +4,16 @@ import '../asset/style/View/mainPanel.less';
 import LeftMenu from './LeftMenu';
 import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
-import ReactRouter from "./reactTest/ReactRouter";
-import ESRouter from './esTest/ESRouter';
-import ComponentRouter from "./componetentTest/ComponentRouter";
-import HttpRouter from "./httpTest/HttpRouter";
+import ReactRouter from "./reactDemo/ReactRouter";
+import ESRouter from './esDemo/ESRouter';
+import ComponentRouter from "./componetentDemo/ComponentRouter";
+import HttpRouter from "./httpDemo/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";
-import CssTestRouter from "./cssTest/CssTestRouter";
+import CssTestRouter from "./cssDemo/CssTestRouter";
 import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 import {setCombinKey} from "../utils/CombinKey";
 import {Message} from "../component";
-import RouterRouter from "./routerTest/RouterRouter";
+import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 
 function MainPanel(props){
