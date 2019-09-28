@@ -28,7 +28,7 @@ function MenuItemM(props) {
 function MenuM(props) {
     const [selected,setSelected] = useState(loadSelected());
 
-    return <div className='x_menuM flex-y' style={props.style}>
+    return <div className={cnFor()} style={props.style}>
         {renderChildren()}
     </div>;
 
@@ -43,10 +43,15 @@ function MenuM(props) {
     function loadSelected() {
         return sessionStorage.getItem(props.menuName) || props.selected
     }
+
+    function cnFor() {
+        return mergeCn('x_menuM flex-y',props.className)
+    }
 }
 
 MenuM.defaultProps = {
     style: {},
+    className:'',
     selected:''
 };
 

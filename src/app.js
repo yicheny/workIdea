@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, {PureComponent,Fragment} from 'react';
 import { Route } from 'react-router-dom';
 import MainPanel from './view/MainPanel';
 
-class App extends Component {
+class App extends PureComponent {
     render() {
-        return <div>
+        return <Fragment>
                     {/*<AppBar/>*/}
                     <Route component={MainPanel}/>
-            </div>
+            </Fragment>
     }
 }
 

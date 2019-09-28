@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import '../asset/style/View/mainPanel.less';
+import './mainPanel.less';
 import LeftMenu from './LeftMenu';
 import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
@@ -22,9 +22,9 @@ function MainPanel(props){
     const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
     setCombinKey([68,74],fn);//D J
 
-    return <div className='mainPanel'>
-        <LeftMenu className='mainPanel_leftMenu'/>
-        <div className="mainPanel_content">
+    return <div className='mainPanel' style={{'overflow':'hidden'}}>
+        <LeftMenu/>
+        <div className="mainPanel_content" style={{'overflow':'auto'}}>
             <Switch>
                 <Route path='/work' component={WorkRouter}/>
                 <Route path='/component' component={ComponentRouter}/>
