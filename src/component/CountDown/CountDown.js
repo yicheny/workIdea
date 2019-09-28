@@ -51,7 +51,7 @@ function CountDown(props) {
         function formatDate() {
             const formatStrategy = {
                 sec:()=>{
-                    return `${addZeroFormat(numFormat(date))}`
+                    return `${addZeroFormat(numFormat(date,'N2'))}`
                 },
                 min:()=>{
                     const min = Math.floor(date/60);

@@ -8,7 +8,8 @@ function Cell(props) {
     </div>;
 
     function display() {
-        if (convert) return convert('v', data, index);
+        // console.log('bind',data[bind]);
+        if (convert) return convert(data[bind], data, index);
 
         const value = data[bind];
         if ([null, undefined].includes(value)) return '-';
@@ -23,8 +24,8 @@ function Cell(props) {
         }
     }
 }
-
-Cell.defaultPorps = {
+Cell.defaultProps = {
+    data:{},
     style: {},
     width:100,
     align:'center'
@@ -48,13 +49,9 @@ function TableW(props) {
             }
         </div>
         <div className="tableW_main">
-            {renderChildren()}
+            {data.map((el, i) => <Column key={i} data={el} index={i} options={optionsFor()}/>)}
         </div>
     </div>;
-
-    function renderChildren() {
-        return data.map((el, i) => <Column key={i} data={el} index={i} options={optionsFor()}/>);
-    }
 
     function optionsFor() {
         return Children.map(children, child => child.props)
