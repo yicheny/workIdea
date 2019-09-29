@@ -14,20 +14,16 @@ function DualStateSave(props) {
         text:"Tab3"
     }];
 
-    return (
-        <div>
-            <Container>
-                <Tabs data={tabData} active={active} onClick={(v)=>setActive(v)}/>
+    return <Container>
+        <Tabs data={tabData} active={active} onClick={(v)=>setActive(v)}/>
 
-                <ul className="main">
-                    <li>姓名：<Input/></li>
-                    <li>年龄：<Input/></li>
-                    <li>性别：<Input/></li>
-                    <li>身高：<Input/></li>
-                </ul>
-            </Container>
-        </div>
-    );
+        <ul className="main">
+            <li>姓名：<Input/></li>
+            <li>年龄：<Input/></li>
+            <li>性别：<Input/></li>
+            <li>身高：<Input/></li>
+        </ul>
+    </Container>
 }
 
 export default DualStateSave;

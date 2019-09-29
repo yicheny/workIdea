@@ -31,7 +31,7 @@ Cell.defaultProps = {
     align:'center'
 };
 
-function Column(props) {
+function ColumnW(props) {
     const {options} = props;
     return <div className="tableW_row flex">
         {options.map((item, i) => <Cell key={i} {...props} {...item}/>)}
@@ -49,7 +49,7 @@ function TableW(props) {
             }
         </div>
         <div className="tableW_main">
-            {data.map((el, i) => <Column key={i} data={el} index={i} options={optionsFor()}/>)}
+            {data.map((el, i) => <ColumnW key={i} data={el} index={i} options={optionsFor()}/>)}
         </div>
     </div>;
 
@@ -58,4 +58,4 @@ function TableW(props) {
     }
 }
 
-export {TableW, Column};
+export {TableW, ColumnW};
