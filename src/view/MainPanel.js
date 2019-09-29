@@ -33,7 +33,7 @@ function MainPanel(props){
                 <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPatternRouter}/>
-                <Route path='/cssTest' component={CssTestRouter}/>
+                <Route path='/css' component={CssTestRouter}/>
                 <Route path='/mProj' component={myProjectRouter}/>
                 <Route path='/recons' component={ReconsitutionRouter}/>
                 <Route path='/arithmetic' component={ArithmeticDemo}/>

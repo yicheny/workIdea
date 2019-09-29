@@ -1,9 +1,15 @@
 .tableW{
   border-top:1px solid #e1e1e1;
-  border-bottom:1px solid #e1e1e1;
+  height:100%;
+
   &_header{
+    flex:1 0;
     font-weight: 700;
     background: #D1DBE8;
+  }
+  &_main{
+    flex-grow:1;
+    overflow: auto;
   }
   &_cell{
     padding:0 12px;
@@ -11,10 +17,6 @@
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
-  }
-  &_main{
-    >.tableW_row:not(:last-child){
-    }
   }
   &_row{
     >.tableW_cell{

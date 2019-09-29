@@ -42,7 +42,7 @@ function ColumnW(props) {
 function TableW(props) {
     const {data, children} = props;
 
-    return <div className='tableW'>
+    return <div className='tableW flex-y'>
         <div className="tableW_header tableW_row flex">
             {
                 optionsFor().map((el, i) => <Cell key={i} {...el} index={i} convert={()=><span>{el.text}</span>}/>)

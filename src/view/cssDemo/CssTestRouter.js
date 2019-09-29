@@ -10,12 +10,12 @@ import MoveToEle from "./css3/MoveToEle";
 
 function CssTestRouter(props) {
     return <Switch>
-        <Route path='/cssTest/layout1' component={Layout1}/>
-        <Route path='/cssTest/table1' component={Table1}/>
-        <Route path='/cssTest/overturn' component={Overturn}/>
-        <Route path='/cssTest/move' component={Move}/>
-        <Route path='/cssTest/bounce' component={Bounce}/>
-        <Route path='/cssTest/moveToEle' component={MoveToEle}/>
+        <Route path='/css/layout1' component={Layout1}/>
+        <Route path='/css/table1' component={Table1}/>
+        <Route path='/css/overturn' component={Overturn}/>
+        <Route path='/css/move' component={Move}/>
+        <Route path='/css/bounce' component={Bounce}/>
+        <Route path='/css/moveToEle' component={MoveToEle}/>
         <Route component={CssTestHome}/>
     </Switch>
 }
