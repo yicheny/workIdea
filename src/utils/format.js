@@ -10,3 +10,11 @@ export function numFormat(value,format='N2') {
     }
 }
 
+export function N2(value){
+    return numFormat(value,'N2')
+}
+
+export function N4(value){
+    return numFormat(value,'N4')
+}
+

@@ -36,7 +36,7 @@ function Login({history}){
 
     const loginClick = ()=>{
         if (user==='123123'&&password==='321321'){
-            return history.push({pathname:'/component'});
+            return history.push({pathname:'/work'});
         }
         setLoginMode('update');
     };
