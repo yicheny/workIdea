@@ -96,8 +96,17 @@ export function orderBy(list, key, order = 'desc') {
         if (order === 'asc') {
             return a[key] - b[key];
         }
-        return console.err('参数order传入错误')
+        return console.error('参数order传入错误')
     });
 
     return list;
+}
+
+//返回一个由忽略属性之外属性所组成的对象
+export function omit(obj,keys=[]){
+    const res = {};
+    Object.keys(obj).forEach((key)=>{
+        if(!keys.includes(key)) return res[key] = obj[key];
+    });
+    return res;
 }
