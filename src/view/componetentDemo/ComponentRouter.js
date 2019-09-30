@@ -14,6 +14,7 @@ import MenuMTest from "./control/MenuMTest";
 import RadioDemo from "./control/RadioDemo";
 import CheckBoxDemo from "./control/CheckBoxDemo";
 import CountDownDemo from "./control/CountDownDemo";
+import RateDemo from "./control/RateDemo";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -30,6 +31,7 @@ function ComponentRouter(props) {
         <Route path='/component/radio' component={RadioDemo}/>
         <Route path='/component/checkBox' component={CheckBoxDemo}/>
         <Route path='/component/countDown' component={CountDownDemo}/>
+        <Route path='/component/rate' component={RateDemo}/>
         <Route component={ComponentHome}/>
     </Switch>
 

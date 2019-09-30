@@ -21,6 +21,7 @@ import _Progress from './Progress/Progress';
 import _CountDown from './CountDown/CountDown';
 import {TableW as _TableW, ColumnW as _ColumnW} from './TableW/TableW';
 import _SetColor from './SetColor/SetColor';
+import _Rate from './Rate/Rate';
 
 export {_Container as Container};
 export {_Header as Header};
@@ -45,3 +46,4 @@ export {_Progress as Progress};
 export {_CountDown as CountDown};
 export {_TableW as TableW, _ColumnW as ColumnW};
 export {_SetColor as SetColor}
+export {_Rate as Rate}
