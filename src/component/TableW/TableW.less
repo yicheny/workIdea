@@ -6,13 +6,15 @@
     flex:1 0;
     font-weight: 700;
     background: #D1DBE8;
+    cursor: default;
   }
   &_main{
     flex-grow:1;
     overflow: auto;
   }
   &_cell{
-    padding:0 12px;
+    position:relative;
+    padding:0 4px;
     line-height: 32px;
     text-align: center;
     overflow: hidden;
@@ -22,6 +24,20 @@
     >.tableW_cell{
       border-right:1px solid #e1e1e1;
       border-bottom:1px solid #e1e1e1;
+    }
+  }
+  &_mark{
+    margin:0 2px;
+    width:16px;
+    >svg{
+      position:absolute;
+      top:50%;
+    }
+    .svg_arrow_up{
+      transform: rotate(180deg) translateY(70%);
+    }
+    .svg_arrow_down{
+      transform: translateY(-15%);
     }
   }
 }

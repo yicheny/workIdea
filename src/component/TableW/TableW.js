@@ -1,17 +1,19 @@
 import React, {Children} from 'react';
 import './TableW.less';
+import {omit} from "../../utils/publicFun";
+import {ArrowSvg} from "../../asset/svg/SVG";
 
 function Cell(props) {
-    const {data, index, style,convert,bind,width,align} = props;
-    return <div className="tableW_cell" style={styleFor()}>
-        {display()}
+    const {data, index, style,convert,bind,width,align,sortable} = props;
+    return <div className="tableW_cell flex" style={styleFor()}>
+        {renderValue()}
+        {sortable && renderMark()}
     </div>;
 
-    function display() {
-        // console.log('bind',data[bind]);
-        if (convert) return convert(data[bind], data, index);
-
+    function renderValue() {
         const value = data[bind];
+
+        if (convert) return convert(value, data, index);
         if ([null, undefined].includes(value)) return '-';
         return value;
     }
@@ -20,22 +22,37 @@ function Cell(props) {
         return {
             ...style,
             width: width + 'px',
-            textAlign:align
+            justifyContent:align
         }
+    }
+
+    function renderMark() {
+        return <div className="tableW_mark flex-y">
+            <ArrowSvg className='svg_arrow_up'/>
+            <ArrowSvg className='svg_arrow_down'/>
+        </div>
     }
 }
 Cell.defaultProps = {
     data:{},
     style: {},
     width:100,
-    align:'center'
+    align:'center',
+    sortable:false
 };
 
 function ColumnW(props) {
     const {options} = props;
+
     return <div className="tableW_row flex">
-        {options.map((item, i) => <Cell key={i} {...props} {...item}/>)}
+        {options.map((item, i) => {
+            return <Cell key={i} {...props} {...itemFilter(item)}/>
+        })}
     </div>;
+
+    function itemFilter(item) {
+        return omit(item,['sortable']);
+    }
 }
 
 

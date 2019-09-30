@@ -14,7 +14,7 @@ function ManyFilter(props) {
             <ColumnW width={240} align='left' bind='fundAdmin' text='管理机构' />
             <ColumnW width={80} align='left' bind='manager' text='基金经理' />
             <ColumnW width={80} align='left' bind='strategy' text='投资策略' />
-            <ColumnW width={100} align='center' bind='duration' text='成立年限(年)'/>
+            <ColumnW sortable width={100} align='center' bind='duration' text='成立年限(年)'/>
             <ColumnW width={80} align='right' bind='unitNetValue' text='最新净值'/>
             <ColumnW width={110} align='right' bind='pnlPctAll' text='自成立收益率' convert={N4}/>
             <ColumnW width={110} align='right' bind='volAll' text='自成立波动率' convert={N4}/>
