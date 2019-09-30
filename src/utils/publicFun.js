@@ -110,3 +110,15 @@ export function omit(obj,keys=[]){
     });
     return res;
 }
+
+//检测值的数据是否和预想的相同
+export function checkType(value,type){
+    let dataType = Object.prototype.toString.call(value);
+    dataType = dataType.slice(8,dataType.length-1);
+    return type===dataType;
+}
+
+//检测值是否是函数
+export function isFunction(value){
+    return checkType(value,'Function')
+}
