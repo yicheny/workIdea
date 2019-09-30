@@ -1,11 +1,11 @@
 import React, {Children} from 'react';
 import './TableW.less';
-import {omit} from "../../utils/publicFun";
+import {mergeCn, omit} from "../../utils/publicFun";
 import {ArrowSvg} from "../../asset/svg/SVG";
 
 function Cell(props) {
     const {data, index, style,convert,bind,width,align,sortable} = props;
-    return <div className="tableW_cell flex" style={styleFor()}>
+    return <div className={cnFor()} style={styleFor()}>
         {renderValue()}
         {sortable && renderMark()}
     </div>;
@@ -24,6 +24,10 @@ function Cell(props) {
             width: width + 'px',
             justifyContent:align
         }
+    }
+
+    function cnFor() {
+        return mergeCn("tableW_cell flex",sortable&&"tableW_cell_sort")
     }
 
     function renderMark() {
