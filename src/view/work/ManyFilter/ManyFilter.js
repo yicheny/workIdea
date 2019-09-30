@@ -2,7 +2,7 @@ import React from "react";
 import {condData} from './data/CondData';
 import {data} from './data/Data';
 import '../../../asset/style/View/business/demo2.less';
-import {Container,TableW,ColumnW,SetColor} from "../../../component";
+import {Container,TableW,ColumnW,SetColor,Rate} from "../../../component";
 import {N4} from "../../../utils/format";
 
 function ManyFilter(props) {
@@ -21,7 +21,7 @@ function ManyFilter(props) {
             <ColumnW sortable width={118} align='right' bind='sharpeAll' text='自成立夏普比率' convert={v=>SetColor(v,N4(v))}/>
             <ColumnW sortable width={110} align='right' bind='pnlPctY1' text='近一年收益率' convert={v=>SetColor(v,N4(v))}/>
             <ColumnW sortable width={110} align='right' bind='volY1' text='近一年波动率' convert={v=>SetColor(v,N4(v))}/>
-            <ColumnW sortable width={120} align='center' bind='overallPerf' text='综合能力'/>
+            <ColumnW sortable width={120} align='center' bind='overallPerf' text='综合能力' convert={v=><Rate value={v} size={20}/>}/>
         </TableW>
     </Container>
 }

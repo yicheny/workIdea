@@ -7,13 +7,13 @@ function Rate(props) {
         {
             Array.from(Array(5)).map((el,i)=>{
                 if(i<value) return <Icon key={i} type={type} size={size} color={color}/>;
-                return <Icon key={i} type={type} size={size}/>
+                return <Icon key={i} type={type} size={size} color='#d3d3d3'/>
             })
         }
     </div>
 }
 Rate.defaultProps={
-    value:2,
+    value:0,
     size:24,
     color:'#1890ff',
     type:'star'
