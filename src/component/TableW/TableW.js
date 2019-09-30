@@ -1,6 +1,6 @@
-import React, {Children} from 'react';
+import React, {Children,isValidElement,useState} from 'react';
 import './TableW.less';
-import {mergeCn, omit} from "../../utils/publicFun";
+import {mergeCn, omit, isFunction} from "../../utils/publicFun";
 import {ArrowSvg} from "../../asset/svg/SVG";
 
 function Cell(props) {
@@ -12,10 +12,14 @@ function Cell(props) {
 
     function renderValue() {
         const value = data[bind];
-
-        if (convert) return convert(value, data, index);
+        if(convert) return renderConvert();
         if ([null, undefined].includes(value)) return '-';
         return value;
+
+        function renderConvert() {
+            if(isFunction(convert)) return convert(value, data, index);
+            if(isValidElement(convert)) return convert;
+        }
     }
 
     function styleFor() {
@@ -61,16 +65,19 @@ function ColumnW(props) {
 
 
 function TableW(props) {
+    const [sort,setSort] = useState(props.sort);
     const {data, children} = props;
 
     return <div className='tableW flex-y'>
         <div className="tableW_header tableW_row flex">
             {
-                optionsFor().map((el, i) => <Cell key={i} {...el} index={i} convert={()=><span>{el.text}</span>}/>)
+                optionsFor().map((el, i) => {
+                    return <Cell key={i} {...el} index={i} convert={<span>{el.text}</span>} setSort={setSort}/>
+                })
             }
         </div>
         <div className="tableW_main">
-            {data.map((el, i) => <ColumnW key={i} data={el} index={i} options={optionsFor()}/>)}
+            {data.map((el, i) => <ColumnW sort={sort} key={i} data={el} index={i} options={optionsFor()}/>)}
         </div>
     </div>;
 
@@ -78,5 +85,11 @@ function TableW(props) {
         return Children.map(children, child => child.props)
     }
 }
+TableW.defaultProps={
+    sort:{
+        column:null,
+        direction:null
+    }
+};
 
 export {TableW, ColumnW};
