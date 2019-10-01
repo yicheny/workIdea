@@ -122,3 +122,14 @@ export function checkType(value,type){
 export function isFunction(value){
     return checkType(value,'Function')
 }
+
+//返回一个 可以循环返回数组项的函数
+export function genListCyclic() {
+    let count = 0;
+    return function (list) {
+        const len = list.length;
+        const index = count%len;
+        count++;
+        return list[index]
+    }
+}
