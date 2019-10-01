@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './FriedGoldenFlower.less';
 import {Container} from "../../../component";
-import {crePkCards} from "../../../utils/pkFun";
+import {crePkCards} from "../../../utils/genPk";
 import {chunk} from '../../../utils/publicFun';
 import Deck from "./PKSrc/Deck";
 import MyCards from "./PKSrc/MyCards";

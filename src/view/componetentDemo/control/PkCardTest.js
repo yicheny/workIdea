@@ -2,7 +2,7 @@ import React,{useReducer} from 'react';
 import './PkCardTest.less';
 import {Container} from "../../../component";
 import PkCard from "../../../component/PkCard/PkCard";
-import {crePkCards} from "../../../utils/pkFun";
+import {crePkCards} from "../../../utils/genPk";
 
 const cards = crePkCards({isRandom:true});
 
