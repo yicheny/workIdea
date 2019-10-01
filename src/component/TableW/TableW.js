@@ -1,7 +1,9 @@
 import React, {Children,isValidElement,useState} from 'react';
 import './TableW.less';
-import {mergeCn, omit, isFunction, orderBy} from "../../utils/publicFun";
+import {mergeCn, omit, isFunction, orderBy,genListCyclic} from "../../utils/publicFun";
 import {ArrowSvg} from "../../asset/svg/SVG";
+
+const cyclicDire = genListCyclic();
 
 function Cell(props) {
     const {data, index, style,convert,bind,width,align,sortable,sort,setSort} = props;
@@ -23,8 +25,7 @@ function Cell(props) {
             function directionFor() {
                 const {direction} = sort;
                 if([null,undefined].includes(direction)) return 'desc';
-                if(direction==='desc') return 'asc';
-                if(direction==='asc') return 'desc';
+                return cyclicDire(['asc', 'desc'])
             }
         }
     }
