@@ -111,16 +111,26 @@ export function omit(obj,keys=[]){
     return res;
 }
 
-//检测值的数据是否和预想的相同
-export function checkType(value,type){
+//返回数据类型
+export function typeFor(value) {
     let dataType = Object.prototype.toString.call(value);
     dataType = dataType.slice(8,dataType.length-1);
-    return type===dataType;
+    return dataType;
+}
+
+//检测数据类型是否和预想的相同
+function checkType(value,typeList){
+    return typeList.includes(typeFor(value));
 }
 
 //检测值是否是函数
 export function isFunction(value){
-    return checkType(value,'Function')
+    return checkType(value,['Function'])
+}
+
+//检测值是否是对象
+export function isObject(value) {
+    return checkType(value,['Null','Function','Object','Array']);
 }
 
 //返回一个 可以循环返回数组项的函数
@@ -132,4 +142,18 @@ export function genListCyclic() {
         count++;
         return list[index]
     }
+}
+
+//浅拷贝
+export function clone(o) {
+    const res = {};
+    for(let key in o){
+        res[key] = o[key];
+    }
+    return res;
+}
+
+//深拷贝
+export function cloneDeep() {
+
 }
