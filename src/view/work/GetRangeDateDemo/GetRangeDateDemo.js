@@ -3,11 +3,11 @@ import {Container} from "../../../component";
 
 function GetRangeDateDemo(props) {
     return <Container header='GetRangeDateDemo'>
-        {GetRangeDate(0)}
-        {/*{GetRangeDate(-1)}*/}
-        {/*{GetRangeDate(+1)}*/}
-        {/*{GetRangeDate(+12)}*/}
-        {/*{GetRangeDate(-12)}*/}
+        <div>{GetRangeDate(0)}</div>
+        <div>{GetRangeDate(+1)}</div>
+        <div>{GetRangeDate(+12)}</div>
+        <div>{GetRangeDate(-1)}</div>
+        <div>{GetRangeDate(-12)}</div>
     </Container>;
 
     function GetRangeDate(skip) {
@@ -16,14 +16,12 @@ function GetRangeDateDemo(props) {
             day = date.getDate(),
             month = date.getMonth()+1;
 
-        if(skip>0){
+        if(skip!==0){
             year = year + Math.floor(skip/12);
             month = (month+skip)%12;
-            console.log(year, month);
-        }
-
-        if(skip<0){
-
+            if(month<0) {
+                month=month+12;
+            }
         }
 
         return `${addZero(year)}-${addZero(month)}-${addZero(day)}`;
