@@ -18,6 +18,7 @@ function ComponentHome(props) {
             <Link to='/component/checkBox'>CheckBox</Link>
             <Link to='/component/CountDown'>倒计时CountDown</Link>
             <Link to='/component/rate'>Rate</Link>
+            <Link to='/component/tableW'>TableW</Link>
         </div>
     );
 }
