@@ -133,6 +133,11 @@ export function isObject(value) {
     return checkType(value,['Null','Function','Object','Array']);
 }
 
+//检测值是否是数字
+export function isNumber(value) {
+    return checkType(value,['Number']);
+}
+
 //返回一个 可以循环返回数组项的函数
 export function genListCyclic() {
     let count = 0;
