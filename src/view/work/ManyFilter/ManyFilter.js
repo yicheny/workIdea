@@ -8,7 +8,7 @@ import {N4} from "../../../utils/format";
 function ManyFilter(props) {
     return <Container header='多重筛选' nopad>
         {/*<h2>共：{data.length}条</h2>*/}
-        <TableW data={data.slice(0,100)} sort={{column:'pnlPctAll', direction:'desc'}}>
+        <TableW data={data} sort={{column:'pnlPctAll', direction:'desc'}}>
             <ColumnW width={60} align='center' text='#' convert={(v, o, i) => <span>{i + 1}</span>} />
             <ColumnW width={300} align='left' bind='productName' text='名称'/>
             <ColumnW width={240} align='left' bind='fundAdmin' text='管理机构' />
