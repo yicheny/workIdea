@@ -7,6 +7,7 @@ import Quest3 from "./control/Quest3";
 import Quest4 from "./control/Quest4";
 import Quest5 from "./control/Quest5";
 import Quest6 from "./control/Quest6";
+import Quest7 from "./control/Quest7";
 
 function QuestBank(props) {
     return <Switch>
@@ -16,6 +17,7 @@ function QuestBank(props) {
         <Route path='/arithmetic/questBank/4' component={Quest4}/>
         <Route path='/arithmetic/questBank/5' component={Quest5}/>
         <Route path='/arithmetic/questBank/6' component={Quest6}/>
+        <Route path='/arithmetic/questBank/7' component={Quest7}/>
         <Route component={QuestBankHome}/>
     </Switch>
 }

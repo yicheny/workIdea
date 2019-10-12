@@ -34,8 +34,8 @@ function GetRangeDateDemo(props) {
     function GetRangeDate(skip) {
         let date = new Date(),
             year = date.getFullYear(),
-            // day = date.getDate(),
-            day = 31,
+            day = date.getDate(),
+            // day = 31,
             month = date.getMonth();
 
         if(skip!==0){
@@ -47,7 +47,7 @@ function GetRangeDateDemo(props) {
             day = dayFor();
         }
 
-        return `${addZero(year)}-${addZero(month+1)}-${addZero(day)}`;
+        return `${year}-${addZero(month+1)}-${addZero(day)}`;
 
         function addZero(num) {
             if(num<10) return '0'+num;

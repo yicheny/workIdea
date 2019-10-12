@@ -15,6 +15,9 @@ function QuestBankHome(props) {
             <p>2. 数字1-9一列只能出现一次</p>
             <p>3. 数字1-9在九宫格内只出现一次【每三行三列为九宫格，不重叠!】</p>
         </QuestItem>
+        <QuestItem tit='7.括号生成' demo='7' level='B'>
+            <p>给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</p>
+        </QuestItem>
     </Container>
 }
 
