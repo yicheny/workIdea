@@ -71,7 +71,7 @@ function CalendarW(props) {
 
             function monthCountListFor(){
                 const monthCountList = [31,28,31,30,31,30,31,31,30,31,30,31];
-                const leapYearMonthCountList = [31,28,31,30,31,30,31,31,30,31,30,31];
+                const leapYearMonthCountList = [31,29,31,30,31,30,31,31,30,31,30,31];
                 return isLeapYear(date.year) ? leapYearMonthCountList : monthCountList;
 
                 function isLeapYear(year) {
