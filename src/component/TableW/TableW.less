@@ -1,14 +1,13 @@
-.tableW{
-  border-top:1px solid #e1e1e1;
-  height:100%;
-  //overflow-y: hidden;
+@columnHeight:35px;
 
-  >.viewport{
-    height:calc(100% - 35px);
-    position:relative;
-  }
+.tableW{
+  height:100%;
+  position:relative;
+  overflow-y: hidden;
+  border-top:1px solid #e1e1e1;
 
   &_header{
+    width:100%;
     flex:1 0;
     font-weight: 700;
     background: #D1DBE8;
@@ -17,8 +16,9 @@
   }
   &_main{
     width: 100%;
+    margin-bottom:@columnHeight;
     position:relative;
-    top:35px;
+    top:@columnHeight;
     left:0;
     flex-grow:1;
     overflow: auto;

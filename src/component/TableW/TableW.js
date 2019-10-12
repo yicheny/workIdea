@@ -5,7 +5,7 @@ import './TableW.less';
 import {ArrowSvg} from "../../asset/svg/SVG";
 
 const cyclicDire = genListCyclic();
-const columnWidth = 35;
+const columnHeight = 35;
 
 function Cell(props) {
     const {data, index, style,convert,bind,width,align,sortable,sort,setSort} = props;
@@ -84,7 +84,7 @@ Cell.defaultProps = {
 function ColumnW(props) {
     const {options,index} = props;
 
-    return <div className="tableW_row flex" data-index={index} style={{top:`${(index)* columnWidth}px`}}>
+    return <div className="tableW_row flex" data-index={index} style={{top:`${(index)* columnHeight}px`}}>
         {options.map((item, i) => {
             return <Cell key={i} {...props} {...itemFilter(item)}/>
         })}
@@ -102,22 +102,20 @@ function TableW(props) {
     const {data, children} = props;
     const mainRef = createRef();
 
-    return <div className='tableW'>
-        <div className="viewport flex-y">
-            <div className="tableW_header tableW_row flex">
-                {
-                    optionsFor().map((el, i) => {
-                        return <Cell key={i} {...el} index={i} convert={<span>{el.text}</span>} sort={sort} setSort={setSort}/>
-                    })
-                }
-            </div>
-            <div className="tableW_main" ref={mainRef} onScroll={mainScrollHandle}>
-                <div className="tableW_main_viewport" style={{height:`${data.length * columnWidth}px`}}>
-                    {dataFor().map((el, i) => {
-                        if(i>renderIndex+29||i<renderIndex) return;
-                        return <ColumnW key={i} data={el} index={i} options={optionsFor()}/>
-                    })}
-                </div>
+    return <div className='tableW flex-y'>
+        <div className="tableW_header tableW_row flex">
+            {
+                optionsFor().map((el, i) => {
+                    return <Cell key={i} {...el} index={i} convert={<span>{el.text}</span>} sort={sort} setSort={setSort}/>
+                })
+            }
+        </div>
+        <div className="tableW_main" ref={mainRef} onScroll={mainScrollHandle}>
+            <div className="viewport" style={{height:`${data.length * columnHeight}px`}}>
+                {dataFor().map((el, i) => {
+                    if(i>renderIndex+29||i<renderIndex) return null;
+                    return <ColumnW key={i} data={el} index={i} options={optionsFor()}/>
+                })}
             </div>
         </div>
     </div>;
@@ -131,7 +129,7 @@ function TableW(props) {
         return orderBy(data,column,direction);
     }
     function mainScrollHandle() {
-        setRenderIndex(Math.floor(mainRef.current.scrollTop/columnWidth))
+        setRenderIndex(Math.floor(mainRef.current.scrollTop/columnHeight))
     }
 }
 TableW.defaultProps={

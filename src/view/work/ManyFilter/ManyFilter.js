@@ -6,8 +6,7 @@ import {Container,TableW,ColumnW,SetColor,Rate} from "../../../component";
 import {N4} from "../../../utils/format";
 
 function ManyFilter(props) {
-    return <Container header='多重筛选' nopad>
-        {/*<h2>共：{data.length}条</h2>*/}
+    return <Container header={`多重筛选——${data.length}条`} nopad>
         <TableW data={data} sort={{column:'pnlPctAll', direction:'desc'}}>
             <ColumnW width={60} align='center' text='#' convert={(v, o, i) => <span>{i + 1}</span>} />
             <ColumnW width={300} align='left' bind='productName' text='名称'/>
