@@ -113,7 +113,7 @@ function TableW(props) {
         <div className="tableW_main" ref={mainRef} onScroll={mainScrollHandle}>
             <div className="viewport" style={{height:`${data.length * columnHeight}px`}}>
                 {dataFor().map((el, i) => {
-                    if(i>renderIndex+29||i<renderIndex) return null;
+                    if(i>=renderIndex+40||i<renderIndex) return null;
                     return <ColumnW key={i} data={el} index={i} options={optionsFor()}/>
                 })}
             </div>
