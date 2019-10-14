@@ -55,7 +55,7 @@ export function arrRandom(array) {
     return array[index];
 }
 
-//返回数组最后一项
+//返回数组或字符串最后一项
 export function last(array) {
     return array[array.length - 1];
 }
