@@ -57,6 +57,7 @@ function Cell(props) {
     function styleFor() {
         return {
             ...style,
+            minWidth: width + 'px',
             width: width + 'px',
             justifyContent:align,
             color:colorFor()
