@@ -3,11 +3,10 @@
 .tableW{
   height:100%;
   position:relative;
-  overflow-y: hidden;
+  overflow: hidden;
   border-top:1px solid #e1e1e1;
 
   &_header{
-    width:100%;
     flex:1 0;
     font-weight: 700;
     background: #D1DBE8;
@@ -15,14 +14,12 @@
     user-select: none;
   }
   &_main{
-    width: 100%;
     margin-bottom:@columnHeight;
     position:relative;
     top:@columnHeight;
     left:0;
     flex-grow:1;
     overflow: auto;
-    overflow-x: hidden;
     .tableW_row{
       &:hover{
         .tableW_cell{
