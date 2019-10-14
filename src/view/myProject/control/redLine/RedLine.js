@@ -12,7 +12,7 @@ import GuestList from "./redLineComponent/GuestList";
 const MAX_VALUE= 9999;
 
 function RedLine(props) {
-    const [cps,setCps] = useState([]);
+    const [cps] = useState([]);
     const [myStaff,setMyStaff] = useState(null);
     const [rivalStaff,setRivalStaff] = useState(null);
     const [res,setRes] = useState(0);
@@ -61,11 +61,11 @@ function RedLine(props) {
             guestRef.current.style.transform = `translate(${x1-x2}px,${y1-y2}px)`;
             // autoHidden();
 
-            function autoHidden() {
-                return setTimeout(()=>{
-                    guestRef.current.style.visibility = 'hidden';
-                },1200);
-            }
+            // function autoHidden() {
+            //     return setTimeout(()=>{
+            //         guestRef.current.style.visibility = 'hidden';
+            //     },1200);
+            // }
             function coordinateFor(box) {
                 const x1 = box.offsetLeft + (box.clientWidth/2);
                 const y1 = box.offsetTop + (box.clientHeight/2);
@@ -73,13 +73,13 @@ function RedLine(props) {
                 return [x1,y1];
             }
         }
-        function getNewCps() {
-            cps.push({
-                staff:staffs[0],
-                guest:guests[0]
-            });
-            return [...cps];
-        }
+        // function getNewCps() {
+        //     cps.push({
+        //         staff:staffs[0],
+        //         guest:guests[0]
+        //     });
+        //     return [...cps];
+        // }
     }
     function calculateRes() {
         if(!cps.length) return;

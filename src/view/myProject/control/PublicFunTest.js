@@ -1,5 +1,5 @@
 import React from 'react';
-import {sleep,getName,delArrItem,genListCyclic,isObject} from "../../../utils/publicFun.js";
+import {sleep,getName,delArrItem,genListCyclic} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
 
 function PublicFunTest(props) {

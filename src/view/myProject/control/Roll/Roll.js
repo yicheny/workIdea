@@ -1,6 +1,17 @@
 import React, {useEffect} from 'react';
 import './Roll.less';
 
+function creLotterPool() {
+    const lotteryPool = Array(100);
+    lotteryPool.fill('一等奖',0,1);
+    lotteryPool.fill('二等奖',1,4);
+    lotteryPool.fill('三等奖',4,10);
+    lotteryPool.fill('四等奖',10,20);
+    lotteryPool.fill('五等奖',20,40);
+    lotteryPool.fill('谢谢参与',40,100);
+    return lotteryPool;
+}
+
 function Roll(props) {
     const {setResult} = props;
 
@@ -34,7 +45,7 @@ function Roll(props) {
     function creItem(selector,count,textArr=[]){
         const deg = 360/count;
         const Box = document.querySelector(selector);
-        Array.from(Array(count),(el,i)=>{
+        Array.from(Array(count),(el,i) => {
             const Item =  document.createElement('div');
             Item.style.transform = `rotate(${i*deg}deg)`;
             Item.className = `item`;
@@ -43,7 +54,7 @@ function Roll(props) {
                 span.innerText = textArr[i];
                 Item.appendChild(span);
             }
-            Box.appendChild(Item);
+            return Box.appendChild(Item);
         });
     }
     function handleClick() {
@@ -64,17 +75,6 @@ function Roll(props) {
             forbidClick = false;
             Point.className = "x_roll_pointer";
         },2530)
-    }
-
-    function creLotterPool() {
-        const lotteryPool = Array(100);
-        lotteryPool.fill('一等奖',0,1);
-        lotteryPool.fill('二等奖',1,4);
-        lotteryPool.fill('三等奖',4,10);
-        lotteryPool.fill('四等奖',10,20);
-        lotteryPool.fill('五等奖',20,50);
-        lotteryPool.fill('谢谢参与',50,100);
-        return lotteryPool;
     }
     function randomFor(array=[]) {
         const count = array.length;
