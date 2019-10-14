@@ -4,7 +4,7 @@ import './mainPanel.less';
 import LeftMenu from './LeftMenu';
 import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
-import ReactRouter from "./reactDemo/ReactRouter";
+import ReactDemo from "./reactDemo/ReactDemo";
 import ESRouter from './esDemo/ESRouter';
 import ComponentRouter from "./componetentDemo/ComponentRouter";
 import HttpRouter from "./httpDemo/HttpRouter";
@@ -28,7 +28,7 @@ function MainPanel(props){
             <Switch>
                 <Route path='/work' component={WorkRouter}/>
                 <Route path='/component' component={ComponentRouter}/>
-                <Route path='/react' component={ReactRouter}/>
+                <Route path='/react' component={ReactDemo}/>
                 <Route path='/es' component={ESRouter}/>
                 <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>

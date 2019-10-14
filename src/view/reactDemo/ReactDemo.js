@@ -8,7 +8,7 @@ import ChildrenTest from "./children/ChildrenTest";
 import HookBase from "./hook/HookBase";
 import ReactDemoRouter from "./demo/ReactDemoRouter";
 
-function ReactRouter() {
+function ReactDemo() {
     return <div>
         <Switch>
             <Route path='/react/lifeCycle' component={LifeCycle}/>
@@ -22,4 +22,4 @@ function ReactRouter() {
     </div>
 }
 
-export default ReactRouter;
+export default ReactDemo;
