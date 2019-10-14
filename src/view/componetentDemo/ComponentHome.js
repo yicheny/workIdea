@@ -16,6 +16,7 @@ function ComponentHome(props) {
             <Link to='/component/menuM'>MenuM</Link>
             <Link to='/component/radio'>Radio</Link>
             <Link to='/component/checkBox'>CheckBox</Link>
+            <Link to='/component/progress'>Progress</Link>
             <Link to='/component/CountDown'>倒计时CountDown</Link>
             <Link to='/component/rate'>Rate</Link>
             <Link to='/component/tableW'>TableW</Link>

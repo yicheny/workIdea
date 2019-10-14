@@ -21,7 +21,7 @@ function Progress(props) {
     }
 }
 Progress.defaultProps={
-    percent:0,
+    percent:0,//百分比
     wrapHeight:8,
     strokeWidth:800,
     strokeColor:'#1890ff',
