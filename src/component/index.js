@@ -22,6 +22,7 @@ import _CountDown from './CountDown/CountDown';
 import {TableW as _TableW, ColumnW as _ColumnW} from './TableW/TableW';
 import _SetColor from './SetColor/SetColor';
 import _Rate from './Rate/Rate';
+import _TextInput from './TextInput/TextInput';
 
 export {_Container as Container};
 export {_Header as Header};
@@ -47,3 +48,4 @@ export {_CountDown as CountDown};
 export {_TableW as TableW, _ColumnW as ColumnW};
 export {_SetColor as SetColor}
 export {_Rate as Rate}
+export {_TextInput as TextInput};
