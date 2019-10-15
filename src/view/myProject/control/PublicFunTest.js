@@ -1,5 +1,5 @@
 import React from 'react';
-import {sleep,getName,delArrItem,genListCyclic} from "../../../utils/publicFun.js";
+import {sleep,getName,delArrItem,genListCyclic,uniq,arrCompare} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
 
 function PublicFunTest(props) {
@@ -8,6 +8,8 @@ function PublicFunTest(props) {
     delArrItemTest();
     genListCyclicTest();
     cloneDeepTest();
+    uniqTest();
+    arrCompareTest();
 
     return <Container header='自用公共方法测试'>
         <ul>
@@ -15,6 +17,8 @@ function PublicFunTest(props) {
             <li>2.getName方法</li>
             <li>3.delArrItem方法</li>
             <li>4.genListCyclic方法</li>
+            <li>5.uniq方法</li>
+            <li>6.arrCompare方法</li>
         </ul>
     </Container>;
 
@@ -52,6 +56,15 @@ function PublicFunTest(props) {
     }
     function cloneDeepTest() {
 
+    }
+    function uniqTest() {
+        console.log('uniq方法测试',uniq([1, 2, 3, 1, 2, 3, 123]));
+    }
+    function arrCompareTest() {
+        console.log('arrCompare方法测试',arrCompare([1,2,3],[1,2,3,1,2,3]));
+        console.log('arrCompare方法测试',arrCompare([1,2,3],[1,2,3]));
+        console.log('arrCompare方法测试',arrCompare([1,2,3,4],[3,1,2,4]));
+        console.log('arrCompare方法测试',arrCompare([1,2,3],[1,2,4]));
     }
 }
 

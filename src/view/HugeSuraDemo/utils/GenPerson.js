@@ -1,5 +1,5 @@
 import {PersonNameList} from "../baseData/BaseData";
-import {arrRandom,genRandom} from "../../../utils/publicFun";
+import {arrRandom,genRandom,arrCompare} from "../../../utils/publicFun";
 
 const samplePerson = {
     name:'samplePerson',
@@ -13,12 +13,14 @@ const samplePerson = {
     freePoint:89,
 };
 
-export function GenPerson() {
-        const talent = genRandom(1,100);
-        const name = arrRandom(PersonNameList);
-        const sexy = arrRandom(['man','woman']);
+const existsPersonNameList = [];//已存在的人物，不允许再被生成
 
-        return {
+export function GenPerson(person={}) {
+        const name = person.name || nameFor();
+        const sexy = person.sexy || arrRandom(['man','woman']);
+        const talent = genRandom(1,100);
+
+    return {
             name,
             level:1,
             sexy,
@@ -30,5 +32,9 @@ export function GenPerson() {
             freePoint:100-talent,
         };
 
-
+        function nameFor() {
+            if (arrCompare(existsPersonNameList,PersonNameList)) return console.error('人物名称已全部使用完成');//临时，不严谨
+            const name = arrRandom(PersonNameList);
+            return existsPersonNameList.includes(name) ? nameFor() : name;
+        }
 }

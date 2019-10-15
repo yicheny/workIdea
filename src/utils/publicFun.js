@@ -168,3 +168,32 @@ export function genRandom(min,max) {
     const count = max-min;
     return Math.round(Math.random()*count + min)
 }
+
+//数组去重
+export function uniq(ary){
+    let newAry = [...ary];
+
+    newAry.sort(function (a, b) {
+        return a - b;
+    });
+
+    for (let i = 0; i < newAry.length - 1; i++) {
+        if (newAry[i] === newAry[i + 1]) {
+            newAry.splice(i, 1);
+            i--;
+        }
+    }
+
+    return newAry;
+}
+
+//判断两个数组中的项是否完全相等【不关注顺序】
+export function arrCompare(list1,list2) {
+    if(list1.length !== list2.length) return false;
+
+    list1 = uniq(list1);
+    list2 = uniq(list2);
+    if(list1.length !== list2.length) return false;
+
+    return list1.every((item)=>list2.includes(item));
+}
