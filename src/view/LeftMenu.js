@@ -11,9 +11,10 @@ function LeftMenu(props) {
         <MenuItemM icon='ie' tit='HTTP学习' url='/http'/>
         <MenuItemM icon='html5' tit='设计模式' url='/design'/>
         <MenuItemM icon='dingding' tit='CSS测试' url='/css'/>
-        <MenuItemM icon='ant-design' tit='my_project' url='/mProj'/>
+        <MenuItemM icon='dribbble' tit='my_project' url='/mProj'/>
         <MenuItemM icon='ant-design' tit='重构-改善代码既有设计' url='/recons'/>
         <MenuItemM icon='codepen' tit='算法练习' url='/arithmetic'/>
+        <MenuItemM icon='sketch' tit='huge_sura测试' url='/hugeSura'/>
     </MenuM>
 }
 

@@ -15,6 +15,7 @@ import {setCombinKey} from "../utils/CombinKey";
 import {Message} from "../component";
 import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
+import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 
 function MainPanel(props){
     // const fn = ()=>props.history.push('/demo');
@@ -37,6 +38,7 @@ function MainPanel(props){
                 <Route path='/mProj' component={myProjectRouter}/>
                 <Route path='/recons' component={ReconsitutionRouter}/>
                 <Route path='/arithmetic' component={ArithmeticDemo}/>
+                <Route path='/hugeSura' component={HugeSuraDemoRouter}/>
                 <Redirect exact from="/" to="/login" />
             </Switch>
         </div>
