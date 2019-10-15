@@ -30,8 +30,7 @@ function GetRangeDateDemo(props) {
         <div>{GetRangeDate(-12)}</div>
     </Container>;
 
-    //关于月尾数需要特殊处理一下
-    function GetRangeDate(skip) {
+    function GetRangeDate(skip=0) {
         let date = new Date(),
             year = date.getFullYear(),
             day = date.getDate(),
