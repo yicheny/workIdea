@@ -162,3 +162,9 @@ export function clone(o) {
 export function cloneDeep() {
 
 }
+
+//生成一个限定范围的随机整数
+export function genRandom(min,max) {
+    const count = max-min;
+    return Math.round(Math.random()*count + min)
+}
