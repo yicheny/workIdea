@@ -59,6 +59,28 @@ export default class IndexedDbClient{
     };
 
     //只会返回查询到的第一个对象
+    query = (key='id',value=0,callback)=>{
+        const request = this.store().index(key).get(value);
+        request.onsuccess = ()=>{
+            if(callback) return callback(request.result)
+        };
+    };
+
+    //返回查询到的所有符合条件的对象
+    queryAll = (key='id',callback)=>{
+        const res = [];
+        const request = this.store().index(key).openCursor();
+        request.onsuccess = (event)=>{
+            const cursor = event.target.result;
+            if(cursor){
+                res.push(cursor.value);
+                return cursor.continue()
+            }
+            if(callback) return callback(res)
+        };
+    };
+
+    //只会返回查询到的第一个对象_Sync
     querySync = async (key='id',value=0)=>{
         const promise = new Promise((resolve,reject)=>{
             const request = this.store().index(key).get(value);
@@ -68,7 +90,7 @@ export default class IndexedDbClient{
         return (await promise).result;
     };
 
-    //返回查询到的所有符合条件的对象
+    //返回查询到的所有符合条件的对象_Sync
     queryAllSync = async(key='id')=>{
         const promise = new Promise((resolve,reject)=>{
             const res = [];
