@@ -36,8 +36,8 @@ function IndexedDbDemo(props) {
         return queryMap[type]()
     }
 
-    function queryAll() {
-        db.queryAll()
+    async function queryAll() {
+        console.log(await db.queryAll());
     }
 
     function genData() {

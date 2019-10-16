@@ -69,19 +69,21 @@ export default class IndexedDbClient{
     };
 
     //返回查询到的所有符合条件的对象
-    queryAll = (key='id',callback)=>{
-        const res = [];
+    queryAll = async(key='id',callback)=>{
+        const promise = new Promise((resolve,reject)=>{
+            const res = [];
+            const request = this.store().index(key).openCursor();
+            request.onsuccess = (event)=>{
+                const cursor = event.target.result;
+                if(cursor){
+                    res.push(cursor.value);
+                    return cursor.continue()
+                }
+                resolve(res);
+            };
+        });
 
-        const request = this.store().index(key).openCursor();
-        request.onsuccess = (event)=>{
-            const cursor = event.target.result;
-            if(cursor){
-                res.push(cursor.value);
-                return cursor.continue()
-            }
-            console.log('数据查询成功',res);
-            if(callback) return callback(res);
-        }
+        return (await promise);
     }
 }
 
