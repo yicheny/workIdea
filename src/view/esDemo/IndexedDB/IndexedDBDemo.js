@@ -16,10 +16,11 @@ function IndexedDbDemo(props) {
         <p>请设置Id：<TextInput type='number' onChange={v=>setId(Number(v))}/></p>
         <p style={{margin:'8px 0'}}>请设置Name：<TextInput onChange={v=>setName(Number(v))}/></p>
         <Button type='primary' onClick={()=>db.add(genData())}>新增数据</Button>
+        <Button type='primary' onClick={()=>db.del(id)}>删除数据</Button>
         <Button type='primary' onClick={()=>db.edit(id,genData())}>编辑数据</Button>
         <Button type='primary' onClick={()=>db.query('id',id)}>根据Id查询数据</Button>
-        <Button type='primary' onClick={()=>db.del(id)}>删除数据</Button>
-        <Button type='primary' onClick={()=>db.query('name',name)}>根据姓名查找数据</Button>
+        <Button type='primary' onClick={()=>db.query('name',name)}>根据姓名查询数据</Button>
+        <Button type='primary' onClick={()=>db.queryAll()}>查询所有数据</Button>
     </Container>;
 
     function genData() {
