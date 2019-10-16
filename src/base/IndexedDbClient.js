@@ -59,7 +59,7 @@ export default class IndexedDbClient{
     };
 
     //只会返回查询到的第一个对象
-    query = async (key='id',value=0)=>{
+    querySync = async (key='id',value=0)=>{
         const promise = new Promise((resolve,reject)=>{
             const request = this.store().index(key).get(value);
             request.onsuccess = ()=>resolve(request);
@@ -69,7 +69,7 @@ export default class IndexedDbClient{
     };
 
     //返回查询到的所有符合条件的对象
-    queryAll = async(key='id',callback)=>{
+    queryAllSync = async(key='id')=>{
         const promise = new Promise((resolve,reject)=>{
             const res = [];
             const request = this.store().index(key).openCursor();

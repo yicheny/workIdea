@@ -41,10 +41,10 @@ function GenPersonDemo(props) {
         </div>
     </Container>;
     async function query() {
-        console.log('数据查询成功',await db.query('name', person.name));
+        console.log('数据查询成功',await db.querySync('name', person.name));
     }
     async function queryAll() {
-        console.log(await db.queryAll())
+        console.log(await db.queryAllSync())
     }
     async function genPerson(person={}) {
         const name = person.name || await nameFor();
@@ -64,7 +64,7 @@ function GenPersonDemo(props) {
         };
 
         async function nameFor() {
-            const existsPersonNameList = (await db.queryAll()).map(item=>item.name);
+            const existsPersonNameList = (await db.queryAllSync()).map(item=>item.name);
             if (isAllUse()) return console.error('默认人物名称已全部被使用');
             const name = sample(PersonNameList);
             return existsPersonNameList.includes(name) ? nameFor() : name;
@@ -76,13 +76,13 @@ function GenPersonDemo(props) {
     }
     async function comfireGen() {
         if(!isInputName())return;
-        const data = await db.query('name',person.name);
+        const data = await db.querySync('name',person.name);
         if(data) return console.error('已存在该人物，不能在创建');
         db.add(person);
     }
     async function editPerson() {
         if(!isInputName())return;
-        const data = await db.query('name',person.name);
+        const data = await db.querySync('name',person.name);
         if(nil.includes(data)) return console.error('不存在该人物，请先创建人物');
         db.edit(data.id,person)
     }

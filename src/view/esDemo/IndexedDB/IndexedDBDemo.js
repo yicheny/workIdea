@@ -26,10 +26,10 @@ function IndexedDbDemo(props) {
     function query(type) {
         const queryMap = {
             id:async()=>{
-                console.log(await db.query('id', id));
+                console.log(await db.querySync('id', id));
             },
             name:async()=>{
-                console.log(await db.query('name',name));
+                console.log(await db.querySync('name',name));
             },
         };
 
@@ -37,7 +37,7 @@ function IndexedDbDemo(props) {
     }
 
     async function queryAll() {
-        console.log(await db.queryAll());
+        console.log(await db.queryAllSync());
     }
 
     function genData() {
