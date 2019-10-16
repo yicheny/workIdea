@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Button, TextInput} from "../../../component";
 import {nil} from "../../../base/BaseVariate";
-import {arrCompare, sample, genRandom,} from "../../../utils/publicFun";
+import {sample, genRandom,} from "../../../utils/publicFun";
 import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
@@ -17,11 +17,15 @@ function GenPersonDemo(props) {
     },[]);
 
     return <Container header='人物生成'>
-        <Button onClick={()=>setPerson(randomPerson())}>随机人物</Button>
-        <Button type='primary' onClick={genPerson}>确认生成</Button>
-        <Button onClick={query}>查询人物</Button>
+        <Button onClick={()=>setPerson(genPerson())}>随机人物</Button>
+        <Button type='primary' onClick={comfireGen}>确认生成</Button>
+        <Button onClick={()=>db.query('name',name)}>查询指定人物</Button>
+        <Button onClick={()=>db.queryAll()}>查询全部人物</Button>
         <p>
             <TextInput placeholder='请输入人物姓名以便查询' onChange={setName}/>
+        </p>
+        <p style={{margin:'6px 0'}}>
+            <TextInput placeholder='请输入人物姓名以便创建' onChange={v=>setPerson(genPerson({name:v}))}/>
         </p>
         <div>
             <p>姓名：{person.name}</p>
@@ -36,10 +40,7 @@ function GenPersonDemo(props) {
         </div>
     </Container>;
 
-    function query() {
-        db.query('name',name);
-    }
-    function randomPerson(person={}) {
+    function genPerson(person={}) {
         const name = person.name || nameFor();
         const sexy = person.sexy || sample(['man','woman']);
         const talent = genRandom(1,100);
@@ -57,12 +58,16 @@ function GenPersonDemo(props) {
         };
 
         function nameFor() {
-            if (arrCompare(existsPersonNameList,PersonNameList)) return console.error('人物名称已全部使用完成');
+            if (isAllUse()) return console.error('默认人物名称已全部被使用');
             const name = sample(PersonNameList);
             return existsPersonNameList.includes(name) ? nameFor() : name;
+
+            function isAllUse(){
+                return PersonNameList.every(item=>existsPersonNameList.includes(item))
+            }
         }
     }
-    function genPerson() {
+    function comfireGen() {
         db.queryAll('id',res=>{
             if(nil.includes(person.name)) return console.error('请输入人物名');
 

@@ -197,5 +197,3 @@ export function arrCompare(list1,list2) {
 
     return list1.every((item)=>list2.includes(item));
 }
-
-//
