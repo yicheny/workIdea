@@ -1,6 +1,7 @@
 export default class IndexedDbClient{
-    constructor(dbName='dbDefault',version=1,storeName='storeDefault'){
+    constructor(dbName='dbDefault',version=1,storeName='storeDefault',keys=[]){
         this.storeName = storeName;
+        this.keys=keys;
         this.openDBRequest = window.indexedDB.open(dbName,version);
         this.clientDB();
     }
@@ -28,11 +29,13 @@ export default class IndexedDbClient{
 
             // 设置索引项--方便快速查找
             store.createIndex('id', 'id', {unique: true});
-            store.createIndex('name','name')
+            this.keys.forEach((key)=>{
+                store.createIndex(key,key)
+            })
         });
     };
 
-    store = ()=>this.db.transaction(this.storeName, "readwrite").objectStore(this.storeName);
+    store = ()=>this.db.transaction([this.storeName], "readwrite").objectStore(this.storeName);
 
     add = (data)=>{
         const request = this.store().add(data);
@@ -55,12 +58,15 @@ export default class IndexedDbClient{
         }
     };
 
-    query = (id,callback)=>{
-        const request = this.store().get(id);
-        request.onsuccess = () =>{
+    query = (key,value,callback)=>{
+        const request = this.store().index(key).get(value);
+        request.onsuccess=()=>{
             const res = request.result;
             console.log('数据查询成功',res);
             if(callback) return callback(res);
         };
+        request.onerror= ()=>{
+            console.error('查询失败')
+        }
     }
 }
