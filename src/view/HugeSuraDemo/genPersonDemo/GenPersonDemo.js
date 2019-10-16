@@ -1,18 +1,27 @@
-import React,{useState} from 'react';
-import {Container,Button} from "../../../component";
+import React, {useEffect, useState} from 'react';
+import {Container, Button, TextInput} from "../../../component";
 import {arrCompare, arrRandom, genRandom} from "../../../utils/publicFun";
 import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
+let db = null;
 const existsPersonNameList = [];
 
 function GenPersonDemo(props) {
-    const db = new IndexedDbClient('hugeSura',1,'persons');
     const [person,setPerson] = useState({});
+    const [name,setName]=useState('');
+
+    useEffect(()=>{
+        db = new IndexedDbClient('hugeSura',1,'persons',['name','sexy']);
+    },[]);
 
     return <Container header='人物生成'>
         <Button onClick={()=>setPerson(randomPerson())}>随机人物</Button>
         <Button type='primary' onClick={genPerson}>确认生成</Button>
+        <Button onClick={query}>查询人物</Button>
+        <p>
+            <TextInput placeholder='请输入人物姓名以便查询' onChange={setName}/>
+        </p>
         <div>
             <p>姓名：{person.name}</p>
             <p>性别：{person.sexy}</p>
@@ -26,6 +35,9 @@ function GenPersonDemo(props) {
         </div>
     </Container>;
 
+    function query() {
+        db.queryAll();
+    }
     function randomPerson(person={}) {
         const name = person.name || nameFor();
         const sexy = person.sexy || arrRandom(['man','woman']);
@@ -44,7 +56,7 @@ function GenPersonDemo(props) {
         };
 
         function nameFor() {
-            if (arrCompare(existsPersonNameList,PersonNameList)) return console.error('人物名称已全部使用完成');//临时，不严谨
+            if (arrCompare(existsPersonNameList,PersonNameList)) return console.error('人物名称已全部使用完成');
             const name = arrRandom(PersonNameList);
             return existsPersonNameList.includes(name) ? nameFor() : name;
         }

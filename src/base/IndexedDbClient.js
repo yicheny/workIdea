@@ -58,6 +58,7 @@ export default class IndexedDbClient{
         }
     };
 
+    //只会返回查询到的第一个对象
     query = (key,value,callback)=>{
         const request = this.store().index(key).get(value);
         request.onsuccess=()=>{
@@ -68,5 +69,37 @@ export default class IndexedDbClient{
         request.onerror= ()=>{
             console.error('查询失败')
         }
+    };
+
+    //返回查询到的所有符合条件的对象
+    queryAll = (key='id',callback)=>{
+        const res = [];
+
+        const request = this.store().index(key).openCursor();
+        request.onsuccess = (event)=>{
+            const cursor = event.target.result;
+            if(cursor){
+                res.push(cursor.value);
+                return cursor.continue()
+            }
+            console.log('数据查询成功',res);
+            if(callback) return callback(res);
+        }
     }
 }
+
+
+//openCursor有两个此参数
+//第一个参数设置cursor范围匹配
+//通过IDBKeyRange属性设置
+// IDBKeyRange.only(1); //key===1
+// IDBKeyRange.lowerBound(1) //key>=1
+// IDBKeyRange.lowerBound(1,false) //key>=1
+// IDBKeyRange.upperBound(2,true) //key<2
+// IDBKeyRange.bound(0,10000,false,true);//key>=0 && key<10000
+//第二个参数设置遍历顺序
+//通过IDBCursor设置
+//IDBCursor.NEXT 从前往后获取所有数据（包括重复数据）
+//IDBCursor.PREV 从后往前获取所有数据（包括重复数据）
+//IDBCursor.NEXTUNIQUE 从前往后获取数据（重复数据只取第一条，索引重复即认为重复，下同
+//IDBCursor.PREVUNIQUE 从后往前获取数据（重复数据只取第一条）
