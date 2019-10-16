@@ -55,10 +55,12 @@ export default class IndexedDbClient{
         }
     };
 
-    query = (id)=>{
+    query = (id,callback)=>{
         const request = this.store().get(id);
         request.onsuccess = () =>{
-            console.log('数据查询成功',request.result);
+            const res = request.result;
+            console.log('数据查询成功',res);
+            if(callback) return callback(res);
         };
     }
 }
