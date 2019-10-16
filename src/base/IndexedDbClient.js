@@ -59,7 +59,7 @@ export default class IndexedDbClient{
     };
 
     //只会返回查询到的第一个对象
-    query = (key,value,callback)=>{
+    query = (key='id',value=0,callback)=>{
         const request = this.store().index(key).get(value);
         request.onsuccess=()=>{
             const res = request.result;

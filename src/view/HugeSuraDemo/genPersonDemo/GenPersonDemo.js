@@ -19,13 +19,14 @@ function GenPersonDemo(props) {
     return <Container header='人物生成'>
         <Button onClick={()=>setPerson(genPerson())}>随机人物</Button>
         <Button type='primary' onClick={comfireGen}>确认生成</Button>
+        <Button type='primary' onClick={editPerson}>修改人物</Button>
         <Button onClick={()=>db.query('name',name)}>查询指定人物</Button>
-        <Button onClick={()=>db.queryAll()}>查询全部人物</Button>
+        <Button onClick={()=>db.queryAll('id',(res)=>console.log('查询全部人物执行成功',res))}>查询全部人物</Button>
         <p>
             <TextInput placeholder='请输入人物姓名以便查询' onChange={setName}/>
         </p>
         <p style={{margin:'6px 0'}}>
-            <TextInput placeholder='请输入人物姓名以便创建' onChange={v=>setPerson(genPerson({name:v}))}/>
+            <TextInput placeholder='请输入人物姓名以便创建或编辑' onChange={v=>setPerson(genPerson({name:v}))}/>
         </p>
         <div>
             <p>姓名：{person.name}</p>
@@ -39,7 +40,6 @@ function GenPersonDemo(props) {
             <p>自由点数：{person.freePoint}</p>
         </div>
     </Container>;
-
     function genPerson(person={}) {
         const name = person.name || nameFor();
         const sexy = person.sexy || sample(['man','woman']);
@@ -68,13 +68,22 @@ function GenPersonDemo(props) {
         }
     }
     function comfireGen() {
-        db.queryAll('id',res=>{
-            if(nil.includes(person.name)) return console.error('请输入人物名');
-
-            existsPersonNameList = res.map((item)=>item.name);
-            if(existsPersonNameList.includes(person.name)) return console.log('该人物已存在');
+        if(!isInputName()) return;
+        db.query('name', person.name,res=>{
+            if(res) return console.error('该人物已存在，不可再创建');
             return db.add(person)
         })
+    }
+    function editPerson() {
+        if(!isInputName()) return;
+        db.query('name', person.name,res=>{
+            if(nil.includes(res)) return console.error('该人物不存在,请先创建');
+            return db.edit(res.id,person)
+        })
+    }
+    function isInputName(){
+        if(nil.includes(person.name)) return console.error('请输入人物名称');
+        return true;
     }
 }
 
