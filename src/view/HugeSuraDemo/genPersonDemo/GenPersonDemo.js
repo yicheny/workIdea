@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Button, TextInput} from "../../../component";
-import {arrCompare, arrRandom, genRandom} from "../../../utils/publicFun";
+import {nil} from "../../../base/BaseVariate";
+import {arrCompare, sample, genRandom,} from "../../../utils/publicFun";
 import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
 let db = null;
-const existsPersonNameList = [];
+let existsPersonNameList = [];
 
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
@@ -36,11 +37,11 @@ function GenPersonDemo(props) {
     </Container>;
 
     function query() {
-        db.queryAll();
+        db.query('name',name);
     }
     function randomPerson(person={}) {
         const name = person.name || nameFor();
-        const sexy = person.sexy || arrRandom(['man','woman']);
+        const sexy = person.sexy || sample(['man','woman']);
         const talent = genRandom(1,100);
 
         return {
@@ -57,12 +58,18 @@ function GenPersonDemo(props) {
 
         function nameFor() {
             if (arrCompare(existsPersonNameList,PersonNameList)) return console.error('人物名称已全部使用完成');
-            const name = arrRandom(PersonNameList);
+            const name = sample(PersonNameList);
             return existsPersonNameList.includes(name) ? nameFor() : name;
         }
     }
     function genPerson() {
-        db.add(person);
+        db.queryAll('id',res=>{
+            if(nil.includes(person.name)) return console.error('请输入人物名');
+
+            existsPersonNameList = res.map((item)=>item.name);
+            if(existsPersonNameList.includes(person.name)) return console.log('该人物已存在');
+            return db.add(person)
+        })
     }
 }
 
