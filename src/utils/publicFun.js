@@ -49,7 +49,7 @@ export function chunk(arr, size = 1) {
 }
 
 //随机返回数组中的一个值
-export function arrRandom(array) {
+export function sample(array) {
     if (!array.length) return null;
     const index = Math.floor(Math.random() * array.length);
     return array[index];
@@ -197,3 +197,5 @@ export function arrCompare(list1,list2) {
 
     return list1.every((item)=>list2.includes(item));
 }
+
+//
