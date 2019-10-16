@@ -6,27 +6,23 @@ import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
 let db = null;
-let existsPersonNameList = [];
+// let existsPersonNameList = [];
 
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
-    const [name,setName]=useState('');
 
     useEffect(()=>{
         db = new IndexedDbClient('hugeSura',1,'persons',['name','sexy']);
     },[]);
 
     return <Container header='人物生成'>
-        <Button onClick={()=>setPerson(genPerson())}>随机人物</Button>
+        <Button onClick={async ()=>setPerson(await genPerson())}>随机人物</Button>
         <Button type='primary' onClick={comfireGen}>确认生成</Button>
         <Button type='primary' onClick={editPerson}>修改人物</Button>
-        <Button onClick={()=>db.query('name',name)}>查询指定人物</Button>
-        <Button onClick={()=>db.queryAll('id',(res)=>console.log('查询全部人物执行成功',res))}>查询全部人物</Button>
-        <p>
-            <TextInput placeholder='请输入人物姓名以便查询' onChange={setName}/>
-        </p>
+        <Button onClick={query}>查询指定人物</Button>
+        <Button onClick={queryAll}>查询全部人物</Button>
         <p style={{margin:'6px 0'}}>
-            <TextInput placeholder='请输入人物姓名以便创建或编辑' onChange={v=>setPerson(genPerson({name:v}))}/>
+            <TextInput placeholder='请输入人物姓名' onChange={async v=>setPerson(await genPerson({name:v}))}/>
         </p>
         <div>
             <p>姓名：{person.name}</p>
@@ -39,9 +35,19 @@ function GenPersonDemo(props) {
             <p>天赋：{person.talent}</p>
             <p>自由点数：{person.freePoint}</p>
         </div>
+        <div>
+            <Button type='primary' onClick={()=>setPerson({...person,sexy:'man'})}>设置性别为男</Button>
+            <Button type='primary' onClick={()=>setPerson({...person,sexy:'woman'})}>设置性别为女</Button>
+        </div>
     </Container>;
-    function genPerson(person={}) {
-        const name = person.name || nameFor();
+    async function query() {
+        console.log('数据查询成功',await db.query('name', person.name));
+    }
+    async function queryAll() {
+        console.log(await db.queryAll())
+    }
+    async function genPerson(person={}) {
+        const name = person.name || await nameFor();
         const sexy = person.sexy || sample(['man','woman']);
         const talent = genRandom(1,100);
 
@@ -57,7 +63,8 @@ function GenPersonDemo(props) {
             freePoint:100-talent,
         };
 
-        function nameFor() {
+        async function nameFor() {
+            const existsPersonNameList = (await db.queryAll()).map(item=>item.name);
             if (isAllUse()) return console.error('默认人物名称已全部被使用');
             const name = sample(PersonNameList);
             return existsPersonNameList.includes(name) ? nameFor() : name;
@@ -67,21 +74,19 @@ function GenPersonDemo(props) {
             }
         }
     }
-    function comfireGen() {
-        if(!isInputName()) return;
-        db.query('name', person.name,res=>{
-            if(res) return console.error('该人物已存在，不可再创建');
-            return db.add(person)
-        })
+    async function comfireGen() {
+        if(!isInputName())return;
+        const data = await db.query('name',person.name);
+        if(data) return console.error('已存在该人物，不能在创建');
+        db.add(person);
     }
-    function editPerson() {
-        if(!isInputName()) return;
-        db.query('name', person.name,res=>{
-            if(nil.includes(res)) return console.error('该人物不存在,请先创建');
-            return db.edit(res.id,person)
-        })
+    async function editPerson() {
+        if(!isInputName())return;
+        const data = await db.query('name',person.name);
+        if(nil.includes(data)) return console.error('不存在该人物，请先创建人物');
+        db.edit(data.id,person)
     }
-    function isInputName(){
+    function isInputName() {
         if(nil.includes(person.name)) return console.error('请输入人物名称');
         return true;
     }
