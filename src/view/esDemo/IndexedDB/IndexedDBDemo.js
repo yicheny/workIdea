@@ -19,7 +19,20 @@ function IndexedDbDemo(props) {
         return {
             name:genRandom(0,10000),
             age:genRandom(10,90),
-            hp:genRandom(0,2000)
+            hp:genRandom(0,2000),
+            children:[
+                {
+                    name:genRandom(10000,20000)
+                },
+                {
+                    name:genRandom(20000,30000),
+                    children:[
+                        {
+                            name:genRandom(30000,40000)
+                        }
+                    ]
+                }
+            ]
         }
     }
 }
