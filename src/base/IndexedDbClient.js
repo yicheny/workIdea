@@ -59,16 +59,13 @@ export default class IndexedDbClient{
     };
 
     //只会返回查询到的第一个对象
-    query = (key='id',value=0,callback)=>{
-        const request = this.store().index(key).get(value);
-        request.onsuccess=()=>{
-            const res = request.result;
-            console.log('数据查询成功',res);
-            if(callback) return callback(res);
-        };
-        request.onerror= ()=>{
-            console.error('查询失败')
-        }
+    query = async (key='id',value=0)=>{
+        const promise = new Promise((resolve,reject)=>{
+            const request = this.store().index(key).get(value);
+            request.onsuccess = ()=>resolve(request);
+        });
+
+        return (await promise).result;
     };
 
     //返回查询到的所有符合条件的对象

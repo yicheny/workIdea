@@ -18,10 +18,27 @@ function IndexedDbDemo(props) {
         <Button type='primary' onClick={()=>db.add(genData())}>新增数据</Button>
         <Button type='primary' onClick={()=>db.del(id)}>删除数据</Button>
         <Button type='primary' onClick={()=>db.edit(id,genData())}>编辑数据</Button>
-        <Button type='primary' onClick={()=>db.query('id',id)}>根据Id查询数据</Button>
-        <Button type='primary' onClick={()=>db.query('name',name)}>根据姓名查询数据</Button>
-        <Button type='primary' onClick={()=>db.queryAll()}>查询所有数据</Button>
+        <Button type='primary' onClick={()=>query('id')}>根据Id查询数据</Button>
+        <Button type='primary' onClick={()=>query('name')}>根据姓名查询数据</Button>
+        <Button type='primary' onClick={queryAll}>查询所有数据</Button>
     </Container>;
+
+    function query(type) {
+        const queryMap = {
+            id:async()=>{
+                console.log(await db.query('id', id));
+            },
+            name:async()=>{
+                console.log(await db.query('name',name));
+            },
+        };
+
+        return queryMap[type]()
+    }
+
+    function queryAll() {
+        db.queryAll()
+    }
 
     function genData() {
         return {
