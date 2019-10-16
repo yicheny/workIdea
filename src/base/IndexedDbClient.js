@@ -1,7 +1,6 @@
 export default class IndexedDbClient{
-    constructor(dbName='default',version=1){
-        this.dbName = dbName;
-        this.version = version;
+    constructor(dbName='dbDefault',version=1,storeName='storeDefault'){
+        this.storeName = storeName;
         this.openDBRequest = window.indexedDB.open(dbName,version);
         this.clientDB();
     }
@@ -22,7 +21,7 @@ export default class IndexedDbClient{
             // 创建一个数据库存储对象
             // 第一个参数设置存储空间的名称
             // 第二个参数：keyPath用于指定存储空间的某个属性作为获取时的key值使用，autoIncrement是否自增长
-            const store = db.createObjectStore(this.dbName, {
+            const store = db.createObjectStore(this.storeName, {
                 keyPath: 'id',
                 autoIncrement: true
             });
@@ -33,18 +32,18 @@ export default class IndexedDbClient{
         });
     };
 
-    store = ()=>this.db.transaction(this.dbName, "readwrite").objectStore(this.dbName);
+    store = ()=>this.db.transaction(this.storeName, "readwrite").objectStore(this.storeName);
 
     add = (data)=>{
         const request = this.store().add(data);
-        request.onsuccess = (event)=>{
+        request.onsuccess = ()=>{
             console.log('数据添加成功')
         }
     };
 
     del = (id)=>{
         const request = this.store().delete(id);
-        request.onsuccess= (event)=>{
+        request.onsuccess= ()=>{
             console.log('数据删除成功')
         }
     };
@@ -58,7 +57,7 @@ export default class IndexedDbClient{
 
     query = (id)=>{
         const request = this.store().get(id);
-        request.onsuccess = event =>{
+        request.onsuccess = () =>{
             console.log('数据查询成功',request.result);
         };
     }

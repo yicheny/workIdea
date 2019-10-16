@@ -3,7 +3,7 @@ import {Container, Button, TextInput} from "../../../component";
 import {genRandom} from "../../../utils/publicFun";
 import IndexedDbClient from '../../../base/IndexedDbClient';
 
-const db = new IndexedDbClient();
+const db = new IndexedDbClient('project1',1,'store1');
 function IndexedDbDemo(props) {
     const [id,setId] = useState(0);
 
