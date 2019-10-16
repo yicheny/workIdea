@@ -6,7 +6,8 @@ function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
 
     return <Container header='人物生成'>
-        <Button onClick={()=>setPerson(GenPerson())}>点击测试</Button>
+        <Button onClick={()=>setPerson(GenPerson())}>随机人物</Button>
+        <Button type='primary'>确认生成</Button>
         <div>
             <p>姓名：{person.name}</p>
             <p>性别：{person.sexy}</p>
