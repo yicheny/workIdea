@@ -38,14 +38,18 @@ function GenPersonDemo(props) {
             <p>天赋：{person.talent}</p>
             <p>自由点数：{person.freePoint}</p>
         </div>
-        <div>
-            <p className='mar_wrap'>
-                <Button type='primary' onClick={()=>setPerson({...person,sexy:'man'})}>设置性别为男</Button>
-                <Button type='primary' onClick={()=>setPerson({...person,sexy:'woman'})}>设置性别为女</Button>
-            </p>
-            <p>
-                <TextInput placeholder='编辑人物姓名' onChange={(v)=>setPerson({...person,name:v})}/>
-            </p>
+        <div className='mar_wrap'>
+            <Button type='primary' onClick={()=>setPerson({...person,sexy:'man'})}>设置性别为男</Button>
+            <Button type='primary' onClick={()=>setPerson({...person,sexy:'woman'})}>设置性别为女</Button>
+        </div>
+        <div className='mar_wrap_b'>
+            <TextInput placeholder='编辑人物姓名' onChange={(v)=>setPerson({...person,name:v})}/>
+            <TextInput min={0} max={99} placeholder='编辑人物等级[0,99]' onChange={(v)=>setPerson({...person,level:v})}/>
+            <TextInput min={20} max={100} placeholder='编辑人物生命[20,100]' onChange={(v)=>setPerson({...person,hp:v})}/>
+            <TextInput min={0} max={20} placeholder='编辑人物攻击[0,20]' onChange={(v)=>setPerson({...person,attack:v})}/>
+            <TextInput min={0} max={20} placeholder='编辑人物防御[0,20]' onChange={(v)=>setPerson({...person,defense:v})}/>
+            <TextInput min={0} max={20} placeholder='编辑人物速度[0,20]' onChange={(v)=>setPerson({...person,speed:v})}/>
+            <TextInput min={0} max={100} placeholder='编辑人物天赋[0,100]!影响自由点数' onChange={(v)=>setPerson({...person,talent:v,freePoint:100-v})}/>
         </div>
     </Container>;
     async function query() {
