@@ -52,3 +52,15 @@
   color:#52c41a;
 }
 
+.mar_wrap{
+  >*{
+    display: inline-block;
+    margin-top:6px;
+    margin-bottom:6px;
+    margin-right:6px;
+  }
+  >:not(:first-child){
+    margin-left:6px;
+  }
+}
+
