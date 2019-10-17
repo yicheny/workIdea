@@ -1,42 +1,57 @@
 import React, {useState} from 'react';
 import './TextInput.less';
 import {last, isNumber, mergeCn} from "../../utils/publicFun";
+import {Icon} from "../index";
 
 function TextInput(props) {
-    const {system,type,onChange,placeholder,digit} = props;
-    const [value,setValue] = useState(props.value);
+    const {system, type, onChange, placeholder, digit, required} = props;
+    const [value, setValue] = useState(props.value);
+    const [error, setError] = useState(props.error);
+    const [init, setInit] = useState(false);
 
-    return <span className={mergeCn('textInput_wrap')}>
-        <input value={value} onFocus={handleFocus} onBlur={()=>onChange(value)} onChange={e=>handleChange(e.target.value)} placeholder={placeholder}/>
+    return <span className={mergeCn('textInput_wrap', error && 'error')}>
+        {error && errorTipRender()}
+        <input value={value} onFocus={handleFocus} onBlur={handleBlur} onChange={e => handleChange(e.target.value)}
+               placeholder={placeholder}/>
     </span>;
 
     function handleFocus() {
-        if(Number(value)===0) return setValue('');
+        if (init && required && value === '') return setError('必填项');
+        if (Number(value) === 0) return setValue('');
+    }
+
+    function handleBlur() {
+        setError(null);
+        !init && setInit(true);
+        return onChange(value)
     }
 
     function handleChange(v) {
-        if(v==='') return setValue('');
-        if(!typeCheck()) return;
+        if (v === '') return setValue('');
+        if (!typeCheck()) return;
         return setValue(v);
 
         function typeCheck() {
             const typeStrategy = {
-                text:()=>true,
-                number:()=>{
-                    if(digitCheck()) return;
-                    if(!systemCheck()) return;
+                text: () => true,
+                number: () => {
+                    if (digitCheck()) return;
+                    if (!systemCheck()) return;
                     return !isNaN(Number(v));
 
                     function systemCheck() {
                         function genSystemList() {
-                            if(!isNumber(system)||system<2) return console.error('genSystemList函数运行错误',system);
-                            const systemList = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
-                            return ['.'].concat(Array.from(Array(system),(item,index)=>systemList[index]))
+                            if (!isNumber(system) || system < 2) return console.error('genSystemList函数运行错误', system);
+                            const systemList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+                            return ['.'].concat(Array.from(Array(system), (item, index) => systemList[index]))
                         }
+
                         return genSystemList().includes(last(v));
                     }
+
                     function digitCheck() {
-                        return deciLenFor()>digit;
+                        return deciLenFor() > digit;
+
                         function deciLenFor() {
                             return decimalFor().length;
 
@@ -51,13 +66,24 @@ function TextInput(props) {
             return typeStrategy[type]()
         }
     }
+
+    function errorTipRender() {
+        return <div className="error_tip">
+            <Icon type='error' size={16} color='#f35541' style={{margin: '0 6px'}}/>
+            {error}
+        </div>
+    }
 }
-TextInput.defaultProps={
-    system:10,//进制_目前最高支持16进制
-    type:'text',
-    value:'',
-    onChange:()=>{},
-    digit:100
+
+TextInput.defaultProps = {
+    system: 10,//进制_目前最高支持16进制
+    type: 'text',
+    value: '',
+    onChange: () => {
+    },
+    digit: 100,
+    required: false,
+    error: null
 };
 
 export default TextInput;

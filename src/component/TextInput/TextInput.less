@@ -1,5 +1,31 @@
+@import "../../asset/color";
+
 .textInput{
   &_wrap{
+    &.error{
+      position:relative;
+      >.error_tip{
+        position:absolute;
+        bottom:40px;
+        left:4px;
+        padding:4px 42px 4px 32px;
+        border-radius: 4px;
+        box-shadow:0 3px 12px 4px rgba(0,0,0,0.16);
+        background: #fff;
+      }
+      input{
+        border-color:@error;
+        caret-color:@error;
+        &::placeholder{
+          color:@error;
+        }
+        &:focus{
+          border-color: @error;
+          box-shadow:0 0 0 2px rgba(243,55,41,0.2);
+        }
+      }
+    }
+
     display: inline-flex;
     input{
       width:248px;
