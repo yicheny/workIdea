@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {Input} from "../index";
-import {last,isNumber} from "../../utils/publicFun";
+import './TextInput.less';
+import {last, isNumber, mergeCn} from "../../utils/publicFun";
 
 function TextInput(props) {
     const {system,type,onChange,placeholder} = props;
     const [value,setValue] = useState(props.value);
 
-    return <span className="textInput">
-        <Input value={value} onFocus={handleFocus} onBlur={()=>onChange(value)} onChange={e=>handleChange(e.target.value)} placeholder={placeholder}/>
+    return <span className={mergeCn('textInput_wrap')}>
+        <input value={value} onFocus={handleFocus} onBlur={()=>onChange(value)} onChange={e=>handleChange(e.target.value)} placeholder={placeholder}/>
     </span>;
 
     function handleFocus() {
@@ -43,7 +43,7 @@ function TextInput(props) {
 TextInput.defaultProps={
     system:10,//进制_目前最高支持16进制
     type:'text',
-    value:''
+    value:'',
 };
 
 export default TextInput;
