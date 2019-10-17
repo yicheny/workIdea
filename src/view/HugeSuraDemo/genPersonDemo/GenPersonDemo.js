@@ -6,8 +6,6 @@ import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
 let db = null;
-// let existsPersonNameList = [];
-
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
     const [name,setName] = useState(null);
@@ -43,13 +41,13 @@ function GenPersonDemo(props) {
             <Button type='primary' onClick={()=>setPerson({...person,sexy:'woman'})}>设置性别为女</Button>
         </div>
         <div className='mar_wrap_b'>
-            <TextInput placeholder='编辑人物姓名' onChange={(v)=>setPerson({...person,name:v})}/>
-            <TextInput min={0} max={99} placeholder='编辑人物等级[0,99]' onChange={(v)=>setPerson({...person,level:v})}/>
-            <TextInput min={20} max={100} placeholder='编辑人物生命[20,100]' onChange={(v)=>setPerson({...person,hp:v})}/>
-            <TextInput min={0} max={20} placeholder='编辑人物攻击[0,20]' onChange={(v)=>setPerson({...person,attack:v})}/>
-            <TextInput min={0} max={20} placeholder='编辑人物防御[0,20]' onChange={(v)=>setPerson({...person,defense:v})}/>
-            <TextInput min={0} max={20} placeholder='编辑人物速度[0,20]' onChange={(v)=>setPerson({...person,speed:v})}/>
-            <TextInput min={0} max={100} placeholder='编辑人物天赋[0,100]!影响自由点数' onChange={(v)=>setPerson({...person,talent:v,freePoint:100-v})}/>
+            <p><TextInput placeholder='编辑人物姓名' onChange={(v)=>setPerson({...person,name:v})}/></p>
+            <p><TextInput min={0} max={99} placeholder='编辑人物等级[0,99]' onChange={(v)=>setPerson({...person,level:v})}/></p>
+            <p><TextInput min={20} max={100} placeholder='编辑人物生命[20,100]' onChange={(v)=>setPerson({...person,hp:v})}/></p>
+            <p><TextInput min={0} max={20} placeholder='编辑人物攻击[0,20]' onChange={(v)=>setPerson({...person,attack:v})}/></p>
+            <p><TextInput min={0} max={20} placeholder='编辑人物防御[0,20]' onChange={(v)=>setPerson({...person,defense:v})}/></p>
+            <p><TextInput min={0} max={20} placeholder='编辑人物速度[0,20]' onChange={(v)=>setPerson({...person,speed:v})}/></p>
+            <p><TextInput min={0} max={100} placeholder='编辑人物天赋[0,100]!影响自由点数' onChange={(v)=>setPerson({...person,talent:v,freePoint:100-v})}/></p>
         </div>
     </Container>;
     async function query() {
