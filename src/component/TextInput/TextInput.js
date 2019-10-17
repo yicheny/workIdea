@@ -7,7 +7,6 @@ function TextInput(props) {
     const {system, type, onChange, placeholder, digit, required,max,min} = props;
     const [value, setValue] = useState(props.value);
     const [error, setError] = useState(props.error);
-    const [init, setInit] = useState(false);
 
     return <span className={mergeCn('textInput_wrap', error && 'error')}>
         {error && errorTipRender()}
@@ -16,7 +15,7 @@ function TextInput(props) {
     </span>;
 
     function handleFocus() {
-        validate();
+
     }
 
     function handleBlur() {
@@ -68,7 +67,6 @@ function TextInput(props) {
     }
 
     function validate() {
-        if(!init) return setInit(true);
         if (required && value === '') return setError('必填项');
         if (min && value<min) return setError(`最小输入值为${min}`);
         return true;
