@@ -10,13 +10,9 @@ function TextInput(props) {
 
     return <span className={mergeCn('textInput_wrap', error && 'error')}>
         {error && errorTipRender()}
-        <input value={value} onFocus={handleFocus} onBlur={handleBlur} onChange={e => handleChange(e.target.value)}
+        <input value={value} onBlur={handleBlur} onChange={e => handleChange(e.target.value)}
                placeholder={placeholder}/>
     </span>;
-
-    function handleFocus() {
-
-    }
 
     function handleBlur() {
         if(!validate()) return;
