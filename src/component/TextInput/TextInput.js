@@ -4,7 +4,7 @@ import {last, isNumber, mergeCn} from "../../utils/publicFun";
 import {Icon} from "../index";
 
 function TextInput(props) {
-    const {system, type, onChange, placeholder, digit, required,max} = props;
+    const {system, type, onChange, placeholder, digit, required,max,min} = props;
     const [value, setValue] = useState(props.value);
     const [error, setError] = useState(props.error);
     const [init, setInit] = useState(false);
@@ -16,13 +16,12 @@ function TextInput(props) {
     </span>;
 
     function handleFocus() {
-        if (init && required && value === '') return setError('必填项');
-        !init && setInit(true);
+        validate();
         if (Number(value) === 0) return setValue('');
     }
 
     function handleBlur() {
-        if (init && required && value === '') return setError('必填项');
+        if(!validate()) return;
         setError(null);
         return onChange(value)
     }
@@ -69,6 +68,13 @@ function TextInput(props) {
         }
     }
 
+    function validate() {
+        if(!init) return setInit(true);
+        if (required && value === '') return setError('必填项');
+        if (min && value<min) return setError(`最小输入值为${min}`);
+        return true;
+    }
+    
     function errorTipRender() {
         return <div className="error_tip">
             <Icon type='error' size={16} color='#f35541' style={{margin: '0 6px'}}/>
@@ -86,7 +92,8 @@ TextInput.defaultProps = {
     digit: 100,
     required: false,
     error: null,
-    max:null
+    max:null,
+    min:null
 };
 
 export default TextInput;
