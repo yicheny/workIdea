@@ -21,6 +21,7 @@ function ComponentHome(props) {
             <Link to='/component/rate'>Rate</Link>
             <Link to='/component/tableW'>TableW</Link>
             <Link to='/component/textInput'>TextInput</Link>
+            <Link to='/component/icon'>Icon展示</Link>
         </div>
     );
 }

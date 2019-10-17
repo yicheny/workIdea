@@ -18,6 +18,7 @@ import RateDemo from "./control/RateDemo";
 import TableWDemo from "./control/TableWDemo";
 import ProgressDemo from "./control/ProgressDemo";
 import TextInputDemo from "./control/TextInputDemo";
+import IconDemo from "./control/IconDemo";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -38,6 +39,7 @@ function ComponentRouter(props) {
         <Route path='/component/rate' component={RateDemo}/>
         <Route path='/component/tableW' component={TableWDemo}/>
         <Route path='/component/textInput' component={TextInputDemo}/>
+        <Route path='/component/icon' component={IconDemo}/>
         <Route component={ComponentHome}/>
     </Switch>
 
