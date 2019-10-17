@@ -8,7 +8,7 @@ import IndexedDbClient from "../../../base/IndexedDbClient";
 let db = null;
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
-    const [name,setName] = useState(null);
+    const [name,setName] = useState('');
 
     useEffect(()=>{
         db = new IndexedDbClient('hugeSura',1,'persons',['name','sexy']);
