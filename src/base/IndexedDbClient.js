@@ -81,18 +81,17 @@ export default class IndexedDbClient{
     };
 
     //只会返回查询到的第一个对象_Sync
-    querySync = async (key='id',value=0)=>{
-        const promise = new Promise((resolve,reject)=>{
+    querySync = (key='id',value=0)=>{
+        return new Promise((resolve,reject)=>{
             const request = this.store().index(key).get(value);
-            request.onsuccess = ()=>resolve(request);
+            request.onsuccess = ()=>resolve(request.result);
         });
 
-        return (await promise).result;
     };
 
     //返回查询到的所有符合条件的对象_Sync
-    queryAllSync = async(key='id')=>{
-        const promise = new Promise((resolve,reject)=>{
+    queryAllSync = (key='id')=>{
+        return new Promise((resolve,reject)=>{
             const res = [];
             const request = this.store().index(key).openCursor();
             request.onsuccess = (event)=>{
@@ -104,8 +103,6 @@ export default class IndexedDbClient{
                 resolve(res);
             };
         });
-
-        return (await promise);
     }
 }
 
