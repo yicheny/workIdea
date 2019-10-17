@@ -1,7 +1,6 @@
 import React from "react";
 // import {condData} from './data/CondData';
 import {data} from './data/Data';
-import '../../../asset/style/View/business/demo2.less';
 import {Container,TableW,ColumnW,SetColor,Rate} from "../../../component";
 import {N4} from "../../../utils/format";
 
