@@ -22,7 +22,7 @@ function GenPersonDemo(props) {
         <Button onClick={query}>查询指定人物</Button>
         <Button onClick={queryAll}>查询全部人物</Button>
         <p style={{margin:'6px 0'}}>
-            <TextInput placeholder='请输入人物姓名' onChange={async v=>setPerson(await genPerson({name:v}))}/>
+            <TextInput value={person.name} placeholder='请输入人物姓名' onChange={v=>setPerson({...person,name:v})}/>
         </p>
         <div>
             <p>姓名：{person.name}</p>
