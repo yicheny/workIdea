@@ -17,7 +17,6 @@ function TextInput(props) {
 
     function handleFocus() {
         validate();
-        if (Number(value) === 0) return setValue('');
     }
 
     function handleBlur() {

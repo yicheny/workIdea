@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import {nil} from "../../../../base/BaseVariate";
 import {Container, TextInput} from "../../../../component";
 
 function SystemSwitch(props) {
-    const [tenNum,setTenNum] = useState(0);
-    const [twoNum,setTwoNum] = useState(0);
+    const [tenNum,setTenNum] = useState('');
+    const [twoNum,setTwoNum] = useState('');
 
     return <Container header='进制转换'>
         <div>
@@ -19,9 +20,11 @@ function SystemSwitch(props) {
     </Container>;
 
     function tenSOther(radix=2) {
+        if(nil.includes(tenNum)) return 0;
         return tenNum.toString(radix);
     }
     function otherSTen(radix=2) {
+        if(nil.includes(twoNum)) return 0;
         return parseInt(twoNum,radix)
     }
 }
