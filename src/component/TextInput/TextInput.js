@@ -17,12 +17,13 @@ function TextInput(props) {
 
     function handleFocus() {
         if (init && required && value === '') return setError('必填项');
+        !init && setInit(true);
         if (Number(value) === 0) return setValue('');
     }
 
     function handleBlur() {
+        if (init && required && value === '') return setError('必填项');
         setError(null);
-        !init && setInit(true);
         return onChange(value)
     }
 
