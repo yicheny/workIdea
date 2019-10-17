@@ -15,17 +15,17 @@ function IndexedDbDemo(props) {
     return <Container header='IndexedDbDemo'>
         <p>请设置Id：<TextInput type='number' onChange={v=>setId(Number(v))}/></p>
         <p style={{margin:'8px 0'}}>请设置Name：<TextInput onChange={v=>setName(Number(v))}/></p>
-        <p>
+        <p className='mar_wrap'>
             <Button type='primary' onClick={()=>db.add(genData())}>新增数据</Button>
             <Button type='primary' onClick={()=>db.del(id)}>删除数据</Button>
             <Button type='primary' onClick={()=>db.edit(id,genData())}>编辑数据</Button>
         </p>
-        <p>
+        <p className='mar_wrap'>
             <Button type='primary' onClick={()=>db.query('id', id,(res)=>console.log(res))}>根据Id查询</Button>
             <Button type='primary' onClick={()=>db.query('name',name,(res)=>console.log(res))}>姓名查询</Button>
             <Button type='primary' onClick={()=>db.queryAll('id',(res)=>console.log(res))}>查询所有</Button>
         </p>
-        <p>
+        <p className='mar_wrap'>
             <Button type='primary' onClick={()=>query('id')}>Id查询_Sync</Button>
             <Button type='primary' onClick={()=>query('name')}>姓名查询_Sync</Button>
             <Button type='primary' onClick={queryAll}>查询所有_Sync</Button>

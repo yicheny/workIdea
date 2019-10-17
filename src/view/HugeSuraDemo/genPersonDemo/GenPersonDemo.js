@@ -10,20 +10,23 @@ let db = null;
 
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
+    const [name,setName] = useState(null);
 
     useEffect(()=>{
         db = new IndexedDbClient('hugeSura',1,'persons',['name','sexy']);
     },[]);
 
     return <Container header='人物生成'>
-        <Button onClick={async ()=>setPerson(await genPerson())}>随机人物</Button>
-        <Button type='primary' onClick={comfireGen}>确认生成</Button>
-        <Button type='primary' onClick={editPerson}>修改人物</Button>
-        <Button onClick={query}>查询指定人物</Button>
-        <Button onClick={queryAll}>查询全部人物</Button>
-        <p style={{margin:'6px 0'}}>
-            <TextInput value={person.name} placeholder='请输入人物姓名' onChange={v=>setPerson({...person,name:v})}/>
-        </p>
+        <div className='mar_wrap'>
+            <Button onClick={async ()=>setPerson(await genPerson())}>随机人物</Button>
+            <Button type='primary' onClick={comfireGen}>确认生成</Button>
+            <Button type='primary' onClick={editPerson}>修改人物</Button>
+            <Button onClick={queryAll}>查询全部人物</Button>
+        </div>
+        <div className='mar_wrap'>
+            <TextInput placeholder='请输入人物姓名' onChange={setName}/>
+            <Button onClick={query}>查询指定人物</Button>
+        </div>
         <div>
             <p>姓名：{person.name}</p>
             <p>性别：{person.sexy}</p>
@@ -36,12 +39,17 @@ function GenPersonDemo(props) {
             <p>自由点数：{person.freePoint}</p>
         </div>
         <div>
-            <Button type='primary' onClick={()=>setPerson({...person,sexy:'man'})}>设置性别为男</Button>
-            <Button type='primary' onClick={()=>setPerson({...person,sexy:'woman'})}>设置性别为女</Button>
+            <p className='mar_wrap'>
+                <Button type='primary' onClick={()=>setPerson({...person,sexy:'man'})}>设置性别为男</Button>
+                <Button type='primary' onClick={()=>setPerson({...person,sexy:'woman'})}>设置性别为女</Button>
+            </p>
+            <p>
+                <TextInput placeholder='编辑人物姓名' onChange={(v)=>setPerson({...person,name:v})}/>
+            </p>
         </div>
     </Container>;
     async function query() {
-        console.log('数据查询成功',await db.querySync('name', person.name));
+        console.log('数据查询成功',await db.querySync('name', name));
     }
     async function queryAll() {
         console.log(await db.queryAllSync())
@@ -51,6 +59,7 @@ function GenPersonDemo(props) {
         const sexy = person.sexy || sample(['man','woman']);
         const talent = genRandom(1,100);
 
+        if(!check()) return {};
         return {
             name,
             level:1,
@@ -72,6 +81,10 @@ function GenPersonDemo(props) {
             function isAllUse(){
                 return PersonNameList.every(item=>existsPersonNameList.includes(item))
             }
+        }
+
+        function check() {
+            if(nil.includes(name)) return false;
         }
     }
     async function comfireGen() {

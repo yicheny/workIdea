@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Button} from "antd/lib/index";
 
 function RouterDemo1(props) {
-    return <div>
+    return <div className='mar_wrap'>
         <Link to='router/demo2'>
             <Button type="primary">点击跳转Router-Demo2</Button>
         </Link>
