@@ -3,7 +3,7 @@ import './TextInput.less';
 import {last, isNumber, mergeCn} from "../../utils/publicFun";
 
 function TextInput(props) {
-    const {system,type,onChange,placeholder} = props;
+    const {system,type,onChange,placeholder,digit} = props;
     const [value,setValue] = useState(props.value);
 
     return <span className={mergeCn('textInput_wrap')}>
@@ -23,6 +23,7 @@ function TextInput(props) {
             const typeStrategy = {
                 text:()=>true,
                 number:()=>{
+                    if(digitCheck()) return;
                     if(!systemCheck()) return;
                     return !isNaN(Number(v));
 
@@ -34,6 +35,17 @@ function TextInput(props) {
                         }
                         return genSystemList().includes(last(v));
                     }
+                    function digitCheck() {
+                        return deciLenFor()>digit;
+                        function deciLenFor() {
+                            return decimalFor().length;
+
+                            function decimalFor() {
+                                const matchs = /(\d?)\.(\d*)/.exec(v);
+                                return matchs ? matchs[2] : '';
+                            }
+                        }
+                    }
                 }
             };
             return typeStrategy[type]()
@@ -44,6 +56,8 @@ TextInput.defaultProps={
     system:10,//进制_目前最高支持16进制
     type:'text',
     value:'',
+    onChange:()=>{},
+    digit:100
 };
 
 export default TextInput;
