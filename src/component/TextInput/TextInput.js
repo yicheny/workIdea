@@ -73,10 +73,10 @@ function TextInput(props) {
     }
     
     function errorTipRender() {
-        return <div className="error_tip">
+        return <span className="error_tip">
             <Icon type='error' size={16} color='#f35541' style={{margin: '0 6px'}}/>
             {error}
-        </div>
+        </span>
     }
 }
 
