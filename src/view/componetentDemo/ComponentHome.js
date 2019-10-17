@@ -20,6 +20,7 @@ function ComponentHome(props) {
             <Link to='/component/CountDown'>倒计时CountDown</Link>
             <Link to='/component/rate'>Rate</Link>
             <Link to='/component/tableW'>TableW</Link>
+            <Link to='/component/textInput'>TextInput</Link>
         </div>
     );
 }
