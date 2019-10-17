@@ -4,7 +4,7 @@ import {last, isNumber, mergeCn} from "../../utils/publicFun";
 import {Icon} from "../index";
 
 function TextInput(props) {
-    const {system, type, onChange, placeholder, digit, required} = props;
+    const {system, type, onChange, placeholder, digit, required,max} = props;
     const [value, setValue] = useState(props.value);
     const [error, setError] = useState(props.error);
     const [init, setInit] = useState(false);
@@ -29,6 +29,7 @@ function TextInput(props) {
     function handleChange(v) {
         if (v === '') return setValue('');
         if (!typeCheck()) return;
+        if (max && v>max) return;
         return setValue(v);
 
         function typeCheck() {
@@ -83,7 +84,8 @@ TextInput.defaultProps = {
     },
     digit: 100,
     required: false,
-    error: null
+    error: null,
+    max:null
 };
 
 export default TextInput;
