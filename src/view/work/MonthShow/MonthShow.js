@@ -1,6 +1,7 @@
 import React from "react";
 import _ from 'lodash';
 import {data} from "./Data/data"
+import './MonthShow.less';
 
 function ChangeDisplay(props) {
     const {v,max,min} = props;
@@ -9,47 +10,34 @@ function ChangeDisplay(props) {
         </span>
 }
 
-function Table(props) {
-    const {option:{title,bind},data} = props;
-
-    if(!data) return <div>没有数据</div>;
-
+function MonthTable(props) {
+    const {data,options:{title,align}} = props;
     return <table>
-        <tbody>
+        <thead>
         <tr>
-            {
-                title.map((item,index)=>{
-                    return <th key={index}>
-                        {item}
-                    </th>
-                })
-            }
+            {title.map((el, i) => <td key={i} className={align[i]}>{el}</td>)}
         </tr>
+        </thead>
+        <tbody>
         {
-            data.map(item=>{
-                return item.details.map((ele,index)=>{
-                    return <tr key={index}>
-                        {bind.map((iItem,iIndex)=>{
-                            if(index===0){
-                                if(iIndex!==0) {
-                                    return <td key={iIndex}>
-                                        <ChangeDisplay v={ele[iItem]} min={ele.minVal} max={ele.maxVal}/>
-                                    </td>
-                                }
-                                return [<td rowSpan={item.details.length} key={0}>{item.value}</td>,<td key={1}>
-                                    {ele[iItem]}
-                                </td>]
-                            }
-                            return <td key={iIndex}>
-                                <ChangeDisplay v={ele[iItem]} min={ele.minVal} max={ele.maxVal}/>
-                            </td>
-                        })}
+            data.map(el => {
+                return el.details.map((el2, i2) => {
+                    return <tr key={i2}>
+                        {!i2 && <td rowSpan={el.details.length} className='center'>{el.value}</td>}
+                        <td className='left'>{el2.name || '-'}</td>
+                        {el2.month.map((el3, i3) =>genTd(el3,i3,el2.minVal,el2.maxVal))}
+                        {genTd(el2.all)}
                     </tr>
                 })
             })
         }
         </tbody>
-    </table>
+    </table>;
+
+
+    function genTd(value,key,min=0,max=0) {
+        return <td key={key} className='center'><ChangeDisplay v={value} min={min} max={max}/></td>
+    }
 }
 
 class MonthShow extends React.Component{
@@ -61,89 +49,64 @@ class MonthShow extends React.Component{
     }
 
     tableData = {
-        title:['年份','产品名称','1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月','综合'],
-        bind:['productName','jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec','all']
+        title: ['年份', '名称', '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '年度累计'],
+        align: ['center', 'left', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center', 'center', ' center', 'center', 'center']
     };
 
     componentDidMount() {
-        this.setState({data:this.getNewArr(data())})
+        this.setState({data:this.newDataFor(data())})
     }
 
-    getNewArr = (data)=>{
-        const creNewArr = (data) => {
-            let newArr = [];
-            data.forEach(item => {
-                newArr.push(item.year);
-            });
-            newArr = [...new Set(newArr)];
-            let newArr2 = newArr.map(item => {
-                return data.filter(ele => ele.year === item);
-            });
-            newArr2.forEach(item=>{
-                item.forEach(ele=>{
-                    delete ele.year;
-                    const keyArr = Object.keys(ele).map(item=>ele[item]);
-                    ele.maxVal = _.max(keyArr);
-                    ele.minVal = _.min(keyArr);
-                })
-            });
-            return {
-                arr1:newArr,//由特定属性组成的新数组
-                arr2:newArr2,//所有含有相同特定属性值对象所组成的数组
+    newDataFor = (data) => {
+        if (!data) return;
+        return _.sortBy(genNewData(), 'value').reverse();
+
+        function genNewData() {
+            return genYears().reduce((acc, el, i) => acc.concat([{value: el, details: genProductList()[i]}]), []);
+
+            function genYears() {
+                const years = gatherData(data).reduce((acc,el)=>acc.concat([el.year]),[]);
+                return _.uniq(years);
             }
-        };
-        let {arr1,arr2} = creNewArr(data);
 
-        const foo = (arr1, arr2) => {
-            let i = 0,
-                newArr = [];
+            //相同年份的产品和基准组成的数组
+            function genProductList() {
+                let productList =  genYears().map(el => gatherData(data).filter(el2=> el2.year === el));
+                setLimit();
+                return productList;
 
-            const innerFoo = () => {
-                newArr.push({
-                    value: arr1[i],
-                    details: arr2[i]
-                });
-                i++;
-                return i >= arr1.length ? newArr : innerFoo(arr1, arr2);
-            };
+                function setLimit() {
+                    productList.forEach(el => {
+                        el.forEach(el2 => {
+                            //delete ele2.year;
+                            el2.maxVal = _.max(el2.month);
+                            el2.minVal = _.min(el2.month);
+                        })
+                    });
+                }
+            }
 
-            return innerFoo();
-        };
+            function gatherData(data) {
+                return productListFor().concat(benchmarkListFor());
 
-        return foo(arr1, arr2);
+                function productListFor() {
+                    let {product, name,} = data;
+                    if (!product) return [];
+                    return product.map(item => _.assign(item, {name}));
+                }
+
+                function benchmarkListFor() {
+                    let {benchmarks, benchmarkName} = data;
+                    if (!benchmarks) return [];
+                    return benchmarks.map(item => _.assign(item, {name: benchmarkName}));
+                }
+            }
+        }
     };
 
     render(){
-        /*return <div>
-            <table>
-                <tbody>
-                <tr>
-                    <th>年份</th>
-                    <th>1月</th>
-                </tr>
-                <tr>
-                    <td rowSpan='3'>
-                        2018
-                    </td>
-                    <td>
-                        1
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        1
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>*/
-        return <div className='x month'>
-            <Table data={this.state.data} option={this.tableData}/>
+        return <div className='x_month '>
+            {this.state.data && <MonthTable data={this.state.data} options={this.tableData}/>}
         </div>
     }
 }

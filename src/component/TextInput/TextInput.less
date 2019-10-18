@@ -2,13 +2,13 @@
 
 .textInput{
   &_wrap{
-    &.error{
+    &.error-color{
       position:relative;
-      >.error_tip{
+      >.error-color_tip{
         display: none;
       }
       &:hover{
-        >.error_tip{
+        >.error-color_tip{
           display: block;
           position:absolute;
           bottom:40px;
@@ -20,13 +20,13 @@
         }
       }
       input{
-        color: @error;
-        border-color:@error;
+        color: @error-color;
+        border-color:@error-color;
         &::placeholder{
-          color:@error;
+          color:@error-color;
         }
         &:focus{
-          border-color: @error;
+          border-color: @error-color;
           box-shadow:0 0 0 2px rgba(243,55,41,0.2);
         }
       }
