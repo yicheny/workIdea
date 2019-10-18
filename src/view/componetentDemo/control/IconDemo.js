@@ -47,7 +47,7 @@ function IconDemo(props) {
                 input.select();
                 if (document.execCommand('copy')) {
                     document.execCommand('copy');
-                    Message.show({info:`复制成功${`<Icon type='${name}'/>`}`,icon:'success'});
+                    Message.show({info:`复制成功<Icon type='${name}'/>`,icon:'success'});
                 }
                 document.body.removeChild(input);
             }
