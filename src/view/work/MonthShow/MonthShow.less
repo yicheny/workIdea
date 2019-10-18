@@ -1,3 +1,49 @@
+.month_show{
+  color: #4A4A4A;
+  font-size: 12px;
+  max-height:550px;
 
+  table {
+    width: 100%;
+    min-width: 1300px;
+    margin-top:-1px;
+    border-collapse: collapse;
+    border: none;
+    position:relative;
 
+    thead{
+      font-weight: bolder;
+      td{
+        border-top:none;
+      }
+    }
 
+    tr {
+      justify-content: space-between;
+      >:first-child{
+        border-left:none;
+      }
+      >:last-child{
+        border-right:none;
+      }
+    }
+
+    td {
+      flex-grow: 1;
+      border:1px rgb(225, 225, 225) solid;
+      padding:0 15px;
+      text-align: right;
+      height: 32px;
+      line-height: 32px;
+      &.center{
+        text-align: center;
+      }
+      &.left{
+        text-align: left;
+      }
+      &.right{
+        text-align: right;
+      }
+    }
+  }
+}

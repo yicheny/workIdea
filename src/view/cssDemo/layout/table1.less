@@ -1,25 +1,27 @@
-table {
-  min-width: 660px;
-  border-top: 1px solid #D3D6DA;
-  border-left: 1px solid #D3D6DA;
-  margin: 48px;
+.css_table1{
+  table {
+    min-width: 660px;
+    border-top: 1px solid #D3D6DA;
+    border-left: 1px solid #D3D6DA;
+    margin: 48px;
 
-  tr {
-    border-bottom: 1px solid #D3D6DA;
-    display: flex;
-    text-align: right;
+    tr {
+      border-bottom: 1px solid #D3D6DA;
+      display: flex;
+      text-align: right;
 
-    td {
-      &:first-child{
-        color:red;
-        flex-grow: 0;
-        min-width:120px;
+      td {
+        &:first-child{
+          color:red;
+          flex-grow: 0;
+          min-width:120px;
+        }
+        border-right: 1px solid #D3D6DA;
+        flex:1 1;
+        height: 40px;
+        line-height: 40px;
+        padding-right:24px;
       }
-      border-right: 1px solid #D3D6DA;
-      flex:1 1;
-      height: 40px;
-      line-height: 40px;
-      padding-right:24px;
     }
   }
 }

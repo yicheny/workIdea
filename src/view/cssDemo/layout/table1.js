@@ -8,7 +8,7 @@ const mockData = Array.from(Array(8),(el,i)=>[
 ]);
 function Table1(props) {
     return (
-        <div className='table1'>
+        <div className='css_table1'>
             <table>
                 { mockData.map((el)=><tr>
                     <td>{el[0]}</td>

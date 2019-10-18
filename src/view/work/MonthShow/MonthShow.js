@@ -2,6 +2,7 @@ import React from "react";
 import _ from 'lodash';
 import {data} from "./Data/data"
 import './MonthShow.less';
+import {Container} from "../../../component";
 
 function ChangeDisplay(props) {
     const {v,max,min} = props;
@@ -105,9 +106,11 @@ class MonthShow extends React.Component{
     };
 
     render(){
-        return <div className='x_month '>
-            {this.state.data && <MonthTable data={this.state.data} options={this.tableData}/>}
-        </div>
+        return <Container header='MonthShow' nopad>
+            <div className='month_show'>
+                {this.state.data && <MonthTable data={this.state.data} options={this.tableData}/>}
+            </div>
+        </Container>
     }
 }
 export default MonthShow;
