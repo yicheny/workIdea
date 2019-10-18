@@ -7,6 +7,7 @@ import Overturn from "./css3/Overturn";
 import Move from "./css3/Move";
 import Bounce from "./css3/Bounce";
 import MoveToEle from "./css3/MoveToEle";
+import CircleLayout from "./layout/CircleLayout";
 
 function CssTestRouter(props) {
     return <Switch>
@@ -16,6 +17,7 @@ function CssTestRouter(props) {
         <Route path='/css/move' component={Move}/>
         <Route path='/css/bounce' component={Bounce}/>
         <Route path='/css/moveToEle' component={MoveToEle}/>
+        <Route path='/css/circleLayout' component={CircleLayout}/>
         <Route component={CssTestHome}/>
     </Switch>
 }

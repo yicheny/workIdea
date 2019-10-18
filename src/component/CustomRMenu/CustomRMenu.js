@@ -40,11 +40,11 @@ class ContextMenu {
     }
 }
 
-const customMenu = new ContextMenu();
-document.addEventListener('contextmenu',e=>{
-    e.preventDefault();
-    customMenu.show(e);
-});
-document.addEventListener('click',e=>{
-    customMenu.hide();
-});
+// const customMenu = new ContextMenu();
+// document.addEventListener('contextmenu',e=>{
+//     e.preventDefault();
+//     customMenu.show(e);
+// });
+// document.addEventListener('click',e=>{
+//     customMenu.hide();
+// });
