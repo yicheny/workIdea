@@ -44,15 +44,15 @@ function PublicFunTest(props) {
         fn();
     }
     function genListCyclicTest() {
-        const listCyclic = genListCyclic();
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
-        console.log('genListCyclic方法测试',listCyclic([1,2,3,4]));
+        const listCyclic = genListCyclic([1,2,3,4]);
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
+        console.log('genListCyclic方法测试',listCyclic());
     }
     function cloneDeepTest() {
 

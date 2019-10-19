@@ -4,7 +4,7 @@ import {nil} from "../../base/BaseVariate";
 import './TableW.less';
 import {ArrowSvg} from "../../asset/svg/SVG";
 
-const cyclicDire = genListCyclic();
+const cyclicDire = genListCyclic(['asc', 'desc']);
 const columnHeight = 35;
 
 function Cell(props) {
@@ -26,7 +26,7 @@ function Cell(props) {
 
             function directionFor() {
                 if(nil.includes(sort.direction)) return 'desc';
-                return cyclicDire(['asc', 'desc'])
+                return cyclicDire()
             }
         }
     }

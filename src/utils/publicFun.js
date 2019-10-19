@@ -139,9 +139,9 @@ export function isNumber(value) {
 }
 
 //返回一个 可以循环返回数组项的函数
-export function genListCyclic() {
+export function genListCyclic(list) {
     let count = 0;
-    return function (list) {
+    return function () {
         const len = list.length;
         const index = count%len;
         count++;
