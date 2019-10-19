@@ -1,5 +1,5 @@
-import React, {createRef, useEffect} from 'react';
-import {Container} from "../../../component";
+import React, {createRef, useState,useEffect} from 'react';
+import {Container, TextInput} from "../../../component";
 import './CircleLayout.less';
 
 // import {typeFor} from '../../../utils/publicFun';
@@ -10,23 +10,16 @@ function CircleLayout(props) {
     const itemW = 60;
     const itemH = 60;
 
+    const [num,setNum] = useState(8);
     const boxRef = createRef();
 
     useEffect(() => {
         setPosition();
-    }, []);
+    }, [num]);
 
     return <Container header='环形排列布局'>
-        <div className="circle_layout_box flex-y center" ref={boxRef}>
-            <div className="circle_layout_item">1</div>
-            <div className="circle_layout_item">2</div>
-            <div className="circle_layout_item">3</div>
-            <div className="circle_layout_item">4</div>
-            <div className="circle_layout_item">5</div>
-            <div className="circle_layout_item">6</div>
-            <div className="circle_layout_item">7</div>
-            <div className="circle_layout_item">8</div>
-        </div>
+        <TextInput type='number' max={1000} placeholder='请输入子元素数量用于渲染[0,1000]' onChange={setNum}/>
+        {renderBox(num)}
     </Container>;
 
     function setPosition() {
@@ -47,6 +40,14 @@ function CircleLayout(props) {
             const left = (sinValue * width) + width;
             return {bottom, left};
         }
+    }
+
+    function renderBox(count) {
+        return <div className="circle_layout_box flex-y center" ref={boxRef}>
+            {Array.from(Array(count*1),(el,i)=>{
+                return <div className="circle_layout_item" key={i}>{i+1}</div>
+            })}
+        </div>
     }
 }
 
