@@ -3,6 +3,7 @@ import './login.less';
 import {Button,Card,Icon,Input} from "./component";
 import Logo from './asset/svg/ylfLogo';
 import Bg from "./component/BG/BG";
+import {mergeCn} from "./utils/publicFun";
 
 function Login({history}){
     const [user,setUser] = useState('');
@@ -10,38 +11,15 @@ function Login({history}){
     const [placeholder,setPlaceholder] = useState('');
     const [loginMode,setLoginMode] = useState('');
 
-    let index = 0;
-    let textArr = ['无法登录？','请检查账号和密码是否输入正确'];
-    textArr = textArr.reduce((acc,el)=>acc.concat(el,'  '),[]);
-    let textFlag = 0;
-    const autoInput = (v='')=>{
-        if(index===v.length){
-            textFlag = textFlag===textArr.length ? 0 : ++ textFlag;
-        }
-        index = index===v.length?0:++index;
-        return v.slice(0,index);
-    };
     useEffect(()=>{
-        const id = setInterval(()=>{
-            setPlaceholder(autoInput(textArr[textFlag]))
-        },250);
-        return ()=>clearInterval(id)
+        autoPrint();
     },[]);
 
     useEffect(()=>{
-        if(loginMode==='update'){
-            setLoginMode('x_login_warn');
-        }
+        if(loginMode==='update') return setLoginMode('x_login_warn');
     },[loginMode]);
 
-    const loginClick = ()=>{
-        if (user==='123123'&&password==='321321'){
-            return history.push({pathname:'/work'});
-        }
-        setLoginMode('update');
-    };
-
-    return <div className={["x_login",loginMode].join(' ')}>
+    return <div className={mergeCn("x_login",loginMode)}>
         <Bg/>
         <Card className='bg_glass' style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
             <div className="x_login_logo">
@@ -53,6 +31,33 @@ function Login({history}){
                 <Button type="primary" style={{width:200}} onClick={loginClick}>登录</Button>
             </div>
         </Card>
-    </div>
+    </div>;
+
+    function loginClick (){
+        if (user==='123123'&&password==='321321')return history.push({pathname:'/work'});
+        return setLoginMode('update');
+    }
+
+    function autoPrint() {
+        const tips = ['无法登录？','请检查账号和密码是否输入正确'];
+        const cyclicFoo = genCyclic();
+        setInterval(()=>{
+            cyclicFoo()
+        },300);
+
+        function genCyclic() {
+            let i = 0;
+            let i2 = 0;
+            return function () {
+                i = i%tips.length;
+                setPlaceholder(tips[i].slice(0, i2));
+                i2++;
+                if(i2>tips[i].length){
+                    i2=0;
+                    i++;
+                }
+            }
+        }
+    }
 }
 export default Login;

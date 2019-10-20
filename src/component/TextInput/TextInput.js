@@ -7,10 +7,10 @@ function TextInput(props) {
     const {system, type, onChange, digit, required,max,min,autoP,autoPTime} = props;
     const [value, setValue] = useState(props.value);
     const [error, setError] = useState(props.error);
-    const [placeholder,setPlaceHolder] = useState('');
+    const [placeholder,setPlaceholder] = useState('');
 
     useEffect(()=>{
-        autoP ? autoPrint() : setPlaceHolder(props.placeholder);
+        autoP ? autoPrint() : setPlaceholder(props.placeholder);
     },[]);
 
     return <span className={mergeCn('textInput_wrap', error && 'error')}>
@@ -92,7 +92,7 @@ function TextInput(props) {
             let i2 = 0;
             return function () {
                 i = i%tips.length;
-                setPlaceHolder(tips[i].slice(0, i2));
+                setPlaceholder(tips[i].slice(0, i2));
                 i2++;
                 if(i2>tips[i].length){
                     i2=0;
