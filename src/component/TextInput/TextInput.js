@@ -1,12 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './TextInput.less';
 import {last, isNumber, mergeCn} from "../../utils/publicFun";
 import {Icon} from "../index";
 
 function TextInput(props) {
-    const {system, type, onChange, placeholder, digit, required,max,min} = props;
+    const {system, type, onChange, digit, required,max,min,autoP,autoPTime} = props;
     const [value, setValue] = useState(props.value);
     const [error, setError] = useState(props.error);
+    const [placeholder,setPlaceHolder] = useState('');
+
+    useEffect(()=>{
+        autoP ? autoPrint() : setPlaceHolder(props.placeholder);
+    },[]);
 
     return <span className={mergeCn('textInput_wrap', error && 'error')}>
         {error && errorTipRender()}
@@ -67,12 +72,34 @@ function TextInput(props) {
         if (min && value<min) return setError(`最小输入值为${min}`);
         return true;
     }
-    
+
     function errorTipRender() {
         return <span className="error_tip">
             <Icon type='error' size={16} color='#f35541' style={{margin: '0 6px'}}/>
             {error}
         </span>
+    }
+
+    function autoPrint() {
+        const tips = props.placeholder.split(' ');
+        const cyclicFoo = genCyclic();
+        setInterval(()=>{
+            cyclicFoo()
+        },autoPTime);
+
+        function genCyclic() {
+            let i = 0;
+            let i2 = 0;
+            return function () {
+                i = i%tips.length;
+                setPlaceHolder(tips[i].slice(0, i2));
+                i2++;
+                if(i2>tips[i].length){
+                    i2=0;
+                    i++;
+                }
+            }
+        }
     }
 }
 
@@ -86,7 +113,9 @@ TextInput.defaultProps = {
     required: false,
     error: null,
     max:null,
-    min:null
+    min:null,
+    autoP:false,//placeholder是否循环打印提示
+    autoPTime:300,
 };
 
 export default TextInput;

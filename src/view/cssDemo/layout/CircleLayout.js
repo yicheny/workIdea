@@ -18,7 +18,7 @@ function CircleLayout(props) {
     }, [num]);
 
     return <Container header='环形排列布局'>
-        <TextInput type='number' max={1000} placeholder='请输入子元素数量用于渲染[0,1000]' onChange={setNum}/>
+        <TextInput type='number' max={1000} placeholder='请输入子元素数量用于渲染[0,1000] 注意，其实本示例是一个椭圆' onChange={setNum} autoP/>
         {renderBox(num)}
     </Container>;
 
