@@ -25,8 +25,9 @@ class ContextMenu {
             ReactDOM.render(GenCustomMenu(),div);
             return this.show(e);
         }
-        setPosition(customMenu);
-        return customMenu.style.display = 'flex';
+        customMenu.style.display = 'flex'
+        return setPosition(customMenu);
+
 
         function setPosition(ele) {
             ele.style.top = `${e.pageY - ele.clientHeight/2}px`;
@@ -40,11 +41,11 @@ class ContextMenu {
     }
 }
 
-// const customMenu = new ContextMenu();
-// document.addEventListener('contextmenu',e=>{
-//     e.preventDefault();
-//     customMenu.show(e);
-// });
-// document.addEventListener('click',e=>{
-//     customMenu.hide();
-// });
+const customMenu = new ContextMenu();
+document.addEventListener('contextmenu',e=>{
+    e.preventDefault();
+    customMenu.show(e);
+});
+document.addEventListener('click',e=>{
+    customMenu.hide();
+});
