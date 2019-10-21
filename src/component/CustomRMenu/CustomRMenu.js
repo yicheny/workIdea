@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './CustomRMenu.less';
-import {CirclePosition} from "../../utils/publicFunLayout";
+import {CirclePosition} from "../../utils/layoutPublicFun";
 
 function GenCustomMenu() {
     const menuList = ['菜单1', '菜单2', '菜单3', '菜单4', '菜单5', '菜单6',];

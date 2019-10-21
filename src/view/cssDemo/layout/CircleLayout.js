@@ -1,7 +1,7 @@
 import React, {createRef, useState,useEffect} from 'react';
 import {Container, TextInput} from "../../../component";
 import './CircleLayout.less';
-import {CirclePosition} from "../../../utils/publicFunLayout";
+import {CirclePosition} from "../../../utils/layoutPublicFun";
 // import {typeFor} from '../../../utils/publicFun';
 
 function CircleLayout(props) {
