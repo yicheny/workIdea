@@ -4,7 +4,7 @@ import './CustomRMenu.less';
 import {CirclePosition} from "../../utils/layoutPublicFun";
 
 function GenCustomMenu() {
-    const menuList = ['菜单1', '菜单2', '菜单3', '菜单4', '菜单5', '菜单6',];
+    const menuList = ['导航', 'DOClever', '部署', 'MDN', 'React', 'bugTags', '本地'];
     const positionFor = new CirclePosition({boxW:240,boxH:240});
     const boxRef = createRef();
 
@@ -24,11 +24,30 @@ function GenCustomMenu() {
         const items = [...boxRef.current.children];
         items.forEach((el,i)=>{
             el.addEventListener('click',(e)=>{
-                e.stopPropagation();
-                console.log('itemClick',i);
+                handleClick(e,i)
             });
-        })
+        });
+
+        function handleClick(e,i) {
+            e.stopPropagation();
+            // console.log('itemClick',i);
+            return strategyFor()[i]();
+
+            function strategyFor() {
+                return {
+                    0:()=>window.open('https://192.168.1.56/nav/'),
+                    1:()=>window.open('http://192.168.1.56:10000/html/web/controller/console/console.html'),
+                    2:()=>window.open('http://192.168.1.43:8081/jenkins/view/%E5%89%8D%E5%8F%B0%E9%83%A8%E7%BD%B2/'),
+                    3:()=>window.open('https://developer.mozilla.org/zh-CN/'),
+                    4:()=>window.open('https://zh-hans.reactjs.org/'),
+                    5:()=>window.open('https://work.bugtags.cn/apps/1620705465599016'),
+                    6:()=>window.open('http://localhost:3000/#/login')
+                };
+            }
+        }
     }
+
+
 }
 
 class ContextMenu {
@@ -46,7 +65,6 @@ class ContextMenu {
         customMenu.style.display = 'flex';
         return setPosition(customMenu);
 
-
         function setPosition(ele) {
             ele.style.top = `${e.pageY - ele.clientHeight / 2}px`;
             ele.style.left = `${e.pageX - ele.clientWidth / 2}px`;
@@ -57,7 +75,7 @@ class ContextMenu {
             div.className = 'x_customMenu_wrap flex center';
             div.addEventListener('click',(e)=>{
                 e.stopPropagation();
-                console.log('menuClick');
+                // console.log('menuClick');
             });
             document.body.appendChild(div);
             ReactDOM.render(<GenCustomMenu/>, div);
@@ -77,7 +95,7 @@ document.addEventListener('contextmenu', e => {
 });
 document.addEventListener('click', e => {
     customMenu.hide();
-    console.log('docClick');
+    // console.log('docClick');
 });
 
 //问题1：在GenCustomMenu函数组件内调用useEffect方法报错
