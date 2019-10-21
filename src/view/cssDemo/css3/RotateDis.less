@@ -1,0 +1,26 @@
+.rotate_dis{
+  &_wrap{
+    margin:60px;
+    width:210px;
+    height:210px;
+  }
+  width:210px;
+  height:210px;
+  background: green;
+  animation: 1.2s rotateDis 1 linear;
+  overflow: hidden;
+
+  @keyframes rotateDis{
+    0%{
+      width:0;
+      height:0;
+      transform: rotate(0deg);
+    }
+
+    100%{
+      width:210px;
+      height:210px;
+      transform: rotate(720deg);
+    }
+  }
+}
