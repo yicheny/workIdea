@@ -8,6 +8,7 @@ import Move from "./css3/Move";
 import Bounce from "./css3/Bounce";
 import MoveToEle from "./css3/MoveToEle";
 import CircleLayout from "./layout/CircleLayout";
+import RotateDis from "./css3/RotateDis";
 
 function CssTestRouter(props) {
     return <Switch>
@@ -18,6 +19,7 @@ function CssTestRouter(props) {
         <Route path='/css/bounce' component={Bounce}/>
         <Route path='/css/moveToEle' component={MoveToEle}/>
         <Route path='/css/circleLayout' component={CircleLayout}/>
+        <Route path='/css/rotateDis' component={RotateDis}/>
         <Route component={CssTestHome}/>
     </Switch>
 }

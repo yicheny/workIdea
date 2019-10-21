@@ -11,6 +11,7 @@ function CssTestHome(props) {
             <Link to='/css/bounce'>弹跳旋转</Link>
             <Link to='/css/moveToEle'>移至指定元素位置</Link>
             <Link to='/css/circleLayout'>环形排列布局</Link>
+            <Link to='/css/rotateDis'>旋转放大显示</Link>
         </div>
     );
 }
