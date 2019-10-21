@@ -5,11 +5,6 @@ import './CircleLayout.less';
 // import {typeFor} from '../../../utils/publicFun';
 
 function CircleLayout(props) {
-    const boxW = 600;
-    const boxH = 480;
-    const itemW = 60;
-    const itemH = 60;
-
     const [num,setNum] = useState(8);
     const boxRef = createRef();
 
@@ -31,6 +26,11 @@ function CircleLayout(props) {
         });
 
         function positionFor(max, i) {
+            const boxW = 600;
+            const boxH = 480;
+            const itemW = 60;
+            const itemH = 60;
+
             const rad = ((i % max) / (max / 2)) * Math.PI;
             const sinValue = Math.sin(rad).toFixed(4);
             const cosValue = Math.cos(rad).toFixed(4);

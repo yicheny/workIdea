@@ -3,14 +3,36 @@ import ReactDOM from 'react-dom';
 import './CustomRMenu.less';
 
 function GenCustomMenu() {
+    const menuList = ['菜单1','菜单2','菜单3','菜单4','菜单5','菜单6',];
+
     return <div className="x_customMenu flex-y center">
-        <div className="x_customMenu_item">自定义菜单1</div>
-        <div className="x_customMenu_item">自定义菜单2</div>
-        <div className="x_customMenu_item">自定义菜单3</div>
-        <div className="x_customMenu_item">自定义菜单4</div>
-        <div className="x_customMenu_item">自定义菜单5</div>
-        <div className="x_customMenu_item">自定义菜单6</div>
-    </div>
+        {
+            menuList.map((el,i)=>{
+                return <div className="x_customMenu_item" key={i} style={positionFor(menuList.length,i)} onClick={()=>handleClick(i)}>{el}</div>
+            })
+        }
+
+    </div>;
+
+    function handleClick(index) {
+        console.log(index);
+    }
+
+    function positionFor(max, i) {
+        const boxW = 300;
+        const boxH = 300;
+        const itemW = 60;
+        const itemH = 60;
+
+        const rad = ((i % max) / (max / 2)) * Math.PI;
+        const sinValue = Math.sin(rad).toFixed(4);
+        const cosValue = Math.cos(rad).toFixed(4);
+        const height = (boxH - itemH) / 2;
+        const width = (boxW - itemW) / 2;
+        const bottom = (cosValue * height) + height;
+        const left = (sinValue * width) + width;
+        return {bottom, left};
+    }
 }
 
 class ContextMenu {
