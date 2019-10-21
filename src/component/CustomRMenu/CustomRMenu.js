@@ -1,31 +1,31 @@
-import React,{Fragment} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './CustomRMenu.less';
 
 function GenCustomMenu() {
-    return <Fragment>
+    return <div className="x_customMenu flex-y center">
         <div className="x_customMenu_item">自定义菜单1</div>
         <div className="x_customMenu_item">自定义菜单2</div>
         <div className="x_customMenu_item">自定义菜单3</div>
         <div className="x_customMenu_item">自定义菜单4</div>
         <div className="x_customMenu_item">自定义菜单5</div>
         <div className="x_customMenu_item">自定义菜单6</div>
-    </Fragment>
+    </div>
 }
 
 class ContextMenu {
-    customMenuFor = ()=>document.querySelector('.x_customMenu');
+    customMenuFor = ()=>document.querySelector('.x_customMenu_wrap');
 
     show = (e)=>{
         const customMenu = this.customMenuFor();
         if(!customMenu){
             const div = document.createElement('div');
-            div.className = 'x_customMenu';
+            div.className = 'x_customMenu_wrap flex center';
             document.body.appendChild(div);
             ReactDOM.render(GenCustomMenu(),div);
             return this.show(e);
         }
-        customMenu.style.display = 'flex'
+        customMenu.style.display = 'flex';
         return setPosition(customMenu);
 
 
