@@ -3,15 +3,14 @@
     position:fixed;
     width:240px;
     height:240px;
+    z-index: 99999;
   }
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width:240px;
   height:240px;
-  background: #fff;
   border-radius: 4px;
-  box-shadow: 2px 2px 5px rgba(124,124,124,0.7);
   user-select: none;
 
   animation: .45s rotateDis 1 ease-in;
@@ -27,6 +26,12 @@
     height:60px;
     border-radius: 50%;
     background: aquamarine;
+    //background-color: rgba(224,224,224,.35);
+    opacity: .72;
     cursor: pointer;
+    box-shadow: 3px 3px 7px rgba(124,124,124,0.7);
+    &:hover{
+      opacity: 1;
+    }
   }
 }

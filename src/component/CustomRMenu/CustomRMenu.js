@@ -46,8 +46,6 @@ function GenCustomMenu() {
             }
         }
     }
-
-
 }
 
 class ContextMenu {
