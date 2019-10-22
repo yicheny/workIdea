@@ -41,7 +41,7 @@ function GenCustomMenu() {
                     3:()=>window.open('https://developer.mozilla.org/zh-CN/'),
                     4:()=>window.open('https://zh-hans.reactjs.org/'),
                     5:()=>window.open('https://work.bugtags.cn/apps/1620705465599016'),
-                    6:()=>window.open('http://localhost:3000/#/login')
+                    6:()=>window.open('http://localhost:3000/#/login'),
                 };
             }
         }
@@ -71,10 +71,6 @@ class ContextMenu {
         function genMenu() {
             const div = document.createElement('div');
             div.className = 'x_customMenu_wrap flex center';
-            div.addEventListener('click',(e)=>{
-                e.stopPropagation();
-                // console.log('menuClick');
-            });
             document.body.appendChild(div);
             ReactDOM.render(<GenCustomMenu/>, div);
         }
