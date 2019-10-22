@@ -2,6 +2,17 @@
 
 .textInput{
   &_wrap{
+    box-sizing: border-box;
+    width:248px;
+    >*{
+      flex-grow:1;
+    }
+    &.addonBefore{
+      input{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
     &.error{
       position:relative;
       >.error_tip{
@@ -34,7 +45,6 @@
 
     display: inline-flex;
     input{
-      width:248px;
       height:32px;
       padding:4px 11px;
       border:1px solid #d9d9d9;
@@ -46,6 +56,15 @@
         box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
       }
     }
+  }
+  &_addon{
+    min-width: 32px;
+    max-width:32px;
+    height:32px;
+    background: #fafafa;
+    border:1px solid #d9d9d9;
+    border-right:none;
+    border-radius: 4px 0 0 4px;
   }
 }
 

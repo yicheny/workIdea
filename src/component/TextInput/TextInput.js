@@ -4,23 +4,24 @@ import {last, isNumber, mergeCn} from "../../utils/publicFun";
 import {Icon} from "../index";
 
 function TextInput(props) {
-    const {system, type, onChange, digit, required,max,min,autoP,autoPTime} = props;
+    const {system, type, onChange, digit, required, max, min, autoP, autoPTime, addonBefore} = props;
     const [value, setValue] = useState(props.value);
     const [error, setError] = useState(props.error);
-    const [placeholder,setPlaceholder] = useState('');
+    const [placeholder, setPlaceholder] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
         autoP ? autoPrint() : setPlaceholder(props.placeholder);
-    },[]);
+    }, []);
 
-    return <span className={mergeCn('textInput_wrap', error && 'error')}>
+    return <span className={cnFor()}>
         {error && errorTipRender()}
-        <input value={value} onBlur={handleBlur} onChange={e => handleChange(e.target.value)}
+        {addonBefore && <span className="textInput_addon flex center">{addonBefore}</span>}
+        <input type={type} value={value} onBlur={handleBlur} onChange={e => handleChange(e.target.value)}
                placeholder={placeholder}/>
     </span>;
 
     function handleBlur() {
-        if(!validate()) return;
+        if (!validate()) return;
         setError(null);
         return onChange(value)
     }
@@ -28,12 +29,11 @@ function TextInput(props) {
     function handleChange(v) {
         if (v === '') return setValue('');
         if (!typeCheck()) return;
-        if (max && v>max) return;
+        if (max && v > max) return;
         return setValue(v);
 
         function typeCheck() {
             const typeStrategy = {
-                text: () => true,
                 number: () => {
                     if (digitCheck()) return;
                     if (!systemCheck()) return;
@@ -63,13 +63,15 @@ function TextInput(props) {
                     }
                 }
             };
+
+            if(!Object.keys(typeStrategy).includes(type)) return true;
             return typeStrategy[type]()
         }
     }
 
     function validate() {
         if (required && value === '') return setError('必填项');
-        if (min && value<min) return setError(`最小输入值为${min}`);
+        if (min && value < min) return setError(`最小输入值为${min}`);
         return true;
     }
 
@@ -83,23 +85,27 @@ function TextInput(props) {
     function autoPrint() {
         const tips = props.placeholder.split(' ');
         const cyclicFoo = genCyclic();
-        setInterval(()=>{
+        setInterval(() => {
             cyclicFoo()
-        },autoPTime);
+        }, autoPTime);
 
         function genCyclic() {
             let i = 0;
             let i2 = 0;
             return function () {
-                i = i%tips.length;
+                i = i % tips.length;
                 setPlaceholder(tips[i].slice(0, i2));
                 i2++;
-                if(i2>tips[i].length){
-                    i2=0;
+                if (i2 > tips[i].length) {
+                    i2 = 0;
                     i++;
                 }
             }
         }
+    }
+
+    function cnFor() {
+        return mergeCn('textInput_wrap', error && 'error', addonBefore && 'addonBefore')
     }
 }
 
@@ -112,10 +118,11 @@ TextInput.defaultProps = {
     digit: 100,
     required: false,
     error: null,
-    max:null,
-    min:null,
-    autoP:false,//placeholder是否循环打印提示
-    autoPTime:300,
+    max: null,
+    min: null,
+    autoP: false,//placeholder是否循环打印提示
+    autoPTime: 300,
+    addonBefore: null
 };
 
 export default TextInput;

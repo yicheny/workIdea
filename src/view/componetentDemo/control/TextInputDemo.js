@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, TextInput} from "../../../component";
+import {Container, Icon, TextInput} from "../../../component";
 
 function TextInputDemo(props) {
     return <Container header='TextInputDemo'>
@@ -12,6 +12,7 @@ function TextInputDemo(props) {
             <p><TextInput type='number' min={40} placeholder='最小允许输入40'/></p>
             <p><TextInput placeholder='自动提示功能测试 组件设置autoP属性 即可启用自动提示' autoP/></p>
             <p><TextInput placeholder='通过设置autoPTime 即可控制自动提示间隔时间' autoP autoPTime={500}/></p>
+            <p><TextInput addonBefore={<Icon type='user'/>}/></p>
         </div>
     </Container>
 }
