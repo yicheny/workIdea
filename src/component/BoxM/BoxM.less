@@ -1,0 +1,26 @@
+@import '../../asset/base';
+
+.c_box{
+  margin:16px;
+  padding:12px;
+  border:1px solid @border-color;
+  border-radius: 4px;
+  background: @glass-bg;
+  &_tit{
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 21px;
+  }
+  &_main{
+    >*{
+      &:not(:first-child){
+        margin-left: 24px;
+      }
+      font-size: 18px;
+      font-family: 'Bell MT';
+      &:hover{
+        color:red;
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@ import {TableW as _TableW, ColumnW as _ColumnW} from './TableW/TableW';
 import _SetColor from './SetColor/SetColor';
 import _Rate from './Rate/Rate';
 import _TextInput from './TextInput/TextInput';
+import _BoxM from './BoxM/BoxM';
 
 export {_Container as Container};
 export {_Header as Header};
@@ -49,3 +50,4 @@ export {_TableW as TableW, _ColumnW as ColumnW};
 export {_SetColor as SetColor}
 export {_Rate as Rate}
 export {_TextInput as TextInput};
+export {_BoxM as BoxM};
