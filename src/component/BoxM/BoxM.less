@@ -3,9 +3,14 @@
 .c_box{
   margin:16px;
   padding:12px;
-  border:1px solid @border-color;
-  border-radius: 4px;
+  //border:1px solid @border-color;
+  border-radius: 6px;
   background: @glass-bg;
+  box-shadow: 0 0 12px rgba(56,56,56,1);
+  transition: 300ms background-color;
+  &:hover{
+    background: @glass-bg-hover;
+  }
   &_tit{
     margin-bottom: 8px;
     font-weight: 600;
