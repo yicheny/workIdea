@@ -8,6 +8,7 @@ import FriedGoldenFlower from "./control/FriedGoldenFlower";
 import Demo from "./control/wolfKill/Demo";
 import RedLine from "./control/redLine/RedLine";
 import SystemSwitch from "./control/systemSwitch/SystemSwitch";
+import SortCase from "./control/sortCase/SortCase";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -18,6 +19,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/wolfKill' component={Demo}/>
         <Route path='/mProj/redLine' component={RedLine}/>
         <Route path='/mProj/systemSwitch' component={SystemSwitch}/>
+        <Route path='/mProj/sortCase' component={SortCase}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
