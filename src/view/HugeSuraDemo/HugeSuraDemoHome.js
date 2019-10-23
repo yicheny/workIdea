@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {BoxM} from "../../component";
 
 function HugeSuraDemoHome(props) {
-    return <div className='pad'>
+    return <BoxM tit='HugeSura'>
         <Link to='/hugeSura/genPerson'>人物生成</Link>
-    </div>
+    </BoxM>
 }
 
 export default HugeSuraDemoHome;

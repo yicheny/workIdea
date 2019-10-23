@@ -1,6 +1,5 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
-import './MyProjectRouter.less';
 import Calputer from "./control/Calputer";
 import MyProjectHome from "./MyProjectHome";
 import PublicFunTest from "./control/PublicFunTest";

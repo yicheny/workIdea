@@ -4,7 +4,7 @@ import './BoxM.less';
 function BoxM(props) {
     const {tit,children} = props;
     return <div className='c_box'>
-        <h3 className='c_box_tit'>{tit}</h3>
+        {tit && <h3 className='c_box_tit'>{tit}</h3>}
         <div className="c_box_main">
             {children}
         </div>

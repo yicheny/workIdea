@@ -1,5 +1,4 @@
 import React from 'react';
-import './DesignPatternRouter.less';
 import {Route, Switch} from "react-router-dom";
 import DesignPatternHome from "./DesignPatternHome";
 import Base1 from "./control/Base1";

@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {BoxM} from "../../component";
 
 function ArithmeticDemoHome(props) {
-    return <div className='pad'>
+    return <BoxM tit='算法实践'>
         <Link to='/arithmetic/questBank'>题库</Link>
-    </div>
+    </BoxM>
 }
 
 export default ArithmeticDemoHome;
