@@ -16,12 +16,14 @@ import {Message} from "../component";
 import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
+import Bg from "../component/BG/BG";
 
 function MainPanel(props){
     const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
     setCombinKey([68,74],fn);//D J
 
     return <div className='mainPanel' style={{'overflow':'hidden'}}>
+        <Bg/>
         <LeftMenu/>
         <div className="mainPanel_content" style={{'overflow':'auto'}}>
             <Switch>

@@ -21,7 +21,7 @@ function GenPersonDemo(props) {
             <Button type='primary' onClick={editPerson}>修改人物</Button>
             <Button onClick={queryAll}>查询全部人物</Button>
         </div>
-        <div className='mar_wrap'>
+        <div className='mar_wrap_b'>
             <TextInput placeholder='请输入人物姓名' onChange={setName}/>
             <Button onClick={query}>查询指定人物</Button>
         </div>
@@ -47,7 +47,7 @@ function GenPersonDemo(props) {
             <p><TextInput type='number' min={0} max={20} placeholder='编辑人物攻击[0,20]' onChange={(v)=>setPerson({...person,attack:v})}/></p>
             <p><TextInput type='number' min={0} max={20} placeholder='编辑人物防御[0,20]' onChange={(v)=>setPerson({...person,defense:v})}/></p>
             <p><TextInput type='number' min={0} max={20} placeholder='编辑人物速度[0,20]' onChange={(v)=>setPerson({...person,speed:v})}/></p>
-            <p><TextInput type='number' min={0} max={100} placeholder='编辑人物天赋[0,100]!影响自由点数' onChange={(v)=>setPerson({...person,talent:v,freePoint:100-v})}/></p>
+            <p><TextInput type='number' min={0} max={100} placeholder='编辑人物天赋[0,100] ！注意，此项影响自由点数' autoP onChange={(v)=>setPerson({...person,talent:v,freePoint:100-v})}/></p>
         </div>
     </Container>;
     async function query() {
