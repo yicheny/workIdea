@@ -30,7 +30,7 @@ function MenuM(props) {
 
     return <div className={cnFor()} style={props.style}>
         <div className="x_menuM_column x_menuM_header flex center" onClick={()=>setOpen(!open)}>
-            <IconM type={`${open ? 'zhankai' : 'shousuo'}`}/>
+            <IconM type={`${open ? 'shousuo'  : 'zhankai'}`}/>
         </div>
         {renderChildren()}
     </div>;
