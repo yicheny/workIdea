@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import './mainPanel.less';
 import LeftMenu from './LeftMenu';
@@ -17,13 +17,18 @@ import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 import Bg from "../component/BG/BG";
+import {mergeCn} from "../utils/publicFun";
 
 function MainPanel(props){
-    const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
-    setCombinKey([68,74],fn);//D J
+    const {theme} = props;
 
-    return <div className='mainPanel' style={{'overflow':'hidden'}}>
-        <Bg/>
+    useEffect(()=>{
+        const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
+        setCombinKey([68,74],fn);//D J
+    },[]);
+
+    return <div className={mergeCn('mainPanel','theme',theme)} style={{'overflow':'hidden'}}>
+        { ['my'].includes(theme) && <Bg/>}
         <LeftMenu/>
         <div className="mainPanel_content" style={{'overflow':'auto'}}>
             <Switch>
@@ -44,5 +49,8 @@ function MainPanel(props){
         </div>
     </div>
 }
+MainPanel.defaultProps={
+    theme:'my'
+};
 
 export default MainPanel;

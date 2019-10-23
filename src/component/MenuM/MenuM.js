@@ -7,7 +7,7 @@ import {mergeCn} from "../../utils/publicFun";
 
 function MenuItemM(props) {
     const {icon, tit, url, selected, setSelected,open} = props;
-    const cn = mergeCn("x_menuM_column x_menuItemM", tit === selected && 'selected');
+    const cn = mergeCn("menuM_column x_menuItemM", tit === selected && 'selected');
 
     return <Link to={url} className={cn} onClick={handleClick}>
         <Icon type={icon}/>
@@ -29,7 +29,7 @@ function MenuM(props) {
     const [open, setOpen] = useState(props.open);
 
     return <div className={cnFor()} style={props.style}>
-        <div className="x_menuM_column x_menuM_header flex center" onClick={()=>setOpen(!open)}>
+        <div className="menuM_column menuM_header flex center" onClick={()=>setOpen(!open)}>
             <IconM type={`${open ? 'shousuo'  : 'zhankai'}`}/>
         </div>
         {renderChildren()}
@@ -48,7 +48,7 @@ function MenuM(props) {
     }
 
     function cnFor() {
-        return mergeCn('x_menuM flex-y', props.className, open?'on':'off')
+        return mergeCn('menuM flex-y', props.className, open?'on':'off')
     }
 }
 

@@ -1,5 +1,4 @@
 import _Container from './Container/Container';
-import _Header from './Header/Header';
 import _Graph from './Graph/Graph';
 import _Calendar from './Calendar/Calendar';
 import _CalendarW from './CalendarW/CalendarW';
@@ -26,7 +25,6 @@ import _TextInput from './TextInput/TextInput';
 import _BoxM from './BoxM/BoxM';
 
 export {_Container as Container};
-export {_Header as Header};
 export {_Graph as Graph};
 export {_Calendar as Calendar};
 export {_CalendarW as CalendarW};

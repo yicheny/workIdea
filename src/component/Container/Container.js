@@ -1,19 +1,16 @@
 import React from 'react';
 import './Container.less';
-import Header from "../Header/Header";
 import {mergeCn} from "../../utils/publicFun";
 
 function Container (props){
-    let {className,header,nopad} = props;
+    let {className,header,nopad,children} = props;
     const cn = mergeCn('x_container',className,nopad&&'nopad');
 
     return (
         <div className={cn}>
             <div className="x_container_main">
-                {header && <Header>{header}</Header>}
-                <div className="x_container_content">
-                    {props.children}
-                </div>
+                {header && <div className='x_container_header'>{header}</div>}
+                <div className="x_container_content">{children}</div>
             </div>
         </div>
     );

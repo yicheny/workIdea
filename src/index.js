@@ -7,6 +7,7 @@ import './asset/common.less'
 import 'antd/dist/antd.css';
 import './index.less'
 import './component/CustomRMenu/CustomRMenu';
+import './asset/theme.less';
 
 ReactDOM.render(
     (<Router>
