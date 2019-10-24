@@ -197,3 +197,9 @@ export function arrCompare(list1,list2) {
 
     return list1.every((item)=>list2.includes(item));
 }
+
+//判断两个数组中的项是否完全相等【关注顺序】
+export function arrCompareOrder(list1,list2) {
+    if(list1.length !== list2.length) return false;
+    return list1.every((el,i)=>el===list2[i])
+}

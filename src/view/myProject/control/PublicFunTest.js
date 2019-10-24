@@ -1,8 +1,9 @@
 import React from 'react';
-import {sleep,getName,delArrItem,genListCyclic,uniq,arrCompare} from "../../../utils/publicFun.js";
+import {sleep,getName,delArrItem,genListCyclic,uniq,arrCompare,arrCompareOrder} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
 
 function PublicFunTest(props) {
+    arrCompareOrderTest();
     sleepTest();
     getNameTest();
     delArrItemTest();
@@ -19,6 +20,7 @@ function PublicFunTest(props) {
             <li>4.genListCyclic方法</li>
             <li>5.uniq方法</li>
             <li>6.arrCompare方法</li>
+            <li>7.arrCompareOrder方法</li>
         </ul>
     </Container>;
 
@@ -65,6 +67,10 @@ function PublicFunTest(props) {
         console.log('arrCompare方法测试',arrCompare([1,2,3],[1,2,3]));
         console.log('arrCompare方法测试',arrCompare([1,2,3,4],[3,1,2,4]));
         console.log('arrCompare方法测试',arrCompare([1,2,3],[1,2,4]));
+    }
+    function arrCompareOrderTest() {
+        console.log('arrCompareOrder测试',arrCompareOrder([1,2,3],[2,3,1]));
+        console.log('arrCompareOrder测试',arrCompareOrder([1,2,3],[1,2,3]));
     }
 }
 
