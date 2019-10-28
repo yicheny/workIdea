@@ -23,6 +23,7 @@ import _SetColor from './SetColor/SetColor';
 import _Rate from './Rate/Rate';
 import _TextInput from './TextInput/TextInput';
 import _BoxM from './BoxM/BoxM';
+import _DropdownW from './DropdownW/DropdownW';
 
 export {_Container as Container};
 export {_Graph as Graph};
@@ -49,3 +50,4 @@ export {_SetColor as SetColor}
 export {_Rate as Rate}
 export {_TextInput as TextInput};
 export {_BoxM as BoxM};
+export {_DropdownW as DropdownW};

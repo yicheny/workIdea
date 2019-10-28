@@ -22,6 +22,7 @@ function ComponentHome(props) {
         <Link to='/component/tableW'>TableW</Link>
         <Link to='/component/textInput'>TextInput</Link>
         <Link to='/component/icon'>Icon展示</Link>
+        <Link to='/component/DropdownW'>DropdownW</Link>
     </BoxM>
 }
 
