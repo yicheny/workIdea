@@ -5,7 +5,7 @@ import {isNil} from "../../../utils/publicFun";
 import Operation from "../../../base/Operation";
 
 function Calputer(props) {
-    const btns = ['CE','DEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'=','CLEAR'];
+    const btns = ['CE','DEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'.','=','CLEAR'];
     const operation = new Operation();
 
     const [num1,setNum1] = useState('');
@@ -15,8 +15,8 @@ function Calputer(props) {
 
     function btnClick(value) {
         if(isNum(value)){
-            if(isNil(oper)) return setNum1(num1.concat(value));
-            return setNum2(num2.concat(value))
+            if(isNil(oper)) return setNum1(setNum(num1,value));
+            return setNum2(setNum(num2,value))
         }
         if(isOperate(value)){
             if(isNil(num1)) return;
@@ -25,6 +25,7 @@ function Calputer(props) {
         return scheduler(value);
 
         function isNum(value) {
+            if(['.'].includes(value)) return true;
             return !isNaN(Number(value))
         }
         function isOperate(value) {
@@ -55,6 +56,10 @@ function Calputer(props) {
             };
 
             return strategy[type]();
+        }
+        function setNum(num,value) {
+            if(value==='.' && num.includes('.')) return num;
+            return num.concat(value);
         }
     }
 
