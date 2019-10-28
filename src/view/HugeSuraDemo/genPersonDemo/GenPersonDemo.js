@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Button, TextInput} from "../../../component";
-import {nil} from "../../../base/BaseVariate";
-import {sample, genRandom,} from "../../../utils/publicFun";
+import {sample, genRandom, isNil,} from "../../../utils/publicFun";
 import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
@@ -86,7 +85,7 @@ function GenPersonDemo(props) {
         }
 
         function check() {
-            if(nil.includes(name)) return false;
+            if(isNil(name)) return false;
         }
     }
     async function comfireGen() {
@@ -98,11 +97,11 @@ function GenPersonDemo(props) {
     async function editPerson() {
         if(!isInputName())return;
         const data = await db.querySync('name',person.name);
-        if(nil.includes(data)) return console.error('不存在该人物，请先创建人物');
+        if(isNil(data)) return console.error('不存在该人物，请先创建人物');
         db.edit(data.id,person)
     }
     function isInputName() {
-        if(nil.includes(person.name)) return console.error('请输入人物名称');
+        if(isNil(person.name)) return console.error('请输入人物名称');
         return true;
     }
 }

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {nil} from "../../../../base/BaseVariate";
 import {Container, TextInput} from "../../../../component";
+import {isNil} from "../../../../utils/publicFun";
 
 function SystemSwitch(props) {
     const [tenNum,setTenNum] = useState('');
@@ -20,11 +20,11 @@ function SystemSwitch(props) {
     </Container>;
 
     function tenSOther(radix=2) {
-        if(nil.includes(tenNum)) return 0;
+        if(isNil(tenNum)) return 0;
         return tenNum.toString(radix);
     }
     function otherSTen(radix=2) {
-        if(nil.includes(twoNum)) return 0;
+        if(isNil(tenNum)) return 0;
         return parseInt(twoNum,radix)
     }
 }

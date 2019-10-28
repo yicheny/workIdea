@@ -149,6 +149,11 @@ export function genListCyclic(list) {
     }
 }
 
+//检测值是否是null/undefined/''
+export function isNil(value) {
+    return [null,undefined,''].includes(value);
+}
+
 //浅拷贝
 export function clone(o) {
     const res = {};
