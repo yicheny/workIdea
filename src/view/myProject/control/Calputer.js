@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import {Button} from "../../../component";
 import './Calputer.less';
 import {isNil} from "../../../utils/publicFun";
-import Operation from "../../../base/Operation";
+import OperationFactory from "../../../base/Operation";
 
 function Calputer(props) {
     const btns = ['+','-','*','/',1,2,3,4,5,6,7,8,9,0,'.','=','CE','DEL','CLEAR'];
-    const operation = new Operation();
 
     const [num1,setNum1] = useState('');
     const [num2,setNum2] = useState('');
@@ -34,9 +33,10 @@ function Calputer(props) {
         function scheduler(type) {
             const strategy = {
                 '=':()=>{
+                    const operation = new OperationFactory(oper).createFactory();
+                    if(!operation) return;
                     operation.num1 = Number(num1);
                     operation.num2 = Number(num2);
-                    operation.operate = oper;
                     setRes(operation.resultFor());
                 },
                 'CE':()=>{
