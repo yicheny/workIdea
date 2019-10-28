@@ -1,38 +1,57 @@
 import React, {useState} from 'react';
 import {Button} from "../../../component";
 import './Calputer.less';
+import {isNil} from "../../../utils/publicFun";
+import Operation from "../../../base/Operation";
 
 function Calputer(props) {
     const btns = ['CE','DEL','+','-','*','/',1,2,3,4,5,6,7,8,9,0,'=','CLEAR'];
-    // const isFuncBtn = value=>['CE','DEL','=','CLEAR'].includes(value);
+    const operation = new Operation();
 
-    const [pre,setPre] = useState('');
-    const [cur,setCur] = useState('');
+    const [num1,setNum1] = useState('');
+    const [num2,setNum2] = useState('');
     const [oper,setOper] = useState('');
     const [res,setRes] = useState('');
-    const [record,setRecord] = useState(null);
 
     function btnClick(value) {
-        if(isNum(value)) return setCur(cur+value);
-        if(cur==='') return;
-        if(isOperation(value)) {
-            setPre(cur);
-            setCur('');
-            return setOper(value);
+        if(isNum(value)){
+            if(isNil(oper)) return setNum1(num1.concat(value));
+            return setNum2(num2.concat(value))
         }
+        if(isOperate(value)){
+            if(isNil(num1)) return;
+            return setOper(value)
+        }
+        return scheduler(value);
 
-        function isNum() {
+        function isNum(value) {
             return !isNaN(Number(value))
         }
-        function isOperation(value) {
+        function isOperate(value) {
              return ['+','-','*','/'].includes(value);
         }
         function scheduler(type) {
             const strategy = {
-                '=':()=>{},
-                'CE':()=>{},
-                'DEL':()=>{},
-                'CLEAR':()=>{}
+                '=':()=>{
+                    operation.num1 = Number(num1);
+                    operation.num2 = Number(num2);
+                    operation.operate = oper;
+                    setRes(operation.resultFor());
+                },
+                'CE':()=>{
+                    setRes('')
+                },
+                'DEL':()=>{
+                    if(isNil(oper)) setNum1(num1.slice(0,num1.length-1));
+                    if(isNil(num2)) setOper('');
+                    return setNum2(num2.slice(0,num2.length-1));
+                },
+                'CLEAR':()=>{
+                    setNum1('');
+                    setNum2('');
+                    setOper('');
+                    setRes('');
+                }
             };
 
             return strategy[type]();
@@ -52,7 +71,7 @@ function Calputer(props) {
             <div className="calputer box carton_bg" style={{width:280,paddingTop:0}}>
                 <div className="calputer_show box">
                     <div className="calputer_course">
-                        {`${pre}${oper}${cur}`}
+                        {`${num1}${oper}${num2}`}
                     </div>
                     <div className="calputer_res">
                         {res}
