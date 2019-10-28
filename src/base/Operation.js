@@ -20,7 +20,6 @@ export default class Operation {
     };
 
     check = ()=>{
-        console.log(this.operate);
         if (!Object.keys(this.algorithm).includes(this.operate)) return console.error('未定义的操作符');
         if (!isNumber(this.num1)) return console.error('num1异常');
         if (!isNumber(this.num2)) return console.error('num2异常');
