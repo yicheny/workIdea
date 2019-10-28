@@ -8,6 +8,10 @@ export function mergeCn(...cns) {
     return cns.filter(el => !!el).join(' ')
 }
 
+export function cls(common,obj) {
+    return mergeCn(common,...getName(obj))
+}
+
 //将数组打乱顺序——洗牌/抽牌算法
 export function shuffle(array) {
     const newArray = [];

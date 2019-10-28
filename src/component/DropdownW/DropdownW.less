@@ -1,2 +1,64 @@
 .DropdownW{
+  &.unfold{
+    .popup{
+      display: block;
+    }
+    .input{
+      .search{
+        .text{
+          color:lightgray;
+        }
+        input{
+          border-bottom:none;
+          border-radius:4px 4px 0 0;
+        }
+      }
+    }
+  }
+  position:relative;
+  width:210px;
+  .input{
+    position:relative;
+    .search{
+      .text{
+        position:absolute;
+        left:0;
+        top:0;
+        padding:6px 13px;
+      }
+      input{
+        width:100%;
+        box-shadow: none;
+        border:1px solid #40a9ff;
+      }
+    }
+    .status{
+      position:absolute;
+      top:0;
+      right:0;
+      padding:5px 7px;
+      cursor: pointer;
+    }
+  }
+  .popup{
+    display: none;
+    position:absolute;
+    top:32px;
+    left:0;
+    width: 100%;
+    border:1px solid #40a9ff;
+    border-top:none;
+    border-radius:0 0 4px 4px;
+    max-height: 300px;
+    overflow-y: auto;
+    .list{
+
+      .item{
+        padding:8px 13px;
+        &:hover{
+          background: #E3E3E3;
+        }
+      }
+    }
+  }
 }
