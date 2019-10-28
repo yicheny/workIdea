@@ -12,6 +12,7 @@ function MyProjectHome(props) {
         <Link to='/mProj/redLine'>赤线Demo</Link>
         <Link to='/mProj/systemSwitch'>进制转换</Link>
         <Link to='/mProj/sortCase'>排序演示</Link>
+        <Link to='/mProj/operation'>计算类测试</Link>
     </BoxM>
 }
 

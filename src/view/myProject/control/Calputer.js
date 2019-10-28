@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Button} from "../../../component";
-import {N2} from "../../../utils/format";
 import './Calputer.less';
 
 function Calputer(props) {

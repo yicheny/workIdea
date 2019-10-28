@@ -9,6 +9,7 @@ import Demo from "./control/wolfKill/Demo";
 import RedLine from "./control/redLine/RedLine";
 import SystemSwitch from "./control/systemSwitch/SystemSwitch";
 import SortCase from "./control/sortCase/SortCase";
+import OperationDemo from "./control/OperationDemo/OperationDemo";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -20,6 +21,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/redLine' component={RedLine}/>
         <Route path='/mProj/systemSwitch' component={SystemSwitch}/>
         <Route path='/mProj/sortCase' component={SortCase}/>
+        <Route path='/mProj/operation' component={OperationDemo}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
