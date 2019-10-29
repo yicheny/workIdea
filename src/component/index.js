@@ -10,7 +10,7 @@ import _Icon from './Icon/Icon';
 import _Tabs from './Tabs/Tabs';
 import _Input from './Input/Input';
 import _Message from './Message/Message.js';
-import _Roll from '../view/myProject/control/Roll/Roll';
+import _Roll from '../view/myProject/Roll/Roll';
 import _Modal from './Modal/Modal';
 import _Menu from './Menu/Menu';
 import {MenuM as _MenuM, MenuItemM as _MenuItemM} from './MenuM/MenuM';
