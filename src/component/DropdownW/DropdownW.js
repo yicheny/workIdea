@@ -6,7 +6,7 @@ import {useOnClickOutside} from "../../utils/customEvent";
 
 function DropdownW(props) {
     const {options,onChange} = props;
-    const [text,setText] = useState(props.value);
+    const [text,setText] = useState(options.find(el=>el.value===props.value).text);
     const [unfold,setUnfold] = useState(false);
     const ref = createRef();
 
