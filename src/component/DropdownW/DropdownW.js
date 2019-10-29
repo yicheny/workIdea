@@ -27,15 +27,15 @@ function DropdownW(props) {
         <div className="popup">
             <div className="list">
                 {
-                    options.map((el,i)=><div className={cls({selected:el.text===text},"item")} key={i} onClick={()=>handleClick(el)}>{el.text}</div>)
+                    options.map((el,i)=><div className={cls({selected:el.text===text},"item")} key={i} onClick={(e)=>handleClick(e,el,el.value)}>{el.text}</div>)
                 }
             </div>
         </div>
     </div>;
 
-    function handleClick(o) {
+    function handleClick(e,o,v) {
         setText(o.text);
-        onChange(o);
+        onChange(e,o,v);
         setUnfold(false);
     }
 
