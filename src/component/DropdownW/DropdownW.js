@@ -6,7 +6,7 @@ import {useOnClickOutside} from "../../utils/customEvent";
 
 function DropdownW(props) {
     const {options,onChange} = props;
-    const [text,setText] = useState('');
+    const [text,setText] = useState(props.value);
     const [unfold,setUnfold] = useState(false);
     const ref = createRef();
 
@@ -27,7 +27,7 @@ function DropdownW(props) {
         <div className="popup">
             <div className="list">
                 {
-                    options.map((el,i)=><div className="item" key={i} onClick={()=>handleClick(el)}>{el.text}</div>)
+                    options.map((el,i)=><div className={cls({selected:el.text===text},"item")} key={i} onClick={()=>handleClick(el)}>{el.text}</div>)
                 }
             </div>
         </div>
