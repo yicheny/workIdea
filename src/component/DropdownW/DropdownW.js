@@ -20,7 +20,7 @@ function DropdownW(props) {
                 <div className='text'>{text}</div>
                 <input type="text"/>
             </div>
-            <div className="status" onClick={()=>setUnfold(!unfold)}>
+            <div className="status" onClick={toggle}>
                 <Icon type='arrowDown' size={16}/>
             </div>
         </div>
@@ -45,6 +45,10 @@ function DropdownW(props) {
 
     function close() {
         return setUnfold(false)
+    }
+
+    function toggle() {
+        return setUnfold(!unfold)
     }
 }
 DropdownW.defaultProps={
