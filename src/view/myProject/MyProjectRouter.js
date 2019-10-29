@@ -10,6 +10,7 @@ import RedLine from "./redLine/RedLine";
 import SystemSwitch from "./systemSwitch/SystemSwitch";
 import SortCase from "./sortCase/SortCase";
 import OperationDemo from "./OperationDemo/OperationDemo";
+import SalesPromotion from "./SalesPromotion/SalesPromotion";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -22,6 +23,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/systemSwitch' component={SystemSwitch}/>
         <Route path='/mProj/sortCase' component={SortCase}/>
         <Route path='/mProj/operation' component={OperationDemo}/>
+        <Route path='/mProj/salesPromotion' component={SalesPromotion}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
