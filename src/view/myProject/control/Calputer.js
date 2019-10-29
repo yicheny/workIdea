@@ -5,6 +5,10 @@ import {isNil} from "../../../utils/publicFun";
 import OperationFactory from "../../../base/Operation";
 
 function Calputer(props) {
+    const operBtns = ['+','-','*','/'];
+    const numBtns = ['1','2','3','4','5','6','7','8','9','0','.'];
+    const scheBtns = ['=','CE','DEL','CLEAR'];
+
     const [num1,setNum1] = useState('');
     const [num2,setNum2] = useState('');
     const [oper,setOper] = useState('');
@@ -29,75 +33,63 @@ function Calputer(props) {
                     </div>
                 </div>
                 <div className="calputer_main">
-                    {
-                        btnsFor().map((btn,i)=><Button key={i} onClick={(e)=>btnClick(e.target.innerHTML)}>{btn}</Button>)
-                    }
+                    {btnsRender(operBtns,operClick)}
+                    {btnsRender(numBtns,numClick)}
+                    {btnsRender(scheBtns,scheClick)}
                 </div>
             </div>
         </div>;
 
-    function btnsFor() {
-        const operBtns = ['+','-','*','/'];
-        const numBtns = ['1','2','3','4','5','6','7','8','9','0','.'];
-        const scheBtns = ['=','CE','DEL','CLEAR'];
-
-        return operBtns.concat(numBtns).concat(scheBtns);
+    function btnsRender(btns,event) {
+        return btns.map((btn,i)=><Button key={i} onClick={(e)=>event(e.target.innerHTML)}>{btn}</Button>)
     }
+    
+    function numClick(value) {
+        if(isNil(oper)) return setNum1(setNum(num1,value));
+        return setNum2(setNum(num2,value));
 
-    function btnClick(value) {
-        if(isNum(value)){
-            if(isNil(oper)) return setNum1(setNum(num1,value));
-            return setNum2(setNum(num2,value))
-        }
-        if(isOperate(value)){
-            if(isNil(num1)) return;
-            if(res){
-                setNum1(res);
-                setNum2('');
-                setRes('');
-            }
-            return setOper(value)
-        }
-        return scheduler(value);
-
-        function isNum(value) {
-            if(['.'].includes(value)) return true;
-            return !isNaN(Number(value))
-        }
-        function isOperate(value) {
-            return ['+','-','*','/'].includes(value);
-        }
-        function scheduler(type) {
-            const strategy = {
-                '=':()=>{
-                    const operation = new OperationFactory(oper).createFactory();
-                    if(!operation) return;
-                    operation.num1 = Number(num1);
-                    operation.num2 = Number(num2);
-                    setRes(operation.resultFor().toString());
-                },
-                'CE':()=>{
-                    setRes('')
-                },
-                'DEL':()=>{
-                    if(isNil(oper)) setNum1(num1.slice(0,num1.length-1));
-                    if(isNil(num2)) setOper('');
-                    return setNum2(num2.slice(0,num2.length-1));
-                },
-                'CLEAR':()=>{
-                    setNum1('');
-                    setNum2('');
-                    setOper('');
-                    setRes('');
-                }
-            };
-
-            return strategy[type]();
-        }
         function setNum(num,value) {
             if(value==='.' && num.includes('.')) return num;
             return num.concat(value);
         }
+    }
+    
+    function operClick(value) {
+        if(isNil(num1)) return;
+        if(res){
+            setNum1(res);
+            setNum2('');
+            setRes('');
+        }
+        return setOper(value)
+    }
+    
+    function scheClick(type) {
+        const strategy = {
+            '=':()=>{
+                const operation = new OperationFactory(oper).createFactory();
+                if(!operation) return;
+                operation.num1 = Number(num1);
+                operation.num2 = Number(num2);
+                setRes(operation.resultFor().toString());
+            },
+            'CE':()=>{
+                setRes('')
+            },
+            'DEL':()=>{
+                if(isNil(oper)) setNum1(num1.slice(0,num1.length-1));
+                if(isNil(num2)) setOper('');
+                return setNum2(num2.slice(0,num2.length-1));
+            },
+            'CLEAR':()=>{
+                setNum1('');
+                setNum2('');
+                setOper('');
+                setRes('');
+            }
+        };
+
+        return strategy[type]();
     }
 }
 
