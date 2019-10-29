@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Container, TextInput} from "../../../../component";
-import {isNil} from "../../../../utils/publicFun";
+import {Container, TextInput} from "../../../component";
+import {isNil} from "../../../utils/publicFun";
 
 function SystemSwitch(props) {
     const [tenNum,setTenNum] = useState('');

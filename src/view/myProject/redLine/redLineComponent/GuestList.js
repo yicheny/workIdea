@@ -1,6 +1,6 @@
 import React from 'react';
 import './GuestList.less';
-import {mergeCn} from "../../../../../utils/publicFun";
+import {mergeCn} from "../../../../utils/publicFun";
 
 function GuestList(props) {
     return <div className='guest_list'>

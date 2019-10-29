@@ -3,9 +3,9 @@ import './FriedGoldenFlower.less';
 import {Container} from "../../../component";
 import {crePkCards} from "../../../utils/genPk";
 import {chunk} from '../../../utils/publicFun';
-import Deck from "./PKSrc/Deck";
-import MyCards from "./PKSrc/MyCards";
-import FoeCards from "./PKSrc/FoeCards";
+import Deck from "../PKSrc/Deck";
+import MyCards from "../PKSrc/MyCards";
+import FoeCards from "../PKSrc/FoeCards";
 
 const cards = crePkCards({isRandom:true});
 

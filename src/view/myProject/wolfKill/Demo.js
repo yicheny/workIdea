@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Container} from "../../../../component";
+import {Container} from "../../../component";
 import {WkCardBox} from "./WkCard";
 
 function Demo(props) {

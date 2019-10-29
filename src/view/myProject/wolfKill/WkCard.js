@@ -1,6 +1,6 @@
 import React from 'react';
 import './WkCard.less'
-import {mergeCn,shuffle} from "../../../../utils/publicFun";
+import {mergeCn,shuffle} from "../../../utils/publicFun";
 
 function WkCard(props) {
     const {className,identity,code,user,face} = props;

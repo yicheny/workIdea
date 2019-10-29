@@ -1,6 +1,6 @@
 import React from 'react';
 import './StaffCard.less';
-import {mergeCn} from "../../../../../utils/publicFun";
+import {mergeCn} from "../../../../utils/publicFun";
 
 function StaffCard(props) {
     const {isRival,className,middleRef,onClick} = props;

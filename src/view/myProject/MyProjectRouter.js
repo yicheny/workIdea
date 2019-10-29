@@ -1,15 +1,15 @@
 import React from 'react';
 import {Route, Switch} from "react-router-dom";
-import Calputer from "./control/Calputer";
+import Calputer from "./Calputer/Calputer";
 import MyProjectHome from "./MyProjectHome";
-import PublicFunTest from "./control/PublicFunTest";
-import DrawRolls from "./control/DrawRolls";
-import FriedGoldenFlower from "./control/FriedGoldenFlower";
-import Demo from "./control/wolfKill/Demo";
-import RedLine from "./control/redLine/RedLine";
-import SystemSwitch from "./control/systemSwitch/SystemSwitch";
-import SortCase from "./control/sortCase/SortCase";
-import OperationDemo from "./control/OperationDemo/OperationDemo";
+import PublicFunTest from "./PublicFooDemo/PublicFunTest";
+import DrawRolls from "./DrawRolls/DrawRolls";
+import FriedGoldenFlower from "./FriedGoldenFlower/FriedGoldenFlower";
+import Demo from "./wolfKill/Demo";
+import RedLine from "./redLine/RedLine";
+import SystemSwitch from "./systemSwitch/SystemSwitch";
+import SortCase from "./sortCase/SortCase";
+import OperationDemo from "./OperationDemo/OperationDemo";
 
 function MyProjectRouter(props) {
     return (<Switch>

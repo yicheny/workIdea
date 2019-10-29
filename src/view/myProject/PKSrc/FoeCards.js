@@ -1,13 +1,13 @@
 import React,{useReducer} from 'react';
-import PkCard from "../../../../component/PkCard/PkCard";
+import PkCard from "../../../component/PkCard/PkCard";
 
-function MyCards(props) {
+function FoeCards(props) {
     const {user} = props;
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);//hook下替代forceUpdate方案
 
 
-    return <div className="pk_myCards flex">
+    return <div className="pk_foeCards flex">
         {
             user.map((el,i)=><PkCard onClick={()=>cardClick(el)} data={el} key={i} scale/>)
         }
@@ -24,4 +24,4 @@ function MyCards(props) {
     }
 }
 
-export default MyCards;
+export default FoeCards;

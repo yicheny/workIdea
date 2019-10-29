@@ -1,7 +1,7 @@
 import React, {useEffect, useState, createRef} from 'react';
 import './StaffArea.less'
 import StaffCard from "./StaffCard";
-import {mergeCn, pick} from "../../../../../utils/publicFun";
+import {mergeCn, pick} from "../../../../utils/publicFun";
 
 function StaffArea(props) {
     const [modal,setModal] = useState(false);

@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Button, Container, Progress} from "../../../../component";
-import {genListCyclic, sleep,pick} from "../../../../utils/publicFun";
+import {Button, Container, Progress} from "../../../component";
+import {genListCyclic, sleep,pick} from "../../../utils/publicFun";
 import _ from 'lodash';
 
 function SortCase(props) {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Button, Container, TextInput} from "../../../../component";
-import OperationFactory from "../../../../base/Operation";
+import {Button, Container, TextInput} from "../../../component";
+import OperationFactory from "../../../base/Operation";
 
 function OperationDemo(props) {
     const [num1, setNum1] = useState(null);
