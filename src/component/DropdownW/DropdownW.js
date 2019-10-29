@@ -1,18 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import './DropdownW.less';
 import {Icon} from "../index";
 import {cls} from "../../utils/publicFun";
+import {useOnClickOutside} from "../../utils/customEvent";
 
 function DropdownW(props) {
     const {options,onChange} = props;
     const [text,setText] = useState('');
     const [unfold,setUnfold] = useState(false);
+    const ref = createRef();
 
     useEffect(()=>{
-        // document.addEventListener('click',close);
+        useOnClickOutside(ref.current,close)
     },[]);
 
-    return <div className={cls('DropdownW',{unfold})} onFocus={open}>
+    return <div className={cls({unfold},'DropdownW')} onFocus={open} ref={ref}>
         <div className="input">
             <div className="search">
                 <div className='text'>{text}</div>

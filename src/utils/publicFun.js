@@ -8,8 +8,8 @@ export function mergeCn(...cns) {
     return cns.filter(el => !!el).join(' ')
 }
 
-export function cls(common,obj) {
-    return mergeCn(common,...getName(obj))
+export function cls(obj,...rest) {
+    return mergeCn(...rest,...getName(obj))
 }
 
 //将数组打乱顺序——洗牌/抽牌算法
