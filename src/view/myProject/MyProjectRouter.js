@@ -11,6 +11,7 @@ import SystemSwitch from "./systemSwitch/SystemSwitch";
 import SortCase from "./sortCase/SortCase";
 import OperationDemo from "./OperationDemo/OperationDemo";
 import SalesPromotion from "./SalesPromotion/SalesPromotion";
+import SalesPromotionV2 from "./SalesPromotion/SalesPromotionV2";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -24,6 +25,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/sortCase' component={SortCase}/>
         <Route path='/mProj/operation' component={OperationDemo}/>
         <Route path='/mProj/salesPromotion' component={SalesPromotion}/>
+        <Route path='/mProj/salesPromotionV2' component={SalesPromotionV2}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
