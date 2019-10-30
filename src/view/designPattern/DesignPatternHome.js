@@ -13,6 +13,7 @@ function DesignPatternHome(props) {
         <Link to='/design/pubSub'>发布-订阅模式</Link>
         <Link to='/design/order'>命令模式</Link>
         <Link to='/design/combination'>组合模式</Link>
+        <Link to='/design/state'>状态模式</Link>
     </BoxM>
 }
 

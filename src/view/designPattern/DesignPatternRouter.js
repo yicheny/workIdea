@@ -10,6 +10,7 @@ import Iterator from "./control/Iterator";
 import PubSub from "./control/PubSub";
 import Order from "./control/Order";
 import Combination from "./control/Combination";
+import SwitchLight from "./control/state/SwitchLight";
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -22,6 +23,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/pubSub' component={PubSub}/>
         <Route path='/design/order' component={Order}/>
         <Route path='/design/combination' component={Combination}/>
+        <Route path='/design/state' component={SwitchLight}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }
