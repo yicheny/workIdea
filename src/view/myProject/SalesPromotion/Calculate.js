@@ -32,11 +32,11 @@ export default class CashFactory{
 
     createCash = ()=>{
         const cashs = {
-            '0':()=>new CashNormal(),
-            '1':()=>new CashDiscount(),
-            '2':()=>new CashRebate()
+            '0':new CashNormal(),
+            '1':new CashDiscount(),
+            '2':new CashRebate()
         };
 
-        return cashs[this.type]();
+        return cashs[this.type];
     }
 }
