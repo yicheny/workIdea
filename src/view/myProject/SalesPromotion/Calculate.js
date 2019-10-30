@@ -17,7 +17,8 @@ class CashDiscount extends CashSuper{
 
 //返利付费子类
 class CashRebate extends CashSuper{
-    totalFor = (condition,rebate)=>{
+    totalFor = (str)=>{
+        const [condition,rebate]= [...(str.split(','))];
         if(this.money>=condition) return this.money - rebate;
         return this.money;
     }

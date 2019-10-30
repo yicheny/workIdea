@@ -30,9 +30,7 @@ function SalesPromotion(props) {
         const {type,value} = cbx;
         const cash = new CashFactory(type).createCash();
         cash.money = price * count;
-        if(type==='0') return setTotal(cash.totalFor());
-        if(type==='1') return setTotal(cash.totalFor(value));
-        if(type==='2') return setTotal(cash.totalFor(...(value.split(','))));
+        return setTotal(cash.totalFor(value));
     }
 }
 
