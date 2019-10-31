@@ -12,6 +12,7 @@ import SortCase from "./sortCase/SortCase";
 import OperationDemo from "./OperationDemo/OperationDemo";
 import SalesPromotion from "./SalesPromotion/SalesPromotion";
 import SalesPromotionV2 from "./SalesPromotion/SalesPromotionV2";
+import ShowMarkdown from "./ShowMarkdown/ShowMarkdown";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -26,6 +27,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/operation' component={OperationDemo}/>
         <Route path='/mProj/salesPromotion' component={SalesPromotion}/>
         <Route path='/mProj/salesPromotionV2' component={SalesPromotionV2}/>
+        <Route path='/mProj/showMarkdown' component={ShowMarkdown}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }

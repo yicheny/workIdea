@@ -15,6 +15,7 @@ function MyProjectHome(props) {
         <Link to='/mProj/operation'>计算类测试</Link>
         <Link to='/mProj/salesPromotion' >商场促销</Link>
         <Link to='/mProj/salesPromotionV2' >商场促销V2</Link>
+        <Link to='/mProj/showMarkdown' >展示Markdown文档</Link>
     </BoxM>
 }
 
