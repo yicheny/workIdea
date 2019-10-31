@@ -1,5 +1,10 @@
 .DropdownW{
   display: inline-block;
+  &:hover{
+    input{
+      border:1px solid #40a9ff;
+    }
+  }
   &.unfold{
     .popup{
       display: block;
@@ -10,8 +15,9 @@
           color:lightgray;
         }
         input{
-          border-bottom:none;
           border-radius:4px 4px 0 0;
+          border:1px solid #40a9ff;
+          border-bottom:none;
         }
       }
       .status{
@@ -35,7 +41,6 @@
       input{
         width:100%;
         box-shadow: none;
-        border:1px solid #40a9ff;
       }
     }
     .status{

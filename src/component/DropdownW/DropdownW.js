@@ -36,7 +36,7 @@ function DropdownW(props) {
     function handleClick(e,o,v) {
         setText(o.text);
         onChange(e,o,v);
-        setUnfold(false);
+        close();
     }
 
     function open() {
