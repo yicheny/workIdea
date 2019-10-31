@@ -95,7 +95,6 @@ function ColumnW(props) {
     }
 }
 
-
 function TableW(props) {
     const [sort,setSort] = useState(props.sort);
     const [renderIndex,setRenderIndex] = useState(0);
