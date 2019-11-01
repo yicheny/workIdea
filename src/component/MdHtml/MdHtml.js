@@ -3,6 +3,7 @@ import {cls} from "../../utils/publicFun";
 import marked from "marked";
 import hljs from "highlight.js";
 import {Loader} from "../index";
+import './MdHtml.less';
 
 function MdHtml(props) {
     const {path} = props;
