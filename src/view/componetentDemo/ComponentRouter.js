@@ -21,6 +21,7 @@ import TextInputDemo from "./inputDemo/TextInputDemo";
 import IconDemo from "./iconDemo/IconDemo";
 import DropdownWDemo from './dropdownDemo/DropdownWDemo';
 import ShowMarkdown from "./showMarkdown/ShowMarkdown";
+import LoaderDemo from "./LoaderDemo/LoaderDemo";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -44,6 +45,7 @@ function ComponentRouter(props) {
         <Route path='/component/icon' component={IconDemo}/>
         <Route path='/component/DropdownW' component={DropdownWDemo}/>
         <Route path='/component/showMarkdown' component={ShowMarkdown}/>
+        <Route path='/component/loader' component={LoaderDemo}/>
         <Route component={ComponentHome}/>
     </Switch>
 

@@ -26,6 +26,7 @@ import _TextInput from './TextInput/TextInput';
 import _BoxM from './BoxM/BoxM';
 import _DropdownW from './DropdownW/DropdownW';
 import _MdHtml from './MdHtml/MdHtml';
+import _Loader from './Loader/Loader';
 
 export {_Container as Container};
 export {_Graph as Graph};
@@ -53,4 +54,5 @@ export {_Rate as Rate}
 export {_TextInput as TextInput};
 export {_BoxM as BoxM};
 export {_DropdownW as DropdownW};
-export {_MdHtml as MdHtml}
+export {_MdHtml as MdHtml};
+export {_Loader as Loader};

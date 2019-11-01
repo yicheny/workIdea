@@ -24,6 +24,7 @@ function ComponentHome(props) {
         <Link to='/component/icon'>Icon展示</Link>
         <Link to='/component/DropdownW'>DropdownW</Link>
         <Link to='/component/showMarkdown' >MdHtml</Link>
+        <Link to='/component/loader' >Loader</Link>
     </BoxM>
 }
 
