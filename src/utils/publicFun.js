@@ -4,10 +4,6 @@ export function sleep(ms) {
 }
 
 //用于合并类名【这里指标签类名】
-export function mergeCn(...cns) {
-    return cns.filter(el => !!el).join(' ')
-}
-
 export function cls(...cns) {
     const res = cns.reduce((acc, el) => {
         if (isObject(el)) {
@@ -22,7 +18,7 @@ export function cls(...cns) {
         return acc;
     }, []);
 
-    return mergeCn(...res)
+    return res.filter(el => !!el).join(' ')
 }
 
 //将数组打乱顺序——洗牌/抽牌算法
