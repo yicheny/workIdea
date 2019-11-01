@@ -1,5 +1,5 @@
 import React from 'react';
-import {menuData} from "../mockData/data";
+import {menuData} from "./data";
 import {Container,Menu} from "../../../component";
 
 function MenuDemo(props) {

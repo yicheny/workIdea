@@ -25,7 +25,6 @@
 
 # 待改进
 - [ ] 月度表现2新表格
-- [ ] componentDemo目录结构
 - [ ] MdHtml需要Loading效果
 
 # 开发中...
