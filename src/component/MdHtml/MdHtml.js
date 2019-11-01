@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
+import {cls} from "../../utils/publicFun";
 import marked from "marked";
 import hljs from "highlight.js";
+import {Loader} from "../index";
 
 function MdHtml(props) {
     const {path} = props;
@@ -26,9 +28,10 @@ function MdHtml(props) {
         fetchData();
     },[]);
 
-    return <React.Fragment>
+    return <div className={cls({},"mdHtml fill flex",!MD&&'center')}>
+        {!MD && <Loader size={40}/>}
         {MD && <div dangerouslySetInnerHTML={{__html:MD}}/>}
-    </React.Fragment>
+    </div>
 }
 
 export default MdHtml;
