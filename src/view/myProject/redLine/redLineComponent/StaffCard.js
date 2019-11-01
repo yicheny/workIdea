@@ -1,6 +1,6 @@
 import React from 'react';
 import './StaffCard.less';
-import {mergeCn} from "../../../../utils/publicFun";
+import {cls} from "../../../../utils/publicFun";
 
 function StaffCard(props) {
     const {isRival,className,middleRef,onClick} = props;
@@ -13,7 +13,7 @@ function StaffCard(props) {
     </div>;
 
     function cnFor() {
-        return mergeCn('staff flex-y center',className,isRival&&'rival')
+        return cls('staff flex-y center',className,isRival&&'rival')
     }
     
     function genLevelSpan(value) {
@@ -38,7 +38,7 @@ function StaffCard(props) {
             if(value>=5000 && value<=6999) levelCn = 'A';
             if(value>=7000 && value<=9999) levelCn='S';
 
-            return mergeCn("staff_level",levelCn)
+            return cls("staff_level",levelCn)
         }
     }
 }

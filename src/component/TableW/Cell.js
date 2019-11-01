@@ -1,4 +1,4 @@
-import {genListCyclic, isFunction, isNil, mergeCn} from "../../utils/publicFun";
+import {genListCyclic, isFunction, isNil, cls} from "../../utils/publicFun";
 import React, {isValidElement} from "react";
 import {ArrowSvg} from "../../asset/svg/SVG";
 
@@ -66,7 +66,7 @@ function Cell(props) {
     }
 
     function cnFor() {
-        return mergeCn("tableW_cell flex",sortable&&"tableW_cell_sort")
+        return cls("tableW_cell flex",sortable&&"tableW_cell_sort")
     }
 }
 Cell.defaultProps = {

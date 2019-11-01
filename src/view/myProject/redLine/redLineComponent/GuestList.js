@@ -1,6 +1,6 @@
 import React from 'react';
 import './GuestList.less';
-import {mergeCn} from "../../../../utils/publicFun";
+import {cls} from "../../../../utils/publicFun";
 
 function GuestList(props) {
     return <div className='guest_list'>
@@ -25,7 +25,7 @@ function GuestItem(props) {
     </div>;
 
     function cnFor() {
-        return mergeCn("guest_item",props.isCurGuest&&'current')
+        return cls("guest_item",props.isCurGuest&&'current')
     }
 }
 GuestItem.defaultProps={

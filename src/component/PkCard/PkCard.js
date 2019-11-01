@@ -1,11 +1,11 @@
 import React from 'react';
 import './PkCard.less';
-import {mergeCn,getName} from '../../utils/publicFun';
+import {cls} from '../../utils/publicFun';
 
 function PkCard(props) {
     let {data:{graph,value,face},scale,onClick,style} = props;
-    const cn = mergeCn('x_pkCard',face,...getName({scale}));
-    const graphCn = mergeCn('x_graph',graph);
+    const cn = cls('x_pkCard',face,{scale});
+    const graphCn = cls('x_graph',graph);
 
     return (
         <div className={cn} onClick={onClick} style={style}>

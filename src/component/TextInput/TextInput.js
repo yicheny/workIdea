@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './TextInput.less';
-import {last, isNumber, mergeCn} from "../../utils/publicFun";
+import {last, isNumber, cls} from "../../utils/publicFun";
 import {Icon} from "../index";
 
 function TextInput(props) {
@@ -105,7 +105,7 @@ function TextInput(props) {
     }
 
     function cnFor() {
-        return mergeCn('textInput_wrap', error && 'error', addonBefore && 'addonBefore')
+        return cls('textInput_wrap', {error,addonBefore})
     }
 }
 

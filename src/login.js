@@ -3,7 +3,7 @@ import './login.less';
 import {Button, Card, Icon, TextInput} from "./component";
 import Logo from './asset/svg/ylfLogo';
 import Bg from "./component/BG/BG";
-import {mergeCn} from "./utils/publicFun";
+import {cls} from "./utils/publicFun";
 
 function Login({history}){
     const [user,setUser] = useState('');
@@ -14,7 +14,7 @@ function Login({history}){
         if(loginMode==='update') return setLoginMode('x_login_warn');
     },[loginMode]);
 
-    return <div className={mergeCn("x_login",loginMode)}>
+    return <div className={cls("x_login",loginMode)}>
         <Bg/>
         <Card className='bg_glass' style={{width:960,minWidth:960,minHeight:420,textAlign:"center"}}>
             <div className="x_login_logo">

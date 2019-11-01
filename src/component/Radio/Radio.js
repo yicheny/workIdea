@@ -1,6 +1,6 @@
 import React from 'react';
 import './Radio.less';
-import {mergeCn} from "../../utils/publicFun";
+import {cls} from "../../utils/publicFun";
 
 function Radio(props) {
 
@@ -10,7 +10,7 @@ function Radio(props) {
     </span>;
 
     function boxCnFor() {
-        return mergeCn('x_radio_box',props.value===props.selected&&'checked')
+        return cls('x_radio_box',{checked:props.value===props.selected})
     }
 }
 Radio.defaultProps={

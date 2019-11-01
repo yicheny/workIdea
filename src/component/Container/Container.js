@@ -1,10 +1,10 @@
 import React from 'react';
 import './Container.less';
-import {mergeCn} from "../../utils/publicFun";
+import {cls} from "../../utils/publicFun";
 
 function Container (props){
     let {className,header,nopad,children} = props;
-    const cn = mergeCn('x_container',className,nopad&&'nopad');
+    const cn = cls('x_container',className,{nopad});
 
     return (
         <div className={cn}>

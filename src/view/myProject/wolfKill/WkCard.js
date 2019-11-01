@@ -1,11 +1,11 @@
 import React from 'react';
 import './WkCard.less'
-import {mergeCn,shuffle} from "../../../utils/publicFun";
+import {cls,shuffle} from "../../../utils/publicFun";
 
 function WkCard(props) {
     const {className,identity,code,user,face} = props;
-    const cn = mergeCn('wkCard flex-y center', className);
-    const mainCn = mergeCn("wkCard_main", getCamp(),face);
+    const cn = cls('wkCard flex-y center', className);
+    const mainCn = cls("wkCard_main", getCamp(),face);
 
     return (<div className={cn}>
         <div className="wkCard_header">
@@ -39,7 +39,7 @@ WkCard.defaultProps = {
 
 function WkCardBox(props) {
     const {data,className,current} = props;
-    const cn = mergeCn('wkCardBox flex wrap', className);
+    const cn = cls('wkCardBox flex wrap', className);
 
     return <div className={cn}>
         {setIdentity()}

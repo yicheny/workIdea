@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {mergeCn} from "../../utils/publicFun";
+import {cls} from "../../utils/publicFun";
 import './Menu.less';
 import Icon from '../Icon/Icon';
 
@@ -31,7 +31,7 @@ function MenuItem(props) {
 
 function Menu(props) {
     const {data,className} = props;
-    const cn = mergeCn('x_menu',className);
+    const cn = cls('x_menu',className);
 
     return <ul className={cn}>
         {data.map((el, i) => <MenuItem data={el} key={i}/>)}

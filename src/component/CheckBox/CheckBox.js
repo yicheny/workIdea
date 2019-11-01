@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './CheckBox.less';
-import {delArrItem, mergeCn} from "../../utils/publicFun";
+import {delArrItem, cls} from "../../utils/publicFun";
 
 function CheckBox(props) {
     const [checked,setChecked] = useState(false);
@@ -11,7 +11,7 @@ function CheckBox(props) {
     </span>;
 
     function boxCnFor() {
-        return mergeCn("x_checkBox_box", checked&&'checked')
+        return cls("x_checkBox_box", {checked})
     }
     function handleClick() {
         const isChecked = !checked;

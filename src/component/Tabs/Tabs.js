@@ -1,17 +1,16 @@
 import React from 'react';
 import './Tabs.less';
-import {mergeCn} from "../../utils/publicFun";
+import {cls} from "../../utils/publicFun";
 
 function Tabs(props) {
     let {active,data,className,onClick} = props;
-    const cn = mergeCn('x_tabs',className);
 
     return (
-        <div className={cn}>
+        <div className={cls('x_tabs',className)}>
             {
                 data.map((el,i)=>{
                     return <span key={i} onClick={() => onClick(el.id)}
-                                className={mergeCn('x_tabs_item',el.id===active&&'active')}>{el.text}</span>
+                                className={cls('x_tabs_item',{active:el.id===active})}>{el.text}</span>
                 })
             }
         </div>

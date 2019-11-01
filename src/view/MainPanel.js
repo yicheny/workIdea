@@ -17,7 +17,7 @@ import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 import Bg from "../component/BG/BG";
-import {mergeCn} from "../utils/publicFun";
+import {cls} from "../utils/publicFun";
 
 function MainPanel(props){
     const {theme} = props;
@@ -27,7 +27,7 @@ function MainPanel(props){
         setCombinKey([68,74],fn);//D J
     },[]);
 
-    return <div className={mergeCn('mainPanel','theme',theme)} style={{'overflow':'hidden'}}>
+    return <div className={cls('mainPanel','theme',theme)} style={{'overflow':'hidden'}}>
         { ['my'].includes(theme) && <Bg/>}
         <LeftMenu/>
         <div className="mainPanel_content" style={{'overflow':'auto'}}>

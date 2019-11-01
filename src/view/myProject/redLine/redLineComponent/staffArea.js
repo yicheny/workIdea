@@ -1,7 +1,7 @@
 import React, {useEffect, useState, createRef} from 'react';
 import './StaffArea.less'
 import StaffCard from "./StaffCard";
-import {mergeCn, pick} from "../../../../utils/publicFun";
+import {cls, pick} from "../../../../utils/publicFun";
 
 function StaffArea(props) {
     const [modal,setModal] = useState(false);
@@ -25,7 +25,7 @@ function StaffArea(props) {
         setModal(false)
     }
     function cnFor() {
-        return mergeCn('staff_area flex-y center',props.isRival?'rival':'my')
+        return cls('staff_area flex-y center',props.isRival?'rival':'my')
     }
     function getRefInfo() {
         // console.log('pick',pick(staffRef.current, ['offsetLeft', 'offsetTop', 'clientWidth', 'clientHeight']));

@@ -3,11 +3,11 @@ import {Link} from "react-router-dom";
 import {Icon as IconM} from '../../component'
 import {Icon} from "antd";
 import './MenuM.less'
-import {mergeCn} from "../../utils/publicFun";
+import {cls} from "../../utils/publicFun";
 
 function MenuItemM(props) {
     const {icon, tit, url, selected, setSelected,open} = props;
-    const cn = mergeCn("menuM_column x_menuItemM", tit === selected && 'selected');
+    const cn = cls("menuM_column x_menuItemM", { selected:tit === selected});
 
     return <Link to={url} className={cn} onClick={handleClick}>
         <Icon type={icon}/>
@@ -48,7 +48,7 @@ function MenuM(props) {
     }
 
     function cnFor() {
-        return mergeCn('menuM flex-y', props.className, open?'on':'off')
+        return cls('menuM flex-y', props.className, open?'on':'off')
     }
 }
 

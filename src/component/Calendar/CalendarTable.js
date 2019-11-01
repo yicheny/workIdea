@@ -1,7 +1,7 @@
 import React from 'react';
 import './CalendarTable.less';
 import {dateCompare} from "../../utils/date";
-import {chunk, mergeCn} from '../../utils/publicFun';
+import {chunk, cls} from '../../utils/publicFun';
 
 function WeekItem(props) {
     const {data,...rest} = props;
@@ -18,7 +18,7 @@ function Cell(props) {
     </div>;
 
     function cnFor() {
-        return mergeCn("calendarTable_cell", cellMain,
+        return cls("calendarTable_cell", cellMain,
             date.isCurMonth||'noCurMonth',
             date.isCurDay&&'curDay',
             dateCompare(date,selectedDate)&&'selected'
