@@ -1,6 +1,7 @@
 import React from 'react';
 import {sleep,getName,delArrItem,genListCyclic,uniq,arrCompare,arrCompareOrder} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
+import {cls} from "../../../utils/publicFun";
 
 function PublicFunTest(props) {
     arrCompareOrderTest();
@@ -11,6 +12,7 @@ function PublicFunTest(props) {
     cloneDeepTest();
     uniqTest();
     arrCompareTest();
+    clsTest();
 
     return <Container header='自用公共方法测试'>
         <ul>
@@ -21,6 +23,7 @@ function PublicFunTest(props) {
             <li>5.uniq方法</li>
             <li>6.arrCompare方法</li>
             <li>7.arrCompareOrder方法</li>
+            <li>8.cls方法</li>
         </ul>
     </Container>;
 
@@ -71,6 +74,12 @@ function PublicFunTest(props) {
     function arrCompareOrderTest() {
         console.log('arrCompareOrder测试',arrCompareOrder([1,2,3],[2,3,1]));
         console.log('arrCompareOrder测试',arrCompareOrder([1,2,3],[1,2,3]));
+    }
+    function clsTest() {
+        console.log('cls方法测试',cls('1',false&&'2','3'));
+        console.log('cls方法测试',cls('1',{'2':true,'3':false,'4':true}));
+        console.log('cls方法测试',cls({'2':true,'3':false,'4':true}));
+        console.log('cls方法测试',cls(1,2,3,'number'));
     }
 }
 

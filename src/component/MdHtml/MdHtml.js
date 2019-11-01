@@ -28,7 +28,7 @@ function MdHtml(props) {
         fetchData();
     },[]);
 
-    return <div className={cls({},"mdHtml fill flex",!MD&&'center')}>
+    return <div className={cls("mdHtml fill flex",!MD&&'center')}>
         {!MD && <Loader size={40}/>}
         {MD && <div dangerouslySetInnerHTML={{__html:MD}}/>}
     </div>

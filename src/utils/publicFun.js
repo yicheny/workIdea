@@ -8,8 +8,21 @@ export function mergeCn(...cns) {
     return cns.filter(el => !!el).join(' ')
 }
 
-export function cls(obj,...rest) {
-    return mergeCn(...rest,...getName(obj))
+export function cls(...cns) {
+    const res = cns.reduce((acc, el) => {
+        if (isObject(el)) {
+            acc = acc.concat(getName(el))
+        }
+        if (isString(el)) {
+            acc.push(el);
+        }
+        if (isNumber(el)){
+            acc.push(el.toString());
+        }
+        return acc;
+    }, []);
+
+    return mergeCn(...res)
 }
 
 //将数组打乱顺序——洗牌/抽牌算法
@@ -107,10 +120,10 @@ export function orderBy(list, key, order = 'desc') {
 }
 
 //返回一个由忽略属性之外属性所组成的对象
-export function omit(obj,keys=[]){
+export function omit(obj, keys = []) {
     const res = {};
-    Object.keys(obj).forEach((key)=>{
-        if(!keys.includes(key)) return res[key] = obj[key];
+    Object.keys(obj).forEach((key) => {
+        if (!keys.includes(key)) return res[key] = obj[key];
     });
     return res;
 }
@@ -118,28 +131,33 @@ export function omit(obj,keys=[]){
 //返回数据类型
 export function typeFor(value) {
     let dataType = Object.prototype.toString.call(value);
-    dataType = dataType.slice(8,dataType.length-1);
+    dataType = dataType.slice(8, dataType.length - 1);
     return dataType;
 }
 
 //检测数据类型是否和预想的相同
-function checkType(value,typeList){
+function checkType(value, typeList) {
     return typeList.includes(typeFor(value));
 }
 
 //检测值是否是函数
-export function isFunction(value){
-    return checkType(value,['Function'])
+export function isFunction(value) {
+    return checkType(value, ['Function'])
 }
 
 //检测值是否是对象
 export function isObject(value) {
-    return checkType(value,['Null','Function','Object','Array']);
+    return checkType(value, ['Null', 'Function', 'Object', 'Array']);
 }
 
 //检测值是否是数字
 export function isNumber(value) {
-    return checkType(value,['Number']);
+    return checkType(value, ['Number']);
+}
+
+//检测值是否是字符串
+export function isString(value) {
+    return checkType(value, ['String']);
 }
 
 //返回一个 可以循环返回数组项的函数
@@ -147,7 +165,7 @@ export function genListCyclic(list) {
     let count = 0;
     return function () {
         const len = list.length;
-        const index = count%len;
+        const index = count % len;
         count++;
         return list[index]
     }
@@ -155,13 +173,13 @@ export function genListCyclic(list) {
 
 //检测值是否是null/undefined/''
 export function isNil(value) {
-    return [null,undefined,''].includes(value);
+    return [null, undefined, ''].includes(value);
 }
 
 //浅拷贝
 export function clone(o) {
     const res = {};
-    for(let key in o){
+    for (let key in o) {
         res[key] = o[key];
     }
     return res;
@@ -173,13 +191,13 @@ export function cloneDeep() {
 }
 
 //生成一个限定范围的随机整数
-export function genRandom(min,max) {
-    const count = max-min;
-    return Math.round(Math.random()*count + min)
+export function genRandom(min, max) {
+    const count = max - min;
+    return Math.round(Math.random() * count + min)
 }
 
 //数组去重
-export function uniq(ary){
+export function uniq(ary) {
     let newAry = [...ary];
 
     newAry.sort(function (a, b) {
@@ -197,18 +215,18 @@ export function uniq(ary){
 }
 
 //判断两个数组中的项是否完全相等【不关注顺序】
-export function arrCompare(list1,list2) {
-    if(list1.length !== list2.length) return false;
+export function arrCompare(list1, list2) {
+    if (list1.length !== list2.length) return false;
 
     list1 = uniq(list1);
     list2 = uniq(list2);
-    if(list1.length !== list2.length) return false;
+    if (list1.length !== list2.length) return false;
 
-    return list1.every((item)=>list2.includes(item));
+    return list1.every((item) => list2.includes(item));
 }
 
 //判断两个数组中的项是否完全相等【关注顺序】
-export function arrCompareOrder(list1,list2) {
-    if(list1.length !== list2.length) return false;
-    return list1.every((el,i)=>el===list2[i])
+export function arrCompareOrder(list1, list2) {
+    if (list1.length !== list2.length) return false;
+    return list1.every((el, i) => el === list2[i])
 }
