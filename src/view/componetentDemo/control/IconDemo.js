@@ -4,7 +4,7 @@ import './IconDemo.less';
 
 const icons = [
     ['info','cancel','arrowDown','error','success','warn','user','lock','unlock','zhankai'],
-    ['shousuo','star']
+    ['shousuo','star','load']
 ];
 
 function IconDemo(props) {
