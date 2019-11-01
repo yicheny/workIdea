@@ -1,20 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Container} from "../../../component";
-import mdPath from './Markdown_Test.md';
-import marked from 'marked';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
+import React, {useEffect, useState} from "react";
+import marked from "marked";
+import hljs from "highlight.js";
 
-function ShowMarkdown(props) {
+function MdHtml(props) {
+    const {path} = props;
     const [MD,setMD] = useState(null);
 
     useEffect(()=>{
-        fetch(mdPath).then(res=>{
-            return res.text();
-        }).then(text=>{
-            const rendererMD = new marked.Renderer();
+        async function fetchData() {
+            const stream = await fetch(path);
+            const text = await stream.text();
             marked.setOptions({
-                renderer: rendererMD,
+                renderer: new marked.Renderer(),
                 highlight: (code)=>hljs.highlightAuto(code).value,
                 gfm: true,//是否允许 Git Hub标准的markdown.
                 tables: true,//是否允许支持表格语法。该选项要求 gfm 为true
@@ -24,13 +21,14 @@ function ShowMarkdown(props) {
                 smartLists: true,//是否使用比原生markdown更时髦的列表。 旧的列表将可能被作为pedantic的处理内容过滤掉.
                 smartypants: false//是否使用更为时髦的标点，比如在引用语法中加入破折号。
             });
-            setMD(marked(text));
-        })
+            setMD(marked(text))
+        }
+        fetchData();
     },[]);
 
-    return <Container header='展示Markdown文档'>
+    return <React.Fragment>
         {MD && <div dangerouslySetInnerHTML={{__html:MD}}/>}
-    </Container>
+    </React.Fragment>
 }
 
-export default ShowMarkdown;
+export default MdHtml;

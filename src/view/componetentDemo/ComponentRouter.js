@@ -20,6 +20,7 @@ import ProgressDemo from "./control/ProgressDemo";
 import TextInputDemo from "./control/TextInputDemo";
 import IconDemo from "./control/IconDemo";
 import DropdownWDemo from './control/DropdownWDemo';
+import ShowMarkdown from "./ShowMarkdown/ShowMarkdown";
 
 function ComponentRouter(props) {
     return <Switch>
@@ -42,6 +43,7 @@ function ComponentRouter(props) {
         <Route path='/component/textInput' component={TextInputDemo}/>
         <Route path='/component/icon' component={IconDemo}/>
         <Route path='/component/DropdownW' component={DropdownWDemo}/>
+        <Route path='/component/showMarkdown' component={ShowMarkdown}/>
         <Route component={ComponentHome}/>
     </Switch>
 

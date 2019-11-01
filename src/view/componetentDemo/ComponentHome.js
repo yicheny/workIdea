@@ -23,6 +23,7 @@ function ComponentHome(props) {
         <Link to='/component/textInput'>TextInput</Link>
         <Link to='/component/icon'>Icon展示</Link>
         <Link to='/component/DropdownW'>DropdownW</Link>
+        <Link to='/component/showMarkdown' >MdHtml</Link>
     </BoxM>
 }
 
