@@ -13,6 +13,7 @@ import Combination from "./practice/Combination";
 import SwitchLight from "./practice/state/SwitchLight";
 import Purpose from "./deep/Purpose/Purpose";
 import DeepPubSub from "./deep/pubsub/DeepPubSub";
+import DeepDemo from "./deep/Demo/DeepDemo";
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -27,6 +28,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/practice/combination' component={Combination}/>
         <Route path='/design/practice/state' component={SwitchLight}/>、
 
+        <Route path='/design/deep/demo' component={DeepDemo}/>
         <Route path='/design/deep/purpose' component={Purpose}/>
         <Route path='/design/deep/pubSub' component={DeepPubSub}/>
         <Route component={DesignPatternHome}/>
