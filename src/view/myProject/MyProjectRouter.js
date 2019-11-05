@@ -5,7 +5,6 @@ import MyProjectHome from "./MyProjectHome";
 import PublicFunTest from "./PublicFooDemo/PublicFunTest";
 import DrawRolls from "./DrawRolls/DrawRolls";
 import FriedGoldenFlower from "./FriedGoldenFlower/FriedGoldenFlower";
-import Demo from "./wolfKill/Demo";
 import RedLine from "./redLine/RedLine";
 import SystemSwitch from "./systemSwitch/SystemSwitch";
 import SortCase from "./sortCase/SortCase";
@@ -19,7 +18,6 @@ function MyProjectRouter(props) {
         <Route path='/mProj/publicFunTest' component={PublicFunTest}/>
         <Route path='/mProj/drawRolls' component={DrawRolls}/>
         <Route path='/mProj/friedGoldenFlower' component={FriedGoldenFlower}/>
-        <Route path='/mProj/wolfKill' component={Demo}/>
         <Route path='/mProj/redLine' component={RedLine}/>
         <Route path='/mProj/systemSwitch' component={SystemSwitch}/>
         <Route path='/mProj/sortCase' component={SortCase}/>

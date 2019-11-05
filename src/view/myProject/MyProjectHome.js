@@ -8,7 +8,6 @@ function MyProjectHome(props) {
         <Link to='/mProj/publicFunTest'>公共方法测试</Link>
         <Link to='/mProj/drawRolls'>抽奖大转盘</Link>
         {/*<Link to='/mProj/friedGoldenFlower'>炸金花</Link>*/}
-        {/*<Link to='/mProj/wolfKill'>狼人杀</Link>*/}
         <Link to='/mProj/redLine'>赤线Demo</Link>
         <Link to='/mProj/systemSwitch'>进制转换</Link>
         <Link to='/mProj/sortCase'>排序演示</Link>
