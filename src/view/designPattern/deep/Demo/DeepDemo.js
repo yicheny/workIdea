@@ -33,6 +33,7 @@ class Qiang extends Buyer{
 class Publish{
     constructor(){
         this.customs = [];//订阅者列表
+        this.price = 12999;
     }
 
     add(name,event){ //添加订阅者
@@ -51,14 +52,9 @@ class Publish{
 
 //价格发布者
 class PricePublish extends Publish{
-    add(name,price,event){
-        this.customs.push({name,price,event});
-    }
-
-    inform(price){
-        this.customs.forEach((item)=>{
-            if(price<=item.price) return item.event(price)
-        })
+    setPrice(price){
+        this.price = price;
+        this.inform(this.price);
     }
 }
 
