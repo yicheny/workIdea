@@ -29,28 +29,28 @@ class Qiang extends Buyer{
     }
 }
 
-//观察者
-class Observer{
+//发布者
+class Publish{
     constructor(){
-        this.customs = [];//消费者列表
+        this.customs = [];//订阅者列表
     }
 
-    add(name,event){ //添加消费者
+    add(name,event){ //添加订阅者
         this.customs.push({name,event});
     }
 
-    remove(name){ //从列表移除指定消费者
+    remove(name){ //从列表移除指定订阅者
         if(!name)return this.customs = [];//如果不传指定名称则清空列表
         this.customs = this.customs.filter(item=>item.name!==name);
     }
 
-    inform(...rest){ //通知列表上的消费者【也可以设置成通知指定的消费者】
+    inform(...rest){ //通知列表上的订阅者【也可以设置成通知指定的订阅者】
         this.customs.forEach((item)=>item.event(...rest))
     }
 }
 
-//价格观察者
-class PriceObserver extends Observer{
+//价格发布者
+class PricePublish extends Publish{
     add(name,price,event){
         this.customs.push({name,price,event});
     }
@@ -64,20 +64,20 @@ class PriceObserver extends Observer{
 
 
 function DeepDemo(props) {
-    const priceObserver = new PriceObserver();
+    const pricePublish = new PricePublish();
 
     const hong = new Hong();
     const ming = new Ming();
     const qiang = new Qiang();
-    priceObserver.add('hong',11999,hong.buyPhone);
-    priceObserver.add('ming',5699,ming.buyPhone);
-    priceObserver.add('qiang',8899,qiang.buyPhone);
+    pricePublish.add('hong',11999,hong.buyPhone);
+    pricePublish.add('ming',5699,ming.buyPhone);
+    pricePublish.add('qiang',8899,qiang.buyPhone);
 
-    priceObserver.inform(11888);
-    priceObserver.inform(10888);
-    priceObserver.inform(8888);
-    priceObserver.inform(6888);
-    priceObserver.inform(4888);
+    pricePublish.inform(11888);
+    pricePublish.inform(10888);
+    pricePublish.inform(8888);
+    pricePublish.inform(6888);
+    pricePublish.inform(4888);
 
     return <div></div>
 }
