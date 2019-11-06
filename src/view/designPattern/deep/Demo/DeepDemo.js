@@ -31,9 +31,14 @@ class Qiang extends Buyer{
 
 //发布者
 class Publish{
-    constructor(){
+    constructor(price=0){
         this.customs = [];//订阅者列表
-        this.price = 12999;
+        this.price = price;//发布者被依赖的状态
+    }
+
+    setPrice(price){ //价格变化的同时自动更新
+        this.price = price;
+        this.inform();
     }
 
     add(name,event){ //添加订阅者
@@ -45,35 +50,44 @@ class Publish{
         this.customs = this.customs.filter(item=>item.name!==name);
     }
 
-    inform(...rest){ //通知列表上的订阅者【也可以设置成通知指定的订阅者】
-        this.customs.forEach((item)=>item.event(...rest))
+    inform(subjectName='all'){ //通知列表上的订阅者【可以设置指定的订阅者】
+        if(subjectName==='all') return this.customs.forEach((item)=>item.event(this.price));
+
+        const subject = this.customs.find(item=>item.name===subjectName);
+        if(!subject) return console.error('不存在此订阅者');
+        return subject.event(this.price);
     }
 }
 
 //价格发布者
 class PricePublish extends Publish{
-    setPrice(price){
-        this.price = price;
-        this.inform(this.price);
+    add(name,event,price){
+        this.customs.push({name,price,event});
+    }
+
+    inform(){
+        this.customs.forEach((item)=>{
+            if(this.price<=item.price) return item.event(this.price)
+        })
     }
 }
 
 
 function DeepDemo(props) {
-    const pricePublish = new PricePublish();
+    const pricePublish = new PricePublish(12999);
 
     const hong = new Hong();
     const ming = new Ming();
     const qiang = new Qiang();
-    pricePublish.add('hong',11999,hong.buyPhone);
-    pricePublish.add('ming',5699,ming.buyPhone);
-    pricePublish.add('qiang',8899,qiang.buyPhone);
+    pricePublish.add('hong',hong.buyPhone,11999,);
+    pricePublish.add('ming',ming.buyPhone,5699);
+    pricePublish.add('qiang',qiang.buyPhone,8899);
 
-    pricePublish.inform(11888);
-    pricePublish.inform(10888);
-    pricePublish.inform(8888);
-    pricePublish.inform(6888);
-    pricePublish.inform(4888);
+    pricePublish.setPrice(11888);
+    pricePublish.setPrice(10888);
+    pricePublish.setPrice(8888);
+    pricePublish.setPrice(6888);
+    pricePublish.setPrice(4888);
 
     return <div></div>
 }
