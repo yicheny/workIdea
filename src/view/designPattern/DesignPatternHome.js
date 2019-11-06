@@ -20,6 +20,7 @@ function DesignPatternHome(props) {
         <BoxM tit='深入理解'>
             <Link to='/design/deep/purpose'>设计模式目的总结</Link>
             <Link to='/design/deep/pubSub'>观察者模式</Link>
+            <Link to='/design/deep/state'>状态模式</Link>
         </BoxM>
     </Fragment>
 }
