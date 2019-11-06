@@ -24,8 +24,9 @@
 - [ ] Operation运算类浮点数误差
 
 # 待改进
-- [ ] 月度表现2新表格
 - [ ] MdHtml需要显示`[TOC]`目录
+- [ ] TableW的autoFill功能
+- [ ] TableW的fixedLeft功能
 
 # 开发中...
 - [ ] 排序演示
