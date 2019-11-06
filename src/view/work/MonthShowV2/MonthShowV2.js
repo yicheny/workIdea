@@ -2,15 +2,41 @@ import React from "react";
 import _ from 'lodash';
 import {data} from "./Data/data"
 import './MonthShowV2.less';
-import {Container} from "../../../component";
+import {Container,TableW as Table,ColumnW as Column} from "../../../component";
 
 const monthName = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function MonthTable(props) {
-    const {data} = props;
-    console.log(data);
-    return <div className='flex'>
-
+    const {data:{lData,mData}} = props;
+    return <div className='month_table flex'>
+        <div className="month_table_L">
+            <div className="header">
+                年份
+            </div>
+            {
+                lData.map((el,i)=><div key={i} className="item">
+                    {el}
+                </div>)
+            }
+        </div>
+        <div className="month_table_M">
+            <Table data={mData}>
+                <Column text='名称' bind='name' width={100}/>
+                <Column text='1月' bind='Jan' width={100}/>
+                <Column text='2月' bind='Feb' width={100}/>
+                <Column text='3月' bind='Mar' width={100}/>
+                <Column text='4月' bind='Apr' width={100}/>
+                <Column text='5月' bind='May' width={100}/>
+                <Column text='6月' bind='Jun' width={100}/>
+                <Column text='7月' bind='Jul' width={100}/>
+                <Column text='8月' bind='Aug' width={100}/>
+                <Column text='9月' bind='Sep' width={100}/>
+                <Column text='10月' bind='Oct' width={100}/>
+                <Column text='11月' bind='Nov' width={100}/>
+                <Column text='12月' bind='Dec' width={100}/>
+                <Column text='年度累计' bind='all' width={100}/>
+            </Table>
+        </div>
     </div>
 }
 
@@ -31,7 +57,10 @@ class MonthShowV2 extends React.Component{
         const {benchmarks,product,name,benchmarkName} = data;
         spreadArr(product,(el)=>res.push({...el,type:'product',name}));
         spreadArr(benchmarks,(el)=>res.push({...el,type:'benchmark',name:benchmarkName}));
-        return _.orderBy(res, 'year');
+        return {
+            lData:_.uniq(res.map(el=>el.year)),
+            mData:_.orderBy(res, 'year')
+        };
 
         function spreadArr(list,callback=()=>{}) {
             list.forEach((el,i)=>{
