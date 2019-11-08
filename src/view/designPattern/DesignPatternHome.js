@@ -18,10 +18,11 @@ function DesignPatternHome(props) {
         </BoxM>
 
         <BoxM tit='基础知识'>
+            <Link to='/design/base/omt'>OMT表示法</Link>
+            <Link to='/design/base/coreTenet'>设计模式核心原则</Link>
             <Link to='/design/base/purpose'>设计模式目的总结</Link>
             <Link to='/design/base/pubSub'>观察者模式</Link>
             <Link to='/design/base/state'>状态模式</Link>
-            <Link to='/design/base/omt'>OMT表示法</Link>
         </BoxM>
     </Fragment>
 }

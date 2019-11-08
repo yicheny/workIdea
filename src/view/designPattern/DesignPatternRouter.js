@@ -16,6 +16,7 @@ import BasePubSub from "./base/pubsub/BasePubSub";
 import BaseDemo from "./base/Demo/BaseDemo";
 import BaseState from "./base/state/BaseState";
 import OMT from "./base/OMT/OMT";
+import CoreTenet from "./base/coreTenet/CoreTenet";
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -35,6 +36,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/base/pubSub' component={BasePubSub}/>
         <Route path='/design/base/state' component={BaseState}/>
         <Route path='/design/base/omt' component={OMT}/>
+        <Route path='/design/base/coreTenet' component={CoreTenet}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }
