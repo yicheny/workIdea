@@ -21,6 +21,7 @@ function DesignPatternHome(props) {
             <Link to='/design/base/omt'>OMT表示法</Link>
             <Link to='/design/base/coreTenet'>设计模式核心原则</Link>
             <Link to='/design/base/dpClass'>设计模式分类</Link>
+            <Link to='/design/base/failDesign'>反设计及其解决方案</Link>
             <Link to='/design/base/pubSub'>观察者模式</Link>
             <Link to='/design/base/state'>状态模式</Link>
         </BoxM>

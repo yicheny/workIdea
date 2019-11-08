@@ -19,6 +19,7 @@ import PubSubPath from './base/doc/观察者模式.md';
 import StatePath from './base/doc/状态模式.md';
 import CoreTenetPath from './base/doc/设计模式核心原则.md';
 import DPClassPath from './base/doc/设计模式分类.md';
+import FailDesignPath from './base/doc/反设计及解决方案.md';
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -39,6 +40,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/base/omt' component={()=><MdContainer path={OMTPath}/>}/>
         <Route path='/design/base/coreTenet' component={()=><MdContainer path={CoreTenetPath}/>}/>
         <Route path='/design/base/dpClass' component={()=><MdContainer path={DPClassPath}/>}/>
+        <Route path='/design/base/failDesign' component={()=><MdContainer path={FailDesignPath}/>}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }
