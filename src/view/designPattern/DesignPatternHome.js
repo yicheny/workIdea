@@ -17,10 +17,10 @@ function DesignPatternHome(props) {
             <Link to='/design/practice/state'>状态模式</Link>
         </BoxM>
 
-        <BoxM tit='深入理解'>
-            <Link to='/design/deep/purpose'>设计模式目的总结</Link>
-            <Link to='/design/deep/pubSub'>观察者模式</Link>
-            <Link to='/design/deep/state'>状态模式</Link>
+        <BoxM tit='基础知识'>
+            <Link to='/design/base/purpose'>设计模式目的总结</Link>
+            <Link to='/design/base/pubSub'>观察者模式</Link>
+            <Link to='/design/base/state'>状态模式</Link>
         </BoxM>
     </Fragment>
 }

@@ -1,9 +1,9 @@
 import React,{useState,useRef} from 'react';
 import {Container,Button} from "../../../../component";
-import Light from './Light';
+import LightContext from './Light';
 
 function SwitchLight(props) {
-    const lightRef = useRef(new Light());
+    const lightRef = useRef(new LightContext());
     const [lightState,setLightState] = useState('关灯');
 
     return <Container header='切换灯光'>

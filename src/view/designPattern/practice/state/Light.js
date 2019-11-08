@@ -23,7 +23,7 @@ class LightStrongState extends LightState{
     }
 }
 
-export default class Light {
+export default class LightContext {
     constructor(){
         this.stateValue='关灯';
         this.currState = new LightOffState();
