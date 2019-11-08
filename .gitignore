@@ -28,8 +28,3 @@ yarn-error.log*
 /.idea
 /.xml
 
-/src/asset/img/*.jpg
-/src/view/myProject/control/wolfKill/img
-/src/view/myProject/control/redLine/img
-/src/view/myProject/redLine/img
-/src/view/myProject/wolfKill/img
