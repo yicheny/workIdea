@@ -12,11 +12,13 @@ import Order from "./practice/Order";
 import Combination from "./practice/Combination";
 import SwitchLight from "./practice/state/SwitchLight";
 import BaseDemo from "./base/BaseDemo";
+
+import MdContainer from "../common/MdContaier";
 import OMTPath from './base/doc/OTM表示法.md';
 import PubSubPath from './base/doc/观察者模式.md';
 import StatePath from './base/doc/状态模式.md';
 import CoreTenetPath from './base/doc/设计模式核心原则.md';
-import MdContainer from "../common/MdContaier";
+import DPClassPath from './base/doc/设计模式分类.md';
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -36,6 +38,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
         <Route path='/design/base/omt' component={()=><MdContainer path={OMTPath}/>}/>
         <Route path='/design/base/coreTenet' component={()=><MdContainer path={CoreTenetPath}/>}/>
+        <Route path='/design/base/dpClass' component={()=><MdContainer path={DPClassPath}/>}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }
