@@ -11,12 +11,12 @@ import PubSub from "./practice/PubSub";
 import Order from "./practice/Order";
 import Combination from "./practice/Combination";
 import SwitchLight from "./practice/state/SwitchLight";
-import Purpose from "./base/Purpose/BasePurpose";
-import BasePubSub from "./base/pubsub/BasePubSub";
-import BaseDemo from "./base/Demo/BaseDemo";
-import BaseState from "./base/state/BaseState";
-import OMT from "./base/OMT/OMT";
-import CoreTenet from "./base/coreTenet/CoreTenet";
+import BaseDemo from "./base/BaseDemo";
+import OMTPath from './base/doc/OTM表示法.md';
+import PubSubPath from './base/doc/观察者模式.md';
+import StatePath from './base/doc/状态模式.md';
+import CoreTenetPath from './base/doc/设计模式核心原则.md';
+import MdContainer from "../common/MdContaier";
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -32,11 +32,10 @@ function DesignPatternRouter(props) {
         <Route path='/design/practice/state' component={SwitchLight}/>、
 
         <Route path='/design/base/demo' component={BaseDemo}/>
-        <Route path='/design/base/purpose' component={Purpose}/>
-        <Route path='/design/base/pubSub' component={BasePubSub}/>
-        <Route path='/design/base/state' component={BaseState}/>
-        <Route path='/design/base/omt' component={OMT}/>
-        <Route path='/design/base/coreTenet' component={CoreTenet}/>
+        <Route path='/design/base/pubSub' component={()=><MdContainer path={PubSubPath}/>}/>
+        <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
+        <Route path='/design/base/omt' component={()=><MdContainer path={OMTPath}/>}/>
+        <Route path='/design/base/coreTenet' component={()=><MdContainer path={CoreTenetPath}/>}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }

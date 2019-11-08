@@ -30,10 +30,10 @@
 
 # 实例图分析
 分析待补充...
-- ![img](./img/OMT1.png)
-- ![img](./img/OMT2.png)
-- ![img](./img/OMT3.png)
-- ![img](./img/OMT4.png)
-- ![img](./img/OMT5.png)
+- ![img](../img/OMT1.png)
+- ![img](../img/OMT2.png)
+- ![img](../img/OMT3.png)
+- ![img](../img/OMT4.png)
+- ![img](../img/OMT5.png)
 
 
