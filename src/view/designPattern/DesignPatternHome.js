@@ -26,6 +26,7 @@ function DesignPatternHome(props) {
 
         <BoxM tit='基础_具体模式'>
             <Link to='/design/base/simpleFactory'>简单工厂模式</Link>
+            <Link to='/design/base/factoryMethod'>工厂方法模式</Link>
             <Link to='/design/base/abstractFactory'>抽象工厂模式</Link>
             <Link to='/design/base/pubSub'>观察者模式</Link>
             <Link to='/design/base/state'>状态模式</Link>

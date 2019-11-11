@@ -21,6 +21,7 @@ import CoreTenetPath from './base/doc/设计模式核心原则.md';
 import DPClassPath from './base/doc/设计模式分类.md';
 import FailDesignPath from './base/doc/反设计及解决方案.md';
 import SimpleFactoryPath from './base/doc/简单工厂模式.md';
+import FactoryMethodPath from './base/doc/工厂方法模式.md';
 import AbstractFactoryPath from './base/doc/抽象工厂模式.md';
 
 function DesignPatternRouter(props) {
@@ -37,14 +38,16 @@ function DesignPatternRouter(props) {
         <Route path='/design/practice/state' component={SwitchLight}/>、
 
         <Route path='/design/base/demo' component={BaseDemo}/>
-        <Route path='/design/base/pubSub' component={()=><MdContainer path={PubSubPath}/>}/>
-        <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
         <Route path='/design/base/omt' component={()=><MdContainer path={OMTPath}/>}/>
         <Route path='/design/base/coreTenet' component={()=><MdContainer path={CoreTenetPath}/>}/>
         <Route path='/design/base/dpClass' component={()=><MdContainer path={DPClassPath}/>}/>
         <Route path='/design/base/failDesign' component={()=><MdContainer path={FailDesignPath}/>}/>
+
         <Route path='/design/base/simpleFactory' component={()=><MdContainer path={SimpleFactoryPath}/>}/>
+        <Route path='/design/base/factoryMethod' component={()=><MdContainer path={FactoryMethodPath}/>}/>
         <Route path='/design/base/abstractFactory' component={()=><MdContainer path={AbstractFactoryPath}/>}/>
+        <Route path='/design/base/pubSub' component={()=><MdContainer path={PubSubPath}/>}/>
+        <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }
