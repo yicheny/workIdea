@@ -11,7 +11,7 @@ function DesignPatternHome(props) {
             <Link to='/design/practice/strategy'>策略模式</Link>
             <Link to='/design/practice/proxy'>代理模式</Link>
             <Link to='/design/practice/iterator'>迭代器模式</Link>
-            <Link to='/design/practice/pubSub'>发布-订阅模式【观察者模式】</Link>
+            <Link to='/design/practice/pubSub'>发布-订阅模式【观察者】</Link>
             <Link to='/design/practice/order'>命令模式</Link>
             <Link to='/design/practice/combination'>组合模式</Link>
             <Link to='/design/practice/state'>状态模式</Link>
@@ -28,6 +28,7 @@ function DesignPatternHome(props) {
             <Link to='/design/base/simpleFactory'>简单工厂模式</Link>
             <Link to='/design/base/factoryMethod'>工厂方法模式</Link>
             <Link to='/design/base/abstractFactory'>抽象工厂模式</Link>
+            <Link to='/design/base/builder'>生成器模式【建造者】</Link>
             <Link to='/design/base/pubSub'>观察者模式</Link>
             <Link to='/design/base/state'>状态模式</Link>
         </BoxM>

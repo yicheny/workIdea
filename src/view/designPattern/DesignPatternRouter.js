@@ -23,6 +23,7 @@ import FailDesignPath from './base/doc/反设计及解决方案.md';
 import SimpleFactoryPath from './base/doc/简单工厂模式.md';
 import FactoryMethodPath from './base/doc/工厂方法模式.md';
 import AbstractFactoryPath from './base/doc/抽象工厂模式.md';
+import BuilderPath from './base/doc/生成器模式.md';
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -46,6 +47,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/base/simpleFactory' component={()=><MdContainer path={SimpleFactoryPath}/>}/>
         <Route path='/design/base/factoryMethod' component={()=><MdContainer path={FactoryMethodPath}/>}/>
         <Route path='/design/base/abstractFactory' component={()=><MdContainer path={AbstractFactoryPath}/>}/>
+        <Route path='/design/base/builder' component={()=><MdContainer path={BuilderPath}/>}/>
         <Route path='/design/base/pubSub' component={()=><MdContainer path={PubSubPath}/>}/>
         <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
         <Route component={DesignPatternHome}/>

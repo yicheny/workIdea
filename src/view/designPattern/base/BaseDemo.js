@@ -1,50 +1,67 @@
 import React from 'react';
 
-//抽象玩具类_定义具体玩具类的接口
-class Toy {
-    constructor(props){
-        const {name=null,size=20,color='white'} = props;
-        this.name=name;
-        this.size=size;
-        this.color=color;
+//Builder抽象类
+class PersonBuilder{
+    setSkinColor=()=>console.error("子类必须重写setSkinColor方法");
+
+    setLanguage=()=>console.error("子类必须重写 setLanguage方法");
+
+    setTerritory=()=>console.error("子类必须重写setTerritory方法");
+
+    getPerson=()=>console.log(`该人种肤色是：${this.skinColor}，语言是：${this.language}，生活地域是：${this.territory}`);
+}
+
+//Builder具体子类_红人类组件
+class RedPersonBuilder extends PersonBuilder{
+    setSkinColor = ()=>{
+        this.skinColor = '红色';
+    }
+
+    setLanguage = ()=>{
+        this.language = '红人语';
+    }
+
+    setTerritory = ()=>{
+        this.territory = '红人地域';
     }
 }
 
-//具体玩具类_悠悠球
-class ToyYoyo extends Toy{
-    constructor(props){
-        super(props);
-        this.name = '悠悠球';
-        console.log('悠悠球生产成功',this);
+//Builder具体子类_黄人类组件
+class YellowPersonBuilder extends PersonBuilder{
+    setSkinColor = ()=>{
+        this.skinColor = '黄色';
+    }
+
+    setLanguage = ()=>{
+        this.language = '黄人语';
+    }
+
+    setTerritory = ()=>{
+        this.territory = '黄人地域';
     }
 }
 
-//具体玩具类_芭比娃娃
-class ToyBabi extends Toy{
-    constructor(props){
-        super(props);
-        this.name = '芭比娃娃';
-        console.log('芭比娃娃生产成功',this);
+//指挥者类_负责抽象创建过程
+class PersonDirector{
+    constructor(builder={}){
+        this.builder = builder
+    }
+
+    createPerson(){
+        this.builder.setSkinColor();
+        this.builder.setLanguage();
+        this.builder.setTerritory();
+        return this.builder;
     }
 }
 
-//工厂类_根据约定的接口返回对应的实例对象
-class ToyFactory{
-    static createToy(type,size,color){
-        // if(type==='yoyo') return new ToyYoyo({size,color});
-        // if(type==='babi') return new ToyBabi({size,color});
-        // return console.log(`生产失败!`)
-    }
-}
 
 
 function BaseDemo(props) {
-    // ToyFactory.createToy('yoyo',18,'red');
-    // ToyFactory.createToy('babi',30,'blue');
-    // ToyFactory.createToy('yoyo');
-    // ToyFactory.createToy('dddd');
-
-    ToyFactory.createToy(ToyYoyo);
+    const redPerson = new PersonDirector(new RedPersonBuilder()).createPerson();
+    redPerson.getPerson();
+    const yellowPerson = new PersonDirector(new YellowPersonBuilder()).createPerson();
+    yellowPerson.getPerson();
     return <div></div>
 }
 
