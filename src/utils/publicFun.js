@@ -34,17 +34,10 @@ export function shuffle(array) {
     return newArray;
 }
 
-//返回一个对象的keys数组和values数组
-export function setObj(obj) {
-    const keys = Object.keys(obj);
-    const values = Object.values(obj);
-    return [keys, values]
-}
-
-//返回一个数组中所有值为真值的变量名
+//返回一个数组中所有值为真值的变量名_待优化
 export function getName(names = {}) {
     const data = {...names};
-    const [keys, values] = setObj(data);
+    const [keys, values] = [Object.keys(data),Object.values(data)];
     let res = keys.filter((el, i) => values[i]);
     if (res.length) return res;
     return [''];
