@@ -1,67 +1,58 @@
 import React from 'react';
 
-//Builder抽象类
-class PersonBuilder{
-    setSkinColor=()=>console.error("子类必须重写setSkinColor方法");
-
-    setLanguage=()=>console.error("子类必须重写 setLanguage方法");
-
-    setTerritory=()=>console.error("子类必须重写setTerritory方法");
-
-    getPerson=()=>console.log(`该人种肤色是：${this.skinColor}，语言是：${this.language}，生活地域是：${this.territory}`);
-}
-
-//Builder具体子类_红人类组件
-class RedPersonBuilder extends PersonBuilder{
-    setSkinColor = ()=>{
-        this.skinColor = '红色';
+class Resume {
+    constructor(name) {
+        this.name = name;
+        this.sex = null;
+        this.age = null;
+        this.timeArea = null;
+        this.company = null;
     }
 
-    setLanguage = ()=>{
-        this.language = '红人语';
-    }
+    resume = (name)=>{
+        this.name = name;
+    };
 
-    setTerritory = ()=>{
-        this.territory = '红人地域';
-    }
-}
+    setPersonInfo = (sex, age) => {
+        this.sex = sex;
+        this.age = age;
+    };
 
-//Builder具体子类_黄人类组件
-class YellowPersonBuilder extends PersonBuilder{
-    setSkinColor = ()=>{
-        this.skinColor = '黄色';
-    }
+    setWorkExperience = (timeArea,company)=>{
+        this.timeArea = timeArea;
+        this.company = company;
+    };
 
-    setLanguage = ()=>{
-        this.language = '黄人语';
-    }
+    display = ()=>{
+        console.log(this.name,this.sex,this.age,this.timeArea,this.company);
+    };
 
-    setTerritory = ()=>{
-        this.territory = '黄人地域';
+    clone = ()=>{
+        const obj = new Resume();
+        obj.name = this.name;
+        obj.age = this.age;
+        obj.sex = this.sex;
+        obj.timeArea = this.timeArea;
+        obj.company = this.company;
+        return obj;
     }
 }
-
-//指挥者类_负责抽象创建过程
-class PersonDirector{
-    constructor(builder={}){
-        this.builder = builder
-    }
-
-    createPerson(){
-        this.builder.setSkinColor();
-        this.builder.setLanguage();
-        this.builder.setTerritory();
-        return this.builder;
-    }
-}
-
-
 
 function BaseDemo(props) {
-    const redPerson = new PersonDirector(new RedPersonBuilder()).createPerson();
-    redPerson.getPerson();
-    const yellowPerson = new PersonDirector(new YellowPersonBuilder()).createPerson();
-    yellowPerson.getPerson();
+    const a = new Resume('大猫');
+    a.setPersonInfo('男','11');
+    a.setWorkExperience('2222','东京东京');
+
+    const b = a.clone();
+    b.resume('隆隆隆');
+    b.setWorkExperience('3333','西京洗净');
+
+    const c = a.clone();
+    c.setPersonInfo('女','99');
+
+    a.display();
+    b.display();
+    c.display();
     return <div></div>
 }
 
