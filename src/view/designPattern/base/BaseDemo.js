@@ -1,5 +1,6 @@
 import React from 'react';
 
+//抽象玩具类_定义具体玩具类的接口
 class Toy {
     constructor(props){
         const {name=null,size=20,color='white'} = props;
@@ -9,6 +10,7 @@ class Toy {
     }
 }
 
+//具体玩具类_悠悠球
 class ToyYoyo extends Toy{
     constructor(props){
         super(props);
@@ -17,6 +19,7 @@ class ToyYoyo extends Toy{
     }
 }
 
+//具体玩具类_芭比娃娃
 class ToyBabi extends Toy{
     constructor(props){
         super(props);
@@ -25,80 +28,23 @@ class ToyBabi extends Toy{
     }
 }
 
-class Sock {
-    constructor(props){
-        const {name=null,quality='normal',price=0} = props;
-        this.name=name;
-        this.quality=quality;
-        this.price=price;
+//工厂类_根据约定的接口返回对应的实例对象
+class ToyFactory{
+    static createToy(type,size,color){
+        // if(type==='yoyo') return new ToyYoyo({size,color});
+        // if(type==='babi') return new ToyBabi({size,color});
+        // return console.log(`生产失败!`)
     }
 }
 
-class SockPantynose extends Sock{
-    constructor(props){
-        super(props);
-        this.name = '连裤袜';
-        console.log('连裤袜生产成功',this);
-    }
-}
-
-class SockSocking extends Sock{
-    constructor(props){
-        super(props);
-        this.name = '长筒袜';
-        console.log('长筒袜生产成功',this);
-    }
-}
-
-//抽象工厂类_用于定义公共的接口
-class ProductFactory{
-    createProduct = (proType,...rest)=>{
-        if(proType==='toy') return new ToyProductFactory().createProduct(...rest);
-        if(proType==='sock') return new SockProductFactory().createProduct(...rest);
-    }
-}
-
-//具体工厂类_生产玩具
-class ToyProductFactory{
-    createProduct(type,...rest){
-        const params = {
-            size:rest[0],
-            color:rest[1]
-        }
-
-        if(type==='yoyo') return new ToyYoyo(params);
-        if(type==='babi') return new ToyBabi(params);
-        return console.log(`生产失败!`)
-    }
-}
-
-//具体工厂类_生产袜子
-class SockProductFactory{
-    createProduct(type,...rest){
-        const params = {
-            quality:rest[0],
-            price:rest[1]
-        }
-
-        if(type==='pantynose') return new SockPantynose(params);
-        if(type==='socking') return new SockSocking(params);
-        return console.log(`生产失败!`)
-    }
-}
-
-const toyFactory = new ProductFactory();
-toyFactory.createProduct('toy','yoyo',18,'red');
-toyFactory.createProduct('toy','babi',30,'blue');
-toyFactory.createProduct('toy','yoyo');
-toyFactory.createProduct('toy','dddd');
-
-const sockProductFactory = new ProductFactory();
-sockProductFactory.createProduct('sock','pantynose','height',1200);
-sockProductFactory.createProduct('sock','socking','normal',600);
-sockProductFactory.createProduct('sock','socking');
-sockProductFactory.createProduct('sock','dddd');
 
 function BaseDemo(props) {
+    // ToyFactory.createToy('yoyo',18,'red');
+    // ToyFactory.createToy('babi',30,'blue');
+    // ToyFactory.createToy('yoyo');
+    // ToyFactory.createToy('dddd');
+
+    ToyFactory.createToy(ToyYoyo);
     return <div></div>
 }
 
