@@ -9,32 +9,26 @@ class Resume {
         this.company = null;
     }
 
-    resume = (name)=>{
+    resume = function(name){
         this.name = name;
     };
 
-    setPersonInfo = (sex, age) => {
+    setPersonInfo = function(sex, age) {
         this.sex = sex;
         this.age = age;
     };
 
-    setWorkExperience = (timeArea,company)=>{
+    setWorkExperience = function(timeArea,company){
         this.timeArea = timeArea;
         this.company = company;
     };
 
-    display = ()=>{
+    display = function(){
         console.log(this.name,this.sex,this.age,this.timeArea,this.company);
     };
 
-    clone = ()=>{
-        const obj = new Resume();
-        obj.name = this.name;
-        obj.age = this.age;
-        obj.sex = this.sex;
-        obj.timeArea = this.timeArea;
-        obj.company = this.company;
-        return obj;
+    clone = function(){
+        return {...this};
     }
 }
 
