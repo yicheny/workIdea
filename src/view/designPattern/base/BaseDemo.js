@@ -1,32 +1,85 @@
 import React from 'react';
 
-class SingleJob{
-    constructor(job){
-        this.job=job;
+function cloneDeep(source,clones=new WeakMap()) {
+    if(!checkTypes(source,['Object','Array','Map','Set'])) return source;
+
+    if(clones.has(source)){
+        return `Circular：此项循环引用，注意！`;
     }
+    clones.set(source,undefined);
 
-    static instance = [];
+    if(checkType(source,'Object')) return objClone();
+    if(checkType(source,'Array')) return arrClone();
+    if(checkType(source,'Map')) return mapClone();
+    if(checkType(source,'Set')) return setClone();
 
-    //注意：创建实例的任务交给这个静态方法
-    static GetInstance = function (...params) {
-        if(SingleJob.instance.length < 2){//注意，这里2就是允许实例化的最大数量
-            SingleJob.instance.push(new SingleJob(...params))
+    function objClone() {
+        const res = {};
+        for(let key in source){
+            res[key] = cloneDeep(source[key],clones)
         }
-        return SingleJob.instance[SingleJob.instance.length-1];
-    };
-
-    jobFor = function () {
-        console.log(this.job);
+        return res;
+    }
+    function arrClone() {
+        const res = [];
+        for(let key in source){
+            res[key] = cloneDeep(source[key],clones)
+        }
+        return res;
+    }
+    function mapClone() {
+        const res = new Map();
+        source.forEach((value,key)=>{
+            res.set(key,cloneDeep(value,clones));
+        });
+        return res;
+    }
+    function setClone(){
+        const res = new Set();
+        source.forEach(value=>{
+            res.add(cloneDeep(value,clones))
+        });
+        return res;
+    }
+    function checkType(value, type=null) {
+        let dataType = Object.prototype.toString.call(value);
+        dataType = dataType.slice(8, dataType.length - 1);
+        return type===dataType;
+    }
+    function checkTypes(value,types) {
+        return types.some(type=>checkType(value,type));
     }
 }
 
 function BaseDemo(props) {
-    const job = SingleJob.GetInstance('程序员');
-    const job2 = SingleJob.GetInstance('音乐家');
-    const job3 = SingleJob.GetInstance('画家');
-    job.jobFor();//'程序员'
-    job2.jobFor();//'音乐家'
-    job3.jobFor();//'音乐家'
+    const mockData = {
+        name:'ylf',
+        obj:{
+            children1:{
+                num:111,
+                children2:{
+                    num:444
+                }
+            },
+        },
+        arr:[1,2,3,4,5],
+        mockMap:new Map([['name','hahaha'],['height',1231]]),
+        mockSet:new Set([1,3,3,6,6,6,4,56]),
+        num:1111,
+        mockBean:false,
+        money:null,
+        f: { f: { f: { f: { f: { f: { f: { f: { f: { f: { f: { f: {} } } } } } } } } } } },
+        fun:()=>{
+            console.log('dddd')
+        }
+    };
+
+    mockData.abc = mockData;
+    const newData = cloneDeep(mockData);
+    console.log(newData);
+    console.log(newData===mockData);
+    console.log(newData.arr === mockData.arr);
+    console.log(newData.obj === mockData.obj);
     return <div></div>
 }
 
