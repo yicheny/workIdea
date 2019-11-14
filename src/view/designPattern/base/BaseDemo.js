@@ -55,13 +55,6 @@ class MingAnswerPrototype extends Answer{
 }
 
 function BaseDemo(props) {
-    const ming = new MingAnswerPrototype();
-    ming.printName = function(){
-        return console.log(`我的名字是：${this.name}`)
-    };
-    const long = ming.clone();
-    long.setName('小龙');
-    long.printName();//看！小龙继承了小明扩展的方法
     return <div></div>
 }
 
