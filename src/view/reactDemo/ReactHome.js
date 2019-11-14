@@ -4,6 +4,7 @@ import {BoxM} from "../../component";
 
 function ReactHome(props) {
     return <BoxM tit='零散知识'>
+        <Link to='/react/mvc'>MVC演变</Link>
         <Link to='/react/lifeCycle'>生命周期_16.3之前</Link>
         <Link to='/react/context'>Context</Link>
         <Link to='/react/hoc'>高阶组件_HOC</Link>
