@@ -26,6 +26,7 @@ import AbstractFactoryPath from './base/doc/抽象工厂模式.md';
 import BuilderPath from './base/doc/生成器模式.md';
 import PrototypePath from './base/doc/原型模式.md';
 import SingletonPath from './base/doc/单例模式.md';
+import AdapterPath from './base/doc/适配器模式.md';
 
 function DesignPatternRouter(props) {
     return <Switch>
@@ -52,6 +53,7 @@ function DesignPatternRouter(props) {
         <Route path='/design/base/builder' component={()=><MdContainer path={BuilderPath}/>}/>
         <Route path='/design/base/prototype' component={()=><MdContainer path={PrototypePath}/>}/>
         <Route path='/design/base/singleton' component={()=><MdContainer path={SingletonPath}/>}/>
+        <Route path='/design/base/adapter' component={()=><MdContainer path={AdapterPath}/>}/>
         <Route path='/design/base/pubSub' component={()=><MdContainer path={PubSubPath}/>}/>
         <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
         <Route component={DesignPatternHome}/>
