@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {cls} from "../../utils/publicFun";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -29,15 +29,22 @@ function MdHtml(props) {
         fetchData();
     },[]);
 
-    createIndex();
-    return <div className={cls("mdHtml fill flex",!MD&&'center')}>
-        {MD ? <div className='mdHtml_main' dangerouslySetInnerHTML={{__html:MD}}/> : <Loader size={40}/>}
+    return <div className={cls("mdHtml fill flex-y",!MD&&'center')}>
+        {!MD && <Loader size={40}/>}
+        {
+            MD && <Fragment>
+                <div className="mdHtml_index">{createIndex()}</div>
+                <div className='mdHtml_main' dangerouslySetInnerHTML={{__html:MD}}/>
+            </Fragment>
+        }
     </div>;
 
     function createIndex() {
         if(!MD) return;
         // console.log(exec(`<h1 id="标题id">标题</h1><h2 id="标题id">标题</h2>`));
-        console.log(exec(MD));
+        return exec(MD).map((item,index)=>{
+            return <a key={index} href={`#${item.id}`} className={item.ele}>{item.id}</a>
+        });
 
         function exec(value) {
             const res = [];
@@ -47,7 +54,7 @@ function MdHtml(props) {
             while(temp){
                 const item = {
                     ele:temp[1],
-                    value:temp[2]
+                    id:temp[2]
                 };
                 res.push(item);
                 temp = re.exec(value)
