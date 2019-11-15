@@ -1,6 +1,11 @@
 import React, {useEffect} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import './mainPanel.less';
+import {cls} from "../utils/publicFun";
+import {setCombinKey} from "../utils/CombinKey";
+// import {Message} from "../component";
+import Bg from "../component/BG/BG";
+
 import LeftMenu from './LeftMenu';
 import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
@@ -11,19 +16,17 @@ import HttpRouter from "./httpDemo/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";
 import CssTestRouter from "./cssDemo/CssTestRouter";
 import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
-import {setCombinKey} from "../utils/CombinKey";
-import {Message} from "../component";
 import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
-import Bg from "../component/BG/BG";
-import {cls} from "../utils/publicFun";
+import Demo from "../Demo";
 
 function MainPanel(props){
     const {theme} = props;
 
     useEffect(()=>{
-        const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
+        // const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
+        const fn = () => window.open(`http://localhost:3020/#/demo`);
         setCombinKey([68,74],fn);//D J
     },[]);
 
@@ -32,6 +35,7 @@ function MainPanel(props){
         <LeftMenu/>
         <div className="mainPanel_content" style={{'overflow':'auto'}}>
             <Switch>
+                <Route path='/demo' component={Demo}/>
                 <Route path='/work' component={WorkRouter}/>
                 <Route path='/component' component={ComponentRouter}/>
                 <Route path='/react' component={ReactDemo}/>

@@ -4,6 +4,7 @@ import ESHome from "./ESHome";
 import TS1 from "./TS/TS1.js";
 import IndexedDbDemo from "./IndexedDB/IndexedDBDemo";
 import DeepClonePath from './doc/深拷贝.md';
+import RegPath from './doc/正则表达式应用.md';
 import MdContainer from "../common/MdContaier";
 
 function ESRouter() {
@@ -12,6 +13,7 @@ function ESRouter() {
             <Route path='/es/ts1' component={TS1}/>
             <Route path='/es/indexedDB' component={IndexedDbDemo}/>
             <Route path='/es/deepClone' component={()=><MdContainer path={DeepClonePath}/>}/>
+            <Route path='/es/reg' component={()=><MdContainer path={RegPath}/>}/>
             <Route component={ESHome}/>
         </Switch>
     </div>

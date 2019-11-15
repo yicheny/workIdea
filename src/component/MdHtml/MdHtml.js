@@ -29,9 +29,15 @@ function MdHtml(props) {
         fetchData();
     },[]);
 
+    createIndex();
     return <div className={cls("mdHtml fill flex",!MD&&'center')}>
         {MD ? <div className='mdHtml_main' dangerouslySetInnerHTML={{__html:MD}}/> : <Loader size={40}/>}
-    </div>
+    </div>;
+
+    function createIndex() {
+        if(!MD) return;
+
+    }
 }
 
 export default MdHtml;
