@@ -36,7 +36,25 @@ function MdHtml(props) {
 
     function createIndex() {
         if(!MD) return;
+        // console.log(exec(`<h1 id="标题id">标题</h1><h2 id="标题id">标题</h2>`));
+        console.log(exec(MD));
 
+        function exec(value) {
+            const res = [];
+            const re = /<(h[1-6]+).+id="(.+)">.+<\/\1>/g;
+            let temp = re.exec(value);
+
+            while(temp){
+                const item = {
+                    ele:temp[1],
+                    value:temp[2]
+                };
+                res.push(item);
+                temp = re.exec(value)
+            }
+
+            return res;
+        }
     }
 }
 
