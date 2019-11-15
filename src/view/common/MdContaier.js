@@ -12,4 +12,8 @@ MdContainer.defaultProps={
     path:''
 };
 
-export default MdContainer;
+export default Wrapper;
+
+function Wrapper(path) {
+    return ()=><MdContainer path={path}/>
+}

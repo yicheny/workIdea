@@ -13,7 +13,7 @@ import Combination from "./practice/Combination";
 import SwitchLight from "./practice/state/SwitchLight";
 import BaseDemo from "./base/BaseDemo";
 
-import MdContainer from "../common/MdContaier";
+import Md from "../common/MdContaier";
 import OMTPath from './base/doc/OTM表示法.md';
 import PubSubPath from './base/doc/观察者模式.md';
 import StatePath from './base/doc/状态模式.md';
@@ -42,20 +42,20 @@ function DesignPatternRouter(props) {
         <Route path='/design/practice/state' component={SwitchLight}/>、
 
         <Route path='/design/base/demo' component={BaseDemo}/>
-        <Route path='/design/base/omt' component={()=><MdContainer path={OMTPath}/>}/>
-        <Route path='/design/base/coreTenet' component={()=><MdContainer path={CoreTenetPath}/>}/>
-        <Route path='/design/base/dpClass' component={()=><MdContainer path={DPClassPath}/>}/>
-        <Route path='/design/base/failDesign' component={()=><MdContainer path={FailDesignPath}/>}/>
+        <Route path='/design/base/omt' component={Md(OMTPath)}/>
+        <Route path='/design/base/coreTenet' component={Md(CoreTenetPath)}/>
+        <Route path='/design/base/dpClass' component={Md(DPClassPath)}/>
+        <Route path='/design/base/failDesign' component={Md(FailDesignPath)}/>
 
-        <Route path='/design/base/simpleFactory' component={()=><MdContainer path={SimpleFactoryPath}/>}/>
-        <Route path='/design/base/factoryMethod' component={()=><MdContainer path={FactoryMethodPath}/>}/>
-        <Route path='/design/base/abstractFactory' component={()=><MdContainer path={AbstractFactoryPath}/>}/>
-        <Route path='/design/base/builder' component={()=><MdContainer path={BuilderPath}/>}/>
-        <Route path='/design/base/prototype' component={()=><MdContainer path={PrototypePath}/>}/>
-        <Route path='/design/base/singleton' component={()=><MdContainer path={SingletonPath}/>}/>
-        <Route path='/design/base/adapter' component={()=><MdContainer path={AdapterPath}/>}/>
-        <Route path='/design/base/pubSub' component={()=><MdContainer path={PubSubPath}/>}/>
-        <Route path='/design/base/state' component={()=><MdContainer path={StatePath}/>}/>
+        <Route path='/design/base/simpleFactory' component={Md(SimpleFactoryPath)}/>
+        <Route path='/design/base/factoryMethod' component={Md(FactoryMethodPath)}/>
+        <Route path='/design/base/abstractFactory' component={Md(AbstractFactoryPath)}/>
+        <Route path='/design/base/builder' component={Md(BuilderPath)}/>
+        <Route path='/design/base/prototype' component={Md(PrototypePath)}/>
+        <Route path='/design/base/singleton' component={Md(SingletonPath)}/>
+        <Route path='/design/base/adapter' component={Md(AdapterPath)}/>
+        <Route path='/design/base/pubSub' component={Md(PubSubPath)}/>
+        <Route path='/design/base/state' component={Md(StatePath)}/>
         <Route component={DesignPatternHome}/>
     </Switch>
 }
