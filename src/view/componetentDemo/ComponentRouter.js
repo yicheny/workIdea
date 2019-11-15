@@ -21,7 +21,7 @@ import TextInputDemo from "./inputDemo/TextInputDemo";
 import IconDemo from "./iconDemo/IconDemo";
 import DropdownWDemo from './dropdownDemo/DropdownWDemo';
 import LoaderDemo from "./LoaderDemo/LoaderDemo";
-import MdContainer from "../common/MdContaier";
+import Md from "../common/MdContaier";
 import MdDocPath from '../designPattern/base/doc/观察者模式.md';
 
 function ComponentRouter(props) {
@@ -45,7 +45,7 @@ function ComponentRouter(props) {
         <Route path='/component/textInput' component={TextInputDemo}/>
         <Route path='/component/icon' component={IconDemo}/>
         <Route path='/component/DropdownW' component={DropdownWDemo}/>
-        <Route path='/component/showMarkdown' component={()=><MdContainer path={MdDocPath}/>}/>
+        <Route path='/component/showMarkdown' component={Md(MdDocPath)}/>
         <Route path='/component/loader' component={LoaderDemo}/>
         <Route component={ComponentHome}/>
     </Switch>

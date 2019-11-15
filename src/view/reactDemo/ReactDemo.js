@@ -8,7 +8,7 @@ import ChildrenTest from "./children/ChildrenTest";
 import HookBase from "./hook/HookBase";
 import ReactDemoRouter from "./demo/ReactDemoRouter";
 import MVCPath from './doc/MVC演变.md';
-import MdContainer from "../common/MdContaier";
+import Md from "../common/MdContaier";
 
 function ReactDemo() {
     return <div>
@@ -19,7 +19,7 @@ function ReactDemo() {
             <Route path='/react/children' component={ChildrenTest}/>
             <Route path='/react/hookBase' component={HookBase}/>
             <Route path='/react/demo' component={ReactDemoRouter}/>
-            <Route path='/react/mvc' component={()=><MdContainer path={MVCPath}/>}/>
+            <Route path='/react/mvc' component={Md(MVCPath)}/>
             <Route component={ReactHome}/>
         </Switch>
     </div>
