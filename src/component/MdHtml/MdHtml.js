@@ -41,10 +41,12 @@ function MdHtml(props) {
 
     function createIndex() {
         if(!MD) return;
-        // console.log(exec(`<h1 id="标题id">标题</h1><h2 id="标题id">标题</h2>`));
-        return exec(MD).map((item,index)=>{
-            return <a key={index} href={`#${item.id}`} className={item.ele}>{item.id}</a>
-        });
+        return exec(MD).map((item,index)=><a key={index} onClick={handleClick} className={item.ele}>{item.id}</a>);
+
+        function handleClick(e) {
+            const ele = document.querySelector(`#${e.target.text}`);
+            ele.scrollIntoView();
+        }
 
         function exec(value) {
             const res = [];
