@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {cls} from "../../utils/publicFun";
+import {cls, isNil} from "../../utils/publicFun";
 import marked from "marked";
 import hljs from "highlight.js";
 import {Loader,Message} from "../index";
@@ -62,6 +62,7 @@ function MdHtml(props) {
     }
 
     function handleClick(e) {
+        if(isNil(e.target.text)) return;
         const ele = document.querySelector(`#${e.target.text}`);
         if(ele){
             ele.scrollIntoView();
