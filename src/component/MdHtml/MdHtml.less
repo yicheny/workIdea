@@ -1,4 +1,8 @@
 .mdHtml{
+  &_content{
+    flex-grow:1;
+    overflow: auto;
+  }
   &_index{
     margin: 32px 0 16px 32px;
     a{
@@ -23,9 +27,11 @@
     }
   }
   &_main{
+    overflow: auto;
     margin:16px 32px;
     max-width: 960px;
   }
+
   ul,li{
     list-style: disc;
   }

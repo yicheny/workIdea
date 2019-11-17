@@ -1,8 +1,8 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {cls} from "../../utils/publicFun";
 import marked from "marked";
 import hljs from "highlight.js";
-import {Loader} from "../index";
+import {Loader,Message} from "../index";
 import './MdHtml.less';
 
 function MdHtml(props) {
@@ -32,10 +32,10 @@ function MdHtml(props) {
     return <div className={cls("mdHtml fill flex-y",!MD&&'center')}>
         {!MD && <Loader size={40}/>}
         {
-            MD && <Fragment>
-                <div className="mdHtml_index" onClick={handleClick} >{createIndex()}</div>
+            MD && <div className='mdHtml_content flex'>
                 <div className='mdHtml_main' dangerouslySetInnerHTML={{__html:MD}}/>
-            </Fragment>
+                <div className="mdHtml_index" onClick={handleClick} >{createIndex()}</div>
+            </div>
         }
     </div>;
 
@@ -63,7 +63,12 @@ function MdHtml(props) {
 
     function handleClick(e) {
         const ele = document.querySelector(`#${e.target.text}`);
-        ele.scrollIntoView();
+        if(ele){
+            ele.scrollIntoView();
+            const info = <p>已成功跳转至标题<span className='code_area'>{e.target.text}</span></p>;
+            return Message.show({icon:'success',info})
+        }
+        return Message.show({icon:'error',info:'跳转失败'})
     }
 }
 

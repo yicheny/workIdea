@@ -25,7 +25,8 @@
 - [ ] Operation运算类浮点数误差
 
 # 待改进
-- [ ] MdHtml需要显示`[TOC]`目录
+- [x] MdHtml需要显示`[TOC]`目录
+- [ ] MdHtml需要添加`Table`样式
 - [ ] TableW的autoFill功能
 - [ ] TableW的fixedLeft功能
 
