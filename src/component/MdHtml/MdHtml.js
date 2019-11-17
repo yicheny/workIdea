@@ -33,7 +33,7 @@ function MdHtml(props) {
         {!MD && <Loader size={40}/>}
         {
             MD && <Fragment>
-                <div className="mdHtml_index">{createIndex()}</div>
+                <div className="mdHtml_index" onClick={handleClick} >{createIndex()}</div>
                 <div className='mdHtml_main' dangerouslySetInnerHTML={{__html:MD}}/>
             </Fragment>
         }
@@ -41,12 +41,7 @@ function MdHtml(props) {
 
     function createIndex() {
         if(!MD) return;
-        return exec(MD).map((item,index)=><a key={index} onClick={handleClick} className={item.ele}>{item.id}</a>);
-
-        function handleClick(e) {
-            const ele = document.querySelector(`#${e.target.text}`);
-            ele.scrollIntoView();
-        }
+        return exec(MD).map((item,index)=><a key={index}className={item.ele}>{item.id}</a>);
 
         function exec(value) {
             const res = [];
@@ -64,6 +59,11 @@ function MdHtml(props) {
 
             return res;
         }
+    }
+
+    function handleClick(e) {
+        const ele = document.querySelector(`#${e.target.text}`);
+        ele.scrollIntoView();
     }
 }
 
