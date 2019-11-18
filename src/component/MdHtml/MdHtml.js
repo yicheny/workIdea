@@ -41,17 +41,18 @@ function MdHtml(props) {
 
     function createIndex() {
         if(!MD) return;
-        return exec(MD).map((item,index)=><a key={index}className={item.ele}>{item.id}</a>);
+        return exec(MD).map((item,index)=><a key={index} className={item.ele} data-id={item.id}>{item.text}</a>);
 
         function exec(value) {
             const res = [];
-            const re = /<(h[1-6]+).+id="(.+)">.+<\/\1>/g;
+            const re = /<(h[1-6]+).+id="(.+)">(.+)<\/\1>/g;
             let temp = re.exec(value);
 
             while(temp){
                 const item = {
                     ele:temp[1],
-                    id:temp[2]
+                    id:temp[2],
+                    text:temp[3]
                 };
                 res.push(item);
                 temp = re.exec(value)
@@ -62,8 +63,10 @@ function MdHtml(props) {
     }
 
     function handleClick(e) {
-        if(isNil(e.target.text)) return;
-        const ele = document.querySelector(`#${e.target.text}`);
+        const id = e.target.dataset.id;
+        if(isNil(id)) return;
+        // const ele = document.querySelector(`#${id}`);//querySelector使用css3选择器查询DOM，css3不支持以数字开头的ID选择器
+        const ele = document.getElementById(id);
         if(ele){
             ele.scrollIntoView();
             const info = <p>已成功跳转至标题<span className='code_area'>{e.target.text}</span></p>;
