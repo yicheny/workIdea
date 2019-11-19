@@ -175,8 +175,47 @@ export function clone(o) {
 }
 
 //深拷贝
-export function cloneDeep() {
+export function cloneDeep(source,clones=new WeakMap()) {
+    if(!checkType(source,['Object','Array','Map','Set'])) return source;
 
+    if(clones.has(source)){
+        return `Circular：此项循环引用，注意！`;
+    }
+    clones.set(source,undefined);
+
+    if(checkType(source,['Object'])) return objClone();
+    if(checkType(source,['Array'])) return arrClone();
+    if(checkType(source,['Map'])) return mapClone();
+    if(checkType(source,['Set'])) return setClone();
+
+    function objClone() {
+        const res = {};
+        for(let key in source){
+            res[key] = cloneDeep(source[key],clones)
+        }
+        return res;
+    }
+    function arrClone() {
+        const res = [];
+        for(let key in source){
+            res[key] = cloneDeep(source[key],clones)
+        }
+        return res;
+    }
+    function mapClone() {
+        const res = new Map();
+        source.forEach((value,key)=>{
+            res.set(key,cloneDeep(value,clones));
+        });
+        return res;
+    }
+    function setClone(){
+        const res = new Set();
+        source.forEach(value=>{
+            res.add(cloneDeep(value,clones))
+        });
+        return res;
+    }
 }
 
 //生成一个限定范围的随机整数
