@@ -27,6 +27,7 @@
 # 待改进
 - [x] MdHtml需要显示`[TOC]`目录
 - [ ] MdHtml需要添加`Table`样式
+- [ ] MdHtml添加编辑模式
 - [ ] TableW的autoFill功能
 - [ ] TableW的fixedLeft功能
 
