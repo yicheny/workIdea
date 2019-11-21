@@ -22,11 +22,11 @@ import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 import Demo from "../Demo";
 
 function MainPanel(props){
-    const {theme} = props;
+    const {theme,shotUrl} = props;
 
     useEffect(()=>{
         // const fn = ()=>Message.show({info:'组合键功能测试',icon:'success'});
-        const fn = () => window.open(`http://localhost:3020/#/demo`);
+        const fn = () => window.open(shotUrl);
         setCombinKey([68,74],fn);//D J
     },[]);
 

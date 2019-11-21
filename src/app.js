@@ -7,7 +7,7 @@ class App extends PureComponent {
     render() {
         return <Fragment>
                     {/*<AppBar/>*/}
-                    <Route  render={()=><MainPanel theme={setting.theme}/>} />
+                    <Route  render={()=><MainPanel {...setting}/>} />
             </Fragment>
     }
 }
