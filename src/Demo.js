@@ -1,4 +1,5 @@
 import React from 'react';
+import ylf from 'ylf_npm_demo';
 
 function Demo(props) {
     //中国员工抽象类【定义公共接口】
@@ -47,6 +48,8 @@ function Demo(props) {
     staff.code();
     staff.test();
     staff.design();
+
+    ylf.printName();
     return (
         <div></div>
     );
