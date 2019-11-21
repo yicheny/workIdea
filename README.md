@@ -23,6 +23,7 @@
 
 # 待修复BUG
 - [ ] Operation运算类浮点数误差
+- [ ] MdHtml的warn警告
 
 # 待改进
 - [x] MdHtml需要显示`[TOC]`目录
