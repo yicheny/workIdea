@@ -1,13 +1,13 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
-import LifeCycle from "./part1/LifeCycle";
-import Context_App from "./part1/Context_App";
-import HOC from "./part1/HOC";
+import LifeCycle from "./giveUp/LifeCycle";
+import Context_App from "./giveUp/Context_App";
+import HOC from "./giveUp/HOC";
 import ReactHome from "./ReactHome";
-import ChildrenTest from "./children/ChildrenTest";
-import HookBase from "./hook/HookBase";
-import ReactDemoRouter from "./demo/ReactDemoRouter";
-import MVCPath from './doc/MVC演变.md';
+import ChildrenTest from "./giveUp/ChildrenTest";
+import HookBase from "./giveUp/HookBase";
+import ReactDemoRouter from "./giveUp/ReactDemoRouter";
+import MVCPath from './giveUp/doc/MVC演变.md';
 import Md from "../common/MdContaier";
 
 function ReactDemo() {
@@ -20,6 +20,8 @@ function ReactDemo() {
             <Route path='/react/hookBase' component={HookBase}/>
             <Route path='/react/demo' component={ReactDemoRouter}/>
             <Route path='/react/mvc' component={Md(MVCPath)}/>
+
+
             <Route component={ReactHome}/>
         </Switch>
     </div>
