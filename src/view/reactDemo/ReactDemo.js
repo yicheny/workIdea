@@ -10,6 +10,12 @@ import ReactDemoRouter from "./giveUp/ReactDemoRouter";
 import MVCPath from './giveUp/doc/MVC演变.md';
 import Md from "../common/MdContaier";
 
+import HookAPI from './base/doc/Hook API.md';
+import UseState from './base/doc/useState.md';
+
+import UseStateDemo from "./base/demo/UseStateDemo";
+import UseStateDemo_C from "./base/demo/UseStateDemo_C";
+
 function ReactDemo() {
     return <div>
         <Switch>
@@ -20,6 +26,13 @@ function ReactDemo() {
             <Route path='/react/hookBase' component={HookBase}/>
             <Route path='/react/demo' component={ReactDemoRouter}/>
             <Route path='/react/mvc' component={Md(MVCPath)}/>
+
+            <Route path='/react/base/hook' component={Md(HookAPI)}/>
+            <Route path='/react/base/useState' component={Md(UseState)}/>
+
+            {/*注：以下路由为页面测试路由，无对应Link*/}
+            <Route path='/react/base/demo/useState' component={UseStateDemo}/>
+            <Route path='/react/base/demo/useState_C' component={UseStateDemo_C}/>
 
             <Route component={ReactHome}/>
         </Switch>
