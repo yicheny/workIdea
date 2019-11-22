@@ -24,10 +24,10 @@
 关于两者差异，请看[演示demo](http://localhost:3020/#/react/base/demo/useEffect)
 
 # 型构
-## 名称
+## 1.名称
 `useEffect`
 
-## 参数
+## 2.参数
 `(effect,dep)`
 
 第一个参数是函数，在渲染结束后执行。
@@ -82,6 +82,6 @@ useEffect(()=>{
 返回值是一个清除函数，会在函数卸载前执行，用于清除副作用产生的一些资源
 > 如果组件多次渲染【通常如此】，则在执行下一次effect之前，上一个effect资源就会被清除。【避免effect重复执行请见effect参数部分】
 
-# 返回值
+# 3.返回值
 `undefined`
 > 注意区分useEffect本身的返回值，与effect的返回值
