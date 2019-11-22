@@ -12,6 +12,7 @@ import Md from "../common/MdContaier";
 
 import HookAPI from './base/doc/Hook API.md';
 import UseState from './base/doc/useState.md';
+import UseEffect from './base/doc/useEffect.md';
 
 import UseStateDemo from "./base/demo/UseStateDemo";
 import UseStateDemo_C from "./base/demo/UseStateDemo_C";
@@ -29,6 +30,7 @@ function ReactDemo() {
 
             <Route path='/react/base/hook' component={Md(HookAPI)}/>
             <Route path='/react/base/useState' component={Md(UseState)}/>
+            <Route path='/react/base/useEffect' component={Md(UseEffect)}/>
 
             {/*注：以下路由为页面测试路由，无对应Link*/}
             <Route path='/react/base/demo/useState' component={UseStateDemo}/>

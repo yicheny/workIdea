@@ -16,6 +16,7 @@ function ReactHome(props) {
         <BoxM tit='基础知识'>
             <Link to='/react/base/hook'>Hook API</Link>
             <Link to='/react/base/useState'>useState</Link>
+            <Link to='/react/base/useEffect'>useEffect</Link>
         </BoxM>
     </Fragment>
 }
