@@ -17,6 +17,7 @@ function ReactHome(props) {
             <Link to='/react/base/hook'>Hook API</Link>
             <Link to='/react/base/useState'>useState</Link>
             <Link to='/react/base/useEffect'>useEffect</Link>
+            <Link to='/react/base/useContext'>useContext</Link>
         </BoxM>
     </Fragment>
 }
