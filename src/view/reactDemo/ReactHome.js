@@ -18,6 +18,7 @@ function ReactHome(props) {
             <Link to='/react/base/useState'>useState</Link>
             <Link to='/react/base/useEffect'>useEffect</Link>
             <Link to='/react/base/useContext'>useContext</Link>
+            <Link to='/react/base/useReducer'>useReducer</Link>
         </BoxM>
     </Fragment>
 }
