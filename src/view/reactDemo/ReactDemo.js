@@ -16,6 +16,7 @@ import UseEffect from './base/doc/useEffect.md';
 
 import UseStateDemo from "./base/demo/UseStateDemo";
 import UseStateDemo_C from "./base/demo/UseStateDemo_C";
+import UseEffectDemo from "./base/demo/UseEffectDemo";
 
 function ReactDemo() {
     return <div>
@@ -35,6 +36,7 @@ function ReactDemo() {
             {/*注：以下路由为页面测试路由，无对应Link*/}
             <Route path='/react/base/demo/useState' component={UseStateDemo}/>
             <Route path='/react/base/demo/useState_C' component={UseStateDemo_C}/>
+            <Route path='/react/base/demo/useEffect' component={UseEffectDemo}/>
 
             <Route component={ReactHome}/>
         </Switch>
