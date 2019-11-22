@@ -15,8 +15,8 @@ function UseEffectDemo(props) {
 
     return <div className="useEffect_demo">
         <div className="boxx_wrap" style={{background:'green'}}>
-            <div className="boxx" ref={ref}></div>
-            <div className="boxx boxx2" ref={ref2}></div>
+            <div className="boxx" ref={ref}/>
+            <div className="boxx boxx2" ref={ref2}/>
         </div>
     </div>
 }
