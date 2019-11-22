@@ -12,6 +12,7 @@ import OperationDemo from "./OperationDemo/OperationDemo";
 import SalesPromotion from "./SalesPromotion/SalesPromotion";
 import SalesPromotionV2 from "./SalesPromotion/SalesPromotionV2";
 import Maze from "./Maze/Maze";
+import TotalStudyTime from "./my/TotalStudyTime";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -26,6 +27,8 @@ function MyProjectRouter(props) {
         <Route path='/mProj/salesPromotion' component={SalesPromotion}/>
         <Route path='/mProj/salesPromotionV2' component={SalesPromotionV2}/>
         <Route path='/mProj/maze' component={Maze}/>
+
+        <Route path='/mProj/my/totalStudyTime' component={TotalStudyTime}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
