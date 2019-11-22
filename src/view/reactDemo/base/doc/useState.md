@@ -133,7 +133,7 @@ const [state,setState] = useState(()=>{
 
 
 ## 2.函数式state更新
-如果是hook写法，则会跳过子级组件的渲染即`useEffect`的执行。
+如果是hook写法，则会跳过子级组件的渲染及`useEffect`的执行。
 > !注意：是**跳过子级组件的渲染，而非子级组件本身的执行**。
 
 什么意思？

@@ -70,3 +70,7 @@ function UseReducerDemo(props) {
 2. state逻辑较复杂
 3. state依赖于上一次的state
 4. 深更新【深层传递回调】时可通过传递dispatch进行优化
+> 一般情况下通过回调传递state更显明确，如果层数过深，配合useContext更方便
+
+# 更新
+如state不变，则会跳过子级组件的渲染及`dispatch`的执行【和useState的更新一样】
