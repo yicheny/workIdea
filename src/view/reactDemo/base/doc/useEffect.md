@@ -28,7 +28,7 @@
 `useEffect`
 
 ## 参数
-`(didUpdate,dep)`
+`(effect,dep)`
 
 第一个参数是函数，在渲染结束后执行。
 
@@ -50,7 +50,7 @@
 
 依赖项是函数中所使用到的所有外部值，如果我们没有按照规则去传依赖项，会被`eslint-plugin-react-hooks`报`warn`警告。
 
-### 函数参数详解
+### effect参数详解
 推荐`在effect内部声明需要的函数`。理由是这样可以更方便看出effect引用了哪些外部值。
 
 不安全的写法会被`eslint-plugin-react-hooks`报`warn`警告，不安全的写法演示：
@@ -74,7 +74,7 @@ useEffect(()=>{
 },[someProp]);//这种写法，我们知道引用了哪些外部值
 ```
 
-## 返回值
+#### effect参数返回值
 `unsubscribe`
 
 返回值可以不传。
@@ -82,3 +82,6 @@ useEffect(()=>{
 返回值是一个清除函数，会在函数卸载前执行，用于清除副作用产生的一些资源
 > 如果组件多次渲染【通常如此】，则在执行下一次effect之前，上一个effect资源就会被清除。【避免effect重复执行请见effect参数部分】
 
+# 返回值
+`undefined`
+> 注意区分useEffect本身的返回值，与effect的返回值
