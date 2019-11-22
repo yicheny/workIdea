@@ -18,6 +18,7 @@ import UseContext from './base/doc/useContext.md';
 import UseStateDemo from "./base/demo/UseStateDemo";
 import UseStateDemo_C from "./base/demo/UseStateDemo_C";
 import UseEffectDemo from "./base/demo/UseEffectDemo";
+import UseContextDemo from "./base/demo/UseContextDemo";
 
 function ReactDemo() {
     return <div>
@@ -39,6 +40,7 @@ function ReactDemo() {
             <Route path='/react/base/demo/useState' component={UseStateDemo}/>
             <Route path='/react/base/demo/useState_C' component={UseStateDemo_C}/>
             <Route path='/react/base/demo/useEffect' component={UseEffectDemo}/>
+            <Route path='/react/base/demo/useContext' component={UseContextDemo}/>
 
             <Route component={ReactHome}/>
         </Switch>
