@@ -52,7 +52,7 @@ function MdHtml(props) {
                 const item = {
                     ele:temp[1],
                     id:temp[2],
-                    text:temp[3]
+                    text:temp[3].replace(/<code>|<\/code>/g,'')
                 };
                 res.push(item);
                 temp = re.exec(value)
