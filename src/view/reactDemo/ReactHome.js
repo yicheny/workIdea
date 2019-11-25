@@ -20,6 +20,7 @@ function ReactHome(props) {
             <Link to='/react/base/useContext'>useContext</Link>
             <Link to='/react/base/useReducer'>useReducer</Link>
             <Link to='/react/base/useCallback'>useCallback</Link>
+            <Link to='/react/base/useMemo'>useMemo</Link>
         </BoxM>
     </Fragment>
 }
