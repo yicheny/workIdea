@@ -18,6 +18,7 @@ import UseReducer from './base/doc/useReducer.md';
 import UseCallback from './base/doc/useCallback.md';
 import UseMemo from './base/doc/useMemo.md';
 import UseRef from './base/doc/useRef.md';
+import UseImperativeHandle from './base/doc/useImperativeHandle.md';
 
 import UseStateDemo from "./base/demo/UseStateDemo";
 import UseStateDemo_C from "./base/demo/UseStateDemo_C";
@@ -46,6 +47,7 @@ function ReactDemo() {
             <Route path='/react/base/useCallback' component={Md(UseCallback)}/>
             <Route path='/react/base/useMemo' component={Md(UseMemo)}/>
             <Route path='/react/base/useRef' component={Md(UseRef)}/>
+            <Route path='/react/base/useImperativeHandle' component={Md(UseImperativeHandle)}/>
 
             {/*注：以下路由为页面测试路由，无对应Link*/}
             <Route path='/react/base/demo/useState' component={UseStateDemo}/>

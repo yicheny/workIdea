@@ -22,6 +22,7 @@ function ReactHome(props) {
             <Link to='/react/base/useCallback'>useCallback</Link>
             <Link to='/react/base/useMemo'>useMemo</Link>
             <Link to='/react/base/useRef'>useRef</Link>
+            <Link to='/react/base/useImperativeHandle'>UseImperativeHandle</Link>
         </BoxM>
     </Fragment>
 }
