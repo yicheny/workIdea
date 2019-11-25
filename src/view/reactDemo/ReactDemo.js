@@ -22,6 +22,7 @@ import UseStateDemo_C from "./base/demo/UseStateDemo_C";
 import UseEffectDemo from "./base/demo/UseEffectDemo";
 import UseContextDemo from "./base/demo/UseContextDemo";
 import UseReducerDemo from "./base/demo/UseReducerDemo";
+import UseCallbackDemo from "./base/demo/UseCallbackDemo";
 
 function ReactDemo() {
     return <div>
@@ -47,6 +48,7 @@ function ReactDemo() {
             <Route path='/react/base/demo/useEffect' component={UseEffectDemo}/>
             <Route path='/react/base/demo/useContext' component={UseContextDemo}/>
             <Route path='/react/base/demo/useReducer' component={UseReducerDemo}/>
+            <Route path='/react/base/demo/useCallback' component={UseCallbackDemo}/>
 
             <Route component={ReactHome}/>
         </Switch>
