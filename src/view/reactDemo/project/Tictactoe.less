@@ -1,0 +1,20 @@
+.tictactoe{
+  &_winner{
+    font-size: 24px;
+    color:red;
+  }
+  &_board{
+    display: grid;
+    grid: repeat(3, 71px) / auto-flow 71px;
+    font-size:21px;
+    .x_button{
+      border-radius: 0;
+      &:hover{
+        border:1px solid #d9d9d9;
+      }
+      width:72px;
+      height:72px;
+      line-height: 72px;
+    }
+  }
+}

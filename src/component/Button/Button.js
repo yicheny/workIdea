@@ -12,7 +12,7 @@ function Button(props) {
     );
 }
 Button.defaultProps={
-    type:'text',
+    type:'text',//text、primary
     className:'',
     style:{},
     children:'',

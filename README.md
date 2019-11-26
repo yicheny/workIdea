@@ -24,6 +24,7 @@
 # 待修复BUG
 - [ ] Operation运算类浮点数误差
 - [ ] MdHtml的warn警告
+- [ ] Container组件需要设置最小宽度
 
 # 待改进
 - [x] MdHtml需要显示`[TOC]`目录

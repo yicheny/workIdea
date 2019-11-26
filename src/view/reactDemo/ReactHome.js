@@ -14,7 +14,7 @@ function ReactHome(props) {
         </BoxM>
 
         <BoxM tit='实践项目'>
-            <Link to='/react/project/tictactoe'>井字棋_component版本</Link>
+            <Link to='/react/project/tictactoe'>井字棋</Link>
         </BoxM>
 
         <BoxM tit='基础知识_Hook API'>
