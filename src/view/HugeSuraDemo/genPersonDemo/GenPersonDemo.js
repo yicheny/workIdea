@@ -1,17 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Container, Button, TextInput} from "../../../component";
 import {sample, genRandom, isNil,} from "../../../utils/publicFun";
 import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
-let db = null;
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
     const [name,setName] = useState('');
-
-    useEffect(()=>{
-        db = new IndexedDbClient('hugeSura',1,'persons',['name','sexy']);
-    },[]);
+    const db = useMemo(()=>new IndexedDbClient('hugeSura',1,'persons',['name','sexy']),[]);
 
     return <Container header='人物生成'>
         <div className='mar_wrap'>

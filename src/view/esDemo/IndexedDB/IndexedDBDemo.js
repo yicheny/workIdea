@@ -1,16 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Container, Button, TextInput} from "../../../component";
 import {genRandom} from "../../../utils/publicFun";
 import IndexedDbClient from '../../../base/IndexedDbClient';
 
-let db = null;
 function IndexedDbDemo(props) {
     const [id,setId] = useState(0);
     const [name,setName] = useState(0);
-
-    useEffect(()=>{
-        db = new IndexedDbClient('project1',1,'store1',['name','age','hp']);
-    },[]);
+    let db = useMemo(()=>new IndexedDbClient('project1',1,'store1',['name','age','hp']),[]);
 
     return <Container header='IndexedDbDemo'>
         <p>请设置Id：<TextInput type='number' onChange={v=>setId(Number(v))}/></p>
