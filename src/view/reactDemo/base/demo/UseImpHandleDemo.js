@@ -1,6 +1,6 @@
 import React, {useImperativeHandle, useRef, forwardRef, useEffect} from 'react';
 
-function FancyInput(props, ref) {
+const FancyInput = forwardRef(function(props, ref) {
     const inputRef = useRef();
     useImperativeHandle(ref, () => ({
         focus: () => {
@@ -8,8 +8,7 @@ function FancyInput(props, ref) {
         }
     }));
     return <input ref={inputRef}/>;
-}
-FancyInput = forwardRef(FancyInput);
+});
 
 function UseImpHandleDemo(props) {
     const ref = useRef();
