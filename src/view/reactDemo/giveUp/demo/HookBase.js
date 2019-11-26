@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {Container} from "../../../component";
+import {Container} from "../../../../component";
 
 function HookBase(props) {
     return <Container header='hook初步了解'>

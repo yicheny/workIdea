@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Container} from "../../../component";
-import {userData} from "./data/CustomHookData";
+import {Button, Container} from "../../../../component";
+import {userData} from "../data/CustomHookData";
 
 //使用组件形式
 function CustomHook(props) {

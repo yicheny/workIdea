@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container} from "../../../component";
+import {Container} from "../../../../component";
 
 function ChildrenTest(props) {
     return <Container header='Children学习'>

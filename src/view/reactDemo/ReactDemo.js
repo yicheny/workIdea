@@ -1,14 +1,15 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
-import LifeCycle from "./giveUp/LifeCycle";
-import Context_App from "./giveUp/Context_App";
-import HOC from "./giveUp/HOC";
 import ReactHome from "./ReactHome";
-import ChildrenTest from "./giveUp/ChildrenTest";
-import HookBase from "./giveUp/HookBase";
-import ReactDemoRouter from "./giveUp/ReactDemoRouter";
-import MVCPath from './giveUp/doc/MVC演变.md';
 import Md from "../common/MdContaier";
+
+import LifeCycle from "./giveUp/demo/LifeCycle";
+import Context_App from "./giveUp/demo/Context_App";
+import HOC from "./giveUp/demo/HOC";
+import ChildrenTest from "./giveUp/demo/ChildrenTest";
+import HookBase from "./giveUp/demo/HookBase";
+import ReactDemoRouter from "./giveUp/demo/ReactDemoRouter";
+import MVCPath from './giveUp/doc/MVC演变.md';
 
 import HookAPI from './base/doc/Hook API.md';
 import UseState from './base/doc/useState.md';
