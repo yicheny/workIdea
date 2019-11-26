@@ -1,6 +1,7 @@
 import React,{Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {BoxM} from "../../component";
+import UseLayoutEffect from "./base/doc/useLayoutEffect.md";
 
 function ReactHome(props) {
     return <Fragment>
@@ -23,6 +24,7 @@ function ReactHome(props) {
             <Link to='/react/base/useMemo'>useMemo</Link>
             <Link to='/react/base/useRef'>useRef</Link>
             <Link to='/react/base/useImperativeHandle'>UseImperativeHandle</Link>
+            <Link to='/react/base/useLayoutEffect'>UseLayoutEffect</Link>
         </BoxM>
     </Fragment>
 }
