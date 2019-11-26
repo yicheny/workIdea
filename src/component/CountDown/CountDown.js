@@ -10,12 +10,13 @@ function CountDown(props) {
     const startTime = useRef(timestampFor());
 
     useEffect(()=>{
-        window.requestAnimationFrame(()=>{
+        const id = window.requestAnimationFrame(()=>{
             const leadTime = timestampFor() - startTime.current;
             const newResidueTime = allTime - leadTime;
             if(newResidueTime <= 0) return setResidueTime(0);
             setResidueTime(newResidueTime)
-        })
+        });
+        return ()=>window.cancelAnimationFrame(id);
     },[residueTime]);
 
     return <div className='countDownProgress flex center'>
