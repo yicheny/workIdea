@@ -1,7 +1,6 @@
 import React,{Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {BoxM} from "../../component";
-import UseLayoutEffect from "./base/doc/useLayoutEffect.md";
 
 function ReactHome(props) {
     return <Fragment>

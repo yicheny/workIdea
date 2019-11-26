@@ -10,23 +10,23 @@ class ChildrenComponent extends PureComponent {
         console.log('child','constructor' );
     }
 
-    componentWillMount() {
-        console.log('child','componentWillMount');
-    }
+    // componentWillMount() {
+    //     console.log('child','componentWillMount');
+    // }
 
     componentDidMount() {
         // this.setState({childNum:99});
         console.log('child','componentDidMount');
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        // this.setState({parentNum:this.props.num});
-        console.log('child','componentWillReceiveProps');
-    }
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     // this.setState({parentNum:this.props.num});
+    //     console.log('child','componentWillReceiveProps');
+    // }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        console.log('child','componentWillUpdate');
-    }
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    //     console.log('child','componentWillUpdate');
+    // }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('child','componentDidUpdate');

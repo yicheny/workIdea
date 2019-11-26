@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button} from "antd/lib/index";
+import {Button} from "../../../component";
 
 function BreadcrumdTest2(props) {
     const handleClick = () => {

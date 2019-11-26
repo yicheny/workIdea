@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {Icon as IconM} from '../../component'
-import {Icon} from "antd";
+import Icon from "antd/es/icon";
 import './MenuM.less'
 import {cls} from "../../utils/publicFun";
 

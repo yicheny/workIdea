@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {Button} from 'antd/lib/index'
+import {Button} from "../../../component";
 
 function BreadcrumdTest1(props) {
     // const handleClick = ()=>{

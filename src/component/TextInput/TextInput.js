@@ -9,8 +9,13 @@ function TextInput(props) {
     const [error, setError] = useState(props.error);
     const [placeholder, setPlaceholder] = useState('');
 
+    let autoPTimeId = null;
+
     useEffect(() => {
         autoP ? autoPrint() : setPlaceholder(props.placeholder);
+        return ()=>{
+            if(autoPTimeId) clearInterval(autoPTimeId);
+        }
     }, []);
 
     return <span className={cnFor()}>
@@ -85,7 +90,7 @@ function TextInput(props) {
     function autoPrint() {
         const tips = props.placeholder.split(' ');
         const cyclicFoo = genCyclic();
-        setInterval(() => {
+        autoPTimeId = setInterval(() => {
             cyclicFoo()
         }, autoPTime);
 

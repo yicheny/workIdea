@@ -10,22 +10,22 @@ class LifeCycle extends PureComponent {
         console.log('parent','constructor');
     }
 
-    componentWillMount() {
-        console.log( 'parent','componentWillMount',);
-    }
+    // componentWillMount() {
+    //     console.log( 'parent','componentWillMount',);
+    // }
 
     componentDidMount() {
         this.setState({num:2});
         console.log('parent','componentDidMount');
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-        console.log('parent','componentWillReceiveProps');
-    }
+    // componentWillReceiveProps(nextProps, nextContext) {
+    //     console.log('parent','componentWillReceiveProps');
+    // }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        console.log('parent','componentWillUpdate');
-    }
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    //     console.log('parent','componentWillUpdate');
+    // }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         console.log('parent','componentDidUpdate');
