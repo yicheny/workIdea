@@ -20,6 +20,7 @@ import UseMemo from './base/doc/useMemo.md';
 import UseRef from './base/doc/useRef.md';
 import UseImperativeHandle from './base/doc/useImperativeHandle.md';
 import UseLayoutEffect from './base/doc/useLayoutEffect.md';
+import UseDebugValue from './base/doc/useDebugValue.md'
 
 import UseStateDemo from "./base/demo/UseStateDemo";
 import UseStateDemo_C from "./base/demo/UseStateDemo_C";
@@ -51,6 +52,7 @@ function ReactDemo() {
             <Route path='/react/base/useRef' component={Md(UseRef)}/>
             <Route path='/react/base/useImperativeHandle' component={Md(UseImperativeHandle)}/>
             <Route path='/react/base/useLayoutEffect' component={Md(UseLayoutEffect)}/>
+            <Route path='/react/base/useDebugValue' component={Md(UseDebugValue)}/>
 
             {/*注：以下路由为页面测试路由，无对应Link*/}
             <Route path='/react/base/demo/useState' component={UseStateDemo}/>
