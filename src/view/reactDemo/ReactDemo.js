@@ -30,6 +30,7 @@ import UseReducerDemo from "./base/demo/UseReducerDemo";
 import UseCallbackDemo from "./base/demo/UseCallbackDemo";
 import UseRefDemo from "./base/demo/UseRefDemo";
 import UseImpHandleDemo from "./base/demo/UseImpHandleDemo";
+import UseDebugValueDemo from "./base/demo/UseDebugValueDemo";
 
 function ReactDemo() {
     return <div>
@@ -63,6 +64,7 @@ function ReactDemo() {
             <Route path='/react/base/demo/useCallback' component={UseCallbackDemo}/>
             <Route path='/react/base/demo/useRef' component={UseRefDemo}/>
             <Route path='/react/base/demo/useImperativeHandle' component={UseImpHandleDemo}/>
+            <Route path='/react/base/demo/useDebugValue' component={UseDebugValueDemo}/>
 
             <Route component={ReactHome}/>
         </Switch>
