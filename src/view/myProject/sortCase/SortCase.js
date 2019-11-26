@@ -1,7 +1,6 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import {Button, Container, Progress} from "../../../component";
-import {genListCyclic, sleep,pick} from "../../../utils/publicFun";
-import _ from 'lodash';
+import {genListCyclic} from "../../../utils/publicFun";
 
 function SortCase(props) {
     const [nums,setNums] = useState(new NumObjList().numObjs());

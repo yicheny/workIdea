@@ -41,7 +41,7 @@ function MdHtml(props) {
 
     function createIndex() {
         if(!MD) return;
-        return exec(MD).map((item,index)=><a key={index} className={item.ele} data-id={item.id}>{item.text}</a>);
+        return exec(MD).map((item,index)=><span key={index} className={item.ele} data-id={item.id}>{item.text}</span>);
 
         function exec(value) {
             const res = [];
@@ -69,7 +69,7 @@ function MdHtml(props) {
         const ele = document.getElementById(id);
         if(ele){
             ele.scrollIntoView();
-            const info = <p>已成功跳转至标题<span className='code_area'>{e.target.text}</span></p>;
+            const info = <p>已成功跳转至标题<span className='code_area'>{ele.innerText}</span></p>;
             return Message.show({icon:'success',info})
         }
         return Message.show({icon:'error',info:'跳转失败'})
