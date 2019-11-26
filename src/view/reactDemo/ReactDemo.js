@@ -32,6 +32,7 @@ import UseCallbackDemo from "./base/demo/UseCallbackDemo";
 import UseRefDemo from "./base/demo/UseRefDemo";
 import UseImpHandleDemo from "./base/demo/UseImpHandleDemo";
 import UseDebugValueDemo from "./base/demo/UseDebugValueDemo";
+import Tictactoe from "./project/Tictactoe";
 
 function ReactDemo() {
     return <div>
@@ -43,6 +44,8 @@ function ReactDemo() {
             <Route path='/react/hookBase' component={HookBase}/>
             <Route path='/react/demo' component={ReactDemoRouter}/>
             <Route path='/react/mvc' component={Md(MVCPath)}/>
+
+            <Route path='/react/project/tictactoe' component={Tictactoe}/>
 
             <Route path='/react/base/hook' component={Md(HookAPI)}/>
             <Route path='/react/base/useState' component={Md(UseState)}/>

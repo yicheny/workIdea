@@ -13,6 +13,10 @@ function ReactHome(props) {
             <Link to='/react/hookBase'>Hook基础</Link>
         </BoxM>
 
+        <BoxM tit='实践项目'>
+            <Link to='/react/project/tictactoe'>井字棋_component版本</Link>
+        </BoxM>
+
         <BoxM tit='基础知识_Hook API'>
             <Link to='/react/base/hook'>Hook API</Link>
             <Link to='/react/base/useState'>useState</Link>
