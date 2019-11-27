@@ -1,11 +1,11 @@
 import React from 'react';
+import {cls} from '../../utils/publicFun';
 import './Icon.less';
 
 function Icon(props) {
-    let {type,size,style,className,color} = props;
-    const cn = ['iconfont',`icon-${type}`,className].join(' ');
+    let {type,size,style,className,color,onClick} = props;
 
-    return (<i className={cn} style={styleFor()}>
+    return (<i className={cls('iconfont',`icon-${type}`,className)} style={styleFor()} onClick={onClick}>
     </i>);
 
     function styleFor() {
@@ -16,7 +16,8 @@ Icon.defaultProps={
     type:'',
     size:20,
     style:{},
-    className:''
+    className:'',
+    onClick:()=>{}
 };
 
 export default Icon;
