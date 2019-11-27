@@ -32,14 +32,18 @@ const TimeBar = React.memo(function(props) {
     </div>;
 
     function handleClick() {
-        if(status==='stop'){//点击开始
+        if(status==='stop') return startAction();
+        return stopAction();
+
+        function startAction() {
             setStartTime((new Date()).getTime());
             return setStatus('start');
         }
 
-        //点击停止
-        setSaveTime(time);
-        return setStatus('stop');
+        function stopAction() {
+            setSaveTime(time);
+            return setStatus('stop');
+        }
     }
 
     function reTime() {
