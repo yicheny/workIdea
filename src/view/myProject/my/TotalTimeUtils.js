@@ -47,7 +47,8 @@ const TimeBar = React.memo(function(props) {
     }
 
     function reTime() {
-        setStartTime((new Date()).getTime());
+        setStatus('stop');
+        setStartTime(null);
         setSaveTime(0);
         setTime(0);
     }

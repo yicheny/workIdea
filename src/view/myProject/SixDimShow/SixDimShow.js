@@ -56,7 +56,7 @@ const SixDimRadar = memo(function SixDimRadar(props) {
         }]
     };
 
-    return <div style={{width:480}}>
+    return <div style={{width:480,height:600}}>
         <ReactEcharts option={option}/>
     </div>
 });
