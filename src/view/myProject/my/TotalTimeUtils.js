@@ -59,7 +59,7 @@ const TimeBar = React.memo(function(props) {
         function timeFor() {
             const t = Math.floor(time/1000);
             const hour = Math.floor(t/60/60);
-            const min =Math.floor((t - hour*60)/60);
+            const min =Math.floor((t - hour*60*60)/60);
             const sec = t - hour*60*60 - min*60;
             return {hour, min, sec};
         }
