@@ -69,7 +69,7 @@ function SixDimShow(props) {
     return <Container header='六维展示'>
         <div style={{margin:8}}>
             <span>请输入六维值：</span>
-            <TextInput onChange={handleChange} max={555555}/>
+            <TextInput onChange={handleChange} max={666666} type='number'/>
         </div>
         <SixDimRadar data={data}/>
     </Container>;
