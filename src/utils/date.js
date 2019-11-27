@@ -1,20 +1,20 @@
 import {compare} from "./publicFun";
 
 export function dateSymFor(date,sym='',scope='day') {
-    const {year,month,day,hour,minute,sec} = date;
+    const {year,month,day,hour,min,sec} = date;
     return scopeStrategy(scope);
 
     function scopeStrategy(key) {
         const scopeStrategyMap = {
-            day:setDateUnit([year,month,day]),
-            sec:setDateUnit([hour,minute,sec])
+            day:setDateUnit([year,month,day],sym),
+            sec:setDateUnit([hour,min,sec],sym)
         };
         return scopeStrategyMap[key];
 
-        function setDateUnit(list) {
-            const date = list.reduce((acc, el) => `${acc}${addZeroFormat(el)}${sym}`, '');
-            if (!sym) return date;
-            return date.slice(0,-1);
+        function setDateUnit(list,sym) {
+            return list.reduce((acc, el,i,arg) => {
+                return i===arg.length-1 ? `${acc}${addZeroFormat(el)}` : `${acc}${addZeroFormat(el)}${sym}`;
+            }, '');
 
             function addZeroFormat(value) {
                 if (value < 10) return '0' + value;
@@ -36,9 +36,9 @@ export function nowDateItemFor() {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const hour = date.getHours();
-    const minute = date.getMinutes();
+    const min = date.getMinutes();
     const sec = date.getSeconds();
-    return {year,month,day,hour,minute,sec};
+    return {year,month,day,hour,min,sec};
 }
 
 export function weekDayFor(date){
