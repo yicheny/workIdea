@@ -2,7 +2,9 @@ import React, {useEffect, useState,useRef} from 'react';
 import {Button, Container, Icon} from "../../../component";
 import {dateSymFor} from "../../../utils/date";
 
-const TimeBar = React.memo(function() {
+const TimeBar = React.memo(function(props) {
+    const {name} = props;
+
     const [status,setStatus] = useState('stop');
     const [startTime,setStartTime] = useState(null);
     const [time,setTime] = useState(0);
@@ -20,6 +22,7 @@ const TimeBar = React.memo(function() {
     },[status,time,saveTime]);
 
     return <div className='flex center-y'>
+        <span>{name}</span>
         <Icon type={status==='start'?'stop':'start'} color='#1890ff' size={32}
               onClick={handleClick}
               style={{'cursor':'pointer'}}
@@ -57,10 +60,13 @@ const TimeBar = React.memo(function() {
         }
     }
 });
+TimeBar.defaultProps = {
+    name:'默认名称'
+};
 
 function TotalTimeUtils(props) {
     return <Container header='计时工具'>
-        <TimeBar/>
+        <TimeBar name='编程实践'/>
         <TimeBar/>
         <TimeBar/>
         <TimeBar/>
