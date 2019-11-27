@@ -19,6 +19,7 @@ function MyProjectHome(props) {
         </BoxM>
         <BoxM tit='自用'>
             <Link to='/mProj/my/totalStudyTime' >时间统计</Link>
+            <Link to='/mProj/my/totalTimeUtils' >计时工具</Link>
         </BoxM>
     </Fragment>
 }
