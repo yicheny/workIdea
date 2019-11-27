@@ -15,6 +15,7 @@ import Maze from "./Maze/Maze";
 import TotalStudyTime from "./my/TotalStudyTime";
 import TotalTimeUtils from "./my/TotalTimeUtils";
 import SixDimShow from "./SixDimShow/SixDimShow";
+import TimeChangeChart from "./my/TimeChangeChart";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -33,6 +34,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/my/totalStudyTime' component={TotalStudyTime}/>
         <Route path='/mProj/my/totalTimeUtils' component={TotalTimeUtils}/>
         <Route path='/mProj/my/sixDimShow' component={SixDimShow}/>
+        <Route path='/mProj/my/timeChart' component={TimeChangeChart}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
