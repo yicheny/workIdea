@@ -8,6 +8,7 @@ function ESHome(props) {
         <Link to='/es/deepClone'>深拷贝</Link>
         <Link to='/es/reg'>正则表达式</Link>
         <Link to='/es/promise'>Promise</Link>
+        <Link to='/es/execMech'>执行机制</Link>
     </BoxM>
 }
 
