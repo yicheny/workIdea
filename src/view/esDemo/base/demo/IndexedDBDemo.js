@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react';
-import {Container, Button, TextInput} from "../../../component";
-import {genRandom} from "../../../utils/publicFun";
-import IndexedDbClient from '../../../base/IndexedDbClient';
+import {Container, Button, TextInput} from "../../../../component";
+import {genRandom} from "../../../../utils/publicFun";
+import IndexedDbClient from '../../../../base/IndexedDbClient';
 
 function IndexedDbDemo(props) {
     const [id,setId] = useState(0);
