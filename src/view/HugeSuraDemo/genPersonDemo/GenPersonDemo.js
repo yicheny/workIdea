@@ -7,7 +7,12 @@ import IndexedDbClient from "../../../base/IndexedDbClient";
 function GenPersonDemo(props) {
     const [person,setPerson] = useState({});
     const [name,setName] = useState('');
-    const db = useMemo(()=>new IndexedDbClient('hugeSura',1,'persons',['name','sexy']),[]);
+    const db = useMemo(()=>new IndexedDbClient({
+        dbName:'hugeSura',
+        version:1,
+        storeName:'persons',
+        keys:['name','sexy']
+    }),[]);
 
     return <Container header='人物生成'>
         <div className='mar_wrap'>

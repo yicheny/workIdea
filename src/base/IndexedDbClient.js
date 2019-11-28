@@ -1,5 +1,6 @@
 export default class IndexedDbClient{
-    constructor(dbName='dbDefault',version=1,storeName='storeDefault',keys=[]){
+    constructor(setting){
+        const {dbName='dbDefault',version=1,storeName='storeDefault',keys=[]} = setting;
         this.storeName = storeName;
         this.keys=keys;
         this.openDBRequest = window.indexedDB.open(dbName,version);

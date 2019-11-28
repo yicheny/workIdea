@@ -6,7 +6,12 @@ import IndexedDbClient from '../../../base/IndexedDbClient';
 function IndexedDbDemo(props) {
     const [id,setId] = useState(0);
     const [name,setName] = useState(0);
-    let db = useMemo(()=>new IndexedDbClient('project1',1,'store1',['name','age','hp']),[]);
+    let db = useMemo(()=>new IndexedDbClient({
+        dbName:'project1',
+        version:1,
+        storeName:'store1',
+        keys:['name','age','hp']
+    }),[]);
 
     return <Container header='IndexedDbDemo'>
         <p>请设置Id：<TextInput type='number' onChange={v=>setId(Number(v))}/></p>
