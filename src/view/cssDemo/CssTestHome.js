@@ -12,6 +12,7 @@ function CssTestHome(props) {
         <Link to='/css/moveToEle'>移至指定元素位置</Link>
         <Link to='/css/circleLayout'>环形排列布局</Link>
         <Link to='/css/rotateDis'>旋转放大显示</Link>
+        <Link to='/css/moreLevelHeight'>多层嵌套高度异常</Link>
     </BoxM>
 }
 
