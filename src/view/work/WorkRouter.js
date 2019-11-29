@@ -6,6 +6,7 @@ import ManyFilter from './ManyFilter/ManyFilter';
 import DualStateSave from "./DualStateSave/DualStateSave";
 import WorkHome from "./WorkHome";
 import GetRangeDateDemo from "./GetRangeDateDemo/GetRangeDateDemo";
+import FlowContainer from "./demo/FlowContainer";
 
 function WorkRouter(props) {
     return <Switch>
@@ -14,6 +15,7 @@ function WorkRouter(props) {
         <Route path='/work/manyFilter' component={ManyFilter}/>
         <Route path='/work/dualStateSave' component={DualStateSave}/>
         <Route path='/work/getRangeDateDemo' component={GetRangeDateDemo}/>
+        <Route path='/work/flowContainer' component={FlowContainer}/>
         <Route component={WorkHome}/>
     </Switch>
 }

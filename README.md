@@ -33,6 +33,7 @@
 - [ ] MdHtml添加编辑模式
 - [ ] TableW的autoFill功能
 - [ ] TableW的fixedLeft功能
+- [ ] LeftMenu的展开状态在刷新后需要保存
 
 # 开发中...
 - [ ] 排序演示

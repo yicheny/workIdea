@@ -3,19 +3,19 @@ import React from 'react';
 import axios from 'axios';
 
 function Demo(props) {
-    // console.log(ylf);
-    async function request() {
-        const data = await api();
-        console.log('data',data);
+    let a = 3;
+
+    function foo(){
+        a = a * 3;
     }
 
-    function api() {
-        const url = 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/abs';
-        return axios.get(url)
+    function bar(){
+        a = a + 3
     }
 
-    request();
-    console.log(18);
+    bar();
+    foo();
+    console.log(a);
 
     return (
         <div>
