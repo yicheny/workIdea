@@ -8,7 +8,7 @@ function TotalStudyTime(props) {
     return <Container header='自用统计工具'>
         <div className="mar_wrap_b">
             <div><TextInput onChange={totalTime}/></div>
-            <div>本周学习时间：{N2(res)}</div>
+            <div>共计：{N2(res)}</div>
         </div>
     </Container>;
 
