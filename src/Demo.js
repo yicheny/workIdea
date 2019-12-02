@@ -1,26 +1,29 @@
 import React from 'react';
+import {Button} from "./component";
 // import * as ylf from 'ylf_public_fun/publicFun';
-import axios from 'axios';
+
+function Child(props) {
+    return <div>
+        <Button type='primary' onClick={props.onClick}>Child</Button>
+    </div>
+}
+
+function Control(props) {
+    const {Opt} = props;
+
+    return <div>
+        {Opt}
+    </div>
+}
 
 function Demo(props) {
-    let a = 3;
+    
 
-    function foo(){
-        a = a * 3;
-    }
-
-    function bar(){
-        a = a + 3
-    }
-
-    bar();
-    foo();
-    console.log(a);
-
-    return (
-        <div>
-        </div>
-    );
+    return <div>
+        {Control({
+            Opt:<Child onClick={()=>console.log('click')}/>
+        })}
+        </div>;
 }
 
 export default Demo;
