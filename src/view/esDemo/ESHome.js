@@ -9,6 +9,7 @@ function ESHome(props) {
         <Link to='/es/reg'>正则表达式</Link>
         <Link to='/es/promise'>Promise</Link>
         <Link to='/es/execMech'>执行机制</Link>
+        <Link to='/es/callback'>回调</Link>
     </BoxM>
 }
 
