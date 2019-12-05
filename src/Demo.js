@@ -1,6 +1,6 @@
 import React from 'react';
 // import * as ylf from 'ylf_public_fun/publicFun';
-import {random} from "./utils/publicFun";
+// import {random} from "./utils/publicFun";
 
 // import axios from 'axios';
 

@@ -7,6 +7,7 @@ import DualStateSave from "./DualStateSave/DualStateSave";
 import WorkHome from "./WorkHome";
 import GetRangeDateDemo from "./GetRangeDateDemo/GetRangeDateDemo";
 import FlowContainer from "./demo/FlowContainer";
+import ReducerSearch from "./demo/ReducerSearch";
 
 function WorkRouter(props) {
     return <Switch>
@@ -16,6 +17,7 @@ function WorkRouter(props) {
         <Route path='/work/dualStateSave' component={DualStateSave}/>
         <Route path='/work/getRangeDateDemo' component={GetRangeDateDemo}/>
         <Route path='/work/flowContainer' component={FlowContainer}/>
+        <Route path='/work/reducerSearch' component={ReducerSearch}/>
         <Route component={WorkHome}/>
     </Switch>
 }
