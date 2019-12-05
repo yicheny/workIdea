@@ -27,7 +27,8 @@ function Cell(props) {
 }
 Cell.defaultProps={
     cellMain:'cellMain',
-    date:{}
+    date:{},
+    click:()=>{}
 };
 
 function CalendarTableHeader(props) {
