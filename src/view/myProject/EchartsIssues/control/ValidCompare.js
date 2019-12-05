@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import ReactEcharts from 'echarts-for-react';
-import '../EchartIssues.less';
+import '../EchartsIssues.less';
 
 const ValidCompare = memo(function ValidCompare(props) {
     const {data:{validInfos,voidInfos}} = props;

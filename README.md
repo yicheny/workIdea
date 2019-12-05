@@ -24,7 +24,6 @@
 - [ ] Operation运算类浮点数误差
 - [x] MdHtml的warn警告
 - [ ] Container组件需要设置最小宽度
-- [ ] 六维展示雷达图不能自由设置高度
 
 # 待改进
 - [x] MdHtml需要显示`[TOC]`目录

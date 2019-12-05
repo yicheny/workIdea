@@ -15,7 +15,8 @@ const SixDimRadar = memo(function SixDimRadar(props) {
                 rich: {
                     a: {
                         color: 'red',
-                        lineHeight: 20
+                        lineHeight: 20,
+                        fontSize:20
                     },
                     b: {
                         color: '#fff',
@@ -23,6 +24,7 @@ const SixDimRadar = memo(function SixDimRadar(props) {
                         backgroundColor: '#777',
                         padding: [4, 6],
                         borderRadius: 4,
+                        fontSize:16
                     }
                 },
                 formatter: (v)=>{
@@ -30,7 +32,7 @@ const SixDimRadar = memo(function SixDimRadar(props) {
                     return `{a|${v}}\n{b|${data[i] || 0}级}`
                 }
             },
-            radius: 90,
+            radius: 160,
             indicator: [
                 {name: '攻击', max: 5},
                 {name: '防御', max: 5},
@@ -56,8 +58,8 @@ const SixDimRadar = memo(function SixDimRadar(props) {
         }]
     };
 
-    return <div style={{width:480,height:600}}>
-        <ReactEcharts option={option}/>
+    return <div style={{width:480}}>
+        <ReactEcharts option={option} style={{height:480}}/>
     </div>
 });
 SixDimRadar.defaultProps = {

@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {isNil} from "ylf_public_fun/publicFun";
 import axios from 'axios';
 import {Container} from "../../../component";
+import {markGroup, sortBy} from "../../../utils/publicFun";
 import ValidCompare from "./control/ValidCompare";
 import VersionComparePie from "./control/VersionComparePie";
 import VersionCompareBar from "./control/VersionCompareBar";
-import {markGroup, sortBy} from "../../../utils/publicFun";
+import VersionCompareTree from "./control/VersionCompareTree";
 
 function EchartsIssues(props) {
     const [data,setData] = useState({});
@@ -21,6 +22,7 @@ function EchartsIssues(props) {
         <ValidCompare data={data}/>
         <VersionComparePie data={validData}/>
         <VersionCompareBar data={validData}/>
+        <VersionCompareTree data={validData}/>
     </Container>
 }
 
