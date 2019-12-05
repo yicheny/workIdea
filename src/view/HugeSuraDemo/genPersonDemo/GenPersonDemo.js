@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {Container, Button, TextInput} from "../../../component";
-import {sample, genRandom, isNil,} from "../../../utils/publicFun";
+import {sample, random, isNil,} from "../../../utils/publicFun";
 import {PersonNameList} from "../baseData/BaseData";
 import IndexedDbClient from "../../../base/IndexedDbClient";
 
@@ -59,17 +59,17 @@ function GenPersonDemo(props) {
     async function genPerson(person={}) {
         const name = person.name || await nameFor();
         const sexy = person.sexy || sample(['man','woman']);
-        const talent = genRandom(1,100);
+        const talent = random(1,100);
 
         if(!check()) return {};
         return {
             name,
             level:1,
             sexy,
-            hp:genRandom(20,100),
-            attack:genRandom(0,20),
-            defense:genRandom(0,20),
-            speed:genRandom(0,20),
+            hp:random(20,100),
+            attack:random(0,20),
+            defense:random(0,20),
+            speed:random(0,20),
             talent,
             freePoint:100-talent,
         };

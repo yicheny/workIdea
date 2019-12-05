@@ -219,7 +219,7 @@ export function cloneDeep(source,clones=new WeakMap()) {
 }
 
 //生成一个限定范围的随机整数
-export function genRandom(min, max) {
+export function random(min, max) {
     const count = max - min;
     return Math.round(Math.random() * count + min)
 }

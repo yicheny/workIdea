@@ -1,6 +1,6 @@
 import React, {useMemo, useState} from 'react';
 import {Container, Button, TextInput} from "../../../../component";
-import {genRandom} from "../../../../utils/publicFun";
+import {random} from "../../../../utils/publicFun";
 import IndexedDbClient from '../../../../base/IndexedDbClient';
 
 function IndexedDbDemo(props) {
@@ -52,18 +52,18 @@ function IndexedDbDemo(props) {
 
     function genData() {
         return {
-            name:genRandom(0,10000),
-            age:genRandom(10,90),
-            hp:genRandom(0,2000),
+            name:random(0,10000),
+            age:random(10,90),
+            hp:random(0,2000),
             children:[
                 {
-                    name:genRandom(10000,20000)
+                    name:random(10000,20000)
                 },
                 {
-                    name:genRandom(20000,30000),
+                    name:random(20000,30000),
                     children:[
                         {
-                            name:genRandom(30000,40000)
+                            name:random(30000,40000)
                         }
                     ]
                 }
