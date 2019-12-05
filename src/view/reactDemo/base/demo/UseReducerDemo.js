@@ -21,7 +21,7 @@ function UseReducerDemo(props) {
         if(type==='x') state.x = value;
         if(type==='y') state.y = value;
         if(type==='res') state = init(state);
-        return {...state};
+        return state;
     }
 
     function init(initState) {
