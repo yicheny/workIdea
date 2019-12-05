@@ -20,10 +20,14 @@ function Demo(props) {
     }
 
     function fetchX(callback) {
-        callback(150)
+        setTimeout(()=>{
+            callback(150)
+        },1000)
     }
     function fetchY(callback) {
-        callback(15)
+        setTimeout(()=>{
+            callback(15)
+        },100)
     }
     add(fetchX,fetchY,function (sum) {
         console.log(sum)

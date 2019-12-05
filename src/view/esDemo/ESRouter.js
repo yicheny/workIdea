@@ -16,9 +16,9 @@ function ESRouter() {
             <Route path='/es/indexedDB' component={IndexedDbDemo}/>
             <Route path='/es/deepClone' component={Md(DeepClonePath)}/>
             <Route path='/es/reg' component={Md(RegPath)}/>}/>
-            <Route path='/es/promise' component={Md(PromisePath)}/>}/>
             <Route path='/es/execMech' component={Md(ExecMechPath)}/>}/>
             <Route path='/es/callback' component={Md(CallbackPath)}/>}/>
+            <Route path='/es/promise' component={Md(PromisePath)}/>}/>
 
             <Route component={ESHome}/>
         </Switch>
