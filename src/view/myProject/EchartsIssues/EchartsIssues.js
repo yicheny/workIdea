@@ -8,11 +8,14 @@ import VersionComparePie from "./control/VersionComparePie";
 import VersionCompareBar from "./control/VersionCompareBar";
 import VersionCompareTree from "./control/VersionCompareTree";
 
+// const url = 'http://192.168.8.130:5000';
+const url = 'http://localhost:5000';
+
 function EchartsIssues(props) {
     const [data,setData] = useState({});
 
     useEffect(()=>{
-        axios.get('http://localhost:5000/local/echartIssues').then(res=>{
+        axios.get(`${url}/local/echartIssues`).then(res=>{
             setData(dataInit(res.data));
         })
     },[]);
@@ -27,11 +30,13 @@ function EchartsIssues(props) {
 }
 
 function dataInit(data) {
+    data = data.filter(item=>item.state.includes('Open'));
+
     const validInfos = data.filter(item=>!isNil(item.version));
     const voidInfos = data.filter(item=>isNil(item.version));
     return {
         validInfos,voidInfos
-    }
+    };
 }
 
 function validDataInit(data=[]) {
