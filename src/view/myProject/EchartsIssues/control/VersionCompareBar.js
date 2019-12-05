@@ -1,7 +1,6 @@
 import React,{memo} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import '../EchartsIssues.less';
-import {markGroup, sortBy} from "../../../../utils/publicFun";
 
 const VersionCompareBar = memo(function (props) {
     const {data} =  props;

@@ -283,6 +283,7 @@ export function sortBy(arr, key, order = "pos"){
         if (order === "inv") {
             return b[key] - a[key];//逆序,从大到小
         }
+        return console.error('sortBy方法参数错误');
     });
 
     return res;
