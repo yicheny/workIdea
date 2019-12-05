@@ -1,18 +1,6 @@
 [TOC]
 
-# 使用场景
-用于处理异步。
+# 解决什么问题？
+promise是ES6提出的新的异步解决方案，在此之前异步的解决方案是回调。
 
-# 型构
-> 注，Promise是一个类
-1. 名称
-`Promise`
-
-2. 初始化参数
-`(fn)` 形如`(resolve,reject)=>{})`的函数
-
-3. 实例对象
-`promise`
-
-4. 使用形式
-`const promise = new Promise((resolve,reject)=>{})`
+通过回调表达程序异步和管理并发有两个主要缺陷：缺乏顺序性和可信任性

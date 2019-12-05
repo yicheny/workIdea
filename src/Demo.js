@@ -3,30 +3,31 @@ import React from 'react';
 import axios from 'axios';
 
 function Demo(props) {
-    function print(str,callback) {
-        console.log(str);
-        setTimeout(()=>{
-             callback && callback()
-        },1000);
+    function add(xFor,yFor,cb) {
+        let x,y;
+        xFor(function (xVal) {
+            x=xVal;
+            if(y!==undefined){
+                cb(x+y);
+            }
+        });
+        yFor(function (yVal) {
+            y=yVal;
+            if(x!==undefined){
+                cb(x+y);
+            }
+        });
     }
 
-    function printA() {
-        print('A',printB);
+    function fetchX(callback) {
+        callback(150)
     }
-    function printB() {
-        print('B',printC);
+    function fetchY(callback) {
+        callback(15)
     }
-    function printC() {
-        print('C',printD);
-        print('E')
-    }
-    function printD() {
-        print('D')
-    }
-
-    printA();
-    print('F');
-
+    add(fetchX,fetchY,function (sum) {
+        console.log(sum)
+    });
     return <div>
 
     </div>;
