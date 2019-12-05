@@ -22,6 +22,7 @@ function MyProjectHome(props) {
             <Link to='/mProj/my/totalTimeUtils' >计时工具</Link>
             <Link to='/mProj/my/sixDimShow' >六维展示</Link>
             <Link to='/mProj/my/timeChart' >时间变化统计图</Link>
+            <Link to='/mProj/my/echartsIssues' >echartsIssues统计信息</Link>
         </BoxM>
     </Fragment>
 }

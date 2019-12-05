@@ -7,7 +7,7 @@ export function sleep(ms) {
 export function cls(...cns) {
     const res = cns.reduce((acc, el) => {
         if (isObject(el)) {
-            acc = acc.concat(getName(el))
+            acc = acc.concat(getTrue(el))
         }
         if (isString(el)) {
             acc.push(el);
@@ -35,7 +35,7 @@ export function shuffle(array) {
 }
 
 //返回一个数组中所有值为真值的变量名_待优化
-export function getName(names = {}) {
+export function getTrue(names = {}) {
     const data = {...names};
     const [keys, values] = [Object.keys(data),Object.values(data)];
     let res = keys.filter((el, i) => values[i]);
@@ -257,4 +257,33 @@ export function arrCompare(list1, list2) {
 export function arrCompareOrder(list1, list2) {
     if (list1.length !== list2.length) return false;
     return list1.every((el, i) => el === list2[i])
+}
+
+//将数组根据特定的属性项分类
+//注：数组项必须为对象
+export function markGroup(data,flag){
+    const res = {};
+
+    data.forEach((item,i)=>{
+        if(!res.hasOwnProperty(item.version)) return res[item.version] = [item];
+        res[item.version].push(item);
+    });
+
+    return res;
+}
+
+//将数组根据特定的属性项排序
+//注：数组项必须为对象
+export function sortBy(arr, key, order = "pos"){
+    let res = [...arr];
+    res.sort(function (a,b) {
+        if (order === "pos") { //正序,从小到大
+            return a[key] - b[key];
+        }
+        if (order === "inv") {
+            return b[key] - a[key];//逆序,从大到小
+        }
+    });
+
+    return res;
 }

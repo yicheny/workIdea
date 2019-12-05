@@ -15,7 +15,7 @@ function PrototypePattern(props) {
     }
 
     Man.prototype = new Person('man');//将原型链关联起来的关键
-    Man.prototype.getName = function () {
+    Man.prototype.getTrue = function () {
         return this.name
     };
     const ylf = new Man('ylf');
@@ -45,7 +45,7 @@ function PrototypePattern(props) {
     return (
         <div>
             <p>{ylf.name}</p>
-            <p>{ylf.getName()}</p>
+            <p>{ylf.getTrue()}</p>
             <p>{ylf.type}</p>
             <p>{ylf.getType()}</p>
         </div>

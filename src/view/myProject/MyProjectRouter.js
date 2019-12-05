@@ -16,6 +16,7 @@ import TotalStudyTime from "./my/TotalStudyTime";
 import TotalTimeUtils from "./my/TotalTimeUtils";
 import SixDimShow from "./SixDimShow/SixDimShow";
 import TimeChangeChart from "./my/TimeChangeChart";
+import EchartsIssues from "./EchartsIssues/EchartsIssues";
 
 function MyProjectRouter(props) {
     return (<Switch>
@@ -35,6 +36,7 @@ function MyProjectRouter(props) {
         <Route path='/mProj/my/totalTimeUtils' component={TotalTimeUtils}/>
         <Route path='/mProj/my/sixDimShow' component={SixDimShow}/>
         <Route path='/mProj/my/timeChart' component={TimeChangeChart}/>
+        <Route path='/mProj/my/echartsIssues' component={EchartsIssues}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }

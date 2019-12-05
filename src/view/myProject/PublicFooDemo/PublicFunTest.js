@@ -1,5 +1,5 @@
 import React from 'react';
-import {sleep,getName,delArrItem,genListCyclic,uniq,arrCompare,arrCompareOrder} from "../../../utils/publicFun.js";
+import {sleep,getTrue,delArrItem,genListCyclic,uniq,arrCompare,arrCompareOrder} from "../../../utils/publicFun.js";
 import {Container} from "../../../component";
 import {cls} from "../../../utils/publicFun";
 
@@ -37,7 +37,7 @@ function PublicFunTest(props) {
             B:false,
             C:true
         };
-        console.log('getName测试',getName(names));
+        console.log('getName测试',getTrue(names));
     }
     function sleepTest() {
         async function fn() {
