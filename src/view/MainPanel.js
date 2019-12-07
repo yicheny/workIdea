@@ -10,7 +10,7 @@ import LeftMenu from './LeftMenu';
 import myProjectRouter from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
 import ReactDemo from "./reactDemo/ReactDemo";
-import ESRouter from './esDemo/ESRouter';
+import ES from './esDemo/ESRouter';
 import ComponentRouter from "./componetentDemo/ComponentRouter";
 import HttpRouter from "./httpDemo/HttpRouter";
 import DesignPatternRouter from "./designPattern/DesignPatternRouter";
@@ -39,7 +39,7 @@ function MainPanel(props){
                 <Route path='/work' component={WorkRouter}/>
                 <Route path='/component' component={ComponentRouter}/>
                 <Route path='/react' component={ReactDemo}/>
-                <Route path='/es' component={ESRouter}/>
+                <Route path='/es' component={ES}/>
                 <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPatternRouter}/>
