@@ -13,7 +13,7 @@ import ReactDemo from "./reactDemo/ReactDemo";
 import ES from './esDemo/ESRouter';
 import ComponentRouter from "./componetentDemo/ComponentRouter";
 import HttpRouter from "./httpDemo/HttpRouter";
-import DesignPatternRouter from "./designPattern/DesignPatternRouter";
+import DesignPattern from "./designPattern/DesignPatternRouter";
 import CssTestRouter from "./cssDemo/CssTestRouter";
 import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
 import RouterRouter from "./routerDemo/RouterRouter";
@@ -42,7 +42,7 @@ function MainPanel(props){
                 <Route path='/es' component={ES}/>
                 <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>
-                <Route path='/design' component={DesignPatternRouter}/>
+                <Route path='/design' component={DesignPattern}/>
                 <Route path='/css' component={CssTestRouter}/>
                 <Route path='/mProj' component={myProjectRouter}/>
                 <Route path='/recons' component={ReconsitutionRouter}/>

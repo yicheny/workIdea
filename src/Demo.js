@@ -1,35 +1,67 @@
 import React from 'react';
 // import * as ylf from 'ylf_public_fun/publicFun';
-import {random} from "./utils/publicFun";
+// import {random} from "./utils/publicFun";
 // import axios from 'axios';
+import _ from 'lodash';
 
-function Demo(props) {
-    function print(str,callback) {
-        const delay = random(0,500);
-        setTimeout(()=>{
-            callback([str,delay]);
-        },delay)
+//抽象原型类_定义拷贝接口
+class Prototype{
+    clone=()=> console.error('子类必须重定义clone方法');
+    cloneDeep=()=> console.error('子类必须重定义cloneDeep方法');
+}
+
+//具体原型类_实现拷贝接口
+class AnswerPrototype extends Prototype{
+    clone=function(){
+        return _.clone(this)
+    };
+
+    cloneDeep=function(){
+        return _.cloneDeep(this)
+    };
+
+    printRes = function(){
+        console.log(`姓名：${this.name}`);
+        console.log(`答案1：${this.selecte1}`);
+        console.log(`答案2：${this.selecte2}`);
+        console.log(`答案3：${this.selecte3}`);
+    };
+}
+
+//具体作业子类小明_原型_具体实现
+class MingAnswerPrototype extends AnswerPrototype{
+    constructor(){
+        super();
+        this.name = '小明';
+        this.selecte1 = '明明明1';
+        this.selecte2 = '明明明2';
+        this.selecte3 = '明明明3';
     }
 
-    print('A',x=>console.log(x));
-    print('B',x=>console.log(x));
-    print('C',x=>console.log(x));
-    print('D',x=>console.log(x));
-    print('E',x=>console.log(x));
-    print('F',x=>console.log(x));
-    print('G',x=>console.log(x));
-    print('H',x=>console.log(x));
+    setName=function(name){
+        this.name = name;
+    };
+    setSelectAnswer1 =function(answer){
+        this.selecte1 = answer;
+    };
+    setSelectAnswer2 =function(answer){
+        this.selecte2 = answer;
+    };
+    setSelectAnswer3 =function(answer){
+        this.selecte3 = answer;
+    };
+}
 
-    // (new Promise(resolve => print('A',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('B',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('C',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('D',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('E',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('F',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('G',x=>resolve(x)))).then(res=>console.log(res));
-    // (new Promise(resolve => print('H',x=>resolve(x)))).then(res=>console.log(res));
-
-    //ABX
+//还是小明抄作业，定义的类不需要做任何改变
+const ming = new MingAnswerPrototype();
+//为小明扩展方法
+ming.printName = function(){
+    return console.log(`我的名字是：${this.name}`)
+};
+const long = ming.clone();
+long.setName('小龙');
+long.printName();//看！小龙继承了小明扩展的方法
+function Demo(props) {
     return <div>
 
     </div>;
