@@ -123,8 +123,104 @@ print('H',x=>console.log(x));
 # 探寻Promise
 现在，想一想Promise机制是如何实现的？
 
+关键是两个字：**监听**，监听异步事件的执行，一旦结束就就进行通知，看这一段伪代码：
+```
+const promise = ent(foo());//foo是一个异步事件，ent监听foo
+
+promise.then(res=>console.log('成功',res));//异步成功结束则在这里进行通知
+promise.catch(err=>console.log('失败',err));//异步失败结束则在这里进行通知
+```
+这段伪代码里的ent就相当于Promise内置函数，下面我们实现这个监听机制，实现一个最基本的只有监听机制的`Promise`
+
+## Promise基础
+在实现之前，我们回顾下`Promise`的特性有哪些？
+- Promise是一个内置函数，可以通过`new Promise`的方式去调用，也可以通过API调用，例如`Promise.resolve`、`Promise.all`这些
+- 通过`new Promise()`方式调用时，接受一个形如`(resolve,reject)=>{}`的回调函数，这个回调函数是同步执行的，我们在这个回调函数里定义承诺的内容，包括成功的承诺与失败的承诺
+- `Promise`实例对象有三种状态`pending`、`fulfilled`、`rejected`，初始状态为`pending`，一旦更改为`fulfilled`或`reject`就不能在修改
+- `then`方法接受两个回调，第一个回调在`fulfilled`状态时执行，第二个状态在`rejected`状态执行，只有有一个被执行，且只会执行一次。
+
+### Promise实现V1
+现在我们仅实现一个只能以`new Promise()`方式调用且只有一个`then`方法的`Promise`构造函数：
+```
+//自定义Promise
+class MyPromise {
+    constructor(callback) {
+        this.status = 'pending';
+        this.value = null;//用于接收数据
+        if(_.isFunction(callback)) callback(this._resolve, this._reject);
+    }
+
+    _resolve = (res) => {
+        if (this.status === 'pending'){
+            this.status = 'fulfilled';
+            this.value = res;
+        }
+    };
+
+    _reject = (err) => {
+        if(this.status === 'pending'){
+            this.status = 'rejected';
+            this.value = err;
+        }
+    };
+
+    then = (resolve,reject) => {
+        const {status,value} = this;
+        
+        setTimeout(()=>{
+            if(status==='fulfilled'){
+                if(_.isFunction(resolve)) return resolve(value);
+            }
+            if(status==='rejected'){
+                if(_.isFunction(reject)) return reject(value);
+            }
+            if(status==='pending'){
+                this.then(resolve,reject);
+            }
+        },0)
+    }
+}
+
+//测试部分
+function getData(callback) {
+    const delay = _.random(0,100);
+    setTimeout(()=>{
+        return callback(delay)
+    },delay);
+}
+
+const promise = new MyPromise((resolve, reject) => {
+    getData(x=>{
+        if(x>50) return resolve(x);
+        return reject(x);
+    });
+});
+
+console.log('A');
+promise.then((res)=>{
+    console.log('异步执行成功啦！',res);
+},(err)=>{
+    console.error('异步执行失败啦！',err);
+});
+console.log('B');
+```
+理解这段代码的关键在于，`getData`内部的回调执行时，此时异步请求结束，我们根据条件更改状态并执行`then`里面的回调。
+
+在promise之前的回调控制流是这样的：异步结束，执行传进的回调。
+
+promise控制流逻辑是：异步结束，`Promise`的状态改为完成态并接收传入的参数，执行`then`方法回调。
+
+区别在于，promise等于从`getData`【异步程序】处取回了控制权，之前我们是将权力交托给了第三方，而现在我们是从第三方得到**异步结束**这一信息，执行由我们决定。
+
+我们是如何得知异步结束的？异步程序回调执行即代表异步结束，一旦结束我们promise实例就会得到通知，此时，我们可以执行预定的程序。
+
+ok，进行到这里，如果可以实现一个简陋的基础Promise，那么应该对于promise应该有一个相对清晰的了解了，promise最主要是解决了回调函数的信任问题，它重新拿回了控制权，实现的关键在于监听，监听的实现原理是对回调的再反转。
+
+目前的`Promise`还很不完整，比如说它没有再返回一个promise对象，也没有提供一些API。接下来，我们就一步步介绍promise的链式调用，以及promise提供的API
+
+# 链式调用
+
 # 关于Promise的检测
 
 # Promise解决信任问题
 
-# 链式调用
