@@ -130,13 +130,15 @@ const promise = ent(foo());//foo是一个异步事件，ent监听foo
 promise.then(res=>console.log('成功',res));//异步成功结束则在这里进行通知
 promise.catch(err=>console.log('失败',err));//异步失败结束则在这里进行通知
 ```
-这段伪代码里的ent就相当于Promise内置函数，下面我们实现这个监听机制，实现一个最基本的只有监听机制的`Promise`
+这段伪代码里ent监听了`foo()`，当`foo()`执行结束后ent得到通知，成功则执行`then`方法里的回调，失败则执行`catch`的回调，大致如此。
+
+这里的ent就相当于Promise内置函数，下面我们实现这个监听机制，实现一个最基本的只有监听机制的`Promise`
 
 ## Promise基础
 在实现之前，我们回顾下`Promise`的特性有哪些？
 - Promise是一个内置函数，可以通过`new Promise`的方式去调用，也可以通过API调用，例如`Promise.resolve`、`Promise.all`这些
 - 通过`new Promise()`方式调用时，接受一个形如`(resolve,reject)=>{}`的回调函数，这个回调函数是同步执行的，我们在这个回调函数里定义承诺的内容，包括成功的承诺与失败的承诺
-- `Promise`实例对象有三种状态`pending`、`fulfilled`、`rejected`，初始状态为`pending`，一旦更改为`fulfilled`或`reject`就不能在修改
+- `Promise`实例对象有三种状态`pending`、`fulfilled`、`rejected`，初始状态为`pending`，一旦更改为`fulfilled`或`reject`就不能再修改
 - `then`方法接受两个回调，第一个回调在`fulfilled`状态时执行，第二个状态在`rejected`状态执行，只有有一个被执行，且只会执行一次。
 
 ### Promise实现V1
@@ -146,38 +148,33 @@ promise.catch(err=>console.log('失败',err));//异步失败结束则在这里�
 class MyPromise {
     constructor(callback) {
         this.status = 'pending';
-        this.value = null;//用于接收数据
+        this.params = null;//用于接收数据
         if(_.isFunction(callback)) callback(this._resolve, this._reject);
     }
 
     _resolve = (res) => {
         if (this.status === 'pending'){
             this.status = 'fulfilled';
-            this.value = res;
+            this.params = res;
         }
     };
 
     _reject = (err) => {
         if(this.status === 'pending'){
             this.status = 'rejected';
-            this.value = err;
+            this.params = err;
         }
     };
 
     then = (resolve,reject) => {
-        const {status,value} = this;
+        const {status,params} = this;
+        
+        if(status==='fulfilled') return resolve(params);
+        if(status==='rejected') return reject(params);
         
         setTimeout(()=>{
-            if(status==='fulfilled'){
-                if(_.isFunction(resolve)) return resolve(value);
-            }
-            if(status==='rejected'){
-                if(_.isFunction(reject)) return reject(value);
-            }
-            if(status==='pending'){
-                this.then(resolve,reject);
-            }
-        },0)
+            return this.then(resolve,reject);
+        },0);
     }
 }
 
@@ -208,7 +205,7 @@ console.log('B');
 
 在promise之前的回调控制流是这样的：异步结束，执行传进的回调。
 
-promise控制流逻辑是：异步结束，`Promise`的状态改为完成态并接收传入的参数，执行`then`方法回调。
+promise控制流逻辑是：异步结束，promise实例对象的状态改为完成态并接收传入的参数，执行`then`方法回调。
 
 区别在于，promise等于从`getData`【异步程序】处取回了控制权，之前我们是将权力交托给了第三方，而现在我们是从第三方得到**异步结束**这一信息，执行由我们决定。
 
@@ -218,7 +215,135 @@ ok，进行到这里，如果可以实现一个简陋的基础Promise，那么�
 
 目前的`Promise`还很不完整，比如说它没有再返回一个promise对象，也没有提供一些API。接下来，我们就一步步介绍promise的链式调用，以及promise提供的API
 
-# 链式调用
+## 链式调用
+```
+function getData(callback) {
+    const delay = _.random(0,100);
+    setTimeout(()=>{
+        return callback(delay)
+    },delay);
+}
+
+const promise = new Promise((resolve, reject) => {
+    getData(x=>{
+        if(x>50) return resolve(x);
+        return reject(x);
+    });
+});
+
+console.log('A');
+promise.then((res)=>{
+    console.log('异步执行成功啦！',res);
+    return '成功';
+},(err)=>{
+    console.error('异步执行失败啦！',err);
+    return '失败';
+}).then((res)=>{
+    console.log('异步执行成功啦2！',res);
+},(err)=>{
+    console.error('异步执行失败啦2！',err);
+});
+console.log('B');
+```
+执行这段代码，我们发现当第一个`then`执行的是`resolve`时第二个`then`执行的也是`resolve`,`reject`亦是如此。
+
+链式调用的关键在于两点：
+- `then`方法每次执行之后都会创建一个新的`promise`对象，
+- `then`方法中所执行的回调的返回值 会作为新`promise`对象`then`的传入值
+
+思考这里：
+```
+const promise = new Promise(resolve=>resolve('结果1'));
+
+promise.then(res=>{
+    console.log(res);
+    return '结果2';
+}).then(res=>{
+    console.log(res);
+})
+```
+在`then`执行之前，返回得到的是什么？是如何保证`then`执行之后立即执行下一个`then`的？
+
+这里的用立即不太准确，因为下一个`then`是被插入到任务队列中的，如果任务队列已有任务，新放入的任务不会被立即执行，不过肯定会比事件队列的事件优先执行。之所以这里使用立即，是想表达promise的`then`概念，它是希望监听的事件结束后立刻被执行的，所以被加入任务队列这一优先执行的队列中
+> JS执行机制：事件循环->任务队列【微任务】->事件队列【宏任务】
+
+第一个问题：`then`被执行前返回的是一个`pending`状态的promise实例对象
+
+第二个问题：在当前`then`执行结束之前，我们一直在监听当前`promise`的状态，监听当前promise状态修改完成后，不再返回当前`promise`，返回一个新创建的`promise`对象。
+
+针对之前的`MyPromise`类，只需要稍微修改`then`方法，针对三种状态返回不同的`promise`对象即可，具体实现如下。
+
+### Promise实现V2
+```
+//只修改了then方法，如今支持链式调用
+class MyPromise {
+    constructor(callback) {
+        this.status = 'pending';
+        this.params = null;//这个属性用于接收数据
+        if(_.isFunction(callback)) callback(this._resolve, this._reject);
+    }
+
+    _resolve = (res) => {
+        if (this.status === 'pending'){
+            this.status = 'fulfilled';
+            this.params = res;
+        }
+    };
+
+    _reject = (err) => {
+        if(this.status === 'pending'){
+            this.status = 'rejected';
+            this.params = err;
+        }
+    };
+
+    then = (resolve,reject) => {
+        const {status,params} = this;
+
+        if(status==='fulfilled'){
+            return new MyPromise(nextResolve=>nextResolve(resolve(params)));
+        }
+        if(status==='rejected'){
+            return new MyPromise((nextResolve,nextReject)=>nextReject(reject(params)));
+        }
+
+        setTimeout(()=>{
+            return this.then(resolve,reject)
+        },0);
+
+        return this;
+    }
+}
+
+//测试部分
+function getData(callback) {
+    const delay = _.random(0,100);
+    setTimeout(()=>{
+        return callback(delay)
+    },delay);
+}
+
+const promise = new MyPromise((resolve, reject) => {
+    getData(x=>{
+        if(x>50) return resolve(x);
+        return reject(x);
+    });
+});
+
+console.log('A');
+promise.then((res)=>{
+    console.log('异步执行成功啦！',res);
+    return '成功';
+},(err)=>{
+    console.error('异步执行失败啦！',err);
+    return '失败';
+}).then((res)=>{
+    console.log('异步执行成功啦2！',res);
+},(err)=>{
+    console.error('异步执行失败啦2！',err);
+});
+console.log('B');
+```
 
 # 关于Promise的检测
 
