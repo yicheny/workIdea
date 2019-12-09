@@ -43,37 +43,21 @@ class MyPromise {
 }
 
 function Demo(props) {
-    function getData(callback) {
-        const delay = _.random(0,100);
-        setTimeout(()=>{
-            return callback(delay)
-        },delay);
-    }
+    const promise = new Promise(resolve=>resolve('结果1'));
 
-    // const promise = new MyPromise((resolve, reject) => {
-    //     getData(x=>{
-    //         if(x>50) return resolve(x);
-    //         return reject(x);
-    //     });
-    // });
+    promise.then(res=>{
+        console.log(res);
+        // return aaa;//aaa未定义
+    },()=>{
 
-    const p = new Promise(resolve => resolve(42));
-    p.then(function fulfilled(res) {
-        try{
-            res()//注意：这里数字42这样调用，会报错
-        }catch(e){
-         console.error('成功捕捉错误',e)
-        }
-    },function rejected(err) {
-        console.error(err);//错误信息并没有被传到这里
+    }).then(res=>{
+
+    },err=>{
+        console.error('成功捕获错误', err);
+        return '结果2'
+    }).then(res=>{
+        console.log(res)
     });
-    /*p.then(function fulfilled(res) {
-        res();//注意：这里数字42这样调用，会报错
-    },function rejected(err) {
-        console.error(err);//错误信息并没有被传到这里
-    }).catch((err)=>{
-        console.error('catch捕捉到错误',err)
-    });*/
 
     return <div>
 

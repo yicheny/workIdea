@@ -217,42 +217,6 @@ ok，进行到这里，如果可以实现一个简陋的基础Promise，那么�
 
 ## 链式调用
 ```
-function getData(callback) {
-    const delay = _.random(0,100);
-    setTimeout(()=>{
-        return callback(delay)
-    },delay);
-}
-
-const promise = new Promise((resolve, reject) => {
-    getData(x=>{
-        if(x>50) return resolve(x);
-        return reject(x);
-    });
-});
-
-console.log('A');
-promise.then((res)=>{
-    console.log('异步执行成功啦！',res);
-    return '成功';
-},(err)=>{
-    console.error('异步执行失败啦！',err);
-    return '失败';
-}).then((res)=>{
-    console.log('异步执行成功啦2！',res);
-},(err)=>{
-    console.error('异步执行失败啦2！',err);
-});
-console.log('B');
-```
-执行这段代码，我们发现当第一个`then`执行的是`resolve`时第二个`then`执行的也是`resolve`,`reject`亦是如此。
-
-链式调用的关键在于两点：
-- `then`方法每次执行之后都会创建一个新的`promise`对象，
-- `then`方法中所执行的回调的返回值 会作为新`promise`对象`then`的传入值
-
-思考这里：
-```
 const promise = new Promise(resolve=>resolve('结果1'));
 
 promise.then(res=>{
@@ -265,6 +229,11 @@ promise.then(res=>{
     console.log(res);
 });
 ```
+链式调用的关键在于两点：
+- `then`方法每次执行之后都会创建一个新的`promise`对象，
+- `then`方法中所执行的回调的返回值 会作为新`promise`对象`then`的传入值
+
+思考这里：
 在`then`执行之前，返回得到的是什么？是如何保证`then`执行之后立即执行下一个`then`的？
 
 这里的用立即不太准确，因为下一个`then`是被插入到任务队列中的，如果任务队列已有任务，新放入的任务不会被立即执行，不过肯定会比事件队列的事件优先执行。之所以这里使用立即，是想表达promise的`then`概念，它是希望监听的事件结束后立刻被执行的，所以被加入任务队列这一优先执行的队列中
@@ -276,76 +245,52 @@ promise.then(res=>{
 
 针对之前的`MyPromise`类，只需要稍微修改`then`方法，针对三种状态返回不同的`promise`对象即可，具体实现如下。
 
-### Promise实现V2
+### Promise实现V1.1
 ```
-//只修改了then方法，如今支持链式调用
-class MyPromise {
-    constructor(callback) {
-        this.status = 'pending';
-        this.params = null;//这个属性用于接收数据
-        if(_.isFunction(callback)) callback(this._resolve, this._reject);
+then = (resolve,reject) => {
+    const {status,params} = this;
+
+    if(status==='fulfilled'){
+        return new MyPromise(onFulFilled=>onFulFilled(resolve(params)));
+    }
+    if(status==='rejected'){
+        return new MyPromise((onFulFilled,onRjected)=>onRjected(reject(params)));
     }
 
-    _resolve = (res) => {
-        if (this.status === 'pending'){
-            this.status = 'fulfilled';
-            this.params = res;
-        }
-    };
-
-    _reject = (err) => {
-        if(this.status === 'pending'){
-            this.status = 'rejected';
-            this.params = err;
-        }
-    };
-
-    then = (resolve,reject) => {
-        const {status,params} = this;
-
-        if(status==='fulfilled'){
-            return new MyPromise(onFulFilled=>onFulFilled(resolve(params)));
-        }
-        if(status==='rejected'){
-            return new MyPromise((onFulFilled,onRjected)=>onRjected(reject(params)));
-        }
-
-        setTimeout(()=>{
-            return this.then(resolve,reject)
-        },0);
-
-        return this;
-    }
-}
-
-//测试部分
-function getData(callback) {
-    const delay = _.random(0,100);
     setTimeout(()=>{
-        return callback(delay)
-    },delay);
+        return this.then(resolve,reject)
+    },0);
+
+    return this;
 }
+```
+之所以命名为1.1版本，是因为现在的`then`方法缺陷很大，不过`then`方法作为promise实现的核心，复杂一些也情有可原，现在我们针对`then`的缺陷一点点的修复。
 
-const promise = new MyPromise((resolve, reject) => {
-    getData(x=>{
-        if(x>50) return resolve(x);
-        return reject(x);
-    });
-});
+首先让我们看一段代码：
+```
+const promise = new Promise(resolve=>resolve('结果1'));
 
-console.log('A');
-promise.then((res)=>{
-    console.log('异步执行成功啦！',res);
-    return '成功';
-},(err)=>{
-    console.error('异步执行失败啦！',err);
-    return '失败';
-}).then((res)=>{
-    console.log('异步执行成功啦2！',res);
-},(err)=>{
-    console.error('异步执行失败啦2！',err);
+promise.then(res=>{
+    console.log(res);
+    return aaa;//aaa未定义
+},()=>{
+
+}).then(res=>{
+
+},err=>{
+    console.error('成功捕获错误', err);
+    return '结果2'
+}).then(res=>{
+    console.log(res)
 });
-console.log('B');
+```
+这里，第一个`then`执行`fulfilled`的回调，第二个`then`执行`rejected`的回调，第三个`then`执行`fulfilled`的回调，这是怎么做到的？
+
+答案是每一个`then`都属于不同的promise对象，除去第一个promise是监控是我们指定的内容，`then`所返回的promise对象所监听的内容是它执行的回调本身，一旦出错则执行promise的`rejected`回调，实现如下：
+
+### Promise实现V1.2
+```
+
 ```
 
 ## 错误处理
