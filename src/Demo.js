@@ -28,10 +28,10 @@ class MyPromise {
         const {status,params} = this;
 
         if(status==='fulfilled'){
-            return new MyPromise(nextResolve=>nextResolve(resolve(params)));
+            return new MyPromise(onFulFilled=>onFulFilled(resolve(params)));
         }
         if(status==='rejected'){
-            return new MyPromise((nextResolve,nextReject)=>nextReject(reject(params)));
+            return new MyPromise((onFulFilled,onRjected)=>onRjected(reject(params)));
         }
 
         setTimeout(()=>{
@@ -43,7 +43,6 @@ class MyPromise {
 }
 
 function Demo(props) {
-    //测试部分
     function getData(callback) {
         const delay = _.random(0,100);
         setTimeout(()=>{
@@ -51,26 +50,31 @@ function Demo(props) {
         },delay);
     }
 
-    const promise = new MyPromise((resolve, reject) => {
-        getData(x=>{
-            if(x>50) return resolve(x);
-            return reject(x);
-        });
-    });
+    // const promise = new MyPromise((resolve, reject) => {
+    //     getData(x=>{
+    //         if(x>50) return resolve(x);
+    //         return reject(x);
+    //     });
+    // });
 
-    console.log('A');
-    promise.then((res)=>{
-        console.log('异步执行成功啦！',res);
-        return '成功';
-    },(err)=>{
-        console.error('异步执行失败啦！',err);
-        return '失败';
-    }).then((res)=>{
-        console.log('异步执行成功啦2！',res);
-    },(err)=>{
-        console.error('异步执行失败啦2！',err);
+    const p = new Promise(resolve => resolve(42));
+    p.then(function fulfilled(res) {
+        try{
+            res()//注意：这里数字42这样调用，会报错
+        }catch(e){
+         console.error('成功捕捉错误',e)
+        }
+    },function rejected(err) {
+        console.error(err);//错误信息并没有被传到这里
     });
-    console.log('B');
+    /*p.then(function fulfilled(res) {
+        res();//注意：这里数字42这样调用，会报错
+    },function rejected(err) {
+        console.error(err);//错误信息并没有被传到这里
+    }).catch((err)=>{
+        console.error('catch捕捉到错误',err)
+    });*/
+
     return <div>
 
     </div>;

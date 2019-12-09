@@ -260,7 +260,10 @@ promise.then(res=>{
     return '结果2';
 }).then(res=>{
     console.log(res);
-})
+    return '结果3';
+}).then(res=>{
+    console.log(res);
+});
 ```
 在`then`执行之前，返回得到的是什么？是如何保证`then`执行之后立即执行下一个`then`的？
 
@@ -301,10 +304,10 @@ class MyPromise {
         const {status,params} = this;
 
         if(status==='fulfilled'){
-            return new MyPromise(nextResolve=>nextResolve(resolve(params)));
+            return new MyPromise(onFulFilled=>onFulFilled(resolve(params)));
         }
         if(status==='rejected'){
-            return new MyPromise((nextResolve,nextReject)=>nextReject(reject(params)));
+            return new MyPromise((onFulFilled,onRjected)=>onRjected(reject(params)));
         }
 
         setTimeout(()=>{
@@ -344,6 +347,109 @@ promise.then((res)=>{
 });
 console.log('B');
 ```
+
+## 错误处理
+### `try-catch`
+JS中，说的错误处理，我们首先会想到的是`try-catch`，然而可惜的是，`try-catch`只能处理同步错误，对于异步是无能为力的。【在es6之后，利用生成器是可以使用`try-catch`的，这个暂且不谈】
+```
+//同步
+try{
+    baz();
+}catch (e) {
+    console.error('捕捉到错误了！',e); //捕捉到baz未定义的错误
+}
+
+//异步
+try{
+    setTimeout(()=>{
+        baz();
+    },0)
+}catch (e) {
+    console.error('捕捉到错误了！',e);//没有捕捉到baz未定义的错误，只有全局报错
+}
+```
+
+### `error-first`
+在`promise`之前异步是通过回调解决的，`error-first`是一种常见的错误处理方案。
+
+`error-first`即回调第一个参数为报错信息，如果没有报错，则置空。nodeJS的API几乎都是`error-first`风格，因而此风格也被叫做nodeJS风格
+
+```
+function foo(cb) {
+    setTimeout(()=>{
+        try{
+            var x = bar();//注意bar未定义
+            cb(null,x)
+        }catch (e) {
+            cb(e)
+        }
+    },0)
+}
+
+foo((err,value)=>{
+   if(err){
+       console.error('捕捉到错误！',err);//成功捕捉错误
+   } else{
+       console.log(value)
+   }
+});
+```
+`error-first`风格在过去回调时代是一种非常流行的报错方案，其主要思想便在于异步转同步，我们真正捕捉错误的时候其实是在同步执行回调时捕捉的。
+
+这种风格缺点在于麻烦，首先捕捉错误是在第三方函数内部进行的，这使得开发者需要关注其内部细节，其次回调的使用更加麻烦了，它需要考虑失败的情况。
+
+`error-first`正好印证了回调的两个关键缺陷：1.控制权转移引发的信任问题，2.可读性【回调地狱】
+
+### 分离回调
+这是某些API采取的错误处理方案，promise和indexedDB便是使用的这种API，具体来说就是接收两个回调，一个用于成功时执行，一个用于报错时执行。见示例：
+```
+const p1 = new Promise((resolve)=>resolve('完成'));
+const p2 = new Promise((resolve,reject)=>reject('拒绝'));
+
+p1.then(function fulfilled(res) {
+    console.log(res);//执行
+},function rejected(err) {
+    console.error(err);//不执行
+});
+
+p2.then(function fulfilled(res) {
+    console.log(res);//不执行
+},function rejected(err) {
+    console.error(err);//执行
+});
+```
+看上去，一切都很完美。然而，还是存在缺陷，见以下：
+```
+const p = new Promise(resolve => resolve(42));
+
+p.then(function fulfilled(res) {
+    res();//注意：这里数字42这样调用，会报错
+},function rejected(err) {
+    console.error(err);//错误信息并没有被传到这里
+});
+```
+发现了吗？在这里，回调执行抛出了一个错误，然而promise的错误处理函数并没有得到通知，根据之前我们`MyPromise`的实现思考这是为什么？
+
+这里的错误处理函数是为promise准备的，当状态从`pending`变为`rejected`之后，此错误信息会被传递给此函数执行。在这里，promise状态从`pending`变成了`fulfilled`之后，执行的是成功态的回调，而状态一旦改变就不会再改回，错误处理函数自然不会被执行。
+
+如果promise只使用分离回调处理，那么就会很容易造成错误被吞掉，这不是我们想看到的情况。
+
+那么这里有什么解决方法呢？比较自然的想法是在其内部进行`try-catch`捕捉错误，这是可行的：
+```
+const p = new Promise(resolve => resolve(42));
+p.then(function fulfilled(res) {
+    try{
+        res()//注意：这里数字42这样调用，会报错
+    }catch(e){
+     console.error('成功捕捉错误',e)
+    }
+},function rejected(err) {
+    console.error(err);//错误信息并没有被传到这里
+});
+```
+
+不过这种方案也有缺陷，如果只是一两个`then`调用可能还好，如果有很多`then`被链式调用，那么难道我们要在每个`then`里面都进行这种错误捕捉吗？这也太让人难受了。
+
 
 # 关于Promise的检测
 
