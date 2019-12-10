@@ -149,7 +149,7 @@ class MyPromise {
     constructor(callback) {
         this.status = 'pending';
         this.params = null;//用于接收数据
-        if(_.isFunction(callback)) callback(this._resolve, this._reject);
+        if(typeof callback === 'function') callback(this._resolve, this._reject);
     }
 
     _resolve = (res) => {
@@ -266,6 +266,19 @@ then = (resolve,reject) => {
 ```
 之所以命名为1.1版本，是因为现在的`then`方法缺陷很大，不过`then`方法作为promise实现的核心，复杂一些也情有可原，现在我们针对`then`的缺陷一点点的修复。
 
+### Promise实现V1.2
+为了接下来的方便，我们定义`MyPromise`的两个静态方法`resolve`,`reject`
+```
+static resolve = (value)=>{
+    return new MyPromise(onFulFilled=>onFulFilled(value));
+};
+
+static reject = (value)=>{
+    return new MyPromise((onFulFilled,onRjected)=>onRjected(value));
+}
+```
+好，现在让我们继续修复`then`的缺陷。
+
 首先让我们看一段代码：
 ```
 const promise = new Promise(resolve=>resolve('结果1'));
@@ -288,9 +301,145 @@ promise.then(res=>{
 
 答案是每一个`then`都属于不同的promise对象，除去第一个promise是监控是我们指定的内容，`then`所返回的promise对象所监听的内容是它执行的回调本身，一旦出错则执行promise的`rejected`回调，实现如下：
 
-### Promise实现V1.2
+### Promise实现V1.3
 ```
+then = (resolve,reject) => {
+    const {status,params} = this;
+    let value = null;
 
+    if(status==='fulfilled'){
+        try {
+            value = resolve(params);
+            return MyPromise.resolve(value);
+        }catch (e) {
+            return  MyPromise.reject(e)
+        }
+    }
+    if(status==='rejected'){
+        try{
+            value = reject(params);
+            return  MyPromise.resolve(value);
+        }catch (e) {
+            return MyPromise.reject(e)
+        }
+    }
+    
+    setTimeout(()=>{
+        return this.then(resolve,reject)
+    },0);
+
+    return this;
+};
+```
+ok，现在每一个`then`方法的执行都被其创建的promise所监听，代码测试结果与原生promise一致了。
+
+这个阶段的`then`已经可以应对大多数状况，不过有一种特殊状况，那就是如果`then`方法**直接**返回的是就是一个promise对象，以我们现在的`then`它会将监听这个promise然后创建一个promise对象，这种行为是异常的。让我们看一下原生promise是怎么做的：
+```
+const promise = new Promise(resolve=>resolve('结果1'));
+
+promise.then((res) => {
+    console.log('成功执行1',res);
+    return Promise.reject('结果2');
+}).then(()=>{},(err)=>{
+    console.error('失败执行2',err);
+    return Promise.resolve('结果3');
+}).then((res)=>{
+    console.log('成功执行3',res)
+});
+```
+执行这个示例，我们发现下一次`then`执行的结果其实就是直接返回的这个promise对象的`then`的结果，因此，如果`then`返回的是一个promise对象，则不需要创建新的promise对象，返回这个直接返回的promise对象即可。
+
+### Promise实现V1.4-Promise判断
+好的，现在有一个重要的问题值得我们去解决，那就是如何去判断promise对象，使用`p instanceof Promise`来判断？很可惜，这样是不行的，不要这么做。原因在于一般而言我们所说的Promise是由ECMAScript所定义的原生Promise，然而不仅仅只有原生的Promise，也有很多第三方库或框架自定义的Promise，包括我们现在实现的这个`MyPromise`，难道这些Promise就不是Promise了吗？所以不能狭隘的使用`p instanceof Promise`进行判断。
+
+让我们看一下PromiseA+规范是怎么说的：1.1 “promise” is an object or function with a then method whose behavior conforms to this specification【“promise”是一个具有then方法的对象或函数，其行为符合这个规范】
+
+也就是说，我们只需要判断这个值是否是一个具有then方法的对象或函数，这种类型判断在术语中表示为鸭子类型，所谓鸭子类型就是：“如果它看起来像个鸭子，叫起来像个鸭子，那么它就是一只鸭子。”，这种判断在动态语言中还是很常见的，详细概念请见[鸭子类型_维基百科](https://zh.wikipedia.org/wiki/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
+
+```
+_isPromise(p){
+    if (p===null) return false;
+    if (typeof p !== 'object' && typeof p !== 'function') return false;
+    return typeof p.then === 'function';
+}
+```
+这样便可以以符合PromiseA+标准的方式检测出promise对象
+
+然而以鸭子类型做判断，不可避免的存在一些问题，例如如果有一个对象`obj1 = {then:()=>{}}`很明显，这不是一个常规意义的Promise对象，它是不能链式调用的，另外，熟悉JS都知道JS对象使用的是原型链机制，也就是说如果一个对象，即使这个对象本身不包含`then`方法，只要其原型链存在一个`then`就会通过这个方法的检测。
+
+想象一下，如果有人恶意的`Object.prototype.then=function(){}`，这样所有的对象都会被检测是promise。
+
+promise是ES6提出来的，在过去的十几年间存在许许多多的库，一些常见的库中也难免有着名为`then`的方法，如此一来，使用鸭子类型去做判断就会出问题，进而引发一些更严重的问题。
+
+这是一个值得注意的问题，我们需要知道是使用鸭子类型进行判断可能会带来的问题。这是符合标准的promise，或许对于我们来说这种promise并不能按我们所预期的进行，可它的确是符合定义的promise。
+
+值得庆幸的是实际开发中很少会出现误判，甚至几乎不需要进行promise的判断，不过我们需要清楚按进行鸭子类型判断可能会造成什么问题。
+
+让我们将这个`_isPromise`加入`MyPromise`，继续实现`then`的链式调用
+
+### Promise实现V1.5
+```
+then = (resolve,reject) => {
+    const {status,params} = this;
+    let value = null;
+
+    if(status==='fulfilled'){
+        try {
+            value = resolve(params);
+            if(MyPromise._isPromise(value)) return value;//+++
+            return MyPromise.resolve(value);
+        }catch (e) {
+            return  MyPromise.reject(e)
+        }
+    }
+    if(status==='rejected'){
+        try{
+            value = reject(params);
+            if(MyPromise._isPromise(value)) return value;//+++
+            return  MyPromise.resolve(value);
+        }catch (e) {
+            return MyPromise.reject(e)
+        }
+    }
+
+    setTimeout(()=>{
+        return this.then(resolve,reject)
+    },0);
+
+    return this;
+};
+```
+现在就可以处理`then`返回值是promise对象的情况了，而且因为我们是用鸭子类型判断，所以可以无缝连接其他符合PromiseA+标准的promise对象，可以这样测试：
+```
+const promise = new MyPromise(resolve=>resolve('结果1'));//第一个promise是MyPromise
+
+promise.then((res) => {
+    console.log('成功执行1',res);
+    return Promise.reject('结果2');//第二个是原生Promise
+}).then(()=>{},(err)=>{
+    console.error('失败执行2',err);
+    return MyPromise.resolve('结果3');//第三个MyPromise
+}).then((res)=>{
+    console.log('成功执行3',res)
+});
+```
+与完全使用`MyPromise`或原生`Promise`结果是一致的。
+
+### Promise实现1.6-值的穿透
+```
+const promise = new MyPromise(resolve=>resolve('结果1'));
+promise.then().then().then(res=>console.log(res));
+```
+这里发生了值的穿透，原理很简单，如果接收到值【`resolve`或`reject`】不是一个函数，根据情况进行相应的处理，实现如下：
+```
+then = (resolve,reject) => {
+    const {status,params} = this;
+    let value = null;
+    resolve = typeof resolve === 'function' ? resolve : v=>v; //+++
+    reject = typeof reject === 'function' ? reject : err => {throw err}; //+++
+
+    ...//其他代码不变
+};
 ```
 
 ## 错误处理
@@ -399,4 +548,9 @@ p.then(function fulfilled(res) {
 # 关于Promise的检测
 
 # Promise解决信任问题
+
+# 参考文档
+- [PromiseA+](https://promisesaplus.com/)
+- [PromiseA+译](https://juejin.im/post/5c4b0423e51d4525211c0fbc)
+
 
