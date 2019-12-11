@@ -3,7 +3,7 @@ import React from 'react';
 // import _ from 'lodash';
 // import axios from 'axios';
 
-class MyPromise {
+class Promise {
     constructor(executor) {
         this.status = 'pending';
         this.params = null;
@@ -33,8 +33,6 @@ class MyPromise {
     };
     
     resolvePromise = (x,nextP,resolve,reject)=>{
-        let called = false;
-
         if(x===nextP){
             return reject(new TypeError('promise对象循环引用'));
         }
@@ -50,6 +48,7 @@ class MyPromise {
         }
 
         if((x !== null) && ((typeof x === 'object') || (typeof x === 'function'))){
+            let called = false;
             try {
                 const then = x.then;
                 if(typeof then === 'function'){
@@ -82,7 +81,7 @@ class MyPromise {
         onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err};
 
         if(status==='fulfilled') {
-            return nextP = new MyPromise((resolve,reject)=>{
+            return nextP = new Promise((resolve,reject)=>{
                 setTimeout(()=>{
                     try {
                         const x = onFulfilled(this.params);
@@ -94,7 +93,7 @@ class MyPromise {
             })
         }
         if(status==='rejected') {
-            return nextP = new MyPromise((resolve,reject)=>{
+            return nextP = new Promise((resolve,reject)=>{
                 setTimeout(()=>{
                     try {
                         const x = onRejected(this.params);
@@ -105,7 +104,7 @@ class MyPromise {
                 },0)
             })
         }
-        if(status==='pending') return nextP = new MyPromise((resolve,reject)=>{
+        if(status==='pending') return nextP = new Promise((resolve,reject)=>{
             this.resolveCB.push(()=>{
                 try {
                     const x = onFulfilled(this.params);
@@ -126,17 +125,17 @@ class MyPromise {
     };
 
     static resolve = (value) => {
-        return new MyPromise(resolve => resolve(value));
+        return new Promise(resolve => resolve(value));
     };
 
     static reject = (value) => {
-        return new MyPromise((resolve, reject) => reject(value));
+        return new Promise((resolve, reject) => reject(value));
     }
 }
 
 function Demo(props) {
-    const p1 = new MyPromise(resolve=>resolve());
-    const p2 = new MyPromise(resolve=>resolve());
+    const p1 = new Promise(resolve=>resolve());
+    const p2 = new Promise(resolve=>resolve());
     p1.then(()=>console.log('p1-1')).then(()=>console.log('p1-2'));
     p2.then(()=>console.log('p2-1')).then(()=>console.log('p2-2'));
     return <div>

@@ -145,7 +145,7 @@ promise.catch(err=>console.log('失败',err));//异步失败结束则在这里�
 现在我们仅实现一个只能以`new Promise()`方式调用且只有一个`then`方法的`Promise`构造函数：
 ```
 //自定义Promise
-class MyPromise {
+class Promise {
     constructor(executor) {
         this.status = 'pending';
         this.params = null;//用于接收数据
@@ -186,7 +186,7 @@ function getData(executor) {
     },delay);
 }
 
-const promise = new MyPromise((resolve, reject) => {
+const promise = new Promise((resolve, reject) => {
     getData(x=>{
         if(x>50) return resolve(x);
         return reject(x);
@@ -218,7 +218,7 @@ ok，进行到这里，如果可以实现一个简陋的基础Promise，那么�
 
 ### 实现V0.2-监听改进
 ```
-class MyPromise {
+class Promise {
     constructor(executor) {
         this.status = 'pending';
         this.params = null;//用于接收数据
@@ -258,14 +258,14 @@ class MyPromise {
 目前的`Promise`还很不完整，比如说它没有再返回一个promise对象，也没有提供一些API。接下来，我们就一步步介绍promise的链式调用，以及promise提供的API
 
 ### 实现V0.3-添加API
-为了接下来的方便，我们定义`MyPromise`的两个静态方法`resolve`,`reject`
+为了接下来的方便，我们定义`Promise`的两个静态方法`resolve`,`reject`
 ```
 static resolve = (value)=>{
-    return new MyPromise(resolve=>resolve(value));
+    return new Promise(resolve=>resolve(value));
 };
 
 static reject = (value)=>{
-    return new MyPromise((resolve,reject)=>reject(value));
+    return new Promise((resolve,reject)=>reject(value));
 }
 ```
 
@@ -298,16 +298,16 @@ p.then(res=>{
 第二个问题：关键在于`then` 返回的`promise`监听的是这个`then`执行的回调。执行`then`的回调，返回的`promise`会监听并修改状态，然后将相应的回调放到事件队列等待执行，因而`then`链的执行顺序是有序的。
 > 之所以使用事件队列而不是任务队列，是因为`task queue`这个概念是ES6之后出现的，对于BOM【浏览器对象模型】开发者来说常用的微任务就是promise实例的这些api了，如果是NodeJS开发者的话`process.nextTick`也是微任务，任务队列放的就是微任务，微任务在同步代码之后，异步代码【定时器、事件这些】之前执行。另外，PromiseA+并没有规定一定要使用微任务实现Promise。
 
-针对之前的`MyPromise`类，只需要稍微修改`then`方法，返回一个新的Promise对象即可。
+针对之前的`Promise`类，只需要稍微修改`then`方法，返回一个新的Promise对象即可。
 
 ### 实现V0.4-链式初步
 ```
 then = (onFulfilled, onRejected) => {
     const {status} = this;
 
-    if(status==='fulfilled') return MyPromise.resolve(onFulfilled(this.params));
-    if(status==='rejected') return MyPromise.reject(onRejected(this.params));
-    if(status==='pending') return new MyPromise((resolve,reject)=>{
+    if(status==='fulfilled') return Promise.resolve(onFulfilled(this.params));
+    if(status==='rejected') return Promise.reject(onRejected(this.params));
+    if(status==='pending') return new Promise((resolve,reject)=>{
         this.resolveCB.push(()=>resolve(onFulfilled(this.params)));
         this.rejectCB.push(()=>reject(onRejected(this.params)));
     })
@@ -341,7 +341,7 @@ promise.then(res=>{
 
 ### 实现V0.5-值的穿透
 ```
-const promise = new MyPromise(resolve=>resolve('结果1'));
+const promise = new Promise(resolve=>resolve('结果1'));
 promise.then().then().then(res=>console.log(res));
 ```
 这里发生了值的穿透，原理很简单，如果接收到值【`resolve`或`reject`】不是一个函数，根据情况进行相应的处理，实现如下：
@@ -360,8 +360,8 @@ promise有一个重要的思想，即无论是同步代码，还是异步代码�
 
 promise正是这么做的，见：
 ```
-const p1 = new MyPromise(resolve=>resolve());
-const p2 = new MyPromise(resolve=>resolve());
+const p1 = new Promise(resolve=>resolve());
+const p2 = new Promise(resolve=>resolve());
 p1.then(()=>console.log('p1-1')).then(()=>console.log('p1-2'));
 p2.then(()=>console.log('p2-1')).then(()=>console.log('p2-2'));
 ```
@@ -392,17 +392,17 @@ _reject = (err) => {
 then = (onFulfilled, onRejected) => {
     const {status} = this;
 
-    if(status==='fulfilled') return new MyPromise((resolve)=>{
+    if(status==='fulfilled') return new Promise((resolve)=>{
         setTimeout(()=>{
             resolve(onFulfilled(this.params))
         },0)
     });
-    if(status==='rejected') return new MyPromise((resolve,reject)=>{
+    if(status==='rejected') return new Promise((resolve,reject)=>{
         setTimeout(()=>{
             reject(onRejected(this.params))
         },0)
     });
-    if(status==='pending') return new MyPromise((resolve,reject)=>{
+    if(status==='pending') return new Promise((resolve,reject)=>{
         //注意：之所以这里没有修改，是因为这里注册的函数是在`_resolve`，`_reject`执行的，而那里已经被处理成异步了
         this.resolveCB.push(()=>resolve(onFulfilled(this.params)));
         this.rejectCB.push(()=>reject(onRejected(this.params)));
@@ -418,10 +418,10 @@ then = (onFulfilled, onRejected) => {
     onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; 
     
     if(status==='fulfilled') {
-        return new MyPromise((resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 try {
-                    MyPromise.resolve(onFulfilled(this.params))
+                    Promise.resolve(onFulfilled(this.params))
                 }catch (e) {
                     reject(e);
                 }
@@ -429,17 +429,17 @@ then = (onFulfilled, onRejected) => {
         })
     }
     if(status==='rejected') {
-        return new MyPromise((resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 try {
-                    MyPromise.resolve(onRejected(this.params))
+                    Promise.resolve(onRejected(this.params))
                 }catch (e) {
                     reject(e);
                 }
             },0)
         })
     }
-    if(status==='pending') return new MyPromise((resolve,reject)=>{
+    if(status==='pending') return new Promise((resolve,reject)=>{
         this.resolveCB.push(()=>{
             try {
                 resolve(onFulfilled(this.params))
@@ -475,21 +475,23 @@ promise.then((res) => {
 ```
 执行这个示例，我们发现下一次`then`执行的结果其实就是直接返回的这个promise对象的`then`的结果，因此，如果`then`返回的是一个promise对象，则不需要创建新的promise对象，返回这个直接返回的promise对象即可。
 
-### 实现V0.8-Promise判断
-好的，现在有一个重要的问题值得我们去解决，那就是如何去判断promise对象，使用`p instanceof Promise`来判断？很可惜，这样是不行的，不要这么做。原因在于一般而言我们所说的Promise是由ECMAScript所定义的原生Promise，然而不仅仅只有原生的Promise，也有很多第三方库或框架自定义的Promise，包括我们现在实现的这个`MyPromise`，难道这些Promise就不是Promise了吗？所以不能狭隘的使用`p instanceof Promise`进行判断。
-
-让我们看一下PromiseA+规范是怎么说的：1.1 “promise” is an object or function with a then method whose behavior conforms to this specification【“promise”是一个具有then方法的对象或函数，其行为符合这个规范】
+### Promise判断
+进行Promise程序处理之前，我们需要先明确`promise`和`thenable`的区别，在接下来处理promise时会用到:
+- `promise`是一个拥有`then`方法的方法或对象
+- `thenable`是由`then`所定义的方法或对象
 
 也就是说，我们只需要判断这个值是否是一个具有then方法的对象或函数，这种类型判断在术语中表示为鸭子类型，所谓鸭子类型就是：“如果它看起来像个鸭子，叫起来像个鸭子，那么它就是一只鸭子。”，这种判断在动态语言中还是很常见的，详细概念请见[鸭子类型_维基百科](https://zh.wikipedia.org/wiki/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
 
 ```
-_isPromise(p){
+isPromise(p){
     if (p===null) return false;
     if (typeof p !== 'object' && typeof p !== 'function') return false;
     return typeof p.then === 'function';
 }
 ```
-这样便可以以符合PromiseA+标准的方式检测出promise对象
+一般来说可以用这种方式去做判断promise对象，进行鸭子类型的判断。
+
+如果想要详尽检测符合PromiseA+标准是非常麻烦的一件事，PromiseA+官方提供了一个脚本`promises-aplus-tests`供我们进行检测，这个是用于检测所编写的Promise是否符合PromiseA+标准的，检测大概花费十几二十秒，因而通常简洁的方法就是刚刚写的那个`isPromise`方法，不过网上可能也有更加规范的判断方法。
 
 然而以鸭子类型做判断，不可避免的存在一些问题，例如如果有一个对象`obj1 = {then:()=>{}}`很明显，这不是一个常规意义的Promise对象，它是不能链式调用的，另外，熟悉JS都知道JS对象使用的是原型链机制，也就是说如果一个对象，即使这个对象本身不包含`then`方法，只要其原型链存在一个`then`就会通过这个方法的检测。
 
@@ -501,27 +503,131 @@ promise是ES6提出来的，在过去的十几年间存在许许多多的库，�
 
 值得庆幸的是实际开发中很少会出现误判，甚至几乎不需要进行promise的判断，不过我们需要清楚按进行鸭子类型判断可能会造成什么问题。
 
-让我们将这个`_isPromise`加入`MyPromise`，继续实现`then`的链式调用
+### 实现V0.9-resolvePromise
+我们将定义一个`resolvePromise`针对`thenable`或`promise`进行处理，关于Promise处理逻辑PromiseA+规范2.3节有着详尽的记载，基本照着规范写就可以了。不过这里我还是大致说一下思路吧：
 
-### 实现V0.9-处理直接返回Promise
-```
+处理程序会用到4个值：`nextP`【`then`方法的最终返回值】,`x`【`then`方法的直接返回值】、`resolve`,`reject`
+1. 首先判断`nextP`与`x`是否是同一个引用，如果是则抛出错误
+2. 判断x是否是一个promise实例，如果是进行相应处理
+3. 判断x是否是`thenable`，如果是进行相应处理
+4. 不符合以上清空，进行相应处理【直接`resolve(x)`】
 
+`resolvePromise`实现如下
 ```
-现在就可以处理`then`返回值是promise对象的情况了，而且因为我们是用鸭子类型判断，所以可以无缝连接其他符合PromiseA+标准的promise对象，可以这样测试：
-```
-const promise = new MyPromise(resolve=>resolve('结果1'));//第一个promise是MyPromise
+resolvePromise = (x,nextP,resolve,reject)=>{
+    //1.循环引用处理
+    if(x===nextP){
+        return reject(new TypeError('循环引用'));
+    }
 
-promise.then((res) => {
-    console.log('成功执行1',res);
-    return Promise.reject('结果2');//第二个是原生Promise
-}).then(()=>{},(err)=>{
-    console.error('失败执行2',err);
-    return MyPromise.resolve('结果3');//第三个MyPromise
-}).then((res)=>{
-    console.log('成功执行3',res)
-});
+    //2.promise实例处理
+    if(x instanceof Promise){
+        if(x.status==='pending'){
+            x.then(v=>{
+                this.resolvePromise(v,nextP,resolve,reject);
+            },reject)
+        }else{
+            x.then(resolve,reject);
+        }
+    }
+
+    //3.thenable处理
+    if((x !== null) && ((typeof x === 'object') || (typeof x === 'function'))){
+        let called = false;//标准2.3.2与2.3.3保证最多只调用一次
+        try {
+            const then = x.then;//使用变量存储x.then的是因为x.then可能有副作用，这么做就可以保证只访问一次x.then，下面使用then.call也是一样的理由，我最后一次测试失败就是因为这里。。。
+            if(typeof then === 'function'){
+                then.call(x,y=>{
+                    if(called) return;
+                    called = true;
+                    return this.resolvePromise(y,nextP,resolve,reject);
+                },r=>{
+                    if(called) return;
+                    called = true;
+                    return reject(r);
+                })
+            }else{
+                return resolve(x)
+            }
+        }catch(e){
+            if(called) return;
+            called = true;
+            return reject(e);
+        }
+    }else{
+        resolve(x)
+    }
+};
 ```
-与完全使用`MyPromise`或原生`Promise`结果是一致的。
+`resolvePromise`实现了，接下来我们修改下`then`就大功告成了：
+```
+then = (onFulfilled, onRejected) => {
+    const {status} = this;
+    let nextP = null;
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v;
+    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err};
+
+    if(status==='fulfilled') {
+        return nextP = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                try {
+                    const x = onFulfilled(this.params);
+                    this.resolvePromise(x,nextP,resolve,reject);//+++
+                }catch (e) {
+                    reject(e);
+                }
+            },0)
+        })
+    }
+    if(status==='rejected') {
+        return nextP = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                try {
+                    const x = onRejected(this.params);
+                    this.resolvePromise(x,nextP,resolve,reject);//+++
+                }catch (e) {
+                    reject(e);
+                }
+            },0)
+        })
+    }
+    if(status==='pending') return nextP = new Promise((resolve,reject)=>{
+        this.resolveCB.push(()=>{
+            try {
+                const x = onFulfilled(this.params);
+                this.resolvePromise(x,nextP,resolve,reject);//+++
+            }catch (e) {
+                reject(e);
+            }
+        });
+        this.rejectCB.push(()=>{
+            try{
+                const x = onRejected(this.params);
+                this.resolvePromise(x,nextP,resolve,reject);//+++
+            }catch(e){
+                reject(e);
+            }
+        });
+    })
+};
+```
+### 实现V1.0-通过PromiseA+测试
+1. 首先安装官方测试脚本: `npm i -g promises-aplus-tests`
+2. 暴露Promise模块
+```
+//在需要测试的文件里暴露Promise模块
+module.exports = Promise
+Promise.defer = Promise.deferred = function(){
+  let dfd = {};
+  dfd.promise = new Promise((resolve,reject)=>{
+    dfd.resolve = resolve;
+    dfd.reject = reject;
+  });
+  return dfd;
+}
+```
+3. 执行测试：`promises-aplus-tests ./promise.js`【路径名和文件名以实际为主】
+> 注：完整实例太长，我放到文档最后了。
 
 ## 错误处理
 ### `try-catch`
@@ -603,7 +709,7 @@ p.then(function fulfilled(res) {
     console.error(err);//错误信息并没有被传到这里
 });
 ```
-发现了吗？在这里，回调执行抛出了一个错误，然而promise的错误处理函数并没有得到通知，根据之前我们`MyPromise`的实现思考这是为什么？
+发现了吗？在这里，回调执行抛出了一个错误，然而promise的错误处理函数并没有得到通知，根据之前我们`Promise`的实现思考这是为什么？
 
 这里的错误处理函数是为promise准备的，当状态从`pending`变为`rejected`之后，此错误信息会被传递给此函数执行。在这里，promise状态从`pending`变成了`fulfilled`之后，执行的是成功态的回调，而状态一旦改变就不会再改回，错误处理函数自然不会被执行。
 
@@ -622,13 +728,143 @@ p.then(function fulfilled(res) {
     console.error(err);//错误信息并没有被传到这里
 });
 ```
-
 不过这种方案也有缺陷，如果只是一两个`then`调用可能还好，如果有很多`then`被链式调用，那么难道我们要在每个`then`里面都进行这种错误捕捉吗？这也太让人难受了。
-
-# 关于Promise的检测
 
 # Promise解决信任问题
 
-# 参考文档
+# ylfPromise完整实例
+已通过PromiseA+测试
+```
+class Promise {
+    constructor(executor) {
+        this.status = 'pending';
+        this.params = null;
+        this.resolveCB = [];
+        this.rejectCB = [];
+        if (typeof executor === 'function') executor(this._resolve, this._reject);
+    }
+
+    _resolve = (res) => {
+        setTimeout(() => {
+            if (this.status === 'pending') {
+                this.status = 'fulfilled';
+                this.params = res;
+                this.resolveCB.forEach(cb => cb(res));
+            }
+        }, 0)
+    };
+
+    _reject = (err) => {
+        setTimeout(() => {
+            if (this.status === 'pending') {
+                this.status = 'rejected';
+                this.params = err;
+                this.rejectCB.forEach(cb => cb(err));
+            }
+        }, 0)
+    };
+    
+    resolvePromise = (x,nextP,resolve,reject)=>{
+        if(x===nextP){
+            return reject(new TypeError('循环引用'));
+        }
+
+        if(x instanceof Promise){
+            if(x.status==='pending'){
+                x.then(v=>{
+                    this.resolvePromise(v,nextP,resolve,reject);
+                },reject)
+            }else{
+                x.then(resolve,reject);
+            }
+        }
+
+        if((x !== null) && ((typeof x === 'object') || (typeof x === 'function'))){
+            let called = false;
+            try {
+                const then = x.then;
+                if(typeof then === 'function'){
+                    then.call(x,y=>{
+                        if(called) return;
+                        called = true;
+                        return this.resolvePromise(y,nextP,resolve,reject);
+                    },r=>{
+                        if(called) return;
+                        called = true;
+                        return reject(r);
+                    })
+                }else{
+                    return resolve(x)
+                }
+            }catch(e){
+                if(called) return;
+                called = true;
+                return reject(e);
+            }
+        }else{
+            resolve(x)
+        }
+    };
+
+    then = (onFulfilled, onRejected) => {
+        const {status} = this;
+        let nextP = null;
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v;
+        onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err};
+
+        if(status==='fulfilled') {
+            return nextP = new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    try {
+                        const x = onFulfilled(this.params);
+                        this.resolvePromise(x,nextP,resolve,reject);
+                    }catch (e) {
+                        reject(e);
+                    }
+                },0)
+            })
+        }
+        if(status==='rejected') {
+            return nextP = new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    try {
+                        const x = onRejected(this.params);
+                        this.resolvePromise(x,nextP,resolve,reject);
+                    }catch (e) {
+                        reject(e);
+                    }
+                },0)
+            })
+        }
+        if(status==='pending') return nextP = new Promise((resolve,reject)=>{
+            this.resolveCB.push(()=>{
+                try {
+                    const x = onFulfilled(this.params);
+                    this.resolvePromise(x,nextP,resolve,reject);
+                }catch (e) {
+                    reject(e);
+                }
+            });
+            this.rejectCB.push(()=>{
+                try{
+                    const x = onRejected(this.params);
+                    this.resolvePromise(x,nextP,resolve,reject);
+                }catch(e){
+                    reject(e);
+                }
+            });
+        })
+    };
+
+    static resolve = (value) => {
+        return new Promise(resolve => resolve(value));
+    };
+
+    static reject = (value) => {
+        return new Promise((resolve, reject) => reject(value));
+    }
+}
+```
+## 参考文档
 - [PromiseA+](https://promisesaplus.com/)
 - [PromiseA+译](https://juejin.im/post/5c4b0423e51d4525211c0fbc)
