@@ -31,17 +31,62 @@ class MyPromise {
             }
         }, 0)
     };
+    
+    resolvePromise = (x,nextP,resolve,reject)=>{
+        let called = false;
+
+        if(x===nextP){
+            return reject(new TypeError('promise对象循环引用'));
+        }
+
+        if(x instanceof Promise){
+            if(x.status==='pending'){
+                x.then(v=>{
+                    this.resolvePromise(v,nextP,resolve,reject);
+                },reject)
+            }else{
+                x.then(resolve,reject);
+            }
+        }
+
+        if((x !== null) && ((typeof x === 'object') || (typeof x === 'function'))){
+            try {
+                const then = x.then;
+                if(typeof then === 'function'){
+                    then.call(x,y=>{
+                        if(called) return;
+                        called = true;
+                        return this.resolvePromise(y,nextP,resolve,reject);
+                    },r=>{
+                        if(called) return;
+                        called = true;
+                        return reject(r);
+                    })
+                }else{
+                    return resolve(x)
+                }
+            }catch(e){
+                if(called) return;
+                called = true;
+                return reject(e);
+            }
+        }else{
+            resolve(x)
+        }
+    };
 
     then = (onFulfilled, onRejected) => {
         const {status} = this;
+        let nextP = null;
         onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v;
         onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err};
 
         if(status==='fulfilled') {
-            return new MyPromise((resolve,reject)=>{
+            return nextP = new MyPromise((resolve,reject)=>{
                 setTimeout(()=>{
                     try {
-                        MyPromise.resolve(onFulfilled(this.params))
+                        const x = onFulfilled(this.params);
+                        this.resolvePromise(x,nextP,resolve,reject);
                     }catch (e) {
                         reject(e);
                     }
@@ -49,27 +94,30 @@ class MyPromise {
             })
         }
         if(status==='rejected') {
-            return new MyPromise((resolve,reject)=>{
+            return nextP = new MyPromise((resolve,reject)=>{
                 setTimeout(()=>{
                     try {
-                        MyPromise.resolve(onRejected(this.params))
+                        const x = onRejected(this.params);
+                        this.resolvePromise(x,nextP,resolve,reject);
                     }catch (e) {
                         reject(e);
                     }
                 },0)
             })
         }
-        if(status==='pending') return new MyPromise((resolve,reject)=>{
+        if(status==='pending') return nextP = new MyPromise((resolve,reject)=>{
             this.resolveCB.push(()=>{
                 try {
-                    resolve(onFulfilled(this.params))
+                    const x = onFulfilled(this.params);
+                    this.resolvePromise(x,nextP,resolve,reject);
                 }catch (e) {
                     reject(e);
                 }
             });
             this.rejectCB.push(()=>{
                 try{
-                    reject(onRejected(this.params))
+                    const x = onRejected(this.params);
+                    this.resolvePromise(x,nextP,resolve,reject);
                 }catch(e){
                     reject(e);
                 }

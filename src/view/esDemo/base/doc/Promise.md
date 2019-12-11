@@ -483,7 +483,7 @@ promise.then((res) => {
 也就是说，我们只需要判断这个值是否是一个具有then方法的对象或函数，这种类型判断在术语中表示为鸭子类型，所谓鸭子类型就是：“如果它看起来像个鸭子，叫起来像个鸭子，那么它就是一只鸭子。”，这种判断在动态语言中还是很常见的，详细概念请见[鸭子类型_维基百科](https://zh.wikipedia.org/wiki/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
 
 ```
-isPromise(p){
+_isPromise(p){
     if (p===null) return false;
     if (typeof p !== 'object' && typeof p !== 'function') return false;
     return typeof p.then === 'function';
