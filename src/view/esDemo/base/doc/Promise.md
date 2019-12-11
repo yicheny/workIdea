@@ -222,8 +222,8 @@ class MyPromise {
     constructor(executor) {
         this.status = 'pending';
         this.params = null;//用于接收数据
-        this.resolveCB = [];//+++
-        this.rejectCB = [];//+++
+        this.resolveCB = [];
+        this.rejectCB = [];
         if (typeof executor === 'function') executor(this._resolve, this._reject);
     }
 
@@ -231,7 +231,7 @@ class MyPromise {
         if (this.status === 'pending') {
             this.status = 'fulfilled';
             this.params = res;
-            this.resolveCB.forEach(cb => cb(res));//+++
+            this.resolveCB.forEach(cb => cb(res));
         }
     };
 
@@ -239,7 +239,7 @@ class MyPromise {
         if (this.status === 'pending') {
             this.status = 'rejected';
             this.params = err;
-            this.rejectCB.forEach(cb => cb(err));//+++
+            this.rejectCB.forEach(cb => cb(err));
         }
     };
 
@@ -348,8 +348,8 @@ promise.then().then().then(res=>console.log(res));
 ```
 then = (onFulfilled, onRejected) => {
     const {status} = this;
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; //+++
-    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; //+++
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; 
+    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; 
 
     ...//其他代码不变
 };
@@ -367,14 +367,14 @@ p2.then(()=>console.log('p2-1')).then(()=>console.log('p2-2'));
 ```
 打印顺序是p1-1、p2-1、p1-2、p2-1，如果对顺序有疑惑，请先去了解JS的执行机制。
 
-因而我们需要对`_resolve`、`_reject`其内部代码异步调用，实现如下：
+因而我们需要对`_resolve`、`_reject`以及`then`部分代码异步调用，实现如下：
 ```
 _resolve = (res) => {
     setTimeout(() => {
         if (this.status === 'pending') {
             this.status = 'fulfilled';
             this.params = res;
-            this.resolveCB.forEach(cb => cb(res));//+++
+            this.resolveCB.forEach(cb => cb(res));
         }
     }, 0)
 };
@@ -384,36 +384,59 @@ _reject = (err) => {
         if (this.status === 'pending') {
             this.status = 'rejected';
             this.params = err;
-            this.rejectCB.forEach(cb => cb(err));//+++
+            this.rejectCB.forEach(cb => cb(err));
         }
     }, 0)
 };
-```
 
+then = (onFulfilled, onRejected) => {
+    const {status} = this;
+
+    if(status==='fulfilled') return new MyPromise((resolve)=>{
+        setTimeout(()=>{
+            resolve(onFulfilled(this.params))
+        },0)
+    });
+    if(status==='rejected') return new MyPromise((resolve,reject)=>{
+        setTimeout(()=>{
+            reject(onRejected(this.params))
+        },0)
+    });
+    if(status==='pending') return new MyPromise((resolve,reject)=>{
+        //注意：之所以这里没有修改，是因为这里注册的函数是在`_resolve`，`_reject`执行的，而那里已经被处理成异步了
+        this.resolveCB.push(()=>resolve(onFulfilled(this.params)));
+        this.rejectCB.push(()=>reject(onRejected(this.params)));
+    })
+};
+```
 
 ### 实现V0.7-捕捉错误
 ```
 then = (onFulfilled, onRejected) => {
     const {status} = this;
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; //+++
-    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; //+++
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; 
+    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; 
     
     if(status==='fulfilled') {
         return new MyPromise((resolve,reject)=>{
-            try {
-                MyPromise.resolve(onFulfilled(this.params))
-            }catch (e) {
-                reject(e);
-            }
+            setTimeout(()=>{
+                try {
+                    MyPromise.resolve(onFulfilled(this.params))
+                }catch (e) {
+                    reject(e);
+                }
+            },0)
         })
     }
     if(status==='rejected') {
         return new MyPromise((resolve,reject)=>{
-            try {
-                MyPromise.resolve(onRejected(this.params))
-            }catch (e) {
-                reject(e);
-            }
+            setTimeout(()=>{
+                try {
+                    MyPromise.resolve(onRejected(this.params))
+                }catch (e) {
+                    reject(e);
+                }
+            },0)
         })
     }
     if(status==='pending') return new MyPromise((resolve,reject)=>{
@@ -609,5 +632,3 @@ p.then(function fulfilled(res) {
 # 参考文档
 - [PromiseA+](https://promisesaplus.com/)
 - [PromiseA+译](https://juejin.im/post/5c4b0423e51d4525211c0fbc)
-
-

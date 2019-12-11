@@ -6,9 +6,9 @@ import React from 'react';
 class MyPromise {
     constructor(executor) {
         this.status = 'pending';
-        this.params = null;//用于接收数据
-        this.resolveCB = [];//+++
-        this.rejectCB = [];//+++
+        this.params = null;
+        this.resolveCB = [];
+        this.rejectCB = [];
         if (typeof executor === 'function') executor(this._resolve, this._reject);
     }
 
@@ -17,7 +17,7 @@ class MyPromise {
             if (this.status === 'pending') {
                 this.status = 'fulfilled';
                 this.params = res;
-                this.resolveCB.forEach(cb => cb(res));//+++
+                this.resolveCB.forEach(cb => cb(res));
             }
         }, 0)
     };
@@ -27,32 +27,36 @@ class MyPromise {
             if (this.status === 'pending') {
                 this.status = 'rejected';
                 this.params = err;
-                this.rejectCB.forEach(cb => cb(err));//+++
+                this.rejectCB.forEach(cb => cb(err));
             }
         }, 0)
     };
 
     then = (onFulfilled, onRejected) => {
         const {status} = this;
-        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; //+++
-        onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; //+++
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v;
+        onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err};
 
         if(status==='fulfilled') {
             return new MyPromise((resolve,reject)=>{
-                try {
-                    MyPromise.resolve(onFulfilled(this.params))
-                }catch (e) {
-                    reject(e);
-                }
+                setTimeout(()=>{
+                    try {
+                        MyPromise.resolve(onFulfilled(this.params))
+                    }catch (e) {
+                        reject(e);
+                    }
+                },0)
             })
         }
         if(status==='rejected') {
             return new MyPromise((resolve,reject)=>{
-                try {
-                    MyPromise.resolve(onRejected(this.params))
-                }catch (e) {
-                    reject(e);
-                }
+                setTimeout(()=>{
+                    try {
+                        MyPromise.resolve(onRejected(this.params))
+                    }catch (e) {
+                        reject(e);
+                    }
+                },0)
             })
         }
         if(status==='pending') return new MyPromise((resolve,reject)=>{
