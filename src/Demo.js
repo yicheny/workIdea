@@ -4,94 +4,89 @@ import React from 'react';
 // import axios from 'axios';
 
 class MyPromise {
-    constructor(callback) {
+    constructor(executor) {
         this.status = 'pending';
         this.params = null;//用于接收数据
-        if (typeof callback === 'function') callback(this._resolve, this._reject);
+        this.resolveCB = [];//+++
+        this.rejectCB = [];//+++
+        if (typeof executor === 'function') executor(this._resolve, this._reject);
     }
 
     _resolve = (res) => {
-        if (this.status === 'pending') {
-            this.status = 'fulfilled';
-            this.params = res;
-        }
+        setTimeout(() => {
+            if (this.status === 'pending') {
+                this.status = 'fulfilled';
+                this.params = res;
+                this.resolveCB.forEach(cb => cb(res));//+++
+            }
+        }, 0)
     };
 
     _reject = (err) => {
-        if (this.status === 'pending') {
-            this.status = 'rejected';
-            this.params = err;
-        }
-    };
-
-    then = (resolve, reject) => {
-        const {status, params} = this;
-        let value = null;
-        resolve = typeof resolve === 'function' ? resolve : v => v;
-        reject = typeof reject === 'function' ? reject : err => {throw err};
-
-        if (status === 'fulfilled') {
-            try {
-                value = resolve(params);
-                if (MyPromise._isPromise(value)) return value;
-                return MyPromise.resolve(value);
-            } catch (e) {
-                return MyPromise.reject(e)
-            }
-        }
-        if (status === 'rejected') {
-            try {
-                value = reject(params);
-                if (MyPromise._isPromise(value)) return value;
-                return MyPromise.resolve(value);
-            } catch (e) {
-                return MyPromise.reject(e)
-            }
-        }
-
         setTimeout(() => {
-            return this.then(resolve, reject)
-        }, 0);
-
-        return this;
+            if (this.status === 'pending') {
+                this.status = 'rejected';
+                this.params = err;
+                this.rejectCB.forEach(cb => cb(err));//+++
+            }
+        }, 0)
     };
 
-    catch = (reject) => {
-        return this.then(null, reject);
+    then = (onFulfilled, onRejected) => {
+        const {status} = this;
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; //+++
+        onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; //+++
+
+        if(status==='fulfilled') {
+            return new MyPromise((resolve,reject)=>{
+                try {
+                    MyPromise.resolve(onFulfilled(this.params))
+                }catch (e) {
+                    reject(e);
+                }
+            })
+        }
+        if(status==='rejected') {
+            return new MyPromise((resolve,reject)=>{
+                try {
+                    MyPromise.resolve(onRejected(this.params))
+                }catch (e) {
+                    reject(e);
+                }
+            })
+        }
+        if(status==='pending') return new MyPromise((resolve,reject)=>{
+            this.resolveCB.push(()=>{
+                try {
+                    resolve(onFulfilled(this.params))
+                }catch (e) {
+                    reject(e);
+                }
+            });
+            this.rejectCB.push(()=>{
+                try{
+                    reject(onRejected(this.params))
+                }catch(e){
+                    reject(e);
+                }
+            });
+        })
     };
 
     static resolve = (value) => {
-        return new MyPromise(onFulFilled => onFulFilled(value));
+        return new MyPromise(resolve => resolve(value));
     };
 
     static reject = (value) => {
-        return new MyPromise((onFulFilled, onRjected) => onRjected(value));
-    };
-
-    static _isPromise(p) {
-        if (p === null) return false;
-        if (typeof p !== 'object' && typeof p !== 'function') return false;
-        return typeof p.then === 'function';
+        return new MyPromise((resolve, reject) => reject(value));
     }
 }
 
 function Demo(props) {
-    let promise = new MyPromise((resolve, reject) => {
-        resolve('hello')
-    })
-    promise.then((data) => {
-        console.log(data);
-        return new MyPromise((resolve, reject) => {
-            resolve('👋')
-        })
-    }, (err) => {
-        console.log(err)
-    }).then((data) => {
-        console.log(data)
-    }, (err) => {
-        console.log('🙅' + err)
-    })
-
+    const p1 = new MyPromise(resolve=>resolve());
+    const p2 = new MyPromise(resolve=>resolve());
+    p1.then(()=>console.log('p1-1')).then(()=>console.log('p1-2'));
+    p2.then(()=>console.log('p2-1')).then(()=>console.log('p2-2'));
     return <div>
 
     </div>;

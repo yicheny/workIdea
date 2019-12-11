@@ -22,9 +22,9 @@ promise是ES6提出的新的异步解决方案，在此之前异步的解决方�
 ## 回调示例
 这是一个回调处理异步的示例：
 ```
-function getX(callback) {
+function getX(executor) {
     setTimeout(()=>{
-        callback('X');
+        executor('X');
     },100)
 }
 
@@ -64,9 +64,9 @@ getH(x=>console.log(x));//异步
 ## promise示例
 现在，让我们使用promise改写这个这段代码：
 ```
-function getX(callback) {
+function getX(executor) {
     setTimeout(()=>{
-        callback('X');
+        executor('X');
     },100)
 }
 
@@ -94,10 +94,10 @@ console.log('B');
 ## 测试代码
 有需要的话可以自行使用以下代码进行测试，尝试实现一些异步的场景需求，看看回调和promise的处理有什么不同：
 ```
-function print(str,callback) {
+function print(str,executor) {
     const delay = Math.round(Math.random()*500);
     setTimeout(()=>{
-        callback([str,delay]);
+        executor([str,delay]);
     },delay)
 }
 
@@ -141,15 +141,15 @@ promise.catch(err=>console.log('失败',err));//异步失败结束则在这里�
 - `Promise`实例对象有三种状态`pending`、`fulfilled`、`rejected`，初始状态为`pending`，一旦更改为`fulfilled`或`reject`就不能再修改
 - `then`方法接受两个回调，第一个回调在`fulfilled`状态时执行，第二个状态在`rejected`状态执行，只有有一个被执行，且只会执行一次。
 
-### Promise实现V1
+### 实现V0.1-监听
 现在我们仅实现一个只能以`new Promise()`方式调用且只有一个`then`方法的`Promise`构造函数：
 ```
 //自定义Promise
 class MyPromise {
-    constructor(callback) {
+    constructor(executor) {
         this.status = 'pending';
         this.params = null;//用于接收数据
-        if(typeof callback === 'function') callback(this._resolve, this._reject);
+        if(typeof executor === 'function') executor(this._resolve, this._reject);
     }
 
     _resolve = (res) => {
@@ -179,10 +179,10 @@ class MyPromise {
 }
 
 //测试部分
-function getData(callback) {
+function getData(executor) {
     const delay = _.random(0,100);
     setTimeout(()=>{
-        return callback(delay)
+        return executor(delay)
     },delay);
 }
 
@@ -202,6 +202,7 @@ promise.then((res)=>{
 console.log('B');
 ```
 理解这段代码的关键在于，`getData`内部的回调执行时，此时异步请求结束，我们根据条件更改状态并执行`then`里面的回调。
+> 注意这里，`getData`内部的回调可能是同步的也可能是异步的，这里是可以处理这两种情况的，因为这里监听的关键是回调被执行才会触发状态改变，无论同步还是异步逻辑都是相同的，回调执行会触发状态改变，并且只会改变一次。
 
 在promise之前的回调控制流是这样的：异步结束，执行传进的回调。
 
@@ -213,13 +214,66 @@ promise控制流逻辑是：异步结束，promise实例对象的状态改为完
 
 ok，进行到这里，如果可以实现一个简陋的基础Promise，那么应该对于promise应该有一个相对清晰的了解了，promise最主要是解决了回调函数的信任问题，它重新拿回了控制权，实现的关键在于监听，监听的实现原理是对回调的再反转。
 
+不过现在监听的机制不是很好，我们实现了一个查询的虚拟进程，不间断的进行查询，直到状态改变执行相应的回调，如果期间出现其他任务则优先其他任务。这种不间断的查询会对性能造成的消耗较大，并且对后续的链式调用实现并不友好，现在让我们改进这个监听机制
+
+### 实现V0.2-监听改进
+```
+class MyPromise {
+    constructor(executor) {
+        this.status = 'pending';
+        this.params = null;//用于接收数据
+        this.resolveCB = [];//+++
+        this.rejectCB = [];//+++
+        if (typeof executor === 'function') executor(this._resolve, this._reject);
+    }
+
+    _resolve = (res) => {
+        if (this.status === 'pending') {
+            this.status = 'fulfilled';
+            this.params = res;
+            this.resolveCB.forEach(cb => cb(res));//+++
+        }
+    };
+
+    _reject = (err) => {
+        if (this.status === 'pending') {
+            this.status = 'rejected';
+            this.params = err;
+            this.rejectCB.forEach(cb => cb(err));//+++
+        }
+    };
+
+    //then修改--关键
+    then = (onFulfilled,onRejected)=>{
+        const {status} = this;
+        if (status === 'fulfilled') return onFulfilled(this.params);//同步走这里，直接执行回调
+        if (status === 'rejected') return onRejected(this.params);//同步走这里，直接执行回调
+        if (status === 'pending') { //异步走这里
+            this.resolveCB.push(onFulfilled);
+            this.rejectCB.push(onRejected);
+        }
+    }
+}
+```
 目前的`Promise`还很不完整，比如说它没有再返回一个promise对象，也没有提供一些API。接下来，我们就一步步介绍promise的链式调用，以及promise提供的API
+
+### 实现V0.3-添加API
+为了接下来的方便，我们定义`MyPromise`的两个静态方法`resolve`,`reject`
+```
+static resolve = (value)=>{
+    return new MyPromise(resolve=>resolve(value));
+};
+
+static reject = (value)=>{
+    return new MyPromise((resolve,reject)=>reject(value));
+}
+```
 
 ## 链式调用
 ```
-const promise = new Promise(resolve=>resolve('结果1'));
+const p = new Promise(resolve=>resolve('结果1'));
 
-promise.then(res=>{
+p.then(res=>{
     console.log(res);
     return '结果2';
 }).then(res=>{
@@ -241,42 +295,26 @@ promise.then(res=>{
 
 第一个问题：`then`被执行前返回的是一个`pending`状态的promise实例对象
 
-第二个问题：在当前`then`执行结束之前，我们一直在监听当前`promise`的状态，监听当前promise状态修改完成后，不再返回当前`promise`，返回一个新创建的`promise`对象。
+第二个问题：关键在于`then` 返回的`promise`监听的是这个`then`执行的回调。执行`then`的回调，返回的`promise`会监听并修改状态，然后将相应的回调放到事件队列等待执行，因而`then`链的执行顺序是有序的。
+> 之所以使用事件队列而不是任务队列，是因为`task queue`这个概念是ES6之后出现的，对于BOM【浏览器对象模型】开发者来说常用的微任务就是promise实例的这些api了，如果是NodeJS开发者的话`process.nextTick`也是微任务，任务队列放的就是微任务，微任务在同步代码之后，异步代码【定时器、事件这些】之前执行。另外，PromiseA+并没有规定一定要使用微任务实现Promise。
 
-针对之前的`MyPromise`类，只需要稍微修改`then`方法，针对三种状态返回不同的`promise`对象即可，具体实现如下。
+针对之前的`MyPromise`类，只需要稍微修改`then`方法，返回一个新的Promise对象即可。
 
-### Promise实现V1.1
+### 实现V0.4-链式初步
 ```
-then = (resolve,reject) => {
-    const {status,params} = this;
+then = (onFulfilled, onRejected) => {
+    const {status} = this;
 
-    if(status==='fulfilled'){
-        return new MyPromise(onFulFilled=>onFulFilled(resolve(params)));
-    }
-    if(status==='rejected'){
-        return new MyPromise((onFulFilled,onRjected)=>onRjected(reject(params)));
-    }
-
-    setTimeout(()=>{
-        return this.then(resolve,reject)
-    },0);
-
-    return this;
-}
-```
-之所以命名为1.1版本，是因为现在的`then`方法缺陷很大，不过`then`方法作为promise实现的核心，复杂一些也情有可原，现在我们针对`then`的缺陷一点点的修复。
-
-### Promise实现V1.2
-为了接下来的方便，我们定义`MyPromise`的两个静态方法`resolve`,`reject`
-```
-static resolve = (value)=>{
-    return new MyPromise(onFulFilled=>onFulFilled(value));
+    if(status==='fulfilled') return MyPromise.resolve(onFulfilled(this.params));
+    if(status==='rejected') return MyPromise.reject(onRejected(this.params));
+    if(status==='pending') return new MyPromise((resolve,reject)=>{
+        this.resolveCB.push(()=>resolve(onFulfilled(this.params)));
+        this.rejectCB.push(()=>reject(onRejected(this.params)));
+    })
 };
-
-static reject = (value)=>{
-    return new MyPromise((onFulFilled,onRjected)=>onRjected(value));
-}
 ```
+现在的`then`方法还存在许多缺陷，不过`then`方法作为promise实现的核心，复杂一些也情有可原，现在我们针对`then`的缺陷一点点的修复。
+
 好，现在让我们继续修复`then`的缺陷。
 
 首先让我们看一段代码：
@@ -301,34 +339,99 @@ promise.then(res=>{
 
 答案是每一个`then`都属于不同的promise对象，除去第一个promise是监控是我们指定的内容，`then`所返回的promise对象所监听的内容是它执行的回调本身，一旦出错则执行promise的`rejected`回调，实现如下：
 
-### Promise实现V1.3
+### 实现V0.5-值的穿透
 ```
-then = (resolve,reject) => {
-    const {status,params} = this;
-    let value = null;
+const promise = new MyPromise(resolve=>resolve('结果1'));
+promise.then().then().then(res=>console.log(res));
+```
+这里发生了值的穿透，原理很简单，如果接收到值【`resolve`或`reject`】不是一个函数，根据情况进行相应的处理，实现如下：
+```
+then = (onFulfilled, onRejected) => {
+    const {status} = this;
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; //+++
+    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; //+++
 
-    if(status==='fulfilled'){
-        try {
-            value = resolve(params);
-            return MyPromise.resolve(value);
-        }catch (e) {
-            return  MyPromise.reject(e)
+    ...//其他代码不变
+};
+```
+
+### 实现V0.6-全异步调用
+promise有一个重要的思想，即无论是同步代码，还是异步代码，都以异步执行，这点很重要，在利用回调时代，就提倡这种做法【无论同步异步都以异步执行】，回调是可以同步执行的，也可以异步执行的，当我们将回调传给第三方函数【或自己编写的高阶函数】时，我们就失去了控制权，想要得知回调的具体执行就必须关注第三方函数的细节，这不是我们所希望的，全异步执行更有利于我们对于执行顺序的判断。
+
+promise正是这么做的，见：
+```
+const p1 = new MyPromise(resolve=>resolve());
+const p2 = new MyPromise(resolve=>resolve());
+p1.then(()=>console.log('p1-1')).then(()=>console.log('p1-2'));
+p2.then(()=>console.log('p2-1')).then(()=>console.log('p2-2'));
+```
+打印顺序是p1-1、p2-1、p1-2、p2-1，如果对顺序有疑惑，请先去了解JS的执行机制。
+
+因而我们需要对`_resolve`、`_reject`其内部代码异步调用，实现如下：
+```
+_resolve = (res) => {
+    setTimeout(() => {
+        if (this.status === 'pending') {
+            this.status = 'fulfilled';
+            this.params = res;
+            this.resolveCB.forEach(cb => cb(res));//+++
         }
-    }
-    if(status==='rejected'){
-        try{
-            value = reject(params);
-            return  MyPromise.resolve(value);
-        }catch (e) {
-            return MyPromise.reject(e)
+    }, 0)
+};
+
+_reject = (err) => {
+    setTimeout(() => {
+        if (this.status === 'pending') {
+            this.status = 'rejected';
+            this.params = err;
+            this.rejectCB.forEach(cb => cb(err));//+++
         }
-    }
+    }, 0)
+};
+```
+
+
+### 实现V0.7-捕捉错误
+```
+then = (onFulfilled, onRejected) => {
+    const {status} = this;
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v=>v; //+++
+    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw err}; //+++
     
-    setTimeout(()=>{
-        return this.then(resolve,reject)
-    },0);
-
-    return this;
+    if(status==='fulfilled') {
+        return new MyPromise((resolve,reject)=>{
+            try {
+                MyPromise.resolve(onFulfilled(this.params))
+            }catch (e) {
+                reject(e);
+            }
+        })
+    }
+    if(status==='rejected') {
+        return new MyPromise((resolve,reject)=>{
+            try {
+                MyPromise.resolve(onRejected(this.params))
+            }catch (e) {
+                reject(e);
+            }
+        })
+    }
+    if(status==='pending') return new MyPromise((resolve,reject)=>{
+        this.resolveCB.push(()=>{
+            try {
+                resolve(onFulfilled(this.params))
+            }catch (e) {
+                reject(e);
+            }
+        });
+        this.rejectCB.push(()=>{
+            try{
+                reject(onRejected(this.params))
+            }catch(e){
+                reject(e);
+            }
+        });
+    })
 };
 ```
 ok，现在每一个`then`方法的执行都被其创建的promise所监听，代码测试结果与原生promise一致了。
@@ -349,7 +452,7 @@ promise.then((res) => {
 ```
 执行这个示例，我们发现下一次`then`执行的结果其实就是直接返回的这个promise对象的`then`的结果，因此，如果`then`返回的是一个promise对象，则不需要创建新的promise对象，返回这个直接返回的promise对象即可。
 
-### Promise实现V1.4-Promise判断
+### 实现V0.8-Promise判断
 好的，现在有一个重要的问题值得我们去解决，那就是如何去判断promise对象，使用`p instanceof Promise`来判断？很可惜，这样是不行的，不要这么做。原因在于一般而言我们所说的Promise是由ECMAScript所定义的原生Promise，然而不仅仅只有原生的Promise，也有很多第三方库或框架自定义的Promise，包括我们现在实现的这个`MyPromise`，难道这些Promise就不是Promise了吗？所以不能狭隘的使用`p instanceof Promise`进行判断。
 
 让我们看一下PromiseA+规范是怎么说的：1.1 “promise” is an object or function with a then method whose behavior conforms to this specification【“promise”是一个具有then方法的对象或函数，其行为符合这个规范】
@@ -357,7 +460,7 @@ promise.then((res) => {
 也就是说，我们只需要判断这个值是否是一个具有then方法的对象或函数，这种类型判断在术语中表示为鸭子类型，所谓鸭子类型就是：“如果它看起来像个鸭子，叫起来像个鸭子，那么它就是一只鸭子。”，这种判断在动态语言中还是很常见的，详细概念请见[鸭子类型_维基百科](https://zh.wikipedia.org/wiki/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B)
 
 ```
-_isPromise(p){
+isPromise(p){
     if (p===null) return false;
     if (typeof p !== 'object' && typeof p !== 'function') return false;
     return typeof p.then === 'function';
@@ -377,37 +480,9 @@ promise是ES6提出来的，在过去的十几年间存在许许多多的库，�
 
 让我们将这个`_isPromise`加入`MyPromise`，继续实现`then`的链式调用
 
-### Promise实现V1.5
+### 实现V0.9-处理直接返回Promise
 ```
-then = (resolve,reject) => {
-    const {status,params} = this;
-    let value = null;
 
-    if(status==='fulfilled'){
-        try {
-            value = resolve(params);
-            if(MyPromise._isPromise(value)) return value;//+++
-            return MyPromise.resolve(value);
-        }catch (e) {
-            return  MyPromise.reject(e)
-        }
-    }
-    if(status==='rejected'){
-        try{
-            value = reject(params);
-            if(MyPromise._isPromise(value)) return value;//+++
-            return  MyPromise.resolve(value);
-        }catch (e) {
-            return MyPromise.reject(e)
-        }
-    }
-
-    setTimeout(()=>{
-        return this.then(resolve,reject)
-    },0);
-
-    return this;
-};
 ```
 现在就可以处理`then`返回值是promise对象的情况了，而且因为我们是用鸭子类型判断，所以可以无缝连接其他符合PromiseA+标准的promise对象，可以这样测试：
 ```
@@ -424,23 +499,6 @@ promise.then((res) => {
 });
 ```
 与完全使用`MyPromise`或原生`Promise`结果是一致的。
-
-### Promise实现1.6-值的穿透
-```
-const promise = new MyPromise(resolve=>resolve('结果1'));
-promise.then().then().then(res=>console.log(res));
-```
-这里发生了值的穿透，原理很简单，如果接收到值【`resolve`或`reject`】不是一个函数，根据情况进行相应的处理，实现如下：
-```
-then = (resolve,reject) => {
-    const {status,params} = this;
-    let value = null;
-    resolve = typeof resolve === 'function' ? resolve : v=>v; //+++
-    reject = typeof reject === 'function' ? reject : err => {throw err}; //+++
-
-    ...//其他代码不变
-};
-```
 
 ## 错误处理
 ### `try-catch`
@@ -543,7 +601,6 @@ p.then(function fulfilled(res) {
 ```
 
 不过这种方案也有缺陷，如果只是一两个`then`调用可能还好，如果有很多`then`被链式调用，那么难道我们要在每个`then`里面都进行这种错误捕捉吗？这也太让人难受了。
-
 
 # 关于Promise的检测
 
