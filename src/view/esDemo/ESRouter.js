@@ -10,6 +10,8 @@ import PromisePath from './base/doc/Promise.md';
 import ExecMechPath from './base/doc/执行机制.md';
 import CallbackPath from './base/doc/回调.md';
 
+import PromiseDemo from "./base/demo/PromiseDemo";
+
 function ESRouter() {
     return <div>
         <Switch>
@@ -19,6 +21,8 @@ function ESRouter() {
             <Route path='/es/execMech' component={Md(ExecMechPath)}/>}/>
             <Route path='/es/callback' component={Md(CallbackPath)}/>}/>
             <Route path='/es/promise' component={Md(PromisePath)}/>}/>
+
+            <Route path='/es/demo/promise' component={PromiseDemo}/>
 
             <Route component={ESHome}/>
         </Switch>
