@@ -834,7 +834,7 @@ Promise.all([p1,p2,p3]).then(res=>{
 ```
 
 关于Promise.all有两点需要注意：
-1. 不要传空数组【如果是空的，主Promise会立即完成】
+1. 不要传空数组【如果是空的，主Promise会立即完成，返回值为[]】
 2. 永远在最后关联一个`catch`捕捉错误
 
 现在我们来思考一下怎么实现这个Promise.all API。
@@ -853,9 +853,7 @@ static all = (list)=> {
             el.then(res=>{
                 evts[i]=res;
                 if(evts.length===list.length && !evts.includes(undefined) return resolve(evts);//注意，这样会导致undefined透传
-            },err=>{
-                reject(err);
-            });
+            },reject);
         });
     })
 }
@@ -873,6 +871,51 @@ if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
 ```
 
 #### 实现1.3-race
+并发情况下，只希望获取第一个返回的任务结果，这种模式在传统上被称作latch-门闩，不过在JS被称作race-竞态。
+
+Promise.race，接受一个数组，数组项为promise实例，一旦有任何一个promise完成，主promise就会立刻完成，一旦有任何一个promise拒绝，主promise就会立刻拒绝。
+```
+//测试代码
+function getData(callback,delay) {
+    delay = delay || Math.round(Math.random()*100);
+    setTimeout(()=>{
+        callback(delay);
+    },delay)
+}
+
+const p1 = new Promise(resolve => getData(resolve,100));
+const p2 = new Promise((resolve,reject) => getData((d)=>{
+    if(d>50) return resolve(d);
+    return reject(d)
+}));
+const p3 = new Promise(resolve => getData(resolve,300));
+
+Promise.race([p1,p2,p3]).then(res=>{
+    console.log(res);
+}).catch(err=>{
+    console.error(err);
+});
+```
+
+关于Promise.race同样有两点需要注意：
+1. 不要传空数组【如果是空的，主Promise会永远处于`pending`状态，理论上我们希望它完成或拒绝，或者抛出个错误也好，出现这种状况时因为Promise这一模式的出现先于ES6 Promise，因而保留了这个缺陷或问题】
+2. 永远在最后关联一个`catch`捕捉错误
+
+现在我们关注下如何实现 Promise.race API
+
+### 实现1.3-race
+```
+static race = (list)=> {
+    return new Promise((resolve,reject)=>{
+        list.forEach((el)=>{
+            el.then(resolve,reject);
+        });
+    })
+}
+```
+测试用例，通过
+
+ok，进行到这里Promise的核心功能和主要的几个API我们都了解的差不多了，剩下的两个API-`Promise.allSettled`、`Promise.prototype.finally`感兴趣的可以实现下，不是很难。
 
 # Promise API总结
 
@@ -1024,9 +1067,15 @@ class Promise {
                 el.then(res=>{
                     evts[i]=res;
                     if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
-                },err=>{
-                    reject(err);
-                });
+                },reject);
+            });
+        })
+    }
+    
+    static race = (list)=> {
+        return new Promise((resolve,reject)=>{
+            list.forEach((el)=>{
+                el.then(resolve,reject);
             });
         })
     }

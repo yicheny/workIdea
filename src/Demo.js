@@ -144,31 +144,36 @@ class Promise {
                 el.then(res=>{
                     evts[i]=res;
                     if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
-                },err=>{
-                    reject(err);
-                });
+                },reject);
+            });
+        })
+    };
+
+    static race = (list)=> {
+        return new Promise((resolve,reject)=>{
+            list.forEach((el)=>{
+                el.then(resolve,reject);
             });
         })
     }
 }
 
 function Demo(props) {
-    function getData(callback) {
-        const delay = Math.round(Math.random()*100);
+    function getData(callback,delay) {
+        delay = delay || Math.round(Math.random()*100);
         setTimeout(()=>{
             callback(delay);
         },delay)
     }
 
-    const p1 = new Promise((resolve,reject) => getData((d)=>{
+    const p1 = new Promise(resolve => getData(resolve,100));
+    const p2 = new Promise((resolve,reject) => getData((d)=>{
         if(d>50) return resolve(d);
-        return reject(d);
+        return reject(d)
     }));
-    const p2 = new Promise(resolve => getData(resolve));
-    const p3 = new Promise(resolve => getData(resolve));
-    const p4 = Promise.resolve(undefined);
+    const p3 = new Promise(resolve => getData(resolve,300));
 
-    Promise.all([p1,p2,p3,p4]).then(res=>{
+    Promise.race([p1,p2,p3]).then(res=>{
         console.log(res);
     }).catch(err=>{
         console.error(err);
