@@ -870,7 +870,7 @@ static all = (list)=> {
 if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
 ```
 
-#### 实现1.3-race
+#### Promise.race
 并发情况下，只希望获取第一个返回的任务结果，这种模式在传统上被称作latch-门闩，不过在JS被称作race-竞态。
 
 Promise.race，接受一个数组，数组项为promise实例，一旦有任何一个promise完成，主promise就会立刻完成，一旦有任何一个promise拒绝，主promise就会立刻拒绝。
@@ -903,7 +903,7 @@ Promise.race([p1,p2,p3]).then(res=>{
 
 现在我们关注下如何实现 Promise.race API
 
-### 实现1.3-race
+#### 实现1.3-race
 ```
 static race = (list)=> {
     return new Promise((resolve,reject)=>{
@@ -918,9 +918,21 @@ static race = (list)=> {
 ok，进行到这里Promise的核心功能和主要的几个API我们都了解的差不多了，剩下的两个API-`Promise.allSettled`、`Promise.prototype.finally`感兴趣的可以实现下，不是很难。
 
 # Promise API总结
+...不想总结了，前面都有
 
 # Promise解决信任问题
 ...待补充
+
+# Promise局限性
+## 1.错误处理
+正如之前所说的，promise默认会吞掉捕获的错误，即便我们在最后捕获了错误，有时也很难判断错误是在链中的哪一点捕获到的。
+
+## 2.单一值
+我们知道目前Promise无论是`onFulfilled`还是`onRejected`都是通过单个参数传递的，如果想要传多个值，就需要包装到一个数组或对象中，在链式调用中重复包装和解构可能会成为一件麻烦的事情。
+
+我们可以借助ES6的解构语法使其更简洁一些，然而其单值传递导致的多余包装问题依旧是存在的。
+
+其他，...待补充
 
 # ylfPromise完整实例
 已通过PromiseA+测试，并附加原生Promise的API
