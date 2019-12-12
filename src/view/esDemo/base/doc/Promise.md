@@ -799,10 +799,88 @@ const p1 = Promise.reject('1').defer();//默认吞没所有错误
 
 这种方案如果成为ES6标准由原生实现会更好，此方案本身是很强大的，效果也最好，然而目前来说会改变Promise的默认行为，在团队合作中如果有新人或与其他团队合作，可能会使其对代码理解产生错误。即便改为默认吞没，选择抛出也会有增加学习成本的问题【如果是这样，那么和done方案的问题就一样了】
 
+### 并发处理
+之前在JS执行机制里详细介绍过，并发就是两个或多个进行同时运行的情况，并发有三种情况：非交互、交互、协作。
+
+非交互的不需要特殊处理，有交互可以通过链式调用规范顺序，协作可以利用Promise.all、Promise.race协调，下面介绍下这两个API
+
+在promise链式调用中，任意时刻只会有异步任务在进行，如果我们需要多个任务并发执行，可以使用Promise.all。
+
+在编程术语中，gate【门】是一种机制，当所有并发任务完成时再继续，不关注完成顺序，只关注是否全部完成。
+
+Promise.all接收一个数组，数组项是promise实例对象，我们将Promise.all创建的promise对象称为主promise，在所有promise都完成时主promise才会将状态改为完成，任意一个promise被拒绝，主promise状态直接改为拒绝。
+
+```
+//测试代码
+function getData(callback) {
+    const delay = Math.round(Math.random()*100);
+    setTimeout(()=>{
+        callback(delay);
+    },delay)
+}
+
+const p1 = new Promise((resolve,reject) => getData((d)=>{
+    if(d>50) return resolve(d);
+    return reject(d);
+}));
+const p2 = new Promise(resolve => getData(resolve));
+const p3 = new Promise(resolve => getData(resolve));
+
+Promise.all([p1,p2,p3]).then(res=>{
+    console.log(res);
+}).catch(err=>{
+    console.error(err);
+});
+```
+
+关于Promise.all有两点需要注意：
+1. 不要传空数组【如果是空的，主Promise会立即完成】
+2. 永远在最后关联一个`catch`捕捉错误
+
+现在我们来思考一下怎么实现这个Promise.all API。
+
+#### 实现1.2-all
+- 我们需要一个数组`evts`维护返回值
+- 每次promise承诺完成【会执行`then`方法回调`onFulfilled`】将返回的结果存到`evts`
+- 存完值之后做一个判断，首先判断`evts`项数是否与传入的promise数相同，为防止`evts[8]==='结果'; evts.length===9;//true`这种情况出现，需要再判断`evts`是否包含`undefined`，这种方案会导致`undefined`不能透传【更好的解决方案会在之后实现，现在不实现是希望注意到如何区分undefined与数组空插槽】
+- 有任意一个promise的`onRejected`执行，则主promise立刻拒绝
+```
+static all = (list)=> {
+    return new Promise((resolve,reject)=>{
+        const evts = [];
+        if(evts.length===list.length) return resolve(evts);
+        list.forEach((el,i)=>{
+            el.then(res=>{
+                evts[i]=res;
+                if(evts.length===list.length && !evts.includes(undefined) return resolve(evts);//注意，这样会导致undefined透传
+            },err=>{
+                reject(err);
+            });
+        });
+    })
+}
+```
+测试刚刚的用例，通过。
+
+不过现在all不能让undefined传过来，修复这个问题：
+
+#### 实现1.2.1-区分空插槽与undefined
+使用in运算符检查数组是否有密钥。对于空插槽，它将返回false，但对于具有值（包括值undefined）的插槽，它将返回true
+> [参考资料](http://www.ojit.com/article/932857)
+```
+//将原来的判断改为下面这样即可
+if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
+```
+
+#### 实现1.3-race
+
+# Promise API总结
+
 # Promise解决信任问题
+...待补充
 
 # ylfPromise完整实例
-已通过PromiseA+测试
+已通过PromiseA+测试，并附加原生Promise的API
 ```
 class Promise {
     constructor(executor) {
@@ -925,12 +1003,32 @@ class Promise {
         })
     };
 
+    //以下部分不属于PromiseA+规范
+    catch = (onRejected)=>{
+        return this.then(null,onRejected);
+    };
+        
     static resolve = (value) => {
         return new Promise(resolve => resolve(value));
     };
 
     static reject = (value) => {
         return new Promise((resolve, reject) => reject(value));
+    }
+    
+    static all = (list)=> {
+        return new Promise((resolve,reject)=>{
+            const evts = [];
+            if(evts.length===list.length) return resolve(evts);
+            list.forEach((el,i)=>{
+                el.then(res=>{
+                    evts[i]=res;
+                    if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
+                },err=>{
+                    reject(err);
+                });
+            });
+        })
     }
 }
 ```

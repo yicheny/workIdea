@@ -134,19 +134,46 @@ class Promise {
 
     static reject = (value) => {
         return new Promise((resolve, reject) => reject(value));
+    };
+
+    static all = (list)=> {
+        return new Promise((resolve,reject)=>{
+            const evts = [];
+            if(evts.length===list.length) return resolve(evts);
+            list.forEach((el,i)=>{
+                el.then(res=>{
+                    evts[i]=res;
+                    if(evts.filter((_,i)=>i in evts).length===list.length) return resolve(evts);
+                },err=>{
+                    reject(err);
+                });
+            });
+        })
     }
 }
 
 function Demo(props) {
-    const p = new Promise(resolve => resolve(42));
-    p.then(function fulfilled(res) {
-        res();//数字42这么调用会报错
-    }).catch((err)=>{
-        console.error('成功捕捉',err);//在这里我们捕捉到了前一个then的报错
-        33()
+    function getData(callback) {
+        const delay = Math.round(Math.random()*100);
+        setTimeout(()=>{
+            callback(delay);
+        },delay)
+    }
+
+    const p1 = new Promise((resolve,reject) => getData((d)=>{
+        if(d>50) return resolve(d);
+        return reject(d);
+    }));
+    const p2 = new Promise(resolve => getData(resolve));
+    const p3 = new Promise(resolve => getData(resolve));
+    const p4 = Promise.resolve(undefined);
+
+    Promise.all([p1,p2,p3,p4]).then(res=>{
+        console.log(res);
     }).catch(err=>{
-        console.error('成功捕捉2',err);
+        console.error(err);
     });
+
     return <div>
 
     </div>;
