@@ -124,6 +124,10 @@ class Promise {
         })
     };
 
+    catch = (onRejected)=>{
+        return this.then(null,onRejected);
+    };
+
     static resolve = (value) => {
         return new Promise(resolve => resolve(value));
     };
@@ -134,10 +138,15 @@ class Promise {
 }
 
 function Demo(props) {
-    const p1 = new Promise(resolve=>resolve());
-    const p2 = new Promise(resolve=>resolve());
-    p1.then(()=>console.log('p1-1')).then(()=>console.log('p1-2'));
-    p2.then(()=>console.log('p2-1')).then(()=>console.log('p2-2'));
+    const p = new Promise(resolve => resolve(42));
+    p.then(function fulfilled(res) {
+        res();//数字42这么调用会报错
+    }).catch((err)=>{
+        console.error('成功捕捉',err);//在这里我们捕捉到了前一个then的报错
+        33()
+    }).catch(err=>{
+        console.error('成功捕捉2',err);
+    });
     return <div>
 
     </div>;

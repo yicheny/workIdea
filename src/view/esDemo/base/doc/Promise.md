@@ -313,30 +313,6 @@ then = (onFulfilled, onRejected) => {
 ```
 现在的`then`方法还存在许多缺陷，不过`then`方法作为promise实现的核心，复杂一些也情有可原，现在我们针对`then`的缺陷一点点的修复。
 
-好，现在让我们继续修复`then`的缺陷。
-
-首先让我们看一段代码：
-```
-const promise = new Promise(resolve=>resolve('结果1'));
-
-promise.then(res=>{
-    console.log(res);
-    return aaa;//aaa未定义
-},()=>{
-
-}).then(res=>{
-
-},err=>{
-    console.error('成功捕获错误', err);
-    return '结果2'
-}).then(res=>{
-    console.log(res)
-});
-```
-这里，第一个`then`执行`fulfilled`的回调，第二个`then`执行`rejected`的回调，第三个`then`执行`fulfilled`的回调，这是怎么做到的？
-
-答案是每一个`then`都属于不同的promise对象，除去第一个promise是监控是我们指定的内容，`then`所返回的promise对象所监听的内容是它执行的回调本身，一旦出错则执行promise的`rejected`回调，实现如下：
-
 ### 实现V0.5-值的穿透
 ```
 const promise = new Promise(resolve=>resolve('结果1'));
@@ -409,6 +385,27 @@ then = (onFulfilled, onRejected) => {
 ```
 
 ### 实现V0.7-捕捉错误
+首先让我们看一段代码：
+```
+const promise = new Promise(resolve=>resolve('结果1'));
+
+promise.then(res=>{
+    console.log(res);
+    return aaa;//aaa未定义
+},()=>{
+
+}).then(res=>{
+
+},err=>{
+    console.error('成功捕获错误', err);
+    return '结果2'
+}).then(res=>{
+    console.log(res)
+});
+```
+这里，第一个`then`执行`fulfilled`的回调，第二个`then`执行`rejected`的回调，第三个`then`执行`fulfilled`的回调，这是怎么做到的？
+
+答案是每一个`then`都属于不同的promise对象，除去第一个promise是监控是我们指定的内容，`then`所返回的promise对象所监听的内容是它执行的回调本身，一旦出错则执行promise的`rejected`回调，实现如下：
 ```
 then = (onFulfilled, onRejected) => {
     const {status} = this;
@@ -712,9 +709,7 @@ p.then(function fulfilled(res) {
 
 这里的错误处理函数是为promise准备的，当状态从`pending`变为`rejected`之后，此错误信息会被传递给此函数执行。在这里，promise状态从`pending`变成了`fulfilled`之后，执行的是成功态的回调，而状态一旦改变就不会再改回，错误处理函数自然不会被执行。
 
-如果promise只使用分离回调处理，那么就会很容易造成错误被吞掉，这不是我们想看到的情况。
-
-那么这里有什么解决方法呢？比较自然的想法是在其内部进行`try-catch`捕捉错误，这是可行的：
+`promise`这种分离回调式的风格默认是会将错误给吞掉的，这不是我们想看到的情况，那么这里有什么解决方法呢？比较自然的想法是在其内部进行`try-catch`捕捉错误，这是可行的：
 ```
 const p = new Promise(resolve => resolve(42));
 p.then(function fulfilled(res) {
@@ -728,6 +723,81 @@ p.then(function fulfilled(res) {
 });
 ```
 不过这种方案也有缺陷，如果只是一两个`then`调用可能还好，如果有很多`then`被链式调用，那么难道我们要在每个`then`里面都进行这种错误捕捉吗？这也太让人难受了。
+
+实际上promise不是这么做的，之前我们在`Promise`实现里，知道`then`生成的promise对象监控的正是这个`then`执行的回调，所以刚刚的那个例子可以这么做：
+```
+const p = new Promise(resolve => resolve(42));
+p.then(function fulfilled(res) {
+    res();//数字42这么调用会报错
+},function rejected(err) {
+    console.error(err);//错误信息并没有被传到这里
+}).then(null,(err)=>{
+    console.error('成功捕捉',err);//在这里我们捕捉到了前一个then的报错
+});
+```
+
+这么做是可行的，不过这里`.then(null,()=>{})`这种捕捉错误的写法promise有个语法糖`catch`，读起来更加直观，写法也更简洁，简单实现下：
+
+### 实现1.1-catch
+```
+catch = (onRejected)=>{
+    return this.then(null,onRejected);
+}
+```
+ok，实现了，现在拿刚刚的例子测试下：
+```
+const p = new Promise(resolve => resolve(42));
+p.then(function fulfilled(res) {
+    res();//数字42这么调用会报错
+}).catch((err)=>{
+    console.error('成功捕捉',err);//在这里我们捕捉到了前一个then的报错
+});
+```
+执行结果和之前是一致的。
+
+在我们实现自定义Promise的过程中，我们知道Promise的错误会沿着`then`链一直传递下去的，所以有种推荐的做法是在任何`then`链的后面都加上一个`catch`用于捕捉错误。
+
+这种做法存在两个问题：
+1. 如果执行链过长，我们很难知道究竟是哪一个环节出了问题，这是我们省略中间捕获错误流程带来的一个后果。
+2. 如果最后的`catch`也出错了，就没有用于捕获这个`catch`的函数了。
+
+第一个问题出现的可能性较大，不过解决起来很简单，加上中间省略的错误捕获即可。然而并不是所有情况都需要这么做，很多时候Promise未必是链式调用，其次就算是链式调用也可以根据报错直接定位错误点。
+
+第二个想要解决却不是那么容易的一件事，下面针对第二个问题提出几种方案：
+
+### 处理Promise未捕获
+#### 1.注册未处理拒绝处理函数
+第一种方案是一些Promise库提供的方案，注册一个*未处理拒绝*处理函数，Promise拒绝时启动这个函数，给定一个时间【例如3秒】，如果给定时间内没有`onRejected`执行，则认为有未被捕获的错误。
+
+这种方案有一个明显的问题，大多数情景下应用这个方案没什么问题，有些时候情况下`onRejected`可能会有较长一段的等待，此时应用这个方案就会将不是错误的情况当作错误捕获了。
+
+#### 2.终结函数done
+第二种方案是为Promise添加一个done实例方法，将其作为最后一个错误捕捉函数，这个done方法和catch方法的区别就在于，done方法不会创建一个promise对象返回，只是接受一个`onRejected`执行。
+
+这一点会导致什么区别，看这里：
+``` 
+const p = new Promise(resolve => resolve(42));
+p.then(function fulfilled(res) {
+    res();//数字42这么调用会报错
+}).catch((err)=>{
+    console.error('成功捕捉',err);//在这里我们捕捉到了前一个then的报错
+    33();//最后一步报错，但是被Promise默认吞没了
+});
+```
+在这个案例里，使用`catch`导致错误被Promise吞没了，虽然我们可以在加一个`catch`进行捕获，然而我们不能确保新加的`catch`就不会在出现报错。
+
+如果这里是`done`，不创建Promise，错误就不会被吞没，它会被抛出一个全局错误，创建一个done方案是一个很好的处理方案，基本上没啥问题，唯一的问题就是它不是ES6标准的一部分，所以它不是普遍的方案，并不是所有开发者都可以立刻理解这个方法，增加了沟通了成本，不过如果需要捕获未处理错误，推荐使用这种方案。
+
+#### 3.defer
+第三种方案defer将关注点放在了Promise的默认行为上，Promise默认会吞没所有的错误，这不是开发者所希望看到的，错误要么被处理要么被报告，这几乎是所有开发者所需要的，否则一旦出现bug，在错误被吞没的情况，跟踪bug就成了一件很痛苦的事情。
+
+可以为Promise提供两种模式，默认抛出所有捕获的错误，如果需要吞没，则可以在初始调用进行选择，比如这样：
+```
+const p = Promise.reject('1');//默认抛出所有错误
+const p1 = Promise.reject('1').defer();//默认吞没所有错误
+```
+
+这种方案如果成为ES6标准由原生实现会更好，此方案本身是很强大的，效果也最好，然而目前来说会改变Promise的默认行为，在团队合作中如果有新人或与其他团队合作，可能会使其对代码理解产生错误。即便改为默认吞没，选择抛出也会有增加学习成本的问题【如果是这样，那么和done方案的问题就一样了】
 
 # Promise解决信任问题
 
