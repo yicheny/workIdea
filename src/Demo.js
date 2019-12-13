@@ -4,19 +4,30 @@ import React from 'react';
 // import axios from 'axios';
 
 function Demo(props) {
-    let x = 0;
+    function *foo(initValue=0){
+        try {
+            let value = initValue;
+            let init = true;
 
-    function *foo() {
-        x++;
-        const y = x + (yield);
-        console.log(y);
+            while(true){
+                if(init){
+                    init=false;
+                    yield value;
+                }
+
+                yield value = value*3+10;
+            }
+        }finally {
+            console.log('clean up!')
+        }
     }
 
-    const it = foo();
-    it.next();
-    x = 10;
-    it.next(0);//2
-
+    const it = foo(1);
+    console.log(it.next().value);
+    console.log(it.next().value);
+    console.log(it.return('终止任务').value);
+    console.log(it.next().value);
+    console.log(it.next().value);
     return <div>
 
     </div>;
