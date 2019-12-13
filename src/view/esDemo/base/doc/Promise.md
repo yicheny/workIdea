@@ -430,7 +430,7 @@ then = (onFulfilled, onRejected) => {
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 try {
-                    Promise.resolve(onFulfilled(this.params))
+                    resolve(onFulfilled(this.params))
                 }catch (e) {
                     reject(e);
                 }
@@ -441,7 +441,7 @@ then = (onFulfilled, onRejected) => {
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 try {
-                    Promise.resolve(onRejected(this.params))
+                    resolve(onRejected(this.params))
                 }catch (e) {
                     reject(e);
                 }
@@ -458,7 +458,7 @@ then = (onFulfilled, onRejected) => {
         });
         this.rejectCB.push(()=>{
             try{
-                reject(onRejected(this.params))
+                resolve(onRejected(this.params))
             }catch(e){
                 reject(e);
             }
