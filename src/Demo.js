@@ -4,30 +4,40 @@ import React from 'react';
 // import axios from 'axios';
 
 function Demo(props) {
-    function *foo(initValue=0){
-        try {
-            let value = initValue;
-            let init = true;
+    function request(url,cb) {
+        const delay = Math.round(Math.random()*100);
+        let err = null;
+        let data = null;
+        console.log('正在请求数据中...',url);
 
-            while(true){
-                if(init){
-                    init=false;
-                    yield value;
-                }
-
-                yield value = value*3+10;
+        setTimeout(()=>{
+            if(delay>50){
+                err='请求出错'+delay
+            }else{
+                data = '请求成功'+delay;
             }
-        }finally {
-            console.log('clean up!')
+            return cb(err,data);
+        },delay);
+    }
+    function printData(err,data){
+        if(err){
+            it.throw(err);
+        }else{
+            it.next(data);
+        }
+    }
+    function *gen(){
+        try{
+            const res = yield request('mockUrl',printData);
+            console.log(res);
+        }catch (e) {
+            console.error(e);
         }
     }
 
-    const it = foo(1);
-    console.log(it.next().value);
-    console.log(it.next().value);
-    console.log(it.return('终止任务').value);
-    console.log(it.next().value);
-    console.log(it.next().value);
+    const it = gen();
+    it.next();
+
     return <div>
 
     </div>;
