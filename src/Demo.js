@@ -4,39 +4,24 @@ import React from 'react';
 // import axios from 'axios';
 
 function Demo(props) {
-    function request(url,cb) {
-        const delay = Math.round(Math.random()*100);
-        let err = null;
-        let data = null;
-        console.log('正在请求数据中...',url);
+    function run(generator) {
+        const it = generator();
+        let res = it.next();
+        while(!res.done){
+            res = it.next();
+        }
 
-        setTimeout(()=>{
-            if(delay>50){
-                err='请求出错'+delay
-            }else{
-                data = '请求成功'+delay;
-            }
-            return cb(err,data);
-        },delay);
     }
-    function printData(err,data){
-        if(err){
-            it.throw(err);
-        }else{
-            it.next(data);
-        }
+    function print(str) {
+        console.log(str);
     }
-    function *gen(){
-        try{
-            const res = yield request('mockUrl',printData);
-            console.log(res);
-        }catch (e) {
-            console.error(e);
-        }
+    function *gen() {
+        yield print('A');
+        yield print('B');
+        yield print('C');
     }
 
-    const it = gen();
-    it.next();
+    run(gen);
 
     return <div>
 
