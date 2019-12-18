@@ -16,7 +16,6 @@ import HttpRouter from "./httpDemo/HttpRouter";
 import DesignPattern from "./designPattern/DesignPatternRouter";
 import CssTestRouter from "./cssDemo/CssTestRouter";
 import ReconsitutionRouter from "./reconsitution/ReconsitutionRouter";
-import RouterRouter from "./routerDemo/RouterRouter";
 import ArithmeticDemo from "./ArithmeticDemo/ArithmeticDemo";
 import HugeSuraDemoRouter from "./HugeSuraDemo/HugeSuraDemoRouter";
 import Demo from "../Demo";
@@ -40,7 +39,6 @@ function MainPanel(props){
                 <Route path='/component' component={ComponentRouter}/>
                 <Route path='/react' component={ReactDemo}/>
                 <Route path='/es' component={ES}/>
-                <Route path='/router' component={RouterRouter}/>
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPattern}/>
                 <Route path='/css' component={CssTestRouter}/>
