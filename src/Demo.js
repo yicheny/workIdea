@@ -4,24 +4,7 @@ import React from 'react';
 // import axios from 'axios';
 
 function Demo(props) {
-    function run(generator) {
-        const it = generator();
-        let res = it.next();
-        while(!res.done){
-            res = it.next();
-        }
 
-    }
-    function print(str) {
-        console.log(str);
-    }
-    function *gen() {
-        yield print('A');
-        yield print('B');
-        yield print('C');
-    }
-
-    run(gen);
 
     return <div>
 
