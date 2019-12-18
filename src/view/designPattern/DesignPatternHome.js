@@ -32,6 +32,7 @@ function DesignPatternHome(props) {
             <Link to='/design/base/prototype'>原型模式</Link>
             <Link to='/design/base/singleton'>单例模式</Link>
             <Link to='/design/base/adapter'>适配器模式</Link>
+            <Link to='/design/base/bridge'>桥接模式</Link>
             <Link to='/design/base/pubSub'>观察者模式</Link>
             <Link to='/design/base/state'>状态模式</Link>
         </BoxM>
