@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios/index'
 import {Container} from "../../../component";
 
-function Part1(props) {
+function Demo1(props) {
     const [info,setInfo] = useState('');
 
     useEffect(()=>{
@@ -15,4 +15,4 @@ function Part1(props) {
     </Container>
 }
 
-export default Part1;
+export default Demo1;
