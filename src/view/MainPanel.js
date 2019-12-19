@@ -11,6 +11,7 @@ import myProject from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
 import ReactDemo from "./reactDemo/ReactDemo";
 import ES from './esDemo/ESRouter';
+import FP from './FP/FPRouter';
 import ComponentRouter from "./componetentDemo/ComponentRouter";
 import HttpRouter from "./httpDemo/HttpRouter";
 import DesignPattern from "./designPattern/DesignPatternRouter";
@@ -39,6 +40,7 @@ function MainPanel(props){
                 <Route path='/component' component={ComponentRouter}/>
                 <Route path='/react' component={ReactDemo}/>
                 <Route path='/es' component={ES}/>
+                <Route path='/fp' component={FP}/>
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPattern}/>
                 <Route path='/css' component={CssTestRouter}/>

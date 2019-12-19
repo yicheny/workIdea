@@ -7,13 +7,14 @@ function LeftMenu(props) {
         <MenuItemM icon='tool' tit='组件库测试' url='/component'/>
         <MenuItemM icon='read' tit='React实践' url='/react'/>
         <MenuItemM icon='html5' tit='JS原生实践' url='/es'/>
+        <MenuItemM icon='google' tit='函数式编程' url='/fp'/>
         <MenuItemM icon='ie' tit='HTTP学习' url='/http'/>
-        <MenuItemM icon='html5' tit='设计模式' url='/design'/>
+        <MenuItemM icon='block' tit='设计模式' url='/design'/>
         <MenuItemM icon='dingding' tit='CSS测试' url='/css'/>
-        <MenuItemM icon='dribbble' tit='my_project' url='/mProj'/>
+        <MenuItemM icon='project' tit='my_project' url='/mProj'/>
         <MenuItemM icon='ant-design' tit='重构-改善代码既有设计' url='/recons'/>
         <MenuItemM icon='codepen' tit='算法练习' url='/arithmetic'/>
-        <MenuItemM icon='sketch' tit='huge_sura测试' url='/hugeSura'/>
+        <MenuItemM icon='sketch' tit='HS测试' url='/hugeSura'/>
     </MenuM>
 }
 
