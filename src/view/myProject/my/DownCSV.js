@@ -7,9 +7,12 @@ function DownCsv(props) {
     </Container>;
 
     function handleClick() {
+        const csv = document.createElement('a');
         let str = "栏位1,栏位2,栏位3\n值1,值2,值3";
         str =  encodeURIComponent(str);
-        window.location.href = "data:text/csv;charset=utf-8,\ufeff"+str;
+        csv.href = "data:text/csv;charset=utf-8,\ufeff"+str;
+        csv.download = '自定义名称.csv';
+        csv.click();
     }
 }
 
