@@ -7,7 +7,7 @@ import {setCombinKey} from "../utils/CombinKey";
 import Bg from "../component/BG/BG";
 
 import LeftMenu from './LeftMenu';
-import myProjectRouter from './myProject/MyProjectRouter';
+import myProject from './myProject/MyProjectRouter';
 import WorkRouter from './work/WorkRouter'
 import ReactDemo from "./reactDemo/ReactDemo";
 import ES from './esDemo/ESRouter';
@@ -42,7 +42,7 @@ function MainPanel(props){
                 <Route path='/http' component={HttpRouter}/>
                 <Route path='/design' component={DesignPattern}/>
                 <Route path='/css' component={CssTestRouter}/>
-                <Route path='/mProj' component={myProjectRouter}/>
+                <Route path='/mProj' component={myProject}/>
                 <Route path='/recons' component={ReconsitutionRouter}/>
                 <Route path='/arithmetic' component={ArithmeticDemo}/>
                 <Route path='/hugeSura' component={HugeSuraDemoRouter}/>

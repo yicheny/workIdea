@@ -12,13 +12,15 @@ import OperationDemo from "./OperationDemo/OperationDemo";
 import SalesPromotion from "./SalesPromotion/SalesPromotion";
 import SalesPromotionV2 from "./SalesPromotion/SalesPromotionV2";
 import Maze from "./Maze/Maze";
+
 import TotalStudyTime from "./my/TotalStudyTime";
 import TotalTimeUtils from "./my/TotalTimeUtils";
 import SixDimShow from "./SixDimShow/SixDimShow";
 import TimeChangeChart from "./my/TimeChangeChart";
 import EchartsIssues from "./EchartsIssues/EchartsIssues";
+import DownCsv from  './my/DownCSV';
 
-function MyProjectRouter(props) {
+function MyProject(props) {
     return (<Switch>
         <Route path='/mProj/calputer' component={Calputer}/>
         <Route path='/mProj/publicFunTest' component={PublicFunTest}/>
@@ -37,8 +39,9 @@ function MyProjectRouter(props) {
         <Route path='/mProj/my/sixDimShow' component={SixDimShow}/>
         <Route path='/mProj/my/timeChart' component={TimeChangeChart}/>
         <Route path='/mProj/my/echartsIssues' component={EchartsIssues}/>
+        <Route path='/mProj/my/downCsv' component={DownCsv}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }
 
-export default MyProjectRouter;
+export default MyProject;
