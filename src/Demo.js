@@ -11,7 +11,7 @@ function Demo(props) {
     const b2 = 2;
     const b3 = 0;
 
-    const res = join(mult(b2, join(b1, b3)), mult(b1, b2));
+    const res = mult(b1,join(b2,b2));
     console.log(res);
 
     return <div>
