@@ -34,6 +34,8 @@ import UseImpHandleDemo from "./base/demo/UseImpHandleDemo";
 import UseDebugValueDemo from "./base/demo/UseDebugValueDemo";
 import Tictactoe from "./project/Tictactoe";
 
+import UseCallbackHell from "./Q&A/demo/UseCallbackHell";
+
 function ReactDemo() {
     return <div>
         <Switch>
@@ -69,6 +71,9 @@ function ReactDemo() {
             <Route path='/react/base/demo/useRef' component={UseRefDemo}/>
             <Route path='/react/base/demo/useImperativeHandle' component={UseImpHandleDemo}/>
             <Route path='/react/base/demo/useDebugValue' component={UseDebugValueDemo}/>
+
+            {/*注：以下路由为页面测试路由，无对应Link*/}
+            <Route path='/react/qa/demo/useCallbackHell' component={UseCallbackHell}/>
 
             <Route component={ReactHome}/>
         </Switch>
