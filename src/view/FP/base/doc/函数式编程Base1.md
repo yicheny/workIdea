@@ -211,7 +211,285 @@ const immutableState = Object.freeze({
 注意数学上函数的定义：函数是不同数值之间的特殊关系：每一个输入值返回且只返回一个输出值
 
 ### 1)可缓存性
-纯函数总能够根据输入来做缓存。实现缓存的一种典型方式是 memoize 技术：
+纯函数总能够根据输入来做缓存，因为纯函数相同的输入可以得到相同的输出。
+
+实现缓存的一种典型方式是 memoize 技术：
+```
+//memoize简易实现
+function memoize(f) {
+    let cache = {};
+    return function (...params) {
+        const params_str = JSON.stringify(params);
+        cache[params_str] = cache[params_str] || f(...params);
+        return cache[params_str];
+    }
+}
+
+//测试
+let square = memoize(x=>{
+    console.log('x',x);
+    return x*x;
+});
+console.log('square',square(4));
+console.log('square',square(5));
+console.log('square',square(4));
+console.log('square',square(6));
 ```
 
+### 2）可移植性/自文档化
+因纯函数是完全自给自足的，它不依赖于外部环境，因此，它完全可以移植到任意位置，它是完全独立的。
+
+而且，因为其不依赖于外部变量或方法，因此可以很清楚的看清其功能，更易于观察和理解。
+
+另外，纯函数对于其依赖必须要诚实，看这个例子：
 ```
+let saveUser = function(Db, attrs) {
+    ...
+};
+
+let welcomeUser = function(Email, user) {
+    ...
+};
+
+// 不纯的
+let signUp = function(attrs) {
+  var user = saveUser(attrs);
+  welcomeUser(user);
+};
+
+// 纯的
+let signUp = function(Db, Email, attrs) {
+  return function() {
+    var user = saveUser(Db, attrs);
+    welcomeUser(Email, user);
+  };
+};
+```
+这样可以最小程度得到足够多的信息，现在这种实现是延迟执行来让函数变纯，缺点是这里的参数会变多【有其他解决方案】
+
+命令式编程中“典型”的方法和过程都深深根植于它们的所在环境中，通过状态、依赖和有效作用（available effects）达成。
+
+而纯函数不同，它与环境无关，只要我们愿意，可以在任何地方运行它。
+
+Erlang 语言的作者 Joe Armstrong 说过一句话：“面向对象语言的问题是，它们永远都要随身携带那些隐式的环境。你只需要一个香蕉，但却得到一个拿着香蕉的大猩猩...以及整个丛林”
+
+### 3）可测试性
+纯函数让测试变得更简单，只需要提供输入，不需要添加额外的环境因素。
+
+### 4）合理性
+很多人相信使用纯函数最大的好处是**引用透明性**（referential transparency）。
+
+**如果一段代码可以替换成它执行所得的结果，而且是在不改变整个程序行为的前提下替换的，那么我们就说这段代码是引用透明的**
+
+由于纯函数总是能够根据相同的输入返回相同的输出，所以它们就能够保证总是返回同一个结果，这也就保证了引用透明性。我们来看一个例子。
+```
+function decrementHP(player) {
+    player.hp = player.hp-1;
+    return player.hp;
+}
+function isSameTeam(player1,player2) {
+    return player1.team === player2.team;
+}
+function punch(player,target) {
+    if(isSameTeam(player,target)){
+        return target
+    }else{
+        return decrementHP(target);
+    }
+}
+
+const p1 = {name:'小明',hp:20,team:'red'};
+const p2 = {name:'小强',hp:20,team:'green'};
+
+punch(p1,p2);
+console.log(p2);//{name: "小强", hp: 19, team: "green"}
+```
+因为纯函数具有引用透明的特性，所以可以使用**等式推导**来分析代码，所谓等式推导就是“一对一”替换，有点像在不考虑程序性执行的怪异行为（quirks of programmatic evaluation）的情况下，手动执行相关代码。我们借助引用透明性来剖析一下这段代码:
+```
+var punch = function(player, target) {
+  if(player.team === target.team) {
+    return target;
+  } else {
+    return decrementHP(target);
+  }
+};
+
+//替换为
+var punch = function(player, target) {
+  if("red" === "green") {
+    return target;
+  } else {
+    return decrementHP(target);
+  }
+};
+
+//替换为
+var punch = function(player, target) {
+  return decrementHP(target);
+};
+
+//替换为
+var punch = function(player, target) {
+  return target.set("hp", target.hp-1);
+};
+```
+
+等式推导为我们分析、重构和理解代码提供了很大的帮助，此技巧将贯穿函数式编程。
+
+### 5）并行代码
+最后一点，也是决定性的一点：我们可以并行运行任意纯函数。因为纯函数根本不需要访问共享的内存，而且根据其定义，纯函数也不会因副作用而进入竞态条件。
+
+到目前为止，还有一些问题需要我们去关注，如果不解决这些问题，在追求纯函数的道路上可能存在一些困难：
+1. 需要将非纯函数从纯函数中抽离出来
+2. 多个参数被到处传递的问题
+3. 禁止使用外部状态和副作用
+
+现在，我们学习使用一个新工具：柯里化[curry]
+
+# 柯里化
+柯里化定义：只传递给函数一部分参数来调用它，让它**返回一个函数**去处理剩下的参数。
+
+可以一次性地调用curry函数，也可以每次只传一个参数分多次调用:
+```
+//定义柯里化函数
+function add(x) {
+    return y=>x+y;
+}
+
+const increment = add(1);
+const addTen = add(10);
+console.log(increment(2));//2
+console.log(addTen(2));//12
+```
+
+# 代码组合
+首先定义一个`compose`方法
+```
+//定义
+const compose = function (f,g) {
+    return function (x) {
+        return f(g(x))
+    }
+};
+```
+ok，现在测试下：
+```
+//测试
+const toUpperCase = x=>x.toUpperCase();
+const exclaim = x=>x+'!';
+const shout = compose(exclaim,toUpperCase);
+console.log(shout('send in the clowns'));
+```
+这种方式比起层层嵌套极大增强了可读性，我们的想法是让代码从右向左运行，而非从内向外运行。
+
+```
+const head = x=>x[0];
+const reverse = data => data.reduce((acc,x)=>[x].concat(acc),[]);
+const last = compose(head,reverse);
+console.log(last(['a', 'b', 'c', 'd']));
+```
+为什么我们选择从右向左运行，而非从左向右【虽然这很容易做到】，因为从右向左执行更能体现数学上的定义。组合这一概念直接来自于数学，下面来看组合的一些特性：
+```
+// 结合律（associativity）
+var associative = compose(f, compose(g, h)) == compose(compose(f, g), h);
+
+//可以这样组合
+compose(toUpperCase, compose(head, reverse));
+// 或者
+compose(compose(toUpperCase, head), reverse);
+```
+看见了么？怎么分组不重要，结果都是一样的，这使得我们有能力写出一个可变的组合：
+
+对`compose`稍加改进：
+```
+//定义
+function compose(...funcs) {
+    if (funcs.length === 0) return arg => arg;
+    if (funcs.length === 1) return funcs[0];
+    return funcs.reduce((a, b) => (...args) => a(b(...args)))
+}
+
+//测试
+const loudLastUpper = compose(exclaim, toUpperCase, head, reverse);
+console.log(loudLastUpper(['aaa', 'bbb', 'ccc', 'ddd']));
+```
+
+## ponitfree
+`pointfree`模式，即函数无须提及将要操作的数据是什么样的。
+
+一等公民的函数、柯里化（curry）以及组合协作起来非常有助于实现这种模式。
+
+先看一个例子：
+```
+const snakeCase = function (word) {
+    return word.toUpperCase().replace(/\s+/ig, '_');
+};
+console.log(snakeCase('a b c'));//A_B_C
+```
+
+现在改写成`pointfree`模式：
+```
+const replace = (regExp,template)=>{
+  return str => str.replace(regExp,template)
+};
+const toUpperCase = s=>s.toUpperCase();
+const snakeCase = compose(replace(/\s+/ig, '_'),toUpperCase);
+console.log(snakeCase('a b c'));//A_B_C
+```
+这里通过管道将数据在接受单个参数函数间传递。利用 curry，我们能够做到让每个函数都先接收数据，然后操作数据，最后再把数据传递到下一个函数那里去。
+
+在 pointfree 版本中，不需要 word 参数就能构造函数；而在非 pointfree 的版本中，必须要有 word 才能进行一切操作。
+```
+import _ from 'lodash/fp';
+const toUpperCase = s=>s.toUpperCase();
+
+// 非 pointfree模式，因为提到了数据：name
+const initials = function (name) {
+    return name.split(' ').map(compose(toUpperCase, _.head)).join('. ');
+};
+console.log(initials("hunter stockton thompson"));// 'H. S. T'
+```
+
+改为pinitfree实现
+```
+import _ from 'lodash/fp';
+const toUpperCase = s=>s.toUpperCase();
+// pointfree模式
+const initials = compose(_.join('. '), _.map(compose(toUpperCase,_.head)), _.split(' '));
+console.log(initials("hunter stockton thompson"));// 'H. S. T'
+```
+pointfree 模式能够帮助我们减少不必要的命名，让代码保持简洁和通用。
+
+对函数式代码来说，pointfree 是非常好的石蕊试验，因为它能告诉我们一个函数是否是接受输入返回输出的小函数
+
+并非所有的函数式代码都是 pointfree 的，不过这没关系。可以使用它的时候就使用，不能使用的时候就用普通函数。比如，while 循环是不能组合的。
+
+## 组合debug
+组合的一个常见错误是，在没有局部调用之前，就组合类似 map 这样接受两个参数的函数。
+```
+const latin = compose(_.map,s=>s.toUpperCase(),_.reverse);
+console.log(latin(["frog", "eyes"]));
+```
+正确的做法：
+```
+const latin = compose(_.map(s=>s.toUpperCase()),_.reverse);
+```
+
+定义一个trace方法追踪代码执行，纯函数报错只会是输入不符合要求，某种层面上降低了debug的难度
+```
+function trace(tag) {
+    return (x)=>{
+        console.log(tag,x);
+        return x;
+    }
+}
+```
+
+测试：
+```
+const toUpperCase = s=>s.toUpperCase();
+// const latin = compose(_.map(toUpperCase),trace('_.reverse成功执行'),_.reverse);
+const latin = compose(_.map,toUpperCase,trace('_.reverse成功执行'),_.reverse);
+console.log(latin(["frog", "eyes"]));
+```
+trace 函数允许我们在某个特定的点观察数据以便 debug
