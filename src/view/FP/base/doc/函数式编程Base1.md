@@ -362,6 +362,20 @@ console.log(increment(2));//2
 console.log(addTen(2));//12
 ```
 
+实现一个简易的通用`curry`方法：
+```
+function curry(fn) {
+   return (...args) => fn.bind(null, ...args);
+}
+
+//测试
+const map = _.curry(function (f,ary) {
+    return ary.map(f);
+});
+const printAll = map(s=>console.log(s));
+printAll([1,2,3,4]);
+```
+
 # 代码组合
 首先定义一个`compose`方法
 ```
@@ -552,3 +566,81 @@ console.log(capitalize('mark'));//Mark
 在 Hindley-Milner 系统中，函数都写成类似 a -> b 这个样子，其中 a 和b 是任意类型的变量。因此，capitalize 函数的类型签名可以理解为“一个接受 String 返回 String 的函数”。换句话说，它接受一个 String 类型作为输入，并返回一个 String 类型的输出
 
 详细解释待补充...
+
+# 容器
+现在我们知道该怎么函数式编程了，即通过管道将数据在一系列函数间传递的程序。
+
+不过，还有很多问题需要我们去解决：控制流、异常处理、异步操作以及状态【state】，和更棘手的作用【effects】
+
+我们将创建一个**容器**，这个容器必须可以装载任意类型的值。
+```
+const Container = function (x) {
+    this.__value = x;
+};
+Container.of = x=>new Container(x);
+```
+现在测试下这个容器：
+```
+console.log(Container.of(3));
+console.log(Container.of('abc'));
+console.log(Container.of(Container.of({name: '小明'})));
+```
+得到的会是`Container`实例对象，有几点需要特殊关注下：
+1. `Contaier`对象**只有一个属性**，属性名随意
+2. `__value`不能特定某个类型
+3. 数据一旦存放到`Container`就会一直在那里。我们可以用`.__value`获取到数据，但是不建议这么做，有违函数式编程
+
+## functor
+我们必须要提供一种方法来操作容器内的值：
+```
+Container.prototype.map = function(f){
+    return Container.of(f(this.__value))
+};
+
+//测试
+console.log(Container.of(2).map(e => e + 10));
+console.log(Container.of('abcd').map(s => s.toUpperCase()));
+console.log(Container.of('ab').map(s=>s.concat('cde')).map(s=>s.length));
+```
+我们为什么需要定义这样一个方法？因为我们需要在不离开`Container`的情况下操作容器内的值。
+
+使用了`Container.map`方法之后我们得到的还是一个`Container`对象，这样我们就可以连续进行操作，如此我们可以连续调用map，执行我们任何想要执行函数，甚至改变值的类型。
+
+现在问题来了，将值装进一个容器，并且只能通过map去操作它，有什么理由值得我们这么去做呢？或许可以从另一个角度去问这个问题：让容器自己运用函数能给我们带来什么好处？
+
+答案是**抽象**，对于函数应用的抽象，当`map`一个函数的时候，我们请求容器来运行这个函数，这是一种十分强大的理念。
+
+需要提到一个词，**functor**,`functor`是实现了`map`函数并遵守一些特定规则的容器类型，它是一个特定接口，或者你也可以叫做**Mappable**【可映射对象】，`functor`是范畴学的概念。
+
+## Maybe
+现在我们来看一个和`Container`不同但是有些类似的`functor`
+```
+const Maybe = function (x) {
+    this.__value = x;
+};
+Maybe.of = x=>new Maybe(x);
+Maybe.prototype.isNothing = function () {
+    return (this.__value === null || this.__value === undefined); 
+};
+Maybe.prototype.map = function (f) {
+    return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value));
+};
+```
+
+`Maybe`和`Container`很相似，但是有一点不同：`Maybe`会检测自己的值是否为空，然后才调用传进的函数，以此避免空值所造成的报错，测试如下：
+```
+Maybe.of("Malkovich Malkovich").map(match(/a/ig));
+Maybe.of(null).map(match(/a/ig));
+Maybe.of({name: "Boris"}).map(_.prop("age")).map(add(10));
+Maybe.of({name: "Dinah", age: 14}).map(_.prop("age")).map(add(10));
+```
+
+ok，现在我们可以避免空值造成的报错了，可以这么认为，一但出现容器值为空，即可认为执行出现了错误。不过目前这种做法无法准确的定位错误，别担心，这个问题之后会修复。
+
+回到`map`，目前这种点记法并不是很让人满意，我们像要一种更加符合pointfree风格的map方法，可以定义这么一个方法：
+```
+const map = curry(function(f,any_functor_at_all){
+    return any_functor_at_all.map(f);
+});
+```
+不过点记法也有用处，之后会有介绍，总之，在适合使用pointfree的时候使用ponitfree,适合点记法的时候使用点记法，就是这样。
