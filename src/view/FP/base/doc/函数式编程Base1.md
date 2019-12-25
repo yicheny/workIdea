@@ -532,3 +532,23 @@ compose(id,f) == compose(f,id) == f;
 我们认为组合是高于其他所有原则的设计原则，组合让我们的代码简单而富有可读性。
 
 # 类型签名
+刚接触函数式编程的人很容易深陷类型签名（type signatures）的泥淖。类型（type）是让所有不同背景的人都能高效沟通的元语言。很大程度上，类型签名是以 “Hindley-Milner” 系统写的。
+
+类型签名在写纯函数时所起的作用非常大，短短一行，就能暴露函数的行为和目的。类型签名还衍生出了 “自由定理（free theorems）” 的概念。因为类型是可以推断的，所以明确的类型签名并不是必要的；
+
+过你完全可以写精确度很高的类型签名，也可以让它们保持通用、抽象。类型签名不但可以用于编译时检测（compile time checks），还是最好的文档。所以类型签名在函数式编程中扮演着非常重要的角色——重要程度远远超出你的想象。
+
+现在，先来看一段代码：
+```
+const head = x=>x[0];
+const tail = x=>x.slice(1,Infinity);
+const toUpperCase = s=>s.toUpperCase();
+const toLowerCase = s=>s.toLowerCase();
+
+//String=>String
+const capitalize = s=> toUpperCase(head(s)) + toLowerCase(tail(s));
+console.log(capitalize('mark'));//Mark
+```
+在 Hindley-Milner 系统中，函数都写成类似 a -> b 这个样子，其中 a 和b 是任意类型的变量。因此，capitalize 函数的类型签名可以理解为“一个接受 String 返回 String 的函数”。换句话说，它接受一个 String 类型作为输入，并返回一个 String 类型的输出
+
+详细解释待补充...

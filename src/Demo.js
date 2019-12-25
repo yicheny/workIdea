@@ -5,12 +5,18 @@ import React from 'react';
 // import _ from 'lodash/fp';
 
 function Demo(props) {
-    //此方法取自redux源码
     function compose(...funcs) {
         if (funcs.length === 0) return arg => arg;
         if (funcs.length === 1) return funcs[0];
         return funcs.reduce((a, b) => (...args) => a(b(...args)))
     }
+
+    const head = x=>x[0];
+    const tail = x=>x.slice(1,Infinity);
+    const toUpperCase = s=>s.toUpperCase();
+    const toLowerCase = s=>s.toLowerCase();
+    const capitalize = s=> toUpperCase(head(s)) + toLowerCase(tail(s));
+    console.log(capitalize('mark'));//Mark
 
     return <div>
 
