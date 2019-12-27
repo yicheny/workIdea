@@ -19,6 +19,7 @@ import SixDimShow from "./SixDimShow/SixDimShow";
 import TimeChangeChart from "./my/TimeChangeChart";
 import EchartsIssues from "./EchartsIssues/EchartsIssues";
 import DownCsv from  './my/DownCSV';
+import ReactCsvDemo from "./my/ReactCsvDemo";
 
 function MyProject(props) {
     return (<Switch>
@@ -40,6 +41,7 @@ function MyProject(props) {
         <Route path='/mProj/my/timeChart' component={TimeChangeChart}/>
         <Route path='/mProj/my/echartsIssues' component={EchartsIssues}/>
         <Route path='/mProj/my/downCsv' component={DownCsv}/>
+        <Route path='/mProj/my/reactCsv' component={ReactCsvDemo}/>
         <Route component={MyProjectHome}/>
     </Switch>);
 }

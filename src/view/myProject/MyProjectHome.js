@@ -24,6 +24,7 @@ function MyProjectHome(props) {
             <Link to='/mProj/my/timeChart' >时间变化统计图</Link>
             <Link to='/mProj/my/echartsIssues' >echartsIssues统计信息</Link>
             <Link to='/mProj/my/downCsv' >下载CSV</Link>
+            <Link to='/mProj/my/reactCsv' >ReactCsc包测试</Link>
         </BoxM>
     </Fragment>
 }
