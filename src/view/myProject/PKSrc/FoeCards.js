@@ -1,5 +1,5 @@
 import React,{useReducer} from 'react';
-import PkCard from "../../../component/PkCard/PkCard";
+import PkCard from "../../../componentMy/PkCard/PkCard";
 
 function FoeCards(props) {
     const {user} = props;

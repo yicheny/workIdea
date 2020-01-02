@@ -1,5 +1,5 @@
 import React,{useRef,useReducer} from "react";
-import PkCard from "../../../component/PkCard/PkCard";
+import PkCard from "../../../componentMy/PkCard/PkCard";
 import './Deck.less';
 
 function Deck(props) {

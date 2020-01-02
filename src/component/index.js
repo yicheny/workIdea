@@ -20,7 +20,7 @@ import _Progress from './Progress/Progress';
 import _CountDown from './CountDown/CountDown';
 import _TableW from './TableW/TableW';
 import _ColumnW from './TableW/ColumnW';
-import _SetColor from './SetColor/SetColor';
+import _SetColor from '../componentMy/SetColor/SetColor';
 import _Rate from './Rate/Rate';
 import _TextInput from './TextInput/TextInput';
 import _BoxM from './BoxM/BoxM';
