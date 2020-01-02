@@ -11,7 +11,7 @@ function ESHome(props) {
         <Link to='/es/callback'>回调</Link>
         <Link to='/es/promise'>Promise</Link>
         <Link to='/es/generator'>生成器</Link>
-
+        <Link to='/es/arrayApi'>数组API</Link>
     </BoxM>
 }
 

@@ -10,6 +10,7 @@ import ExecMechPath from './base/doc/执行机制.md';
 import CallbackPath from './base/doc/回调.md';
 import PromisePath from './base/doc/Promise.md';
 import Generator from './base/doc/生成器.md';
+import ArrayApi from './base/doc/数组API.md';
 
 import PromiseDemo from "./base/demo/PromiseDemo";
 
@@ -23,6 +24,7 @@ function ESRouter() {
             <Route path='/es/callback' component={Md(CallbackPath)}/>
             <Route path='/es/promise' component={Md(PromisePath)}/>
             <Route path='/es/generator' component={Md(Generator)}/>
+            <Route path='/es/arrayApi' component={Md(ArrayApi)}/>
 
             <Route path='/es/demo/promise' component={PromiseDemo}/>
 
