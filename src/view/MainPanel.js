@@ -4,7 +4,7 @@ import './mainPanel.less';
 import {cls} from "../utils/publicFun";
 import {setCombinKey} from "../utils/CombinKey";
 // import {Message} from "../component";
-import Bg from "../component/BG/BG";
+import Bg from "../componentMy/BG/BG";
 
 import LeftMenu from './LeftMenu';
 import myProject from './myProject/MyProjectRouter';

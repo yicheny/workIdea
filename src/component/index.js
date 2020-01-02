@@ -1,5 +1,5 @@
 import _Container from './Container/Container';
-import _Graph from './Graph/Graph';
+import _Graph from '../componentMy/Graph/Graph';
 import _Calendar from './Calendar/Calendar';
 import _CalendarW from './CalendarW/CalendarW';
 import _Clock from './Clock/Clock';

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './login.less';
 import {Button, Card, Icon, TextInput} from "./component";
 import Logo from './asset/svg/ylfLogo';
-import Bg from "./component/BG/BG";
+import Bg from "./componentMy/BG/BG";
 import {cls} from "./utils/publicFun";
 
 const mockUsers = [
