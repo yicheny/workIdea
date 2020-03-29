@@ -11,6 +11,7 @@ function WorkHome(props) {
         <Link to='/work/getRangeDateDemo'>GetRangeDate方法改进</Link>
         <Link to='/work/flowContainer'>Container流式</Link>
         <Link to='/work/reducerSearch'>异步请求</Link>
+        <Link to='/work/total'>汇总Echarts</Link>
     </BoxM>
 }
 

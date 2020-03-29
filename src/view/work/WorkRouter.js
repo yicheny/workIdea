@@ -8,6 +8,7 @@ import WorkHome from "./WorkHome";
 import GetRangeDateDemo from "./GetRangeDateDemo/GetRangeDateDemo";
 import FlowContainer from "./demo/FlowContainer";
 import ReducerSearch from "./demo/ReducerSearch";
+import Total from "./Total/Total";
 
 function WorkRouter(props) {
     return <Switch>
@@ -18,6 +19,7 @@ function WorkRouter(props) {
         <Route path='/work/getRangeDateDemo' component={GetRangeDateDemo}/>
         <Route path='/work/flowContainer' component={FlowContainer}/>
         <Route path='/work/reducerSearch' component={ReducerSearch}/>
+        <Route path='/work/total' component={Total}/>
         <Route component={WorkHome}/>
     </Switch>
 }
